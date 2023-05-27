@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Helvetica Bold';
+  src: local('Helvetica'),
+      url('../fonts/helvetica-bold.woff2') format('woff2'),
+      url('../fonts/helvetica-bold.woff') format('woff'),
+      url('../fonts/helvetica-bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Helvetica Light';
+  src: local('Helvetica Light'),
+    url('../fonts/helvetica-light.woff2') format('woff2'),
+    url('../fonts/helvetica-light.woff') format('woff'),
+    url('../fonts/helvetica-light.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Druk Medium';
+  src: local('Druk Text Wide Cyr'),
+    url('../fonts/druktextwidecyr-medium.woff2') format('woff2'),
+    url('../fonts/druktextwidecyr-medium.woff') format('woff'),
+    url('../fonts/druktextwidecyr-medium.ttf') format('truetype');
+  font-weight: bold;
+}
