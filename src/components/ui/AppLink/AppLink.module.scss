@@ -1,0 +1,11 @@
+.appLink {
+  cursor: pointer;
+  text-transform: uppercase;
+  display: flex;
+  gap:1rem;
+  color: inherit;
+
+  &.active {
+    font-family: "Helvetica Bold", sans-serif;
+  }
+}

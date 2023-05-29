@@ -1,5 +1,15 @@
+import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
+import { Products } from '@/components/business/Product/Products'
+
 function App() {
-  return <></>
+  return (
+    <div className="app">
+      <main className="app-content">
+        <Sidebar className="app-content-first" />
+        <Products />
+      </main>
+    </div>
+  )
 }
 
 export default App

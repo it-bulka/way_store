@@ -1,7 +1,28 @@
 @import 'fonts';
+@import 'reset';
 
-body {
+html {
   font-family: 'Helvetica Light', 'sans-serif';
   font-style: normal;
   font-size: 10px;
+  line-height: 1.4rem;
+  color: $grey;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+
+.app-content {
+  max-width: calc(1056 / 1440 * 100%);
+  display: flex;
+
+  &-first {
+    flex: 0 1 18%;
+  }
+
+  &-second {
+    flex: 1;
+  }
 }

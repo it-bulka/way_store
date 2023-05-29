@@ -1,0 +1,73 @@
+@mixin absoluteSizeCover($left: 0, $right: 0, $top: 0, $bottom: 0, ) {
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
+@mixin rangeSlider {
+  height: 17px;
+  width: 17px;
+  pointer-events: auto;
+  background-image: url("@/assets/general/star.svg");
+}
+
+.rangeSlider {
+  .labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+
+    & > input {
+      padding-left: 0.2rem;
+    }
+  }
+
+
+  .slider {
+    height: 1px;
+    width: calc(100%);
+    background-color: $grey_light;
+    position: relative;
+
+    .progress {
+      position: absolute;
+      @include absoluteSizeCover(25%, 25%);
+      background-color: $grey;
+    }
+  }
+
+  .rangeInput {
+    position: absolute;
+    @include absoluteSizeCover;
+
+    input {
+      position: absolute;
+      @include absoluteSizeCover;
+      background: none;
+
+      pointer-events: none;
+
+
+      &::-webkit-slider-thumb {
+        @include rangeSlider;
+        -webkit-appearance: none; /* Override default look */
+      }
+
+      &::-moz-range-thumb {
+        @include rangeSlider;
+        -moz-appearance: none; /* Override default look */
+      }
+
+    };
+
+    input[type="range" i] {
+      appearance: none;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.productsList {
+
+  .title {
+    font-family: "Helvetica Bold", sans-serif;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 8.78px;
+    row-gap: 12.16px;
+  }
+}
