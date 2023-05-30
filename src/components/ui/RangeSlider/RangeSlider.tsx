@@ -30,6 +30,8 @@ export const RangeSlider: FC<RangeProps> = ({
   const [tooltipX, setTooltipX] = useState<number>(0)
   const [minRange, setMinRange] = useState<string>(min.toString())
   const [maxRange, setMaxRange] = useState<string>(max.toString())
+  const [minValue, setMinValue] = useState<string>(min.toString())
+  const [maxValue, setMaxValue] = useState<string>(max.toString())
   const [rangePositions, setRangePositions] = useState<IRangePositions>({
     left: 0,
     right: 0,
@@ -82,7 +84,15 @@ export const RangeSlider: FC<RangeProps> = ({
       setTooltip(slide)
     }
   }
-  const hideTooltip = () => setTooltipShown(false)
+  const hideTooltip = (cb?: () => void) => {
+    return () => {
+      setTooltipShown(false)
+      cb && cb()
+    }
+  }
+
+  const refreshMinVal = () => setMinValue(minRange)
+  const refreshMaxVal = () => setMaxValue(maxRange)
 
   return (
     <div className={cls.rangeSlider + ' ' + className}>
@@ -94,7 +104,7 @@ export const RangeSlider: FC<RangeProps> = ({
             min="1000"
             max="500000"
             onChange={onMinRangeChange}
-            value={minRange}
+            value={minValue}
           />
         </label>
 
@@ -105,7 +115,7 @@ export const RangeSlider: FC<RangeProps> = ({
             min="1000"
             max="500000"
             onChange={onMaxRangeChange}
-            value={maxRange}
+            value={maxValue}
           />
         </label>
       </div>
@@ -123,9 +133,10 @@ export const RangeSlider: FC<RangeProps> = ({
             onChange={onMinRangeChange}
             value={minRange}
             onMouseEnter={showTooltip('min')}
-            onMouseLeave={hideTooltip}
+            onMouseLeave={hideTooltip()}
+            onMouseUp={refreshMinVal}
             onTouchStart={showTooltip('min')}
-            onTouchEnd={hideTooltip}
+            onTouchEnd={hideTooltip(refreshMinVal)}
           />
           <input
             type="range"
@@ -134,9 +145,10 @@ export const RangeSlider: FC<RangeProps> = ({
             onChange={onMaxRangeChange}
             value={maxRange}
             onMouseEnter={showTooltip('max')}
-            onMouseLeave={hideTooltip}
+            onMouseLeave={hideTooltip()}
+            onMouseUp={refreshMaxVal}
             onTouchStart={showTooltip('max')}
-            onTouchEnd={hideTooltip}
+            onTouchEnd={hideTooltip(refreshMaxVal)}
           />
 
           {isTooltipShown && (
