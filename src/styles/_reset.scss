@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   border: 0;
+  box-sizing: border-box;
 }
 
 *:after,
@@ -52,6 +53,11 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+input::placeholder {
+  font-family: inherit;
+}
+
 button {
   cursor: pointer;
 }

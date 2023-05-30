@@ -1,0 +1,29 @@
+$icon_size: 22px;
+
+.searchBar {
+  display: inline-flex;
+  align-items: center;
+  max-width: 8.6rem;
+
+  -webkit-transition: max-width .9s;
+          transition: max-width .9s;
+
+
+  span {
+    flex: 0 1 $icon_size;
+  }
+
+  input {
+    flex: 0;
+    padding: 0.2rem 1rem 0.2rem 0.2rem;
+    max-width: calc(100% - $icon_size);
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+
+  &:focus-within {
+    max-width: 300rem;
+    -webkit-transition: max-width 2s;
+    transition: max-width 3s;
+  }
+}
