@@ -54,8 +54,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-input::placeholder {
+input::placeholder,
+a {
   font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 button {

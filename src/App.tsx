@@ -1,5 +1,5 @@
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
-import { Products } from '@/components/business/Product/Products'
+import { Products } from '@/components/business/Products/Products'
 import { Header } from '@/components/business/Header/Header'
 
 function App() {

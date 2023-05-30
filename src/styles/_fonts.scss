@@ -17,6 +17,24 @@
 }
 
 @font-face {
+  font-family: 'TeX Gyre Heros Bold';
+  src: local('Helvetica'),
+  url('@/fonts/texgyreheros.woff2') format('woff2'),
+  url('@/fonts/texgyreheros.woff') format('woff'),
+  url('@/fonts/texgyreheros.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros';
+  src: local('Helvetica Light'),
+  url('@/fonts/texgyreheros.woff2') format('woff2'),
+  url('@/fonts/texgyreheros.woff') format('woff'),
+  url('@/fonts/texgyreheros.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
   font-family: 'Druk Medium';
   src: local('Druk Text Wide Cyr'),
     url('@/fonts/druktextwidecyr-medium.woff2') format('woff2'),

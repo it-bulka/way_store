@@ -1,0 +1,12 @@
+.breadcrumbs {
+  display: flex;
+  color: $grey_2;
+
+  li+li:before {
+    padding: 8px;
+    content: "/\00a0";
+  }
+
+  a {
+  }
+}
