@@ -1,4 +1,33 @@
 .header {
-  max-width: 1190px;
+  max-width: 1252px;
+  padding: 2.6rem 0;
+  display: flex;
+  margin: auto;
 
+  .col1 {
+    flex: 0 0 16%;
+  }
+
+  .col2 {
+    flex: 1;
+  }
+
+  .col3 {
+    flex: 0 0 15%;
+  }
+
+  .logo {
+    padding: 0 2.7rem;
+  }
+
+  .actions {
+    padding: 0 2.7rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    span {
+      padding: 5px;
+    }
+  }
 }
