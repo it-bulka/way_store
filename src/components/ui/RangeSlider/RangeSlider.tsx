@@ -73,7 +73,7 @@ export const RangeSlider: FC<RangeProps> = ({
 
   const setTooltip = (slide: SlideType) => {
     setPositions(slide)
-    setTooltipContent(`p.${slide === 'min' ? minRange : maxRange}`)
+    setTooltipContent(`p.${minRange}`)
   }
 
   const showTooltip = (slide: SlideType) => {
@@ -122,8 +122,8 @@ export const RangeSlider: FC<RangeProps> = ({
             max="500000"
             onChange={onMinRangeChange}
             value={minRange}
-            onMouseDown={showTooltip('min')}
-            onMouseUp={hideTooltip}
+            onMouseEnter={showTooltip('min')}
+            onMouseLeave={hideTooltip}
             onTouchStart={showTooltip('min')}
             onTouchEnd={hideTooltip}
           />
@@ -133,9 +133,9 @@ export const RangeSlider: FC<RangeProps> = ({
             max="500000"
             onChange={onMaxRangeChange}
             value={maxRange}
-            onMouseDown={showTooltip('max')}
-            onMouseUp={hideTooltip}
-            onTouchStart={showTooltip('min')}
+            onMouseEnter={showTooltip('max')}
+            onMouseLeave={hideTooltip}
+            onTouchStart={showTooltip('max')}
             onTouchEnd={hideTooltip}
           />
 
