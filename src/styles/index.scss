@@ -18,15 +18,23 @@ body {
 }
 
 
-.app-content {
-  max-width: calc(1056 / 1440 * 100%);
+.container {
+  width: calc(1252 / 1440 * 100%);
+  margin: 0 auto;
+}
+
+.flex-container {
   display: flex;
+}
 
-  &-first {
-    flex: 0 1 18%;
-  }
+.col-1 {
+  flex: 0 0 16%;
+}
 
-  &-second {
-    flex: 1;
-  }
+.col-2 {
+  flex: 0 0 69%;
+}
+
+.col-3 {
+  flex: 0 0 15%;
 }

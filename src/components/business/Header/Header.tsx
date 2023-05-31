@@ -11,14 +11,14 @@ interface HeaderProps {
 }
 export const Header: FC<HeaderProps> = ({ className = '' }) => {
   return (
-    <div className={cls.header + ' ' + className}>
-      <div className={`${cls.logo} ${cls.col1}`}>
+    <div className={cls.header + ' container ' + className}>
+      <div className={`${cls.logo} col-1`}>
         <Logo />
       </div>
-      <div className={`${cls.searchHolder} ${cls.col2}`}>
+      <div className={`${cls.searchHolder} col-2`}>
         <SearchBar />
       </div>
-      <div className={`${cls.actions} ${cls.col3}`}>
+      <div className={`${cls.actions} col-3`}>
         <span>
           <Heart />
         </span>
