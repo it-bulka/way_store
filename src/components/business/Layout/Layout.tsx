@@ -13,7 +13,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       <Header />
       <main className={'flex-container container'}>
         <Sidebar className=" col-1" />
-        {children}
+        <div className="col-2">{children}</div>
       </main>
       <Footer />
     </>
