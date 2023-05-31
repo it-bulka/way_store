@@ -1,13 +1,12 @@
-import { Header } from '@/components/business/Header/Header'
-import { Footer } from '@/components/business/Footer/Footer'
+import { Layout } from '@/components/business/Layout/Layout'
 import { Store } from '@/pages/Store/Store'
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <Store />
-      <Footer />
+      <Layout>
+        <Store />
+      </Layout>
     </div>
   )
 }
