@@ -1,6 +1,7 @@
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
 import { Products } from '@/components/business/Products/Products'
 import { Header } from '@/components/business/Header/Header'
+import { Footer } from '@/components/business/Footer/Footer'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Sidebar className="app-content-first" />
         <Products />
       </main>
+      <Footer />
     </div>
   )
 }
