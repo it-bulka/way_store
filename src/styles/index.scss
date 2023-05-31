@@ -9,6 +9,10 @@ html {
   color: $grey;
 }
 
+body {
+  background-color: $grey_bg;
+}
+
 .app {
   min-height: 100vh;
 }
