@@ -1,0 +1,31 @@
+.imgTabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 428px;
+
+  .viewer {
+    flex: 0 0 69%;
+
+    img {
+      height: 284px;
+    }
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    flex: 0 0 25%;
+
+    .tab {
+      height: 121px;
+      width: calc(33%);
+    }
+  }
+
+  img {
+    object-fit: cover;
+    height: 100%;
+  }
+}
