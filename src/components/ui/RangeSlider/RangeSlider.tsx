@@ -28,36 +28,33 @@ export const RangeSlider: FC<RangeProps> = ({
   const [isTooltipShown, setTooltipShown] = useToggle(false)
   const [tooltipContent, setTooltipContent] = useState('p.121212')
   const [tooltipX, setTooltipX] = useState<number>(0)
-  const [minRange, setMinRange] = useState<string>(min.toString())
-  const [maxRange, setMaxRange] = useState<string>(max.toString())
-  const [minValue, setMinValue] = useState<string>(min.toString())
-  const [maxValue, setMaxValue] = useState<string>(max.toString())
+  const [minRange, setMinRange] = useState<number>(min as number)
+  const [maxRange, setMaxRange] = useState<number>(max as number)
+  const [minValue, setMinValue] = useState<number>(min as number)
+  const [maxValue, setMaxValue] = useState<number>(max as number)
   const [rangePositions, setRangePositions] = useState<IRangePositions>({
     left: 0,
     right: 0,
   })
 
   const onMinRangeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
+    const value = Number(e.target.value)
     if (maxRange - value < rangeGap || value < min) return
     setMinRange(value)
     isTooltipShown && setTooltip('min')
   }
 
   const onMaxRangeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
+    const value = Number(e.target.value)
     if (value - minRange < rangeGap || value > max) return
     setMaxRange(value)
     isTooltipShown && setTooltip('max')
   }
 
   const getRangePosition = useCallback(
-    (min: string, max: string, maxPossible: number): IRangePositions => {
-      const minVal = parseInt(min)
-      const maxVal = parseInt(max)
-
-      const left = (minVal / maxPossible) * 100
-      const right = 100 - (maxVal / maxPossible) * 100
+    (min: number, max: number, maxPossible: number): IRangePositions => {
+      const left = (min / maxPossible) * 100
+      const right = 100 - (max / maxPossible) * 100
 
       return { left, right }
     },

@@ -10,7 +10,7 @@ export const Stepper = memo(() => {
   }
 
   const onDownClick = () => {
-    value > 0 && setValue(prev => (+prev - 1).toString())
+    Number(value) > 0 && setValue(prev => (+prev - 1).toString())
   }
   return (
     <div className={cls.stepper}>

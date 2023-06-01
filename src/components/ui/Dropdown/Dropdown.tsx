@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from 'react'
+import { type FC, useEffect, useState, useId } from 'react'
 import cls from './Dropdown.module.scss'
 import Arrow from '@/assets/general/arrow.svg'
 import { useToggle } from '@/hooks/useToggle'
@@ -11,24 +11,22 @@ interface SelectProps {
 
 export const Dropdown: FC<SelectProps> = ({ className = '', title, options }) => {
   const [opened, setOpened] = useToggle(false)
-  const [chosenOptions, setChosenOptions] = useState([1, 2])
+  const [chosenOptions] = useState([1, 2])
+  const id = useId()
 
   useEffect(() => {
-    const clickHandle = e => {
-      if (!e.target.closest('#dropdown-' + title)) {
+    const clickHandle = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement)?.closest('#dropdown-' + id)) {
         setOpened(false)
       }
     }
 
     document.addEventListener('click', clickHandle)
     return () => document.removeEventListener('click', clickHandle)
-  }, [])
+  }, [setOpened, id])
 
   return (
-    <div
-      className={`${cls.dropdown} ${className} ${opened && cls.opened}`}
-      id={'dropdown-' + title}
-    >
+    <div className={`${cls.dropdown} ${className} ${opened && cls.opened}`} id={'dropdown-' + id}>
       <button className={cls.title} onClick={() => setOpened()} aria-label="label">
         <span>
           {title} {options.length ? `(${chosenOptions.length})` : null}
