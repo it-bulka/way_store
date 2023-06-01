@@ -1,0 +1,40 @@
+@mixin center {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btns {
+  @include center;
+  gap: 1.4rem;
+
+  button {
+    @include center;
+  }
+
+    .prev {
+
+    }
+
+  .next {
+
+  }
+
+  .arrow {
+    padding: 0.88rem;
+    @include center;
+
+    &:first-of-type svg {
+      transform: rotate(90deg);
+    }
+
+    &:last-of-type svg {
+      transform: rotate(-90deg);
+    }
+  }
+  .divider {
+    height: 1.3rem;
+    width: 0.06rem;
+    background-color: $grey;
+  }
+
+}
