@@ -1,0 +1,23 @@
+.stepper {
+  display: inline-flex;
+  padding: 0.01rem 0.754rem 0.01rem 1.57rem;
+  border: 0.06rem solid $border_color;
+
+
+  .arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .arrow {
+      padding: 4px;
+      line-height: 0;
+      text-align: center;
+      cursor: pointer;
+
+      &:first-of-type > svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
