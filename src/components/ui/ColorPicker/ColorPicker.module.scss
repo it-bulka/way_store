@@ -1,0 +1,19 @@
+.colorPicker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.839rem;
+
+  .holder {
+    display: flex;
+    gap: 0.8rem;
+  }
+  .btn {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+
+    &.active {
+      border: 0.06rem solid $grey;
+    }
+  }
+}
