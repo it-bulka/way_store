@@ -6,5 +6,5 @@ interface ButtonProps {
   title: string
 }
 export const Button: FC<ButtonProps> = ({ className, title }) => {
-  return <div className={cls.button + ' ' + className}>{title}</div>
+  return <button className={cls.button + ' ' + className}>{title}</button>
 }
