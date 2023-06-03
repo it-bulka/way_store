@@ -1,0 +1,46 @@
+@use 'sass:math';
+
+@mixin flexColSize($initialSize: 0, $grow: 0, $shrink: 0) {
+  flex: 0 0 math.div($initialSize, 866) * 100%;
+}
+
+.goods {
+  .title {
+    margin: 2.6rem 0 6.9rem;
+    @include flex;
+  }
+
+  .content {
+    @include flex($align: flex-start);
+
+    .descript {
+      @include flex;
+    }
+
+    .col1 {
+      @include flexColSize(428)
+    }
+
+    .col2 {
+      @include flexColSize(369.83)
+    }
+
+    .controls {
+      padding: 3.439rem 0 1.939rem;
+      @include flex($align: flex-end);
+      flex-wrap: wrap;
+    }
+
+    .stepper {
+      @include flex($align: flex-start);
+      flex-direction: column;
+      gap: 0.766rem;
+    }
+
+    .btns {
+      @include flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+  }
+}
