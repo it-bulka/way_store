@@ -1,0 +1,13 @@
+.textfield {
+  text-transform: uppercase;
+  @include flex($align: flex-start);
+  flex-direction: column;
+  height: 13.1rem;
+
+  & > textarea {
+    border: 0.06rem solid $grey_4;
+    width: 100%;
+    flex: 1;
+    resize: none;
+  }
+}

@@ -1,37 +1,19 @@
 @font-face {
-  font-family: 'Helvetica Bold';
-  src: local('Helvetica'),
-      url('@/fonts/helvetica-bold.woff2') format('woff2'),
-      url('@/fonts/helvetica-bold.woff') format('woff'),
-      url('@/fonts/helvetica-bold.ttf') format('truetype');
-  font-weight: bold;
+  font-family: 'PTSans-Bold';
+  src: local('PTSans-Bold'),
+  url('@/fonts/PTSans-Bold.woff2') format('woff2'),
+  url('@/fonts/PTSans-Bold.woff') format('woff'),
+  url('@/fonts/PTSans-Bold.ttf') format('truetype');
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Helvetica Light';
-  src: local('Helvetica Light'),
-    url('@/fonts/helvetica-light.woff2') format('woff2'),
-    url('@/fonts/helvetica-light.woff') format('woff'),
-    url('@/fonts/helvetica-light.ttf') format('truetype');
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: 'TeX Gyre Heros Bold';
-  src: local('Helvetica'),
-  url('@/fonts/texgyreheros.woff2') format('woff2'),
-  url('@/fonts/texgyreheros.woff') format('woff'),
-  url('@/fonts/texgyreheros.ttf') format('truetype');
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: 'TeX Gyre Heros';
-  src: local('Helvetica Light'),
-  url('@/fonts/texgyreheros.woff2') format('woff2'),
-  url('@/fonts/texgyreheros.woff') format('woff'),
-  url('@/fonts/texgyreheros.ttf') format('truetype');
-  font-weight: bold;
+  font-family: 'PTSans-Reqular';
+  src: local('PTSans-Regular'),
+  url('@/fonts/PTSans-Regular.woff2') format('woff2'),
+  url('@/fonts/PTSans-Regular.woff') format('woff'),
+  url('@/fonts/PTSans-Regular.ttf') format('truetype');
+  font-weight: 700;
 }
 
 @font-face {

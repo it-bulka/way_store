@@ -2,7 +2,7 @@
 @import 'reset';
 
 html, body {
-  font-family: 'Helvetica Light', 'TeX Gyre Heros', 'sans-serif';
+  font-family: $font_normal;
   font-style: normal;
   font-size: 10px;
   line-height: 1.4rem;

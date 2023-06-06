@@ -1,11 +1,11 @@
 import { Layout } from '@/components/business/Layout/Layout'
-import { Store } from '@/pages/Store/Store'
+import { Profile } from '@/pages/Profile/Profile'
 
 function App() {
   return (
     <div className="app">
       <Layout>
-        <Store />
+        <Profile />
       </Layout>
     </div>
   )

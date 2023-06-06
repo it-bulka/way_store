@@ -1,0 +1,56 @@
+@mixin label{
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin hideInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox {
+  @include label;
+  gap: 0.7rem;
+
+  &:hover {
+    font-family: $font_bold
+  }
+
+  & input {
+    @include hideInput;
+  }
+
+  & input {
+    &:checked ~ .checkmark {
+      background-image: url("@/assets/general/star.svg");
+    }
+  }
+
+  .checkmark {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1rem;
+    height: 1rem;
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 1.5px;
+      left: 1.5px;
+      width: 0.7rem;
+      height: 0.7rem;
+      border: 1px solid #C7C7C7;
+      background-color: #F0F0F0;
+      z-index: -1;
+    }
+  }
+}

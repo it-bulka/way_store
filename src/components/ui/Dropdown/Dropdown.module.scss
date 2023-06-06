@@ -1,21 +1,3 @@
-@mixin label{
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@mixin hideInput {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
 $borderColor: $grey_3;
 @mixin dropdownBorder($withCol) {
   @if $withCol{
@@ -23,8 +5,6 @@ $borderColor: $grey_3;
   } @else {
     border: 0.6px solid transparent;
   }
-
-
 }
 
 
@@ -33,14 +13,6 @@ $borderColor: $grey_3;
   position: relative;
   @include dropdownBorder(false);
   border-bottom: none;
-
-  & label {
-    @include label;
-  }
-
-  & input {
-    @include hideInput;
-  }
 
   .title {
     padding: 0.6rem 1.1rem ;
@@ -54,41 +26,6 @@ $borderColor: $grey_3;
   }
   .container {
     padding: 0.25rem 0;
-
-    &:hover {
-      font-family: 'Helvetica Bold', 'TeX Gyre Heros Bold', sans-serif;
-    }
-
-    & label {
-      display: flex;
-      gap: 0.7rem;
-    }
-
-    & input {
-      &:checked ~ .checkmark {
-        background-image: url("@/assets/general/star.svg");
-      }
-    }
-
-    .checkmark {
-      position: relative;
-      background-repeat: no-repeat;
-      background-size: contain;
-      width: 1rem;
-      height: 1rem;
-
-      &:after {
-        position: absolute;
-        content: '';
-        top: 1.5px;
-        left: 1.5px;
-        width: 0.7rem;
-        height: 0.7rem;
-        border: 1px solid #C7C7C7;
-        background-color: #F0F0F0;
-        z-index: -1;
-      }
-    }
   }
 
   .content {

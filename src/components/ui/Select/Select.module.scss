@@ -1,0 +1,42 @@
+.select {
+  border-bottom: 0.06rem solid $grey_4;
+  text-transform: uppercase;
+  @include flex($justify: space-between);
+  padding: 0.02rem 0;
+  position: relative;
+
+  & > button {
+    display: flex;
+    padding-left: 2px;
+  }
+
+  &.opened {
+    & > button > svg {
+      transform: scaleY(-1);
+    }
+  }
+
+  .options {
+    position: absolute;
+    background-color: $grey_bg;
+    top: 100%;
+    left: 0;
+    border: 0.06rem solid $grey_4;
+    min-width: 100%;
+    padding: 0 0.2rem;
+    z-index: 9999;
+    max-height: 400px;
+    overflow: auto;
+
+    & > li {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $grey_4;
+        opacity: 0.8;
+      }
+    }
+  }
+
+
+}

@@ -2,6 +2,7 @@ import { type FC, useEffect, useState, useId } from 'react'
 import cls from './Dropdown.module.scss'
 import Arrow from '@/assets/general/arrow.svg'
 import { useToggle } from '@/hooks/useToggle'
+import { Checkbox } from '@/components/ui/Checkbox/Checkbox'
 
 interface SelectProps {
   className?: string
@@ -40,11 +41,7 @@ export const Dropdown: FC<SelectProps> = ({ className = '', title, options }) =>
         <ul className={cls.content}>
           {options?.map(item => (
             <li key={item} className={cls.container}>
-              <label>
-                <input type="checkbox" />
-                <span className={cls.checkmark}></span>
-                <span>{item}</span>
-              </label>
+              <Checkbox label={item} value={item} key={item} />
             </li>
           ))}
         </ul>

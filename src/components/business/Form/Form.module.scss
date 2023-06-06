@@ -1,0 +1,93 @@
+$gap: 24;
+.form {
+  @include flex;
+  position: relative;
+  margin: pc(866, 67) 0 pc(866, 40);
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 0.06rem;
+    background-color: $grey_light;
+    transform: translateX(-50%);
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .block {
+    flex: 0 0 pc(866, 369);
+    @include flexLayout;
+    column-gap: $gap + px;
+    row-gap: 0.8rem;
+  }
+
+
+  .flex {
+    @include flexLayout;
+  }
+
+  .col_1 {
+    flex: 0 0 100%;
+  }
+
+  .col_3 {
+    @include getItemFlexSize($generalSize: 223, $itemsAmmount: 3, $itemSize: 58, $gap: $gap)
+  }
+
+  .col_6 {
+    flex: 0 0 60%;
+  }
+
+  .col_7 {
+    flex: 0 0 pc(369, 247)
+  }
+
+  .col_2 {
+    flex: 0 0 pc(369, 98)
+  }
+
+  .grow {
+    flex-grow: 1;
+  }
+
+  .btn {
+    margin: $gap / 2;
+  }
+
+  .birthday {
+    margin-bottom: 1.7rem;
+  }
+
+  .radioBtns {
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  .radioBtn {
+    gap: 0.5rem;
+
+    &:not(:last-of-type) {
+      margin-right: 1.4rem;
+    }
+  }
+
+  .passwords {
+    @include flex($align: stretch);
+    flex-direction: column;
+    flex: 1 0 100%;
+    row-gap: 1.1rem;
+    margin-top: 4.1rem;
+
+    & > .legend {
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  .col_1.textfield {
+    flex-grow: 1;
+  }
+}

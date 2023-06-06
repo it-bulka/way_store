@@ -5,14 +5,17 @@ import StarIcon from '@/assets/general/star.svg'
 interface AppLinkProps {
   className?: string
   title: string
+  withDecoration?: boolean
 }
 
-export const AppLink: FC<AppLinkProps> = ({ className = '', title }) => {
+export const AppLink: FC<AppLinkProps> = ({ className = '', title, withDecoration = true }) => {
   return (
     <li className={cls.appLink + ' ' + cls.active + ' ' + className}>
-      <span>
-        <StarIcon />
-      </span>
+      {withDecoration && (
+        <span>
+          <StarIcon />
+        </span>
+      )}
       <span>{title}</span>
     </li>
   )

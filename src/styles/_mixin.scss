@@ -1,5 +1,21 @@
+@use 'sass:math';
 @mixin flex($justify: space-between, $align: center) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
+}
+
+@mixin flexLayout {
+  @include flex;
+  flex-wrap: wrap;
+}
+
+@mixin getItemFlexSize($generalSize, $itemsAmmount, $itemSize, $gap){
+  $sizeWithoutGap: $generalSize + (($itemsAmmount - 1) * $gap);
+  $size: math.div($itemSize, $sizeWithoutGap) * 100%;
+  flex: 0 0 $size;
+}
+
+@function pc($general, $item) {
+  @return math.div($item, $general) * 100%
 }
