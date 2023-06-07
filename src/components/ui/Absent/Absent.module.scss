@@ -1,9 +1,6 @@
 .absent {
-  padding: pc(866, 52 - 17) 0; //wrapper has margin 17
-
   .info {
-    //@include flex;
-    margin-bottom: pc(866, 21);
+    margin-bottom: pc($main_width, 21);
   }
 
   .icon {

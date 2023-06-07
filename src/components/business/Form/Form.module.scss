@@ -2,7 +2,7 @@ $gap: 24;
 .form {
   @include flex;
   position: relative;
-  margin: pc(866, 67) 0 pc(866, 40);
+  margin: pc($main_width, 67) 0 pc($main_width, 40);
 
   &:before {
     position: absolute;
@@ -20,7 +20,7 @@ $gap: 24;
   }
 
   .block {
-    flex: 0 0 pc(866, 369);
+    flex: 0 0 pc($main_width, 369);
     @include flexLayout;
     column-gap: $gap + px;
     row-gap: 0.8rem;

@@ -1,3 +1,9 @@
 .purchaseHistory {
-    margin: pc(866, 17) 0 pc(866, 15);
+
+    .table {
+        padding-top: pc($main_width, 22);
+    }
+    .absent {
+        padding: pc($main_width, 52) 0;
+    }
 }

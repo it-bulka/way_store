@@ -3,7 +3,7 @@ import cls from './PurchaseHistory.module.scss'
 import { Table } from '@/components/ui/Table/Table'
 import { IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
-/*const tableData: IGoods[] = [
+const tableData: IGoods[] = [
   {
     id: '1',
     title: 'ДИЛЬВО 18 СМ',
@@ -28,9 +28,9 @@ import { Absent } from '@/components/ui/Absent/Absent'
       statusEn: 'cancel',
     },
   },
-]*/
+]
 
-const tableData: IGoods[] = []
+tableData.length = 0
 
 const columns = [
   {
@@ -70,9 +70,13 @@ export const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) =>
   return (
     <div className={cls.purchaseHistory + ' ' + className}>
       {tableData?.length ? (
-        <Table columns={columns} data={tableData} />
+        <Table columns={columns} data={tableData} className={cls.table} />
       ) : (
-        <Absent info="У ВАС ПОКА НЕ БЫЛО ЗАКАЗОВ" btnTitle="ПЕРЕЙТИ В МАГАЗИН" />
+        <Absent
+          info="У ВАС ПОКА НЕ БЫЛО ЗАКАЗОВ"
+          btnTitle="ПЕРЕЙТИ В МАГАЗИН"
+          className={cls.absent}
+        />
       )}
     </div>
   )

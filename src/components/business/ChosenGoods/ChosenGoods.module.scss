@@ -1,5 +1,9 @@
 .chosenGoods {
     .products {
-      padding-top: pc(866, 47);
+      padding-top: pc($main_width, 47);
     }
+
+  .absent {
+    padding: pc($main_width, 52) 0;
+  }
 }

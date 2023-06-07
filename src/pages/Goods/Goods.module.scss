@@ -1,7 +1,7 @@
 @use 'sass:math';
 
 @mixin flexColSize($initialSize: 0, $grow: 0, $shrink: 0) {
-  flex: 0 0 math.div($initialSize, 866) * 100%;
+  flex: 0 0 math.div($initialSize, $main_width) * 100%;
 }
 
 .goods {

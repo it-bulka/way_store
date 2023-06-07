@@ -1,11 +1,11 @@
 .pageNav {
   border-bottom: $border_width solid $border_color2;
-  padding: 0 0 pc(866, 15);
+  padding: 0 0 pc($main_width, 15);
   position: relative;
 
   & > ul {
     @include flex($justify: flex-start);
-    gap: pc(866, 84);
+    gap: pc($main_width, 84);
   }
 
   .underline {

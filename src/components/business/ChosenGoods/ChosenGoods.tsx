@@ -15,7 +15,11 @@ export const ChosenGoods: FC<ChosenGoodsProps> = ({ className = '' }) => {
       {products?.length ? (
         <ProductsList products={products} className={cls.products} />
       ) : (
-        <Absent info="ВЫ ПОКА НИЧЕГО НЕ ДОБАВИЛИ В ИЗБРАННОЕ" btnTitle="ПЕРЕЙТИ В МАГАЗИН" />
+        <Absent
+          info="ВЫ ПОКА НИЧЕГО НЕ ДОБАВИЛИ В ИЗБРАННОЕ"
+          btnTitle="ПЕРЕЙТИ В МАГАЗИН"
+          className={cls.absent}
+        />
       )}
     </div>
   )
