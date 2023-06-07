@@ -5,7 +5,8 @@
   gap:1rem;
   color: inherit;
 
-  &.active {
+  &.active,
+  &:hover {
     font-family: $font_bold;
   }
 }

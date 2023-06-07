@@ -1,0 +1,20 @@
+.pageNav {
+  border-bottom: $border_width solid $border_color2;
+  padding: 0 0 pc(866, 15);
+  position: relative;
+
+  & > ul {
+    @include flex($justify: flex-start);
+    gap: pc(866, 84);
+  }
+
+  .underline {
+    position: absolute;
+    content: '';
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    background-color: $border_color2;
+  }
+}
