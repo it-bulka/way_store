@@ -2,8 +2,8 @@ import { type FC } from 'react'
 import cls from './PurchaseHistory.module.scss'
 import { Table } from '@/components/ui/Table/Table'
 import { IGoods } from '@/components/ui/Table/Table'
-
-const tableData: IGoods[] = [
+import { Absent } from '@/components/ui/Absent/Absent'
+/*const tableData: IGoods[] = [
   {
     id: '1',
     title: 'ДИЛЬВО 18 СМ',
@@ -28,7 +28,9 @@ const tableData: IGoods[] = [
       statusEn: 'cancel',
     },
   },
-]
+]*/
+
+const tableData: IGoods[] = []
 
 const columns = [
   {
@@ -67,7 +69,11 @@ interface PurchaseHistoryProps {
 export const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
   return (
     <div className={cls.purchaseHistory + ' ' + className}>
-      <Table columns={columns} data={tableData} />
+      {tableData?.length ? (
+        <Table columns={columns} data={tableData} />
+      ) : (
+        <Absent info="У ВАС ПОКА НЕ БЫЛО ЗАКАЗОВ" btnTitle="ПЕРЕЙТИ В МАГАЗИН" />
+      )}
     </div>
   )
 }
