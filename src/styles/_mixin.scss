@@ -14,7 +14,7 @@
 @mixin getItemFlexSize($generalSize, $itemsAmmount, $itemSize, $gap){
   $sizeWithoutGap: $generalSize + (($itemsAmmount - 1) * $gap);
   $size: math.div($itemSize, $sizeWithoutGap) * 100%;
-  flex: 0 0 $size;
+  flex: 1 1 $size;
 }
 
 @function pc($general, $item) {

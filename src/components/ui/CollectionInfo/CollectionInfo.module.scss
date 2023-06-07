@@ -1,0 +1,69 @@
+.collectionInfo {
+  &:not(:last-of-type) {
+    margin-bottom: pc($main_width, 35);
+  }
+  .header {
+    @include flex;
+  }
+  .title {
+    font-family: "Druk Medium", sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  }
+
+  .content {
+    margin: pc($main_width, 27) 0 pc($main_width, 24);
+    max-width: pc($main_width, 678);
+  }
+
+  .paragraph:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+
+  .imgs {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      overflow: hidden;
+    }
+
+    img {
+      transition: transform 0.5s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &_2 {
+      gap: 7px;
+
+      & > * {
+        @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 2, $itemSize: 429, $gap: 7);
+      }
+    }
+
+    &_3 {
+      column-gap: 5px;
+      row-gap: 4px;
+
+      & > * {
+        @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 2, $itemSize: 429, $gap: 5);
+      }
+
+      & > *:first-of-type {
+        flex: 0 0 100%;
+      }
+    }
+
+    &_4 {
+      gap: 5px;
+
+      & > * {
+        @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 4, $itemSize: 212, $gap: 7);
+      }
+    }
+  }
+}
