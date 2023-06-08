@@ -1,0 +1,35 @@
+import { type FC } from 'react'
+import cls from './CollabCard.module.scss'
+import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
+import { Button } from '@/components/ui/Button/Button'
+
+interface CollabCardProps {
+  className?: string
+  img: string
+  title: string
+  content: string | string[]
+}
+export const CollabCard: FC<CollabCardProps> = ({ className = '', img, title, content }) => {
+  return (
+    <div className={cls.collabCard + ' ' + className}>
+      <div>
+        <img src={img} alt={title} />
+      </div>
+      <div className={cls.content}>
+        <Typography variant="h3" type={TypographyTypes.HEADER}>
+          {title}
+        </Typography>
+        {content && Array.isArray(content) ? (
+          <div>
+            {content.map((text, order) => (
+              <Typography key={order}>{text}</Typography>
+            ))}
+          </div>
+        ) : (
+          <Typography>{content}</Typography>
+        )}
+        <Button title="продолжить" className={cls.btn} />
+      </div>
+    </div>
+  )
+}
