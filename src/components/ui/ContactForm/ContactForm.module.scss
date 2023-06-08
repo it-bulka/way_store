@@ -1,0 +1,19 @@
+.contactForm {
+  .inputs {
+    @include flex($justify: space-between);
+    flex-wrap: wrap;
+    white-space: nowrap;
+    column-gap: 2.5rem;
+    row-gap: 0.8rem;
+
+    margin-bottom: 0.9rem;
+
+    & > * {
+      @include getItemFlexSize($generalSize: 369, $itemsAmmount: 2, $itemSize: 175, $gap: 25);
+    }
+  }
+
+  .checkbox {
+    margin: 0.6rem 0 1rem;
+  }
+}

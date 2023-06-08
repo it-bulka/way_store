@@ -1,18 +1,31 @@
 import { type FC, useRef, useState } from 'react'
 import cls from './Accordion.module.scss'
 import Plus from '@/assets/general/plus.svg'
+import Arrow from '@/assets/general/arrow.svg'
 
+export enum AccordionType {
+  ARROW = 'accordion-arrow',
+  REGULAR = 'accordion-regular',
+}
 interface IAccordionItems {
   id: string
   title: string
   content: string
+  type?: AccordionType
 }
 
 interface AccordionProps {
+  className?: string
   items: IAccordionItems[]
+  type?: AccordionType
 }
 
-const AccordionItem: FC<IAccordionItems> = ({ id, title, content }) => {
+const AccordionItem: FC<IAccordionItems> = ({
+  id,
+  title,
+  content,
+  type = AccordionType.REGULAR,
+}) => {
   const [isOpened, setOpened] = useState(false)
   const ref = useRef<HTMLParagraphElement | null>(null)
 
@@ -20,30 +33,46 @@ const AccordionItem: FC<IAccordionItems> = ({ id, title, content }) => {
 
   return (
     <li className={cls.item + ' ' + (isOpened && cls.opened)} key={id}>
-      <button className={cls.control} onClick={onClick} aria-expanded={!isOpened}>
-        <span>{title}</span>
-        <span className={cls.icon}>
-          <Plus className={cls.plus} />
-          <span className={cls.minus} />
-        </span>
-      </button>
+      {type === AccordionType.REGULAR && (
+        <button className={cls.control} onClick={onClick} aria-expanded={!isOpened}>
+          <span>{title}</span>
+          <span className={cls.icon}>
+            <Plus className={cls.plus} />
+            <span className={cls.minus} />
+          </span>
+        </button>
+      )}
+
+      {type === AccordionType.ARROW && (
+        <button className={cls.control} onClick={onClick} aria-expanded={!isOpened}>
+          <span>{title}</span>
+          <span className={cls.icon}>
+            <Arrow className={cls.arrow} />
+          </span>
+        </button>
+      )}
+
       <p
         className={cls.content}
         aria-hidden={isOpened}
         ref={ref}
         style={{ maxHeight: isOpened ? ref.current?.scrollHeight : 0 }}
       >
-        {content}
+        <span>{content}</span>
       </p>
     </li>
   )
 }
 
-export const Accordion: FC<AccordionProps> = ({ items }) => {
+export const Accordion: FC<AccordionProps> = ({
+  items,
+  className = '',
+  type = AccordionType.REGULAR,
+}) => {
   return (
-    <ul className={cls.accordion}>
+    <ul className={cls.accordion + ' ' + className + ' ' + cls[type]}>
       {items?.map(item => (
-        <AccordionItem {...item} key={item.id} />
+        <AccordionItem {...item} key={item.id} type={type as AccordionType} />
       ))}
     </ul>
   )

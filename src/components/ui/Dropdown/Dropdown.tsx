@@ -41,7 +41,7 @@ export const Dropdown: FC<SelectProps> = ({ className = '', title, options }) =>
         <ul className={cls.content}>
           {options?.map(item => (
             <li key={item} className={cls.container}>
-              <Checkbox label={item} value={item} key={item} />
+              <Checkbox label={item} key={item} />
             </li>
           ))}
         </ul>

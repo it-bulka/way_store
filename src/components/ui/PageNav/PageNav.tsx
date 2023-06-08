@@ -1,10 +1,12 @@
-import { MouseEvent, useState, useRef, useEffect, useCallback } from 'react'
+import { MouseEvent, useState, useRef, useEffect, useCallback, FC } from 'react'
 import cls from './PageNav.module.scss'
 import { AppLink } from '@/components/ui/AppLink/AppLink'
 
-const options = ['ПРОФИЛЬ', 'ИСТОРИЯ ПОКУПОК', 'ИЗБРАННОЕ']
+interface PageNavProps {
+  options: string[]
+}
 
-export const PageNav = () => {
+export const PageNav: FC<PageNavProps> = ({ options }) => {
   const [underlineStyle, setUnderlineStyle] = useState({ width: 0, transform: 'translateX(0)' })
   const [positionShift, setPositionShift] = useState(0)
   const ref = useRef<HTMLElement | null>(null)

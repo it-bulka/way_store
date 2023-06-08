@@ -1,7 +1,7 @@
 .accordion {
   .item {
     padding: 1.861rem 0 2.19rem;
-    border-bottom: 0.06rem solid $grey_light;
+    border-bottom: $border_width solid $grey_light;
 
     &:last-child {
       padding-bottom: 0;
@@ -17,49 +17,75 @@
     cursor: pointer;
   }
 
-  .icon {
-    transform: rotate(0);
-    transition: transform .8s ease-in-out;
-    position: relative;
-  }
-
-  .plus {
-    transform: scale(1);
-    transition: transform .4s ease-in-out;
-  }
-
-  .minus {
-    position: absolute;
-    top: 40%;
-    left: 0;
-    width: 1.526rem;
-    height: 0.06rem;
-    background-color: $grey_light;
-    transform: scale(0);
-    transition: transform .4s ease-in-out .7s;
-  }
-
   .content {
     max-height: 0;
     overflow: hidden;
     will-change: max-height;
     transition: max-height 0.5s ease-in-out;
-    padding-top: 1rem;
+    & > span {
+      display: inline-block;
+      padding-top: 1rem;
+    }
   }
 
-
-  .opened {
-
+  &.accordion-regular {
     .icon {
-      transform: rotate(360deg);
+      transform: rotate(0);
+      transition: transform .8s ease-in-out;
+      position: relative;
     }
+
     .plus {
-      transform: scale(0);
-      transition-delay: 0.7s;
+      transform: scale(1);
+      transition: transform .4s ease-in-out;
     }
 
     .minus {
-      transform: scale(1);
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 1.526rem;
+      height: 0.06rem;
+      background-color: $grey_light;
+      transform: scale(0);
+      transition: transform .4s ease-in-out .7s;
+    }
+
+    .opened {
+      .icon {
+        transform: rotate(360deg);
+      }
+      .plus {
+        transform: scale(0);
+        transition-delay: 0.7s;
+      }
+
+      .minus {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.accordion-arrow {
+    border-bottom: $border_width solid $grey_light;
+    border-top: $border_width solid $grey_light;
+
+    .item {
+      padding: 1.8rem 0 1.4rem;
+    }
+
+    button {
+      text-transform: uppercase;
+    }
+
+    .icon {
+      padding: 0 1.5rem;
+    }
+
+    .opened {
+      .arrow {
+        transform: rotate(180deg);
+      }
     }
   }
 

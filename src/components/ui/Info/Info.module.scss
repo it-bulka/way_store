@@ -1,0 +1,9 @@
+.info {
+  & > * {
+    padding: 0.5rem 0;
+  }
+
+  .title {
+    border-bottom: $border_width solid $border_color2;
+  }
+}

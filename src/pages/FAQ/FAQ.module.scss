@@ -1,0 +1,12 @@
+.FAQ {
+  .title {
+    margin: pc($main_width, 43) 0 pc($main_width, 29);
+  }
+
+  .info {
+    margin-bottom: pc($main_width, 67);
+    & > *:not(:last-child) {
+      padding-bottom: 0.5rem;
+    }
+  }
+}
