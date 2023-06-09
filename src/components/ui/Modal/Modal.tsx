@@ -5,14 +5,22 @@ import CloseIcon from '@/assets/general/close.svg'
 
 export interface ModalProps {
   className?: string
+  contentClassName?: string
   children: ReactNode
   close: () => void
   isOpened: boolean
+  overlay?: 'on' | 'off'
 }
 
 const ANIMATION_TIME = 400
 
-export const Modal: FC<ModalProps> = ({ children, close, isOpened }) => {
+export const Modal: FC<ModalProps> = ({
+  children,
+  close,
+  isOpened,
+  overlay = 'on',
+  contentClassName,
+}) => {
   const [isClosing, setIsClosing] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(0)
 
@@ -55,9 +63,9 @@ export const Modal: FC<ModalProps> = ({ children, close, isOpened }) => {
       >
         {/* There is window EventListener for keyboard interaction */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-        <div className={cls.overlay} onClick={closeHandler}>
+        <div className={cls.overlay + ' ' + cls[overlay]} onClick={closeHandler}>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <div className={cls.content} onClick={onContentClick}>
+          <div className={cls.content + ' ' + contentClassName} onClick={onContentClick}>
             <button className={cls.closeBtn} onClick={closeHandler}>
               <CloseIcon />
             </button>
