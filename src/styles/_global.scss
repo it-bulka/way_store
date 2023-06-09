@@ -11,6 +11,7 @@ $border_color: #C5C5C5;
 $border_color2: #B6B6B6;
 $success: #81E491;
 $error: #E48181;
+$overlay-color: rgba(0, 0, 0, 0.77);
 
 /* FONTS */
 $font_bold: 'PTSans-Bold', sans-serif;
@@ -20,5 +21,11 @@ $font_normal: 'PTSans-Regular', sans-serif;
 $border_width: 0.06rem;
 $main_width: 866;
 
+/* MODAL */
+$modal_zindex: 999;
+$modal_height-l: 382px;
+
+/* VIEWPORT */
+$viewport_width-l: 1440;
 
 
