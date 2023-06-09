@@ -1,0 +1,55 @@
+.modal {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: $overlay-color;
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  top: pc(1024, 182);
+  left: 50%;
+  background-color: $grey_bg;
+  transform-box: border-box;
+  transition: transform 400ms ease-in-out;
+  transform-origin: left;
+  max-height: 90vh;
+}
+.closeBtn {
+  position: absolute;
+  padding: 5px;
+  top: 14px;
+  right: 14px;
+  z-index: 999;
+
+  & > svg {
+    width: 7px;
+    height: 7px;
+  }
+}
+
+.opened {
+  pointer-events: auto;
+  opacity: 1;
+  z-index: $modal_zindex;
+
+  .content {
+    transform: scale(1) translateX(-50%);
+  }
+}
+
+.closing {
+  .content {
+    transform: scale(0.1) translateX(-50%);
+  }
+}

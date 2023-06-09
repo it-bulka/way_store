@@ -1,0 +1,14 @@
+.backToRegister {
+  padding: 5px 0;
+  text-transform: uppercase;
+  @include flex($justify: flex-start);
+  gap: 0.784rem;
+
+  & > span:first-of-type  {
+    line-height: 0;
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+}

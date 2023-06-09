@@ -1,0 +1,44 @@
+$wrapper_width: 866;
+$viewport_width: 1440;
+
+.authForm {
+  padding: pc($wrapper_width, 61) pc($wrapper_width, 52) pc($wrapper_width, 32) pc($wrapper_width, 67);
+  width: $wrapper_width + px;
+  max-width: vw($viewport_width, $wrapper_width);
+
+  .content {
+    position: relative;
+    padding-bottom: pc(747, 84 - 32);
+    @include flex($align: stretch);
+
+    & > * {
+      flex: 0 0 pc($wrapper_width, 302);
+    }
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      border: $border_width solid $grey_4;
+    }
+  }
+
+  .btn {
+    margin-top: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .link {
+    font-size: 8px;
+    line-height: 11px;
+    text-decoration: underline;
+    color: #9B9B9B;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+}

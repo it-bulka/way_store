@@ -12,7 +12,7 @@ export enum TypographyTypes {
   P = 'paragraph',
 }
 
-type TypographyProps = (HeadingType | ParagraphType | SpanType) & {
+export type TypographyProps = (HeadingType | ParagraphType | SpanType) & {
   className?: string
   variant?: TagType
   children: ReactNode | ReactElement
