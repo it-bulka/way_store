@@ -19,6 +19,7 @@
 .checkbox {
   @include label;
   gap: 0.7rem;
+  text-transform: uppercase;
 
   &:hover {
     font-family: $font_bold
