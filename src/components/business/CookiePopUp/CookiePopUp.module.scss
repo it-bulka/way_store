@@ -1,0 +1,23 @@
+.cookie {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3.1rem 3.8rem;
+  background-color: $grey_bg;
+  box-shadow: 0 4px 10px 10px rgba(0, 0, 0, 0.06);
+
+  .content {
+    @include flex($align: flex-end);
+    gap: 0.7rem;
+  }
+
+  .info {
+    max-width: pc($container_width, 923);
+  }
+
+  .btns {
+    @include flex(space-between);
+    gap: 0.7rem;
+  }
+}
