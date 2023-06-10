@@ -1,6 +1,7 @@
 import { type FC, MouseEvent } from 'react'
 import cls from './AppLink.module.scss'
 import StarIcon from '@/assets/general/star.svg'
+import classnames from 'classnames'
 
 interface AppLinkProps {
   className?: string
@@ -11,14 +12,14 @@ interface AppLinkProps {
 }
 
 export const AppLink: FC<AppLinkProps> = ({
-  className = '',
+  className,
   title,
   withDecoration = true,
   isActive = false,
   onClick,
 }) => {
   return (
-    <li className={cls.appLink + ' ' + (isActive && cls.active) + ' ' + className}>
+    <li className={classnames(cls.appLink, [className], { [cls.active]: isActive })}>
       <a
         onClick={e => {
           e.preventDefault()

@@ -2,6 +2,7 @@ import { ChangeEvent, type FC, useCallback, useState } from 'react'
 import cls from './RangeSlider.module.scss'
 import { Tooltip, TooltipLeftPosition, TooltipTopPosition } from '@/components/ui/Tooltip/Tooltip'
 import { useToggle } from '@/hooks/useToggle'
+import classnames from 'classnames'
 
 interface RangeProps {
   className?: string
@@ -19,7 +20,7 @@ interface IRangePositions {
 type SlideType = 'min' | 'max'
 
 export const RangeSlider: FC<RangeProps> = ({
-  className = '',
+  className,
   maxPossible = 500000,
   rangeGap = 20000,
   min = 1000,
@@ -92,7 +93,7 @@ export const RangeSlider: FC<RangeProps> = ({
   const refreshMaxVal = () => setMaxValue(maxRange)
 
   return (
-    <div className={cls.rangeSlider + ' ' + className}>
+    <div className={classnames(cls.rangeSlider, [className])}>
       <div className={cls.labels}>
         <label className={cls.label}>
           <span>р.</span>

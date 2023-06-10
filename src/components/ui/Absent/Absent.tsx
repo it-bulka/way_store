@@ -3,6 +3,7 @@ import cls from './Absent.module.scss'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import SadIcon from '@/assets/general/sad.svg'
+import classnames from 'classnames'
 
 interface AbsentProps {
   className?: string
@@ -10,9 +11,9 @@ interface AbsentProps {
   btnTitle: string
   onBtnClick?: () => void
 }
-export const Absent: FC<AbsentProps> = ({ className = '', info, btnTitle, onBtnClick }) => {
+export const Absent: FC<AbsentProps> = ({ className, info, btnTitle, onBtnClick }) => {
   return (
-    <div className={cls.absent + ' ' + className}>
+    <div className={classnames(cls.absent, [className])}>
       <Typography className={cls.info}>
         <>
           <span>{info}</span>

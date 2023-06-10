@@ -1,5 +1,6 @@
 import { type FC, ReactElement, ReactNode, HTMLAttributes } from 'react'
 import cls from './Typography.module.scss'
+import classnames from 'classnames'
 
 export type TagType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 
@@ -19,7 +20,7 @@ export type TypographyProps = (HeadingType | ParagraphType | SpanType) & {
   type?: TypographyTypes
 }
 export const Typography: FC<TypographyProps> = ({
-  className = '',
+  className,
   variant = 'p',
   type = TypographyTypes.P,
   children,
@@ -27,7 +28,7 @@ export const Typography: FC<TypographyProps> = ({
 }) => {
   const CustomTag = variant as TagType
   return (
-    <CustomTag className={cls.typography + ' ' + className + ' ' + cls[type]} {...props}>
+    <CustomTag className={classnames(cls.typography, [className], cls[type])} {...props}>
       {children}
     </CustomTag>
   )

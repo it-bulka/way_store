@@ -7,6 +7,7 @@ import { TextField } from '@/components/ui/Textfield/TextField'
 import { Select } from '@/components/ui/Select/Select'
 import EyeIcon from '@/assets/general/eye.svg'
 import { RadioBtn } from '@/components/ui/RadioBtn/RadioBtn'
+import classnames from 'classnames'
 
 interface FormProps {
   className?: string
@@ -21,7 +22,7 @@ const InfoForm = () => {
       <Typography variant="h3" type={TypographyTypes.HEADER}>
         ОБО МНЕ
       </Typography>
-      <fieldset className={cls.col_1 + ' ' + cls.radioBtns}>
+      <fieldset className={classnames(cls.col_1, cls.radioBtns)}>
         {sexTypes.map(item => (
           <RadioBtn
             label={item}
@@ -37,11 +38,11 @@ const InfoForm = () => {
       <Input name={'email'} defaultValue={'aLVOST97@GMAIL.COM'} className={cls.col_1} />
       <Input name={'name'} defaultValue={'ВОСТРИКОВ СЕМЕН ЕБАНЬКОВОВИЧ'} className={cls.col_1} />
       <Input name={'phone'} defaultValue={'+7 999 555-33-36'} className={cls.col_1} />
-      <div className={cls.col_6 + ' ' + cls.flex}>
+      <div className={classnames(cls.col_6, cls.flex)}>
         <Input
           name={'birth'}
           defaultValue={'ДЕНЬ РОЖДЕНИЯ'}
-          className={cls.col_1 + ' ' + cls.birthday}
+          className={classnames(cls.col_1, cls.birthday)}
         />
 
         <Select initialValue={'ДЕНЬ'} className={cls.col_3} />
@@ -53,7 +54,7 @@ const InfoForm = () => {
         <Typography
           variant="h3"
           type={TypographyTypes.HEADER}
-          className={cls.col_1 + ' ' + cls.legend}
+          className={classnames(cls.col_1, cls.legend)}
         >
           МОЙ ПАРОЛЬ
         </Typography>
@@ -84,25 +85,25 @@ const AddressForm = () => {
       <Input name={'street'} label={'УЛИЦА'} className={cls.col_7} />
       <Input name={'home'} label={'ДОМ'} className={cls.col_2} />
       <Input name={'name'} label={'ПОДЪЕЗД'} className={cls.col_2} />
-      <Input name={'floor'} label={'ЭТАЖ'} className={cls.col_2 + ' ' + cls.grow} />
+      <Input name={'floor'} label={'ЭТАЖ'} className={classnames(cls.col_2, cls.grow)} />
       <Input name={'appartment'} label={'КВАРТИРА'} className={cls.col_2} />
       <Input name={'index'} label={'ИНДЕКС'} className={cls.col_2} />
       <TextField
         name="comment"
         label="КОММЕНТАРИИ АДРЕСУ "
-        className={cls.col_1 + ' ' + cls.textfield}
+        className={classnames(cls.col_1, cls.textfield)}
       />
       <Button title={'Подтвердить'} type="submit" className={cls.btn} />
     </div>
   )
 }
 
-export const Form: FC<FormProps> = ({ className = '' }) => {
+export const Form: FC<FormProps> = ({ className }) => {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
   }
   return (
-    <form className={cls.form + ' ' + className} onSubmit={submitHandler}>
+    <form className={classnames(cls.form, [className])} onSubmit={submitHandler}>
       <InfoForm />
       <AddressForm />
     </form>

@@ -1,5 +1,6 @@
 import { type FC, ReactNode } from 'react'
 import cls from './Tooltip.module.scss'
+import classnames from 'classnames'
 
 export enum TooltipTopPosition {
   START = 'top_start',
@@ -22,7 +23,7 @@ interface TooltipProps {
   leftTransform?: TooltipLeftPosition
 }
 export const Tooltip: FC<TooltipProps> = ({
-  className = '',
+  className,
   content,
   x = '0%',
   y = '0%',
@@ -31,7 +32,7 @@ export const Tooltip: FC<TooltipProps> = ({
 }) => {
   return (
     <div
-      className={`${cls.tooltip} ${className} ${cls[topTransform]} ${cls[leftTransform]}`}
+      className={classnames(cls.tooltip, [className], cls[topTransform], cls[leftTransform])}
       style={{ left: x, top: y }}
     >
       {content}

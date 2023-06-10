@@ -5,20 +5,21 @@ import Heart from '@/assets/general/heart.svg'
 import Cart from '@/assets/general/cart.svg'
 import Person from '@/assets/general/person.svg'
 import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
+import classnames from 'classnames'
 
 interface HeaderProps {
   className?: string
 }
-export const Header: FC<HeaderProps> = ({ className = '' }) => {
+export const Header: FC<HeaderProps> = ({ className }) => {
   return (
-    <div className={cls.header + ' container ' + className}>
-      <div className={`${cls.logo} col-1`}>
+    <div className={classnames(cls.header, 'container ', [className])}>
+      <div className={classnames(cls.logo, 'col-1')}>
         <Logo />
       </div>
-      <div className={`${cls.searchHolder} col-2`}>
+      <div className={classnames(cls.searchHolder, 'col-2')}>
         <SearchBar />
       </div>
-      <div className={`${cls.actions} col-3`}>
+      <div className={classnames(cls.actions, 'col-3')}>
         <span>
           <Heart />
         </span>

@@ -5,14 +5,15 @@ import { Typography } from '@/components/ui/Typography/Typography'
 import { Input } from '@/components/ui/Input/Input'
 import { BackToRegisterBtn } from '@/components/ui/BackToRegisterBtn/BackToRegisterBtn'
 import { Button } from '@/components/ui/Button/Button'
+import classnames from 'classnames'
 
 interface PasswordRecoveryProps {
   className?: string
 }
-export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ className = '' }) => {
+export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ className }) => {
   const [isSubmitted, setSubmitted] = useState(false)
   return (
-    <div className={cls.recovery + ' ' + className}>
+    <div className={classnames(cls.recovery, [className])}>
       <ModalTitle>восстановление пароля</ModalTitle>
       {isSubmitted ? (
         <Typography className={cls.info}>

@@ -4,6 +4,7 @@ import Ring from '@/assets/goods/Ring 1.jpg'
 import { Typography } from '@/components/ui/Typography/Typography'
 import ArrowIcon from '@/assets/general/arrow.svg'
 import { formatDate } from '@/utils/formatDate'
+import classnames from 'classnames'
 
 interface Column {
   [key: string]: string | undefined
@@ -38,11 +39,11 @@ const cellsSize: StyleClasses = {
   status: cls.statusHead,
 }
 
-export const Table: FC<TableProps> = ({ className = '', data, columns }) => {
+export const Table: FC<TableProps> = ({ className, data, columns }) => {
   console.log({ data, columns })
 
   return (
-    <table className={cls.table + ' ' + className}>
+    <table className={classnames(cls.table, [className])}>
       <thead>
         <tr>
           {columns.map(head => (

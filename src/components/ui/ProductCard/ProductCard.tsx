@@ -1,5 +1,6 @@
 import { type FC } from 'react'
 import cls from './ProductCard.module.scss'
+import classnames from 'classnames'
 
 export interface IProduct {
   img: string
@@ -14,9 +15,9 @@ interface ProductCardProps extends IProd {
   className?: string
 }
 
-export const ProductCard: FC<ProductCardProps> = ({ className = '', img, title, price }) => {
+export const ProductCard: FC<ProductCardProps> = ({ className, img, title, price }) => {
   return (
-    <div className={cls.productCard + ' ' + className}>
+    <div className={classnames(cls.productCard, [className])}>
       <div>
         <img src={img} alt="product" />
       </div>

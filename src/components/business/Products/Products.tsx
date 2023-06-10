@@ -5,6 +5,7 @@ import { products } from '@/data/products'
 import { RangeSlider } from '@/components/ui/RangeSlider/RangeSlider'
 import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import { Dropdown } from '@/components/ui/Dropdown/Dropdown'
+import classnames from 'classnames'
 
 interface ProductsProps {
   className?: string
@@ -13,9 +14,9 @@ interface ProductsProps {
 const temporalCrumbs: string[] = ['Главная', 'Магазин', 'Кольца']
 const checks = ['option 1', 'option 2', 'option 3']
 
-export const Products: FC<ProductsProps> = ({ className = '' }) => {
+export const Products: FC<ProductsProps> = ({ className }) => {
   return (
-    <div className={cls.products + ' ' + className}>
+    <div className={classnames(cls.products, [className])}>
       <BreadCrumbs crumbs={temporalCrumbs} />
       <div className={cls.filters}>
         <div className={cls.dropdowns}>

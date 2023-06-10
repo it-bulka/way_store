@@ -3,15 +3,16 @@ import cls from './ChosenGoods.module.scss'
 import { Absent } from '@/components/ui/Absent/Absent'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
 import { products } from '@/data/products'
+import classnames from 'classnames'
 
 products.length = 0
 
 interface ChosenGoodsProps {
   className?: string
 }
-export const ChosenGoods: FC<ChosenGoodsProps> = ({ className = '' }) => {
+export const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
   return (
-    <div className={cls.chosenGoods + ' ' + className}>
+    <div className={classnames(cls.chosenGoods, [className])}>
       {products?.length ? (
         <ProductsList products={products} className={cls.products} />
       ) : (

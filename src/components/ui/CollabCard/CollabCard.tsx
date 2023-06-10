@@ -2,6 +2,7 @@ import { type FC } from 'react'
 import cls from './CollabCard.module.scss'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
+import classnames from 'classnames'
 
 interface CollabCardProps {
   className?: string
@@ -9,9 +10,9 @@ interface CollabCardProps {
   title: string
   content: string | string[]
 }
-export const CollabCard: FC<CollabCardProps> = ({ className = '', img, title, content }) => {
+export const CollabCard: FC<CollabCardProps> = ({ className, img, title, content }) => {
   return (
-    <div className={cls.collabCard + ' ' + className}>
+    <div className={classnames(cls.collabCard, [className])}>
       <div>
         <img src={img} alt={title} />
       </div>

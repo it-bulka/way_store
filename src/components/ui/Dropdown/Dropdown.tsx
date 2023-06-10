@@ -3,6 +3,7 @@ import cls from './Dropdown.module.scss'
 import Arrow from '@/assets/general/arrow.svg'
 import { useToggle } from '@/hooks/useToggle'
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox'
+import classnames from 'classnames'
 
 interface SelectProps {
   className?: string
@@ -10,7 +11,7 @@ interface SelectProps {
   options: string[]
 }
 
-export const Dropdown: FC<SelectProps> = ({ className = '', title, options }) => {
+export const Dropdown: FC<SelectProps> = ({ className, title, options }) => {
   const [opened, setOpened] = useToggle(false)
   const [chosenOptions] = useState([1, 2])
   const id = useId()
@@ -27,7 +28,10 @@ export const Dropdown: FC<SelectProps> = ({ className = '', title, options }) =>
   }, [setOpened, id])
 
   return (
-    <div className={`${cls.dropdown} ${className} ${opened && cls.opened}`} id={'dropdown-' + id}>
+    <div
+      className={classnames(cls.dropdown, [className], { [cls.opened]: opened })}
+      id={'dropdown-' + id}
+    >
       <button className={cls.title} onClick={() => setOpened()} aria-label="label">
         <span>
           {title} {options.length ? `(${chosenOptions.length})` : null}

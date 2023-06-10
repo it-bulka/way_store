@@ -1,13 +1,14 @@
 import { type FC } from 'react'
 import cls from './SearchBar.module.scss'
 import Search from '@/assets/general/search.svg'
+import classnames from 'classnames'
 
 interface SearchBarProps {
   className?: string
 }
-export const SearchBar: FC<SearchBarProps> = ({ className = '' }) => {
+export const SearchBar: FC<SearchBarProps> = ({ className }) => {
   return (
-    <div className={cls.searchBar + ' ' + className}>
+    <div className={classnames(cls.searchBar, [className])}>
       <span>
         <Search />
       </span>

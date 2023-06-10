@@ -1,5 +1,6 @@
 import { type FC, HTMLAttributes } from 'react'
-import cls from '@/components/ui/Checkbox/Checkbox.module.scss' //the same styling
+import cls from '@/components/ui/Checkbox/Checkbox.module.scss'
+import classnames from 'classnames' //the same styling
 
 interface RadioBtnProps extends HTMLAttributes<HTMLInputElement> {
   className?: string
@@ -9,7 +10,7 @@ interface RadioBtnProps extends HTMLAttributes<HTMLInputElement> {
   value: string
 }
 export const RadioBtn: FC<RadioBtnProps> = ({
-  className = '',
+  className,
   label,
   checked,
   onChecked,
@@ -17,7 +18,7 @@ export const RadioBtn: FC<RadioBtnProps> = ({
   ...props
 }) => {
   return (
-    <label className={cls.checkbox + ' ' + className}>
+    <label className={classnames(cls.checkbox, [className])}>
       <input
         type="radio"
         checked={checked}

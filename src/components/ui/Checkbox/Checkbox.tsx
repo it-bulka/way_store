@@ -1,6 +1,7 @@
 import { type FC, HTMLAttributes } from 'react'
 import cls from './Checkbox.module.scss'
 import { useToggle } from '@/hooks/useToggle'
+import classnames from 'classnames'
 
 interface CheckInputProps extends HTMLAttributes<HTMLInputElement> {
   className?: string
@@ -9,7 +10,7 @@ interface CheckInputProps extends HTMLAttributes<HTMLInputElement> {
   onChecked?: (isChecked?: boolean) => void
 }
 export const Checkbox: FC<CheckInputProps> = ({
-  className = '',
+  className,
   label,
   checked = false,
   onChecked,
@@ -22,7 +23,7 @@ export const Checkbox: FC<CheckInputProps> = ({
     toggleChecked()
   }
   return (
-    <label className={cls.checkbox + ' ' + className}>
+    <label className={classnames(cls.checkbox, [className])}>
       <input type="checkbox" checked={isChecked} onChange={checkHandler} {...props} />
       <span className={cls.checkmark}></span>
       {label && <span>{label}</span>}

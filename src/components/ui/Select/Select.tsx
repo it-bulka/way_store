@@ -2,6 +2,7 @@ import { type FC, useState } from 'react'
 import cls from './Select.module.scss'
 import ArrowIcon from '@/assets/general/arrow.svg'
 import { useToggle } from '@/hooks/useToggle'
+import classnames from 'classnames'
 
 interface SelectProps {
   className?: string
@@ -19,8 +20,15 @@ export const Select: FC<SelectProps> = ({ className = '', initialValue = 'Ден
     onChose && onChose(item)
   }
 
+  const isSelected = (item: string) => {
+    if (chosen) {
+      return chosen === item
+    }
+    return false
+  }
+
   return (
-    <div className={cls.select + ' ' + className + ' ' + (isOpen && cls.opened)}>
+    <div className={classnames(cls.select, { className, [cls.opened]: isOpen })}>
       <p>{chosen || initialValue}</p>
       <button onClick={() => setOpen()}>
         <ArrowIcon />
@@ -28,8 +36,14 @@ export const Select: FC<SelectProps> = ({ className = '', initialValue = 'Ден
       {isOpen && (
         <ul className={cls.options}>
           {options.map(item => (
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <li onClick={() => onItemClick(item)} onKeyDown={() => onItemClick(item)} key={item}>
+            <li
+              onClick={() => onItemClick(item)}
+              onKeyDown={() => onItemClick(item)}
+              key={item}
+              role="option"
+              aria-selected={isSelected(item)}
+              aria-labelledby={item}
+            >
               {item}
             </li>
           ))}

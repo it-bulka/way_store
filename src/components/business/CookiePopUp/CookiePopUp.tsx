@@ -5,6 +5,7 @@ import { Typography } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import { useCookies } from 'react-cookie'
 import { getDateExpires } from '@/utils/getDateExpires'
+import classnames from 'classnames'
 
 interface CookiePopUpProps {
   className?: string
@@ -13,7 +14,7 @@ interface CookiePopUpProps {
 }
 const CONSENT_COOKIE = 'consent'
 
-export const CookiePopUp: FC<CookiePopUpProps> = ({ className = '', onConfirm, onDecline }) => {
+export const CookiePopUp: FC<CookiePopUpProps> = ({ className, onConfirm, onDecline }) => {
   const [, setCookie, removeCookie] = useCookies()
 
   const onConfirmClick = () => {
@@ -28,7 +29,7 @@ export const CookiePopUp: FC<CookiePopUpProps> = ({ className = '', onConfirm, o
 
   return (
     <Portal>
-      <div className={cls.cookie + ' ' + className}>
+      <div className={classnames(cls.cookie, [className])}>
         <div className={cls.content + ' container'}>
           <Typography className={cls.info}>
             Мы используем файлы cookie, чтобы обеспечивать правильную работу нашего веб-сайта,

@@ -1,5 +1,6 @@
 import { type FC, FormEvent, HTMLAttributes, ReactNode, useId, useState } from 'react'
 import cls from './Input.module.scss'
+import classnames from 'classnames'
 
 type InputVal = string | undefined
 type InputSetter = <T>(a: T) => void
@@ -17,7 +18,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 export const Input: FC<InputProps> = ({
-  className = '',
+  className,
   type = 'text',
   label,
   placeholder,
@@ -44,7 +45,7 @@ export const Input: FC<InputProps> = ({
   }
 
   return (
-    <div className={cls.input + ' ' + className}>
+    <div className={classnames(cls.input, [className])}>
       {label && <label htmlFor={id + name}>{label}</label>}
       <input
         type={type}

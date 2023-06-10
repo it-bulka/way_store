@@ -1,7 +1,11 @@
+/* There is window EventListener set for keyboard interaction */
+/* eslint jsx-a11y/click-events-have-key-events: 0,jsx-a11y/no-static-element-interactions: 0 */
+
 import { type FC, ReactNode, useRef, useState, useCallback, MouseEvent, useEffect } from 'react'
 import cls from './Modal.module.scss'
 import { Portal } from '@/components/ui/Portal/Portal'
 import CloseIcon from '@/assets/general/close.svg'
+import classnames from 'classnames'
 
 export interface ModalProps {
   className?: string
@@ -58,13 +62,8 @@ export const Modal: FC<ModalProps> = ({
   }, [isOpened, onKeyDown])
   return (
     <Portal>
-      <div
-        className={cls.modal + ' ' + (isClosing && cls.closing) + ' ' + (isOpened && cls.opened)}
-      >
-        {/* There is window EventListener for keyboard interaction */}
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+      <div className={classnames(cls.modal, { [cls.closing]: isClosing, [cls.opened]: isOpened })}>
         <div className={cls.overlay + ' ' + cls[overlay]} onClick={closeHandler}>
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div className={cls.content + ' ' + contentClassName} onClick={onContentClick}>
             <button className={cls.closeBtn} onClick={closeHandler}>
               <CloseIcon />

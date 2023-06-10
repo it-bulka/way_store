@@ -3,6 +3,7 @@ import cls from './PurchaseHistory.module.scss'
 import { Table } from '@/components/ui/Table/Table'
 import { IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
+import classnames from 'classnames'
 const tableData: IGoods[] = [
   {
     id: '1',
@@ -68,7 +69,7 @@ interface PurchaseHistoryProps {
 
 export const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
   return (
-    <div className={cls.purchaseHistory + ' ' + className}>
+    <div className={classnames(cls.purchaseHistory, [className])}>
       {tableData?.length ? (
         <Table columns={columns} data={tableData} className={cls.table} />
       ) : (

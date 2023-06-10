@@ -2,6 +2,7 @@ import { type FC, useRef, useState } from 'react'
 import cls from './Accordion.module.scss'
 import Plus from '@/assets/general/plus.svg'
 import Arrow from '@/assets/general/arrow.svg'
+import classnames from 'classnames'
 
 export enum AccordionType {
   ARROW = 'accordion-arrow',
@@ -32,7 +33,7 @@ const AccordionItem: FC<IAccordionItems> = ({
   const onClick = () => setOpened(prev => !prev)
 
   return (
-    <li className={cls.item + ' ' + (isOpened && cls.opened)} key={id}>
+    <li className={classnames(cls.item, { [cls.opened]: isOpened })} key={id}>
       {type === AccordionType.REGULAR && (
         <button className={cls.control} onClick={onClick} aria-expanded={!isOpened}>
           <span>{title}</span>
@@ -66,11 +67,11 @@ const AccordionItem: FC<IAccordionItems> = ({
 
 export const Accordion: FC<AccordionProps> = ({
   items,
-  className = '',
+  className,
   type = AccordionType.REGULAR,
 }) => {
   return (
-    <ul className={cls.accordion + ' ' + className + ' ' + cls[type]}>
+    <ul className={classnames(cls.accordion, [className], cls[type])}>
       {items?.map(item => (
         <AccordionItem {...item} key={item.id} type={type as AccordionType} />
       ))}

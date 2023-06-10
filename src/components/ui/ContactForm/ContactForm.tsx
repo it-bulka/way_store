@@ -4,13 +4,14 @@ import { Input } from '@/components/ui/Input/Input'
 import { TextField } from '@/components/ui/Textfield/TextField'
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox'
 import { Button } from '@/components/ui/Button/Button'
+import classnames from 'classnames'
 
 interface ContactFormProps {
   className?: string
 }
-export const ContactForm: FC<ContactFormProps> = ({ className = '' }) => {
+export const ContactForm: FC<ContactFormProps> = ({ className }) => {
   return (
-    <form className={cls.contactForm + ' ' + className}>
+    <form className={classnames(cls.contactForm, [className])}>
       <div className={cls.inputs}>
         <Input label="ПОЛНОЕ ИМЯ" name="name" />
         <Input label="АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ" name="email" />

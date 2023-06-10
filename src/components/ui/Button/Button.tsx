@@ -1,5 +1,6 @@
 import { type FC, HTMLAttributes } from 'react'
 import cls from './Button.module.scss'
+import classnames from 'classnames'
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string
@@ -8,7 +9,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 export const Button: FC<ButtonProps> = ({ className, title, type = 'button', ...props }) => {
   return (
-    <button className={cls.button + ' ' + className} type={type} {...props}>
+    <button className={classnames(cls.button, [className])} type={type} {...props}>
       {title}
     </button>
   )

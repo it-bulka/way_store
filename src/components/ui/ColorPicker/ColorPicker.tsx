@@ -1,5 +1,6 @@
 import { type FC, useState } from 'react'
 import cls from './ColorPicker.module.scss'
+import classnames from 'classnames'
 
 interface IOption {
   id: string
@@ -18,7 +19,7 @@ export const ColorPicker: FC<ColorPickerProps> = ({ title, options }) => {
       <div className={cls.holder}>
         {options?.map(({ id, color }) => (
           <button
-            className={cls.btn + ' ' + (active.id === id && cls.active)}
+            className={classnames(cls.btn, { [cls.active]: active.id === id })}
             style={{ backgroundColor: color }}
             onClick={() => setActive({ id, color })}
             key={id}
