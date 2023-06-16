@@ -4,13 +4,14 @@ import { Absent } from '@/components/ui/Absent/Absent'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
 import { products } from '@/data/products'
 import classnames from 'classnames'
-
-products.length = 0
+import { useNavigate } from 'react-router-dom'
 
 interface ChosenGoodsProps {
   className?: string
 }
-export const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
+const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
+  const navigateTo = useNavigate()
+
   return (
     <div className={classnames(cls.chosenGoods, [className])}>
       {products?.length ? (
@@ -20,8 +21,11 @@ export const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
           info="ВЫ ПОКА НИЧЕГО НЕ ДОБАВИЛИ В ИЗБРАННОЕ"
           btnTitle="ПЕРЕЙТИ В МАГАЗИН"
           className={cls.absent}
+          onBtnClick={() => navigateTo('/store')}
         />
       )}
     </div>
   )
 }
+
+export default ChosenGoods

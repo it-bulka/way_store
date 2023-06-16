@@ -6,11 +6,17 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 import { PageNav } from '@/components/ui/PageNav/PageNav'
 import { Info } from '@/components/ui/Info/Info'
 import { ContactForm } from '@/components/ui/ContactForm/ContactForm'
+import { Outlet } from 'react-router-dom'
 
 interface FAQProps {
   className?: string
 }
-const options = ['ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ', 'ДОСТАВКА', 'ОПЛАТА', 'СВЯЗАТЬСЯ С НАМИ']
+const options = [
+  { id: '1', title: 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ', path: 'faq' },
+  { id: '2', title: 'ДОСТАВКА', path: 'delivery' },
+  { id: '3', title: 'ОПЛАТА', path: 'payment' },
+  { id: '4', title: 'СВЯЗАТЬСЯ С НАМИ', path: 'contact' },
+]
 const deliveryInfo = [
   {
     id: '1',
@@ -24,7 +30,7 @@ const deliveryInfo = [
   },
 ]
 
-const Questions = () => {
+export const Questions = () => {
   return (
     <>
       <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
@@ -35,7 +41,7 @@ const Questions = () => {
   )
 }
 
-const Delivery = () => {
+export const Delivery = () => {
   return (
     <>
       <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
@@ -48,7 +54,7 @@ const Delivery = () => {
   )
 }
 
-const Payment = () => {
+export const Payment = () => {
   return (
     <>
       <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
@@ -64,7 +70,7 @@ const Payment = () => {
   )
 }
 
-const Contacts = () => {
+export const Contacts = () => {
   return (
     <>
       <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
@@ -91,18 +97,13 @@ const Contacts = () => {
   )
 }
 
-const sections = {
-  questions: <Questions />,
-  delivery: <Delivery />,
-  payment: <Payment />,
-  contacts: <Contacts />,
-}
-
-export const Faq: FC<FAQProps> = ({ className = '' }) => {
+const Faq: FC<FAQProps> = ({ className = '' }) => {
   return (
     <div className={cls.FAQ + ' ' + className}>
       <PageNav options={options} />
-      {sections.contacts}
+      <Outlet />
     </div>
   )
 }
+
+export default Faq

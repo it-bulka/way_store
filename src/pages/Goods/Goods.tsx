@@ -46,12 +46,11 @@ const accordionItems = [
       'emLOremLOremLOrem LOremLOremLOremLOremLOremLOrem LOremLOr emvvLOrem LOremLOremLOremLOremLOremLO remLOremLOremLOremLOrem',
   },
 ]
-const temporalCrumbs = ['Главная', 'Магазин', 'Кольца', 'Кольцо 1']
 
-export const Goods = () => {
+const Goods = () => {
   return (
     <div className={cls.goods}>
-      <BreadCrumbs crumbs={temporalCrumbs} />
+      <BreadCrumbs />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">
           Кольца
@@ -93,3 +92,5 @@ export const Goods = () => {
     </div>
   )
 }
+
+export default Goods

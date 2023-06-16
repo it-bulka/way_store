@@ -3,7 +3,7 @@ import cls from './PageNav.module.scss'
 import { AppLink } from '@/components/ui/AppLink/AppLink'
 
 interface PageNavProps {
-  options: string[]
+  options: { id: string; title: string; path: string }[]
 }
 
 export const PageNav: FC<PageNavProps> = ({ options }) => {
@@ -41,13 +41,14 @@ export const PageNav: FC<PageNavProps> = ({ options }) => {
   return (
     <nav className={cls.pageNav} ref={ref}>
       <ul>
-        {options.map(item => (
+        {options.map(({ id, title, path }) => (
           <AppLink
-            title={item}
-            key={item}
+            title={title}
+            key={id}
             withDecoration={false}
             onClick={handleLinkClick}
             className={'active'}
+            path={path}
           />
         ))}
       </ul>

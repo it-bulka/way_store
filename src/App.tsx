@@ -1,14 +1,9 @@
-import { Layout } from '@/components/business/Layout/Layout'
-import { Collections } from '@/pages/Collections/Collections'
+import { Outlet } from 'react-router-dom'
 
-function App() {
+export function App() {
   return (
     <div className="app">
-      <Layout>
-        <Collections />
-      </Layout>
+      <Outlet />
     </div>
   )
 }
-
-export default App

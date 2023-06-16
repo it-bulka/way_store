@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .products {
     .filters {
       display: flex;
@@ -14,6 +16,6 @@
   }
 
   .slider {
-    flex: 0 0 248 / $main_width * 100%;
+    flex: 0 0 math.div(248, $main_width) * 100%;
   }
 }

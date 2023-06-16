@@ -1,12 +1,21 @@
 import { CollectionInfo } from '@/components/ui/CollectionInfo/CollectionInfo'
 import { collections } from '@/data/collections'
+import { Outlet, useParams } from 'react-router-dom'
+import { Layout } from '@/components/business/Layout/Layout'
 
 export const Collections = () => {
+  const { slug } = useParams()
+  if (slug) {
+    return <Outlet />
+  }
+
   return (
-    <div>
+    <Layout>
       {collections?.map(({ id, title, data, images }) => (
-        <CollectionInfo title={title} data={data} images={images} key={id} />
+        <CollectionInfo title={title} data={data} images={images} key={id} id={id} />
       ))}
-    </div>
+    </Layout>
   )
 }
+
+export default Collections

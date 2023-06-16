@@ -11,13 +11,13 @@ interface ProductsProps {
   className?: string
 }
 
-const temporalCrumbs: string[] = ['Главная', 'Магазин', 'Кольца']
+console.log({ products2: products })
 const checks = ['option 1', 'option 2', 'option 3']
 
 export const Products: FC<ProductsProps> = ({ className }) => {
   return (
     <div className={classnames(cls.products, [className])}>
-      <BreadCrumbs crumbs={temporalCrumbs} />
+      <BreadCrumbs />
       <div className={cls.filters}>
         <div className={cls.dropdowns}>
           <Dropdown title="ИЗДЕЛИЕ" options={checks} />

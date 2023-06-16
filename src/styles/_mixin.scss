@@ -24,3 +24,10 @@
 @function vw($general, $item) {
   @return math.div($item, $general) * 100vw
 }
+
+@mixin bg-img($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

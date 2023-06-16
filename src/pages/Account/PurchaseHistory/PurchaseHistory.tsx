@@ -4,6 +4,7 @@ import { Table } from '@/components/ui/Table/Table'
 import { IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
 import classnames from 'classnames'
+import { useNavigate } from 'react-router-dom'
 const tableData: IGoods[] = [
   {
     id: '1',
@@ -67,7 +68,9 @@ interface PurchaseHistoryProps {
   className?: string
 }
 
-export const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
+const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
+  const navigateTo = useNavigate()
+
   return (
     <div className={classnames(cls.purchaseHistory, [className])}>
       {tableData?.length ? (
@@ -77,8 +80,11 @@ export const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) =>
           info="У ВАС ПОКА НЕ БЫЛО ЗАКАЗОВ"
           btnTitle="ПЕРЕЙТИ В МАГАЗИН"
           className={cls.absent}
+          onBtnClick={() => navigateTo('/store')}
         />
       )}
     </div>
   )
 }
+
+export default PurchaseHistory

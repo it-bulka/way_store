@@ -1,0 +1,48 @@
+.home {
+  .info {
+    @include bg-img("@/assets/home/bg-1.jpg");
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .title {
+    font-family: 'Druk Medium', sans-serif;
+    font-weight: 500;
+    font-size: 9.6rem;
+    line-height: 12.2rem;
+    color: #FFFFFF;
+
+    display: inline-block;
+    position: absolute;
+    right: pc(1457, 138);
+    bottom: pc(1024, 118);
+  }
+
+  .gallery  {
+    display: flex;
+    max-height: pc(1890, 627);
+
+    & > * {
+      flex-grow: 1;
+      flex-shrink: 1;
+
+      &:nth-child(1) {
+        flex-basis: pc(1440, 401);
+      }
+
+      &:nth-child(2) {
+        flex-basis: pc(1440, 558);
+      }
+
+      &:nth-child(3) {
+        flex-basis: pc(1440, 481);
+      }
+    }
+
+    img {
+      height: 100%;
+    }
+
+  }
+}
+

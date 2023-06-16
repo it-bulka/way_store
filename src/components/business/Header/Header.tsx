@@ -6,11 +6,14 @@ import Cart from '@/assets/general/cart.svg'
 import Person from '@/assets/general/person.svg'
 import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
 import classnames from 'classnames'
+import { useNavigate } from 'react-router-dom'
 
 interface HeaderProps {
   className?: string
 }
 export const Header: FC<HeaderProps> = ({ className }) => {
+  const navigateTo = useNavigate()
+
   return (
     <div className={classnames(cls.header, 'container ', [className])}>
       <div className={classnames(cls.logo, 'col-1')}>
@@ -20,15 +23,15 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         <SearchBar />
       </div>
       <div className={classnames(cls.actions, 'col-3')}>
-        <span>
+        <button onClick={() => navigateTo('/account/chosen')}>
           <Heart />
-        </span>
-        <span>
+        </button>
+        <button onClick={() => navigateTo('/')}>
           <Cart />
-        </span>
-        <span>
+        </button>
+        <button onClick={() => navigateTo('/account/profile')}>
           <Person />
-        </span>
+        </button>
       </div>
     </div>
   )

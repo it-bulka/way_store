@@ -1,0 +1,54 @@
+.notFound {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: $blue;
+  z-index: $loader_zindex;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .logo {
+    width: 83px;
+    height: 62px;
+    margin: 0 auto;
+
+    & > svg {
+      color: transparent;
+      width: 100%;
+      height: 100%;
+
+      stroke: $white;
+      stroke-width: 1;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: draw 2s linear forwards;
+    }
+  }
+
+  .info {
+    margin: 3rem 0;
+    font-size: 5rem;
+  }
+
+  .link {
+    justify-content: flex-end;
+  }
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    color: $white;
+    stroke-width: 0;
+  }
+}
