@@ -1,8 +1,12 @@
 .stepper {
   display: inline-flex;
-  padding: 0.01rem 0.754rem 0.01rem 1.57rem;
+  justify-content: space-between;
+  padding: 0.01rem 0.754rem 0.01rem 1.057rem;
   border: 0.06rem solid $border_color;
 
+  & > input {
+    max-width: calc(100% - 15px);
+  }
 
   .arrows {
     display: flex;
