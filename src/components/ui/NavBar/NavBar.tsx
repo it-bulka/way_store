@@ -1,7 +1,8 @@
-import { type FC } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import cls from './NavBar.module.scss'
 import { AppLink } from '@/components/ui/AppLink/AppLink'
 import classnames from 'classnames'
+import { useLocation } from 'react-router-dom'
 
 interface NavBarProps {
   className?: string
@@ -14,11 +15,22 @@ const links = [
   { id: '5', title: 'о нас', path: '/about' },
 ]
 export const NavBar: FC<NavBarProps> = ({ className }) => {
+  const [activePage, setActivePage] = useState('/')
+  const { pathname } = useLocation()
+  const checkPage = () => {
+    const pathName = pathname.split('/')[1]
+    const path = '/' + pathName
+    setActivePage(path)
+  }
+
+  useEffect(() => {
+    checkPage()
+  }, [pathname])
   return (
     <nav className={classnames(cls.navbar, [className])}>
       <ul>
         {links.map(({ id, title, path }) => (
-          <AppLink title={title} key={id} path={path} />
+          <AppLink title={title} key={id} path={path} isActive={activePage === path} />
         ))}
       </ul>
     </nav>

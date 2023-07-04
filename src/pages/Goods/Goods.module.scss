@@ -43,4 +43,13 @@
       flex-wrap: wrap;
     }
   }
+
+  .likeBtn {
+    color: $grey;
+
+    &.isLiked {
+      color: red;
+    }
+  }
+
 }

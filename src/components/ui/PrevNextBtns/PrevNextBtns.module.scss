@@ -9,14 +9,10 @@
 
   button {
     @include center;
-  }
 
-    .prev {
-
+    &.disabled {
+      opacity: 0.3;
     }
-
-  .next {
-
   }
 
   .arrow {

@@ -26,7 +26,7 @@ export const Modal: FC<ModalProps> = ({
   contentClassName,
 }) => {
   const [isClosing, setIsClosing] = useState(false)
-  const timer = useRef<ReturnType<typeof setTimeout>>(0)
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const closeHandler = useCallback(() => {
     if (close) {
@@ -56,7 +56,7 @@ export const Modal: FC<ModalProps> = ({
     }
 
     return () => {
-      timer.current && clearTimeout(timer.current)
+      timer.current && clearTimeout(timer.current as ReturnType<typeof setTimeout>)
       window.removeEventListener('keydown', onKeyDown)
     }
   }, [isOpened, onKeyDown])

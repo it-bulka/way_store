@@ -1,4 +1,4 @@
-import { type FC, useRef, useState } from 'react'
+import { type FC, ReactNode, useRef, useState } from 'react'
 import cls from './Accordion.module.scss'
 import Plus from '@/assets/general/plus.svg'
 import Arrow from '@/assets/general/arrow.svg'
@@ -11,7 +11,7 @@ export enum AccordionType {
 interface IAccordionItems {
   id: string
   title: string
-  content: string
+  content: string | ReactNode
   type?: AccordionType
 }
 
@@ -53,14 +53,14 @@ const AccordionItem: FC<IAccordionItems> = ({
         </button>
       )}
 
-      <p
+      <div
         className={cls.content}
         aria-hidden={isOpened}
         ref={ref}
         style={{ maxHeight: isOpened ? ref.current?.scrollHeight : 0 }}
       >
-        <span>{content}</span>
-      </p>
+        <div>{content}</div>
+      </div>
     </li>
   )
 }

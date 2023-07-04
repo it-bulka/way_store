@@ -31,3 +31,7 @@
   background-size: cover;
   background-position: center;
 }
+
+@mixin disable {
+  opacity: 0.3;
+}

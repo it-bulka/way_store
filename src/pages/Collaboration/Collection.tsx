@@ -3,8 +3,8 @@ import cls from './Collection.module.scss'
 import classnames from 'classnames'
 import { Header } from '@/components/business/Header/Header'
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
-import { ProductsList } from '@/components/business/ProductsList/ProductsList'
-import { products } from '@/data/products'
+//import { ProductsList } from '@/components/business/ProductsList/ProductsList'
+//import { products } from '@/data/products'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Footer } from '@/components/business/Footer/Footer'
 
@@ -30,7 +30,7 @@ const Collection = ({ className, title, info, gallery }: CollectionProps) => {
           </Typography>
           <Typography className={cls.text}>{info}</Typography>
 
-          <ProductsList products={products} />
+          {/*<ProductsList products={products} />*/}
         </section>
 
         <section className={cls.gallery}>

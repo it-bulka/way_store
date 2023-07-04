@@ -15,12 +15,12 @@ module.exports = {
     'react-refresh'
   ],
   rules: {
-    'react-refresh/only-export-components': 'warn',
+    'react-refresh/only-export-components': 0,
     '@typescript-eslint/no-empty-interface': [
       'error',
       {
         'allowSingleExtends': true
       }
-    ]
+    ],
   },
 }

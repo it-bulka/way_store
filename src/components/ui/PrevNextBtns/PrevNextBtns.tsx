@@ -1,36 +1,53 @@
 import { type FC, useCallback, memo } from 'react'
 import cls from './PrevNextBtns.module.scss'
 import Arrow from '@/assets/general/arrow.svg'
+import classnames from 'classnames'
 
 interface PageSwitcherProps {
   onPrevClick: () => void
   onNextClick: () => void
+  disablePrev?: boolean
+  disableNext?: boolean
 }
 
-export const PrevNextBtns: FC<PageSwitcherProps> = memo(({ onPrevClick, onNextClick }) => {
-  const prevClickHandler = useCallback(() => {
-    onPrevClick && onPrevClick()
-  }, [onPrevClick])
+export const PrevNextBtns: FC<PageSwitcherProps> = memo(
+  ({ onPrevClick, onNextClick, disablePrev = false, disableNext = false }) => {
+    const prevClickHandler = useCallback(() => {
+      onPrevClick && onPrevClick()
+    }, [onPrevClick])
 
-  const nextClickHandler = useCallback(() => {
-    onNextClick && onNextClick()
-  }, [onNextClick])
+    const nextClickHandler = useCallback(() => {
+      onNextClick && onNextClick()
+    }, [onNextClick])
 
-  return (
-    <div className={cls.btns}>
-      <button className={cls.prev} onClick={prevClickHandler}>
-        <span className={cls.arrow}>
-          <Arrow />
-        </span>
-        <span>Пред.</span>
-      </button>
-      <div className={cls.divider} />
-      <button className={cls.next} onClick={nextClickHandler}>
-        <span>След.</span>
-        <span className={cls.arrow}>
-          <Arrow />
-        </span>
-      </button>
-    </div>
-  )
-})
+    console.log({ disablePrev, disableNext })
+
+    return (
+      <div className={cls.btns}>
+        <button
+          className={classnames(cls.prev, { [cls.disabled]: disablePrev })}
+          onClick={prevClickHandler}
+          disabled={disablePrev}
+        >
+          <span className={cls.arrow}>
+            <Arrow />
+          </span>
+          <span>Пред.</span>
+        </button>
+        <div className={cls.divider} />
+        <button
+          className={classnames(cls.next, { [cls.disabled]: disableNext })}
+          onClick={nextClickHandler}
+          disabled={disableNext}
+        >
+          <span>След.</span>
+          <span className={cls.arrow}>
+            <Arrow />
+          </span>
+        </button>
+      </div>
+    )
+  }
+)
+
+PrevNextBtns.displayName = 'PrevNextBtns'

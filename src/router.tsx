@@ -22,6 +22,7 @@ import {
 
 import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
 import { colGallery, colInfo, colTitle } from '@/data/collection'
+import { goodsLoader } from '@/pages/Goods/Goods'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +30,9 @@ export const router = createBrowserRouter(
       <Route index element={<Home />} />
 
       <Route element={<Layout />}>
-        <Route path="store" element={<Store />} />
+        <Route path="store" element={<Store />}>
+          <Route path=":slug" element={<Goods />} loader={goodsLoader} />
+        </Route>
         <Route path="goods" element={<Goods />} />
 
         <Route path="faq" element={<Faq />}>

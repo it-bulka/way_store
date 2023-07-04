@@ -6,10 +6,22 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string
   title: string
   type?: 'submit' | 'button'
+  disabled?: boolean
 }
-export const Button: FC<ButtonProps> = ({ className, title, type = 'button', ...props }) => {
+export const Button: FC<ButtonProps> = ({
+  className,
+  title,
+  type = 'button',
+  disabled = false,
+  ...props
+}) => {
   return (
-    <button className={classnames(cls.button, [className])} type={type} {...props}>
+    <button
+      className={classnames(cls.button, [className], { [cls.disabled]: disabled })}
+      type={type}
+      {...props}
+      disabled={disabled}
+    >
       {title}
     </button>
   )

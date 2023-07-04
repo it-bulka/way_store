@@ -1,7 +1,6 @@
-import { type IProduct } from '@/components/ui/ProductCard/ProductCard'
 import prod from '@/assets/products/ring.png'
-
-export const products: IProduct[] = [
+// TODO: del
+export const products = [
   { img: prod, title: 'SILVER ECHMIA EAR CUFF (SINGLE - BOTH EARS)', price: 245.0, id: '1' },
   { img: prod, title: 'SILVER ECHMIA EAR CUFF (SINGLE - BOTH EARS)', price: 245.0, id: '2' },
   { img: prod, title: 'SILVER ECHMIA EAR CUFF (SINGLE - BOTH EARS)', price: 245.0, id: '3' },
