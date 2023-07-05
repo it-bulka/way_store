@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { MetalsType, StoneType, ProductType } from '@/models'
 
+export type FilterPrice = Record<'min' | 'max', number>
 export interface IFilters {
   metal?: MetalsType[]
   stones?: StoneType[]
   product?: ProductType[]
+  price?: FilterPrice
 }
 interface IState {
   filters: IFilters

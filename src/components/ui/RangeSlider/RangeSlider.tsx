@@ -1,15 +1,20 @@
-import { ChangeEvent, type FC, useCallback, useState } from 'react'
+import { ChangeEvent, type FC, useCallback, useEffect, useState } from 'react'
 import cls from './RangeSlider.module.scss'
 import { Tooltip, TooltipLeftPosition, TooltipTopPosition } from '@/components/ui/Tooltip/Tooltip'
 import { useToggle } from '@/hooks/useToggle'
 import classnames from 'classnames'
 
+export interface IGetRange {
+  (min: number, max: number): void
+}
 interface RangeProps {
   className?: string
   maxPossible?: number
   rangeGap?: number
   min?: number
   max?: number
+  getRange?: IGetRange
+  reset?: boolean
 }
 
 interface IRangePositions {
@@ -25,6 +30,8 @@ export const RangeSlider: FC<RangeProps> = ({
   rangeGap = 20000,
   min = 1000,
   max = 500000,
+  getRange,
+  reset = false,
 }) => {
   const [isTooltipShown, setTooltipShown] = useToggle(false)
   const [tooltipContent, setTooltipContent] = useState('p.121212')
@@ -72,8 +79,9 @@ export const RangeSlider: FC<RangeProps> = ({
   }
 
   const setTooltip = (slide: SlideType) => {
+    const content = slide === 'min' ? minRange : maxRange
     setPositions(slide)
-    setTooltipContent(`p.${minRange}`)
+    setTooltipContent(`p.${content}`)
   }
 
   const showTooltip = (slide: SlideType) => {
@@ -82,15 +90,24 @@ export const RangeSlider: FC<RangeProps> = ({
       setTooltip(slide)
     }
   }
-  const hideTooltip = (cb?: () => void) => {
+  const onStopSliding = (cb?: () => void) => {
     return () => {
       setTooltipShown(false)
       cb && cb()
+      getRange && getRange(minRange, maxRange)
     }
   }
 
   const refreshMinVal = () => setMinValue(minRange)
   const refreshMaxVal = () => setMaxValue(maxRange)
+
+  useEffect(() => {
+    if (reset) {
+      setMinRange(min)
+      setMaxRange(max)
+      setRangePositions({ left: 0, right: 0 })
+    }
+  }, [reset])
 
   return (
     <div className={classnames(cls.rangeSlider, [className])}>
@@ -131,10 +148,10 @@ export const RangeSlider: FC<RangeProps> = ({
             onChange={onMinRangeChange}
             value={minRange}
             onMouseEnter={showTooltip('min')}
-            onMouseLeave={hideTooltip()}
+            onMouseLeave={onStopSliding()}
             onMouseUp={refreshMinVal}
             onTouchStart={showTooltip('min')}
-            onTouchEnd={hideTooltip(refreshMinVal)}
+            onTouchEnd={onStopSliding(refreshMinVal)}
           />
           <input
             type="range"
@@ -143,10 +160,10 @@ export const RangeSlider: FC<RangeProps> = ({
             onChange={onMaxRangeChange}
             value={maxRange}
             onMouseEnter={showTooltip('max')}
-            onMouseLeave={hideTooltip()}
+            onMouseLeave={onStopSliding()}
             onMouseUp={refreshMaxVal}
             onTouchStart={showTooltip('max')}
-            onTouchEnd={hideTooltip(refreshMaxVal)}
+            onTouchEnd={onStopSliding(refreshMaxVal)}
           />
 
           {isTooltipShown && (

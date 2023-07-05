@@ -2,7 +2,7 @@ import { type FC, useEffect, useState } from 'react'
 import { where } from 'firebase/firestore'
 import cls from './Products.module.scss'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
-import { RangeSlider } from '@/components/ui/RangeSlider/RangeSlider'
+import { type IGetRange, RangeSlider } from '@/components/ui/RangeSlider/RangeSlider'
 import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import { Dropdown, type IOption as IDropdownOption } from '@/components/ui/Dropdown/Dropdown'
 import classnames from 'classnames'
@@ -11,7 +11,7 @@ import { getProducts } from '@/redux/selectors/getProducts'
 import { fetchProducts } from '@/redux/async/fetchProducts'
 import { FilterActions } from '@/redux/reducers'
 import { getFilterCategories } from '@/redux/selectors'
-import { IFilters } from '@/redux/reducers/filterCategorySlice.ts'
+import { FilterPrice, IFilters } from '@/redux/reducers/filterCategorySlice.ts'
 import { QueryFieldFilterConstraint } from '@firebase/firestore'
 import { Absent } from '@/components/ui/Absent/Absent.tsx'
 import type { StoneType, ProductType, MetalsType } from '@/models'
@@ -59,12 +59,13 @@ export const Products: FC<ProductsProps> = ({ className }) => {
   const [metals, setMetals] = useState(metalsOptions)
   const [stones, setStones] = useState(stonesOptions)
   const [productType, setProductType] = useState(productOptions)
+  const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(null)
   const dispatch = useAppDispatch()
 
   const getFilters = (): QueryFieldFilterConstraint[] | undefined => {
     const filters: QueryFieldFilterConstraint[] = []
 
-    const setQueries = (category: keyof IFilters) => {
+    const setQueries = (category: keyof Omit<IFilters, 'price'>) => {
       filterCategories?.[category]?.forEach(item => {
         filters.push(where(category, 'array-contains', item))
       })
@@ -72,6 +73,16 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     setQueries('metal')
     setQueries('stones')
     setQueries('product')
+
+    const setPriceParam = (): void => {
+      const price: FilterPrice | undefined = filterCategories.price
+      if (price) {
+        filters.push(where('price', '>=', filterCategories.price!.min))
+        filters.push(where('price', '>=', filterCategories.price!.min))
+      }
+    }
+
+    setPriceParam()
 
     return filters.length ? filters : undefined
   }
@@ -121,7 +132,16 @@ export const Products: FC<ProductsProps> = ({ className }) => {
       stones: stonesFilters,
       product: productFilters,
     }
+
+    if (priceFilter) {
+      filters.price = priceFilter
+    }
+
     dispatch(FilterActions.addCategory(filters))
+  }
+
+  const getRange: IGetRange = (min, max) => {
+    setPriceFilter({ min, max })
   }
 
   const resetFilters = () => {
@@ -132,11 +152,12 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     setMetals(reset(metals))
     setStones(reset(stones))
     setProductType(reset(productType))
+    setPriceFilter(null)
   }
 
   useEffect(() => {
     setFilters()
-  }, [metals, stones, productType])
+  }, [metals, stones, productType, priceFilter])
 
   return (
     <div className={classnames(cls.products, [className])}>
@@ -148,7 +169,13 @@ export const Products: FC<ProductsProps> = ({ className }) => {
           <Dropdown title="КАМНИ" options={stones} onChangeChecked={onStonesChecked} />
         </div>
         <div className={cls.slider}>
-          <RangeSlider />
+          <RangeSlider
+            getRange={getRange}
+            min={1000}
+            max={500000}
+            maxPossible={500000}
+            reset={!priceFilter}
+          />
         </div>
       </div>
       {!products || !products.length ? (
