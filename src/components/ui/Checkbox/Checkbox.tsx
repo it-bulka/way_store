@@ -7,7 +7,7 @@ interface CheckInputProps extends HTMLAttributes<HTMLInputElement> {
   className?: string
   label?: string
   checked?: boolean
-  onChecked?: (isChecked?: boolean) => void
+  onChecked?: (isChecked: boolean) => void
 }
 export const Checkbox: FC<CheckInputProps> = ({
   className,

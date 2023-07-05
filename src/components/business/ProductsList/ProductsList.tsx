@@ -24,7 +24,6 @@ export const ProductsList: FC<ProductsListProps> = ({ className, products, title
       {title && <h3 className={cls.title}>{title}</h3>}
       <div className={cls.list}>
         {products.map(({ images, name, price, id }) => {
-          console.log({ img: images })
           return (
             <ProductCard
               img={images['white'][0]}

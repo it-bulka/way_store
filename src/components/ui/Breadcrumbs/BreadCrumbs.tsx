@@ -11,7 +11,7 @@ interface BreadCrumbsProps {
 
 export const BreadCrumbs: FC<BreadCrumbsProps> = ({ className }) => {
   const locations = useLocation()
-  console.log({ locations })
+
   let current = ''
   const othersCrumbs = locations.pathname
     .split('/')

@@ -11,14 +11,15 @@ $borderColor: $grey_3;
 .dropdown {
   background-color: $grey_bg;
   position: relative;
-  @include dropdownBorder(false);
-  border-bottom: none;
 
   .title {
     padding: 0.6rem 1.1rem ;
     display: flex;
     align-items: center;
     width: 100%;
+    @include dropdownBorder(false);
+    border-bottom: none;
+
 
     .arrow {
       padding: 3px 6px 5.5px;
@@ -40,7 +41,9 @@ $borderColor: $grey_3;
   }
 
   &.opened {
-    border-color: $borderColor;
+    .title  {
+      border-color: $borderColor;
+    }
 
     .arrow > svg {
       transform: rotate(180deg);

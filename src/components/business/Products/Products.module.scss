@@ -1,18 +1,22 @@
 @use 'sass:math';
 
 .products {
-    .filters {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem 0 3.5rem;
-      margin-left: -1.1rem; //padding for dropdown
-    }
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 3.5rem;
+    margin-left: -1.1rem; //padding for dropdown
+  }
 
   .dropdowns {
     display: flex;
-    gap: 2.8rem;
-    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex-wrap: wrap-reverse;
     flex: 1;
+
+    & > * {
+      flex: 0 1 120px;
+    }
   }
 
   .slider {
