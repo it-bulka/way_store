@@ -17,6 +17,7 @@ import {
   Collaborations,
   Collection,
   Collections,
+  About,
   NotFound,
 } from '@/pages'
 
@@ -47,6 +48,7 @@ export const router = createBrowserRouter(
           <Route path="purchase-history" element={<PurchaseHistory />} />
           <Route path="chosen" element={<ChosenGoods />} />
         </Route>
+        <Route path="about" element={<About />} />
       </Route>
 
       <Route path="collaborations" element={<Collaborations />}>

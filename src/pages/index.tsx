@@ -11,6 +11,7 @@ const ChosenGoods = lazy(() => import('./Account/ChosenGoods/ChosenGoods'))
 const Collaborations = lazy(() => import('./Collaborations/Collaborations'))
 const Collection = lazy(() => import('./Collaboration/Collection'))
 const Collections = lazy(() => import('./Collections/Collections'))
+const About = lazy(() => import('./About/About'))
 const NotFound = lazy(() => import('./NotFound/NotFound'))
 
 export {
@@ -25,5 +26,6 @@ export {
   Collaborations,
   Collections,
   Collection,
+  About,
   NotFound,
 }
