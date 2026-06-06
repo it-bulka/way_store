@@ -27,3 +27,6 @@ dist-ssr
 
 # Project accsess
 .env
+
+# Local dev docs (not tracked in git)
+docs-dev/
