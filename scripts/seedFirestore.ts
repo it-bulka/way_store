@@ -1,5 +1,4 @@
-import { writeBatch, doc } from 'firebase/firestore'
-import type { WriteBatch } from 'firebase/firestore'
+import type { WriteBatch } from 'firebase-admin/firestore'
 import type { ProductType } from '../src/models/goodsType'
 import { PAGES } from '../src/models/pages'
 import { db } from './firebase'
@@ -10,13 +9,13 @@ const BATCH_LIMIT = 500
 const flush = async (batch: WriteBatch, count: number): Promise<[WriteBatch, number]> => {
   if (count >= BATCH_LIMIT) {
     await batch.commit()
-    return [writeBatch(db), 0]
+    return [db.batch(), 0]
   }
   return [batch, count]
 }
 
 async function seed() {
-  let batch = writeBatch(db)
+  let batch = db.batch()
   let count = 0
   let total = 0
 
@@ -24,7 +23,7 @@ async function seed() {
     const colPath = PAGES.getCollection('ukr', category as ProductType)
 
     for (const { id, ...data } of products) {
-      const ref = doc(db, colPath, id)
+      const ref = db.doc(`${colPath}/${id}`)
       batch.set(ref, data)
       count++
       total++
@@ -35,7 +34,6 @@ async function seed() {
   }
 
   if (count > 0) await batch.commit()
-
   console.log(`\nSeeded ${total} documents across ${Object.keys(seedData).length} categories.`)
 }
 
