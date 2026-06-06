@@ -1,29 +1,36 @@
-$wrapper_width: 866;
+$wrapper_width: 451;
 $viewport_width: 1440;
 
 .authForm {
-  padding: pc($wrapper_width, 61) pc($wrapper_width, 52) pc($wrapper_width, 32) pc($wrapper_width, 67);
+  padding: pc($wrapper_width, 61) pc($wrapper_width, 74) pc($wrapper_width, 32);
   width: $wrapper_width + px;
   max-width: vw($viewport_width, $wrapper_width);
+  min-height: $modal_height-l;
 
-  .content {
-    position: relative;
-    padding-bottom: pc(747, 84 - 32);
-    @include flex($align: stretch);
+  .tabs {
+    @include flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: $border_width solid $grey_4;
+    padding-bottom: 0.8rem;
+  }
 
-    & > * {
-      flex: 0 0 pc($wrapper_width, 302);
-    }
+  .tab {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    color: $grey_2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
 
-    &:after {
-      position: absolute;
-      content: '';
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
-      border: $border_width solid $grey_4;
-    }
+  .activeTab {
+    font-family: $font_bold;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid $grey;
+    padding-bottom: 2px;
   }
 
   .btn {
@@ -32,13 +39,17 @@ $viewport_width: 1440;
   }
 
   .link {
+    display: block;
     font-size: 8px;
     line-height: 11px;
     text-decoration: underline;
-    color: #9B9B9B;
+    color: #9b9b9b;
+    margin-top: 0.5rem;
+  }
 
-    &:first-letter {
-      text-transform: uppercase;
-    }
+  .error {
+    color: $error;
+    font-size: 0.65rem;
+    margin-top: 0.5rem;
   }
 }

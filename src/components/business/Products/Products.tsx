@@ -53,6 +53,17 @@ const productOptions: GoodsDropdownType<ProductType> = [
   { id: '8', label: 'chains', chosen: false },
 ]
 
+const categoryTitles: Record<ProductType, string> = {
+  rings: 'КАБЛУЧКИ',
+  necklaces: 'НАМИСТО',
+  bracelets: 'БРАСЛЕТИ',
+  earrings: 'СЕРЕЖКИ',
+  pendants: 'ПІДВІСКИ',
+  watches: 'ГОДИННИКИ',
+  cufflinks: 'ЗАПОНКИ',
+  chains: 'ЛАНЦЮЖКИ',
+}
+
 export const Products: FC<ProductsProps> = ({ className }) => {
   const products = useAppSelector(getProducts)
   const filterCategories = useAppSelector(getFilterCategories)
@@ -92,7 +103,8 @@ export const Products: FC<ProductsProps> = ({ className }) => {
 
   const dispatchProducts = (filterCategories: IFilters): void => {
     const queries = getFilters(filterCategories)
-    dispatch(fetchProducts({ collection: 'rings', queries }))
+    const chosenProduct = getChosenCategory<ProductType>(productType)[0] ?? 'rings'
+    dispatch(fetchProducts({ collection: chosenProduct, queries }))
   }
 
   function onCategoryChecked<T extends string>(
@@ -201,9 +213,9 @@ export const Products: FC<ProductsProps> = ({ className }) => {
       <BreadCrumbs />
       <div className={cls.filters}>
         <div className={cls.dropdowns}>
-          <Dropdown title="ИЗДЕЛИЕ" options={productType} onChangeChecked={onProductChecked} />
-          <Dropdown title="МЕТАЛЛ" options={metals} onChangeChecked={onMetalsChecked} />
-          <Dropdown title="КАМНИ" options={stones} onChangeChecked={onStonesChecked} />
+          <Dropdown title="ВИРІБ" options={productType} onChangeChecked={onProductChecked} />
+          <Dropdown title="МЕТАЛ" options={metals} onChangeChecked={onMetalsChecked} />
+          <Dropdown title="КАМІННЯ" options={stones} onChangeChecked={onStonesChecked} />
         </div>
         <div className={cls.slider}>
           <RangeSlider
@@ -222,7 +234,10 @@ export const Products: FC<ProductsProps> = ({ className }) => {
           onBtnClick={resetFilters}
         />
       ) : (
-        <ProductsList products={products} title={'КОЛЬЦА'} />
+        <ProductsList
+            products={products}
+            title={categoryTitles[getChosenCategory<ProductType>(productType)[0] ?? 'rings']}
+          />
       )}
     </div>
   )

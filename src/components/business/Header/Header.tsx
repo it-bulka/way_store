@@ -1,4 +1,4 @@
-import { type FC, useMemo, useState } from 'react'
+import { type FC, useMemo } from 'react'
 import cls from './Header.module.scss'
 import LogoIcon from '@/assets/logo/logo.svg'
 import HeartIcon from '@/assets/general/heart.svg'
@@ -8,22 +8,37 @@ import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { Cart } from '@/components/ui/Cart/Cart'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { AuthModal } from '@/components/ui/AuthModal/AuthModal'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getCartItems } from '@/redux/selectors/cartSelectors'
+import { getIsAuthenticated } from '@/redux/selectors/getAuthSelector'
+import { signOutUser } from '@/redux/async/signOutUser'
+import { useControlModal } from '@/hooks/useControlModal'
 
 interface HeaderProps {
   className?: string
 }
+
 export const Header: FC<HeaderProps> = ({ className }) => {
-  const [isCartShown, setCartShown] = useState(false)
+  const { isModalOpen: isCartOpen, openModal: openCart, closeModal: closeCart } =
+    useControlModal(false)
+  const { isModalOpen: isAuthOpen, openModal: openAuth, closeModal: closeAuth } =
+    useControlModal(false)
+
   const items = useAppSelector(getCartItems)
+  const isAuthenticated = useAppSelector(getIsAuthenticated)
+  const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
 
-  const totalAmount = useMemo(() => {
-    return items.reduce((accum, item) => {
-      return accum + item.amount
-    }, 0)
-  }, [items])
+  const totalAmount = useMemo(
+    () => items.reduce((acc, item) => acc + item.amount, 0),
+    [items]
+  )
+
+  const handleSignOut = () => {
+    dispatch(signOutUser())
+    navigateTo('/')
+  }
 
   return (
     <div className={classnames(cls.header, 'container ', [className])}>
@@ -38,18 +53,30 @@ export const Header: FC<HeaderProps> = ({ className }) => {
           <HeartIcon />
         </button>
         <button
-          onClick={() => setCartShown(true)}
+          onClick={openCart}
           className={classnames(cls.cartBtn, { [cls.active]: !!items.length })}
         >
           <CartIcon />
           {!!items.length && <p className={cls.items}>{totalAmount}</p>}
         </button>
-        <button onClick={() => navigateTo('/account/profile')}>
-          <PersonIcon />
-        </button>
+        {isAuthenticated ? (
+          <>
+            <button onClick={() => navigateTo('/account/profile')}>
+              <PersonIcon />
+            </button>
+            <button className={cls.signOutBtn} onClick={handleSignOut}>
+              Вийти
+            </button>
+          </>
+        ) : (
+          <button className={cls.signInBtn} onClick={openAuth}>
+            Увійти
+          </button>
+        )}
       </div>
 
-      {isCartShown && <Cart onClose={() => setCartShown(false)} />}
+      {isCartOpen && <Cart onClose={closeCart} />}
+      <AuthModal isOpened={isAuthOpen} close={closeAuth} overlay="on" />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { Sex } from '@/redux/types/user.ts'
+
 export interface IFormValues {
   sex: Sex
   email: string
@@ -11,6 +12,7 @@ export interface IFormValues {
   month: number
   year: number
   city: string
+  street: string
   home: string
   entrance: string
   floor: string
@@ -22,22 +24,23 @@ export interface IFormValues {
 export const formSchema = yup
   .object({
     sex: yup.string(),
-    email: yup.string().email('Not valid email').required('Email is required'),
-    name: yup.string().required('Name is required'),
+    email: yup.string().email('Невірний email').required("Email обов'язковий"),
+    name: yup.string().required("Ім'я обов'язкове"),
     phone: yup
       .string()
       .matches(
         /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,9}$/g,
-        'Invalid phone number'
+        'Невірний номер телефону'
       )
-      .required('Phone number is required'),
+      .required("Телефон обов'язковий"),
     password: yup.string(),
     confirm: yup.string(),
     day: yup.number(),
     month: yup.number(),
     year: yup.number(),
-    home: yup.string().required('Home is required'),
-    city: yup.string().required('City is required'),
+    city: yup.string().required("Місто обов'язкове"),
+    street: yup.string(),
+    home: yup.string().required("Будинок обов'язковий"),
     entrance: yup.string(),
     floor: yup.string(),
     apartment: yup.string(),
