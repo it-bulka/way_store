@@ -4,7 +4,10 @@ const Home = lazy(() => import('./Home/Home'))
 const Store = lazy(() => import('./Store/Store'))
 const Goods = lazy(() => import('./Goods/Goods'))
 const Faq = lazy(() => import('./FAQ/FAQ'))
-export { Contacts, Delivery, Payment, Questions } from './FAQ/FAQ'
+export { Questions } from './FAQ/Questions'
+export { Delivery } from './FAQ/Delivery'
+export { Payment } from './FAQ/Payment'
+export { Contacts } from './FAQ/Contacts'
 const Account = lazy(() => import('./Account/Account'))
 const Profile = lazy(() => import('./Account/Profile/Profile'))
 const PurchaseHistory = lazy(() => import('./Account/PurchaseHistory/PurchaseHistory'))
