@@ -18,6 +18,14 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    @include respond-to('mobile') {
+      top: 0;
+      right: 0;
+      left: 0;
+      max-width: 100%;
+      max-height: 100vh;
+    }
   }
 
   .header {

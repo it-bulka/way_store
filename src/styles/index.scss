@@ -44,3 +44,19 @@ body {
 .col-3 {
   flex: 0 0 15%;
 }
+
+@include respond-to('tablet') {
+  .container { width: 92%; }
+}
+
+@include respond-to('mobile') {
+  .container { width: 94%; }
+
+  main.flex-container {
+    flex-direction: column;
+  }
+
+  main > .col-1 { display: none; }
+
+  main > .col-2 { flex: 1 1 100%; }
+}

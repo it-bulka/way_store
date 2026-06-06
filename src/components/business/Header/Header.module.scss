@@ -56,4 +56,13 @@
       }
     }
   }
+
+  @include respond-to('mobile') {
+    flex-wrap: wrap;
+    padding: 1.5rem 0;
+
+    :global(.col-1) { flex: 1 1 auto; padding: 0 1.5rem; }
+    :global(.col-2) { flex: 0 0 100%; order: 3; padding: 0 1.5rem 1rem; }
+    :global(.col-3) { flex: 0 0 auto; padding: 0 1.5rem; }
+  }
 }

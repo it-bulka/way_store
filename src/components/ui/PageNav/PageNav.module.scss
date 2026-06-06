@@ -17,4 +17,14 @@
     transition: all 0.3s ease;
     background-color: $border_color2;
   }
+
+  @include respond-to('mobile') {
+    & > ul {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.5rem;
+      gap: 2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
 }

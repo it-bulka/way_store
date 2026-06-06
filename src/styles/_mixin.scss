@@ -35,3 +35,11 @@
 @mixin disable {
   opacity: 0.3;
 }
+
+@mixin respond-to($bp) {
+  @if $bp == 'mobile' {
+    @media (max-width: $bp-mobile) { @content; }
+  } @else if $bp == 'tablet' {
+    @media (max-width: $bp-tablet) { @content; }
+  }
+}
