@@ -29,7 +29,7 @@ import {
 
 import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
 import { colGallery, colInfo, colTitle } from '@/data/collection'
-import { goodsLoader } from '@/pages/Goods/Goods'
+import { goodsLoader } from '@/pages/Goods/goodsLoader'
 import { orderLoader } from '@/pages/Account/OrderDetail/OrderDetail'
 
 export const router = createBrowserRouter(

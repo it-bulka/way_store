@@ -1,0 +1,29 @@
+.descript {
+  @include flex;
+}
+
+.likeBtn {
+  color: $grey;
+
+  &.isLiked {
+    color: red;
+  }
+}
+
+.controls {
+  padding: 3.439rem 0 1.939rem;
+  @include flex($align: flex-end);
+  flex-wrap: wrap;
+}
+
+.stepper {
+  @include flex($align: flex-start);
+  flex-direction: column;
+  gap: 0.766rem;
+}
+
+.btns {
+  @include flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
