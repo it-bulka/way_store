@@ -176,7 +176,7 @@ export default Goods
 
 export const goodsLoader = async ({ params }: LoaderFunctionArgs) => {
   if (params.slug) {
-    return await getDocInfo(PAGES.getRings('ukr'), params.slug)
+    return await getDocInfo<IProduct>(PAGES.getRings('ukr'), params.slug)
   }
 
   return null

@@ -1,14 +1,11 @@
 import { db } from '@/base/firebase'
 import { doc, getDoc } from 'firebase/firestore'
-import { IProduct } from '@/models/goodsType.ts'
 
-export const getDocInfo = async (path: string, docId: string): Promise<IProduct | never> => {
+export const getDocInfo = async <T>(path: string, docId: string): Promise<T | never> => {
   const docRef = doc(db, path, docId)
   const docSnap = await getDoc(docRef)
   if (docSnap.exists()) {
-    console.log(docSnap.data())
-
-    return { ...docSnap.data(), id: docId } as IProduct
+    return { ...docSnap.data(), id: docId } as T
   } else {
     throw new Error('Нет такого документа')
   }
