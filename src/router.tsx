@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom'
-import { App } from '@/App'
+import { App } from '@/components/App.tsx'
 import { Layout } from '@/components/business/Layout/Layout'
 import {
   Home,
