@@ -16,6 +16,7 @@ const About = lazy(() => import('./About/About'))
 const NotFound = lazy(() => import('./NotFound/NotFound'))
 const Privacy = lazy(() => import('./Privacy/Privacy'))
 const Offer = lazy(() => import('./Offer/Offer'))
+const Checkout = lazy(() => import('./Checkout/Checkout'))
 const CheckoutSuccess = lazy(() => import('./CheckoutSuccess/CheckoutSuccess'))
 const OrderDetail = lazy(() => import('./Account/OrderDetail/OrderDetail'))
 
@@ -35,6 +36,7 @@ export {
   NotFound,
   Privacy,
   Offer,
+  Checkout,
   CheckoutSuccess,
   OrderDetail,
 }

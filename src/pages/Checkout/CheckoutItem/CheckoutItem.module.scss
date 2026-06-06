@@ -1,0 +1,29 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-bottom: $border_width solid $border_color;
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.title {
+  flex: 1;
+}
+
+.qty {
+  color: $grey;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.price {
+  font-family: $font_bold;
+  white-space: nowrap;
+}

@@ -22,6 +22,7 @@ import {
   NotFound,
   Privacy,
   Offer,
+  Checkout,
   CheckoutSuccess,
   OrderDetail,
 } from '@/pages'
@@ -68,6 +69,7 @@ export const router = createBrowserRouter(
         <Route path="privacy" element={<Privacy />} />
         <Route path="offer" element={<Offer />} />
         <Route path="checkout">
+          <Route index element={<Checkout />} />
           <Route path="success" element={<CheckoutSuccess />} />
         </Route>
       </Route>

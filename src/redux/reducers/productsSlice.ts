@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '@/models/goodsType'
 import { fetchProducts } from '@/redux/async/fetchProducts'
 import { storage } from '@/utils/storage'
+import { mockProducts } from '@/data/mockProducts'
 
 export interface IProductsSlice {
   products: IProduct[]
@@ -11,7 +12,7 @@ export interface IProductsSlice {
 }
 
 const initialState: IProductsSlice = {
-  products: [],
+  products: mockProducts,
   chosen: storage.get<IProduct[]>('chosen') ?? [],
   loading: false,
   error: null,

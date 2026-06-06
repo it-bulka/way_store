@@ -42,6 +42,11 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
     [dispatch, deleteItem]
   )
 
+  const toCheckout = useCallback(() => {
+    onClose()
+    navigateTo('/checkout')
+  }, [navigateTo, onClose])
+
   const getTotalSum = () => {
     return items.reduce((accum, item) => {
       return accum + item.amount * item.price
@@ -97,7 +102,11 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
             <Typography className={cls.sum}>
               {getInfo()} НА СУМУ <span>{totalSum} </span> грн.
             </Typography>
-            <Button title="Перейти до кошика" onClick={() => navigateTo('/account/chosen')} />
+            <Button
+              title="Оформити замовлення"
+              onClick={toCheckout}
+              disabled={items.length === 0}
+            />
           </div>
         </div>
       </div>
