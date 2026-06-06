@@ -5,28 +5,29 @@ import { IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
+
 const tableData: IGoods[] = [
   {
     id: '1',
-    title: 'ДИЛЬВО 18 СМ',
+    title: 'ДІЛЬВО 18 СМ',
     price: 250,
     data: new Date(2020, 5, 15),
     order: 'ENY7-47920435',
     delivery: {
-      type: 'ДО ДВЕРИ',
-      status: 'ВЫПОЛНЕНО',
+      type: 'ДО ДВЕРЕЙ',
+      status: 'ВИКОНАНО',
       statusEn: 'success',
     },
   },
   {
     id: '2',
-    title: 'ДИЛЬВО Groom',
+    title: 'ДІЛЬВО Groom',
     price: 250,
     data: new Date(2020, 5, 15),
     order: 'ENY7-47920435',
     delivery: {
-      type: 'ПУНКТ ВЫДАЧИ',
-      status: 'ОТМЕНА',
+      type: 'ПУНКТ ВИДАЧІ',
+      status: 'СКАСОВАНО',
       statusEn: 'cancel',
     },
   },
@@ -36,12 +37,12 @@ tableData.length = 0
 
 const columns = [
   {
-    header: 'ИМЯ',
+    header: "ІМ'Я",
     accessorKey: 'name',
     sortType: 'text',
   },
   {
-    header: 'ЦЕНА',
+    header: 'ЦІНА',
     accessorKey: 'price',
     sortType: 'text',
   },
@@ -51,7 +52,7 @@ const columns = [
     sortType: 'datetime',
   },
   {
-    header: 'НОМЕР ЗАКАЗА',
+    header: 'НОМЕР ЗАМОВЛЕННЯ',
     accessorKey: 'order',
   },
   {
@@ -77,8 +78,8 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
         <Table columns={columns} data={tableData} className={cls.table} />
       ) : (
         <Absent
-          info="У ВАС ПОКА НЕ БЫЛО ЗАКАЗОВ"
-          btnTitle="ПЕРЕЙТИ В МАГАЗИН"
+          info="У ВАС ЩЕ НЕ БУЛО ЗАМОВЛЕНЬ"
+          btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
           className={cls.absent}
           onBtnClick={() => navigateTo('/store')}
         />

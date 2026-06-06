@@ -56,18 +56,13 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
 
   const getInfo = () => {
     const amount = getTotalAmount()
-
     const lastDigit = amount % 10
+    const lastTwoDigits = amount % 100
 
-    if (lastDigit === 1) {
-      return `${amount} ТОВАР`
-    }
-
-    if (lastDigit === 2 || lastDigit === 3 || lastDigit === 4) {
-      return `${amount} ТОВАРА`
-    }
-
-    return `${amount} ТОВАРOВ`
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `${amount} ТОВАРІВ`
+    if (lastDigit === 1) return `${amount} ТОВАР`
+    if (lastDigit >= 2 && lastDigit <= 4) return `${amount} ТОВАРИ`
+    return `${amount} ТОВАРІВ`
   }
 
   const totalSum = formatNumberIntoGroups(getTotalSum())
@@ -77,7 +72,7 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
       <div className={cls.cart} onClick={onClose}>
         <div className={classnames(cls.cartInner, 'container')} onClick={e => e.stopPropagation()}>
           <div className={cls.header}>
-            <Typography>ВАШИ ТОВАРЫ</Typography>
+            <Typography>ВАШ КОШИК</Typography>
             <button className={cls.closeBtn} onClick={onClose}>
               <CloseIcon />
             </button>
@@ -100,9 +95,9 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
 
           <div className={cls.footer}>
             <Typography className={cls.sum}>
-              {getInfo()} НА СУММУ <span>{totalSum} </span> руб.
+              {getInfo()} НА СУМУ <span>{totalSum} </span> грн.
             </Typography>
-            <Button title="перейти в коризну" onClick={() => navigateTo('/account/chosen')} />
+            <Button title="Перейти до кошика" onClick={() => navigateTo('/account/chosen')} />
           </div>
         </div>
       </div>

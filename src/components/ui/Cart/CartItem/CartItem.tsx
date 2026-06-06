@@ -28,7 +28,7 @@ export const CartItem: FC<CartItemProps> = ({ img, title, price, amount, onDelet
         <Typography className={cls.title}>{title}</Typography>
         <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />
         <Typography className={cls.price}>
-          <span>{price}</span> руб.
+          <span>{price}</span> грн.
         </Typography>
       </div>
     </li>

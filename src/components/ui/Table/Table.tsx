@@ -23,8 +23,8 @@ export interface IGoods {
   data: Date
   order: string
   delivery: {
-    type: 'ДО ДВЕРИ' | 'ПУНКТ ВЫДАЧИ'
-    status: 'ВЫПОЛНЕНО' | 'ОТМЕНА'
+    type: 'ДО ДВЕРЕЙ' | 'ПУНКТ ВИДАЧІ'
+    status: 'ВИКОНАНО' | 'СКАСОВАНО'
     statusEn: 'success' | 'cancel'
   }
 }
