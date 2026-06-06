@@ -15,6 +15,8 @@ import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
 import { createOrder } from '@/redux/async/createOrder'
 import { checkoutSchema, type ICheckoutFormValues } from './schema'
 import type { DeliveryType, IOrderItem } from '@/models/orderType'
+import { useWayforpay } from '@/hooks/useWayforpay'
+import { useToast } from '@/context/ToastContext'
 
 const DELIVERY_OPTIONS: DeliveryType[] = ['ДО ДВЕРЕЙ', 'ПУНКТ ВИДАЧІ']
 
@@ -24,6 +26,9 @@ const Checkout = () => {
   const items = useAppSelector(getCartItems)
   const user = useAppSelector(getUserSelector)
   const [delivery, setDelivery] = useState<DeliveryType>('ДО ДВЕРЕЙ')
+  const [isPaying, setIsPaying] = useState(false)
+  const { pay } = useWayforpay()
+  const { addToast } = useToast()
 
   const {
     register,
@@ -68,9 +73,20 @@ const Checkout = () => {
         },
       })
     )
-    if (createOrder.fulfilled.match(result)) {
-      navigateTo('/checkout/success', { state: { orderNumber } })
-    }
+    if (!createOrder.fulfilled.match(result)) return
+
+    setIsPaying(true)
+    pay({
+      orderReference: orderNumber,
+      items,
+      clientFirstName: user?.name,
+      clientPhone: user?.phone,
+      onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
+      onDeclined: () => {
+        setIsPaying(false)
+        addToast('Платіж відхилено. Спробуйте ще раз.', 'error')
+      },
+    })
   }
 
   return (
@@ -120,7 +136,7 @@ const Checkout = () => {
       <DeliveryForm register={register} errors={errors} />
 
       <div className={cls.actions}>
-        <Button title="Оформити замовлення" type="submit" disabled={isSubmitting} />
+        <Button title="Оформити замовлення" type="submit" disabled={isSubmitting || isPaying} />
         <button type="button" className={cls.backBtn} onClick={() => navigateTo('/store')}>
           Назад до магазину
         </button>
