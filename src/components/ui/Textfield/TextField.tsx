@@ -1,22 +1,31 @@
-import { type FC, HTMLAttributes, useId } from 'react'
+import { HTMLAttributes, useId } from 'react'
 import cls from './TextField.module.scss'
 import { useInput, type InitialInputValue } from '@/hooks/useInput'
 import classnames from 'classnames'
+import { FieldValues } from 'react-hook-form/dist/types/fields'
+import { IRegister } from '@/models'
 
-interface TextFieldProps extends HTMLAttributes<HTMLTextAreaElement> {
+interface TextFieldProps<T extends FieldValues | undefined = undefined>
+  extends HTMLAttributes<HTMLTextAreaElement>,
+    IRegister<T> {
   className?: string
   initialValue?: InitialInputValue
   label?: string
-  name: string
 }
-export const TextField: FC<TextFieldProps> = ({ className, initialValue, label }) => {
+export function TextField<T extends FieldValues | undefined = undefined>({
+  className,
+  initialValue,
+  label,
+  register,
+  name,
+}: TextFieldProps<T>) {
   const [value, onChange] = useInput(initialValue)
   const id = useId()
 
   return (
     <div className={classnames(cls.textfield, [className])}>
       {label && <label htmlFor={id}>{label}</label>}
-      <textarea value={value} onChange={onChange} id={id} />
+      <textarea value={value} {...(register && register(name))} onChange={onChange} id={id} />
     </div>
   )
 }

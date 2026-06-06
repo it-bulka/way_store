@@ -1,39 +1,52 @@
-import { type FC, FormEvent, HTMLAttributes, ReactNode, useId, useState } from 'react'
+import { FormEvent, HTMLAttributes, ReactNode, useId, useState } from 'react'
 import cls from './Input.module.scss'
 import classnames from 'classnames'
+import { FieldValues } from 'react-hook-form/dist/types/fields'
+import { IRegister } from '@/models'
 
 type InputVal = string | undefined
 type InputSetter = <T>(a: T) => void
 
-interface InputProps extends HTMLAttributes<HTMLInputElement> {
+interface InputProps<T extends FieldValues | undefined = undefined>
+  extends HTMLAttributes<HTMLInputElement>,
+    IRegister<T> {
   className?: string
   type?: string
   label?: string
   placeholder?: string
   defaultValue?: string
-  name: string
+  value?: string
   onChange?: InputSetter
   addendum?: ReactNode
   onAddendumClick?: InputSetter
+  error?: string
 }
 
-export const Input: FC<InputProps> = ({
+export function Input<T extends FieldValues | undefined = undefined>({
   className,
   type = 'text',
   label,
   placeholder,
   defaultValue,
+  value: inputValue,
   name,
   onChange,
   addendum,
   onAddendumClick,
+  error,
+  register,
   ...props
-}) => {
-  const [value, setValue] = useState<InputVal>(defaultValue)
+}: InputProps<T>) {
+  const [value, setValue] = useState<InputVal>(inputValue || defaultValue)
+  const [isFieldFocused, setFieldFocused] = useState(false)
   const id = useId()
 
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     onChange ? onChange(setInputValue) : setValue((e.target as HTMLInputElement).value)
+
+    if (register && name) {
+      register(name).onChange(e)
+    }
   }
 
   const setInputValue = (value: InputVal) => {
@@ -46,17 +59,34 @@ export const Input: FC<InputProps> = ({
 
   return (
     <div className={classnames(cls.input, [className])}>
-      {label && <label htmlFor={id + name}>{label}</label>}
+      {label && (
+        <label
+          htmlFor={id + name}
+          className={classnames({ [cls.label]: !!value || isFieldFocused })}
+        >
+          {label}
+        </label>
+      )}
       <input
         type={type}
         {...props}
         id={id + name}
+        {...(register ? register(name) : {})}
         name={name}
         value={value}
         onChange={changeHandler}
+        onBlur={() => setFieldFocused(false)}
+        onFocus={() => setFieldFocused(true)}
         placeholder={placeholder}
+        autoComplete="new-password"
+        aria-invalid={!!error}
       />
       {addendum && <button onClick={addendumClickHandler}>{addendum}</button>}
+      {error && !isFieldFocused && (
+        <p role="alert" className={cls.error}>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

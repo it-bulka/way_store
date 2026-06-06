@@ -1,13 +1,14 @@
 .select {
   border-bottom: 0.06rem solid $grey_4;
   text-transform: uppercase;
-  @include flex($justify: space-between);
   padding: 0.02rem 0;
   position: relative;
 
   & > button {
-    display: flex;
-    padding-left: 2px;
+    min-width: 0;
+    width: 100%;
+    gap: 2px;
+    @include flex($justify: space-between);
   }
 
   &.opened {
@@ -23,13 +24,14 @@
     left: 0;
     border: 0.06rem solid $grey_4;
     min-width: 100%;
-    padding: 0 0.2rem;
+    padding: 0.4rem 0;
     z-index: 9999;
-    max-height: 400px;
+    max-height: 200px;
     overflow: auto;
 
     & > li {
       cursor: pointer;
+      padding: 0 0.4rem;
 
       &:hover {
         background-color: $grey_4;
@@ -37,6 +39,4 @@
       }
     }
   }
-
-
 }

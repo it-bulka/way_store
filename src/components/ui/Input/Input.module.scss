@@ -3,8 +3,27 @@
   text-transform: uppercase;
   @include flex($justify: flex-start);
   padding: 0.8rem 0;
+  position: relative;
 
   input {
     flex: 1;
+  }
+
+  .label {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    font-size: 0.8em;
+  }
+
+  .error {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+    opacity: 0.8;
+    font-size: 0.8em;
+    color: red;
+    background-color: $grey_bg;
   }
 }
