@@ -1,12 +1,61 @@
 .productCard {
+  position: relative;
+
+  .imgWrapper {
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 0;
+    right: 0;
+    @include flex($justify: center);
+    gap: 0.6rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      background-color: $white;
+      border: $border_width solid $border_color;
+      cursor: pointer;
+      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+
+      &:hover {
+        color: $white;
+        background-color: $blue;
+        border-color: $blue;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 1px 2px 5px $border_color2;
+
+    .imgWrapper img {
+      transform: scale(1.05);
+    }
+
+    .actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   .content {
     max-width: calc(182.66 / 209.91 * 100%);
     margin: 1.5rem auto 0;
     text-align: center;
     line-height: 1.4rem;
-  }
-
-  &:hover {
-    box-shadow: 1px 2px 5px $border_color2;
   }
 }
