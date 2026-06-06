@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthed() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthed() && request.auth.uid == userId;
+    }
+
+    // User profiles: only the owning user may read or write
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Order history: same ownership constraint as the parent user document
+      match /orders/{orderId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Products catalogue: public read, no client writes
+    // {document=**} covers the full nested path:
+    //   products/translations/{lang}/accessories/{category}/{productId}
+    match /products/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
