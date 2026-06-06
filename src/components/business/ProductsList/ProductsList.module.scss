@@ -10,5 +10,11 @@
     column-gap: 8.78px;
     row-gap: 12.16px;
     margin-top: 1.4rem;
+
+    &.dimmed {
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
   }
 }

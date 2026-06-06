@@ -29,8 +29,8 @@ export const ProductsList: FC<ProductsListProps> = ({ className, products, title
   return (
     <div className={classnames(cls.productsList, [className])}>
       {title && <h3 className={cls.title}>{title}</h3>}
-      <div className={cls.list}>
-        {loading
+      <div className={classnames(cls.list, { [cls.dimmed]: loading && products.length > 0 })}>
+        {loading && products.length === 0
           ? Array.from({ length: SKELETON_COUNT }, (_, i) => <ProductCardSkeleton key={i} />)
           : products.map(({ images, name, price, id }) => (
               <ProductCard
