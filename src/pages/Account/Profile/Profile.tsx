@@ -1,26 +1,23 @@
 import { Form } from '@/components/business/Form/Form'
-import { AppLink } from '@/components/ui/AppLink/AppLink'
+import { Loader } from '@/components/ui/Loader/Loader'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks.ts'
 import { getUserSelector } from '@/redux/selectors/getUserSelector.ts'
+import { getAuthUid } from '@/redux/selectors/getAuthSelector'
 import { useEffect } from 'react'
 import { fetchUser } from '@/redux/async/fetchUser.ts'
 
 const Profile = () => {
   const user = useAppSelector(getUserSelector)
+  const uid = useAppSelector(getAuthUid)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchUser('u1'))
-  }, [])
+    if (uid) dispatch(fetchUser(uid))
+  }, [uid])
 
-  return (
-    <>
-      {user && <Form user={user} />}
-      <div>
-        <AppLink title={'Выйти'} withDecoration={false} path="/" />
-      </div>
-    </>
-  )
+  if (!user) return <Loader />
+
+  return <Form user={user} />
 }
 
 export default Profile
