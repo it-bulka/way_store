@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react'
+import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
 import cls from './Header.module.scss'
 import LogoIcon from '@/assets/logo/logo.svg'
 import HeartIcon from '@/assets/general/heart.svg'
@@ -6,7 +6,7 @@ import CartIcon from '@/assets/general/cart.svg'
 import PersonIcon from '@/assets/general/person.svg'
 import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
 import classnames from 'classnames'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Cart } from '@/components/ui/Cart/Cart'
 import { AuthModal } from '@/components/ui/AuthModal/AuthModal'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -20,20 +20,38 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ className }) => {
-  const { isModalOpen: isCartOpen, openModal: openCart, closeModal: closeCart } =
-    useControlModal(false)
-  const { isModalOpen: isAuthOpen, openModal: openAuth, closeModal: closeAuth } =
-    useControlModal(false)
+  const {
+    isModalOpen: isCartOpen,
+    openModal: openCart,
+    closeModal: closeCart,
+  } = useControlModal(false)
+  const {
+    isModalOpen: isAuthOpen,
+    openModal: openAuth,
+    closeModal: closeAuth,
+  } = useControlModal(false)
 
   const items = useAppSelector(getCartItems)
   const isAuthenticated = useAppSelector(getIsAuthenticated)
   const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
+  const [searchParams] = useSearchParams()
 
-  const totalAmount = useMemo(
-    () => items.reduce((acc, item) => acc + item.amount, 0),
-    [items]
+  const urlQuery = searchParams.get('search') ?? ''
+  const [localQuery, setLocalQuery] = useState(urlQuery)
+
+  useEffect(() => {
+    setLocalQuery(urlQuery)
+  }, [urlQuery])
+
+  const handleSearch = useCallback(
+    (query: string) => {
+      navigateTo(query.trim() ? `/store?search=${encodeURIComponent(query.trim())}` : '/store')
+    },
+    [navigateTo]
   )
+
+  const totalAmount = useMemo(() => items.reduce((acc, item) => acc + item.amount, 0), [items])
 
   const handleSignOut = () => {
     dispatch(signOutUser())
@@ -46,7 +64,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         <LogoIcon />
       </div>
       <div className={classnames(cls.searchHolder, 'col-2')}>
-        <SearchBar />
+        <SearchBar value={localQuery} onChange={setLocalQuery} onSearch={handleSearch} />
       </div>
       <div className={classnames(cls.actions, 'col-3')}>
         <button onClick={() => navigateTo('/account/chosen')}>

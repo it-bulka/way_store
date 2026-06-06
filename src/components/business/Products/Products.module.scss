@@ -1,6 +1,30 @@
 @use 'sass:math';
 
 .products {
+  .searchInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: $grey;
+  }
+
+  .clearSearch {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $grey;
+    font-size: 0.875rem;
+    font-family: $font_normal;
+    text-decoration: underline;
+    padding: 0;
+
+    &:hover {
+      color: $grey_2;
+    }
+  }
+
   .filters {
     display: flex;
     justify-content: space-between;

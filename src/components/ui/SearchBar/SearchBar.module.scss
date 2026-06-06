@@ -8,14 +8,9 @@ $icon_size: 22px;
   -webkit-transition: max-width .9s;
           transition: max-width .9s;
 
-
-  span {
-    flex: 0 1 $icon_size;
-  }
-
   input {
-    flex: 0;
-    padding: 0.2rem 1rem 0.2rem 0.2rem;
+    flex: 1;
+    padding: 0.2rem 0.4rem 0.2rem 0.2rem;
     max-width: calc(100% - $icon_size);
     text-overflow: ellipsis;
     text-align: right;
@@ -24,6 +19,31 @@ $icon_size: 22px;
   &:focus-within {
     max-width: 300rem;
     -webkit-transition: max-width 2s;
-    transition: max-width 3s;
+            transition: max-width 3s;
+  }
+}
+
+.searchBtn {
+  flex: 0 0 $icon_size;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.clearBtn {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $grey;
+  font-size: 1rem;
+  padding: 0 0.2rem;
+  line-height: 1;
+
+  &:hover {
+    color: $grey_2;
   }
 }
