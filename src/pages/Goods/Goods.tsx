@@ -4,6 +4,7 @@ import cls from './Goods.module.scss'
 import { Button } from '@/components/ui/Button/Button'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
 import { ColorPicker, type IOption as IColorOption } from '@/components/ui/ColorPicker/ColorPicker'
+import { SizeSelector } from '@/components/ui/SizeSelector/SizeSelector'
 import { Accordion } from '@/components/ui/Accordion/Accordion'
 import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
@@ -19,6 +20,7 @@ import { getNextDoc, getDocInfo } from '@/services'
 import { PAGES } from '@/models'
 import { cartActions } from '@/redux/reducers/cartSlice.ts'
 import { ICartItem } from '@/redux/types/cartTypes.ts'
+import { useToast } from '@/context/ToastContext'
 
 const colors: IColorOption[] = [
   { id: '1', color: '#D3D3D3', tag: 'white' },
@@ -31,54 +33,56 @@ const Goods = () => {
   const [color, setColor] = useState<ringsColors>('white')
   const [isChosen, setIsChosen] = useState(false)
   const [amount, setAmount] = useState(0)
+  const [selectedSize, setSelectedSize] = useState<number | undefined>(undefined)
   const [isNextProd, setIsNextProd] = useState(true)
   const chosenProducts = useAppSelector(getChosenProducts)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { addToast } = useToast()
 
-  const accordionItems = useMemo(() => {
-    return [
+  const accordionItems = useMemo(
+    () => [
       {
         id: '1',
-        title: 'Детали',
+        title: 'Деталі',
         content: (
           <p>
-            Цвет - {prod?.color}, Вага - {prod?.weight.num} {prod?.weight.measurement}
+            Колір - {prod?.color}, Вага - {prod?.weight.num} {prod?.weight.measurement}
           </p>
         ),
       },
       {
         id: '2',
-        title: 'Руководство по размеру',
-        content: <p>Цвет - ${prod?.color}</p>,
+        title: 'Таблиця розмірів',
+        content: <p>Колір - {prod?.color}</p>,
       },
       {
         id: '3',
-        title: 'Уход за продуктом',
+        title: 'Догляд за виробом',
         content:
           'LOrem LOremLOremvvLOremLOrem LOremLOremLOremLOremLOremLOr emLOremL OremLOremLOrem LOremLOr emvvLOremLOremLOremLOremLOremLOremLOremLOremLOremLOremLOremLOrem LOremLOremvvLOremLOremLOremLOremLOremLOremLOemLOremLOremLOremLOremLOremLOremLOremLOrem',
       },
       {
         id: '4',
-        title: 'Доставка и возврат',
+        title: 'Доставка та повернення',
         content:
           'emLOremLOremLOrem LOremLOremLOremLOremLOremLOrem LOremLOr emvvLOrem LOremLOremLOremLOremLOremLO remLOremLOremLOremLOrem',
       },
-    ]
-  }, [prod])
+    ],
+    [prod]
+  )
 
   const onLikeClick = () => {
     setIsChosen(prev => !prev)
-
     if (isChosen) dispatch(productsAction.deleteChosen(prod.id))
     if (!isChosen) dispatch(productsAction.addChosen(prod))
   }
 
-  const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [])
+  const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [navigate])
 
   const onNextClick = useCallback(async () => {
     const nextProd = await getNextDoc({
-      collection: PAGES.getRings('ukr'),
+      collection: PAGES.getCollection('ukr'),
       currentDocId: prod.id,
     })
     if (!nextProd?.id) {
@@ -86,7 +90,7 @@ const Goods = () => {
       return
     }
     moveToProdPage(nextProd.id)
-  }, [prod])
+  }, [prod, moveToProdPage])
 
   const onPrevClick = useCallback(async () => {
     if (prod?.prev) {
@@ -95,9 +99,9 @@ const Goods = () => {
     }
   }, [prod, moveToProdPage])
 
-  const pickColor = (colorTag: ringsColors) => {
-    setColor(colorTag)
-  }
+  const pickColor = (colorTag: ringsColors) => setColor(colorTag)
+
+  const hasRequiredSize = !prod?.sizes?.length || selectedSize !== undefined
 
   const onAddToBucketClick = () => {
     const chosen: ICartItem = {
@@ -106,16 +110,17 @@ const Goods = () => {
       amount,
       price: prod.price.amount,
       img: prod.images[color][0],
+      size: selectedSize,
     }
     dispatch(cartActions.addItem(chosen))
+    addToast('Додано до кошика', 'success')
   }
 
   useEffect(() => {
-    const isChosen = chosenProducts.find(item => item.id === prod.id)
-    if (isChosen) setIsChosen(true)
+    const found = chosenProducts.find(item => item.id === prod.id)
+    if (found) setIsChosen(true)
   }, [prod, chosenProducts])
 
-  //TODO: add redirect page
   if (!prod) return null
 
   return (
@@ -123,7 +128,7 @@ const Goods = () => {
       <BreadCrumbs />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">
-          Кольца
+          Каблучки
         </Typography>
         <PrevNextBtns
           onNextClick={onNextClick}
@@ -152,19 +157,26 @@ const Goods = () => {
 
           <div className={cls.controls}>
             <div className={cls.stepper}>
-              <Typography>Кол-во</Typography>
+              <Typography>Кількість</Typography>
               <Stepper initial={amount} getValue={n => setAmount(n)} />
             </div>
             <div className={cls.btns}>
               <Button
-                title={'Добавить в корзину'}
+                title="Додати до кошика"
                 onClick={onAddToBucketClick}
-                disabled={amount <= 0}
+                disabled={amount <= 0 || !hasRequiredSize}
               />
-              <Button title={'Купить'} disabled={amount <= 0} />
+              <Button title="Купити" disabled={amount <= 0 || !hasRequiredSize} />
             </div>
           </div>
-          <ColorPicker options={colors} title={'Metal'} onClick={pickColor} />
+          <ColorPicker options={colors} title={`Колір - ${color}`} onClick={pickColor} />
+          {!!prod.sizes?.length && (
+            <SizeSelector
+              sizes={prod.sizes}
+              selected={selectedSize}
+              onSelect={setSelectedSize}
+            />
+          )}
           <Accordion items={accordionItems} />
         </div>
       </div>
@@ -176,7 +188,7 @@ export default Goods
 
 export const goodsLoader = async ({ params }: LoaderFunctionArgs) => {
   if (params.slug) {
-    return await getDocInfo<IProduct>(PAGES.getRings('ukr'), params.slug)
+    return await getDocInfo<IProduct>(PAGES.getCollection('ukr'), params.slug)
   }
 
   return null

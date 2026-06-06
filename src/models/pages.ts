@@ -1,3 +1,6 @@
+import type { ProductType } from './goodsType'
+
 export const PAGES = {
-  getRings: (lang: 'ukr' | 'eng' = 'ukr') => `products/translations/${lang}/accessories/rings`,
+  getCollection: (lang: 'ukr' | 'eng' = 'ukr', type: ProductType = 'rings') =>
+    `products/translations/${lang}/accessories/${type}`,
 } as const
