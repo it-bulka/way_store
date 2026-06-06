@@ -16,6 +16,7 @@ const About = lazy(() => import('./About/About'))
 const NotFound = lazy(() => import('./NotFound/NotFound'))
 const Privacy = lazy(() => import('./Privacy/Privacy'))
 const Offer = lazy(() => import('./Offer/Offer'))
+const CheckoutSuccess = lazy(() => import('./CheckoutSuccess/CheckoutSuccess'))
 
 export {
   Home,
@@ -33,4 +34,5 @@ export {
   NotFound,
   Privacy,
   Offer,
+  CheckoutSuccess,
 }

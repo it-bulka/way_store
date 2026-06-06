@@ -42,6 +42,10 @@ const cartSlice = createSlice({
     deleteItem: (state: ICart, action: PayloadAction<{ id: string }>) => {
       state.items = state.items.filter(item => item.id !== action.payload.id)
     },
+
+    clearCart: (state: ICart) => {
+      state.items = []
+    },
   },
 })
 

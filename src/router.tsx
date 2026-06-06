@@ -22,6 +22,7 @@ import {
   NotFound,
   Privacy,
   Offer,
+  CheckoutSuccess,
 } from '@/pages'
 
 import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
@@ -59,6 +60,9 @@ export const router = createBrowserRouter(
         <Route path="about" element={<About />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="offer" element={<Offer />} />
+        <Route path="checkout">
+          <Route path="success" element={<CheckoutSuccess />} />
+        </Route>
       </Route>
 
       <Route path="collaborations" element={<Collaborations />}>
