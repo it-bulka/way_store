@@ -1,0 +1,9 @@
+.container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: $loader_zindex;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
