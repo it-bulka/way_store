@@ -4,6 +4,7 @@ import { productsReducer } from '@/redux/reducers/productsSlice'
 import { FilterCategoryReducer } from '@/redux/reducers/filterCategorySlice.ts'
 import { userReducer } from '@/redux/reducers/userSlice.ts'
 import { authReducer } from '@/redux/reducers/authSlice'
+import { orderReducer } from '@/redux/reducers/orderSlice'
 import { localStorageMiddleware } from '@/redux/middleware/localStorageMW'
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     filterCategory: FilterCategoryReducer,
     user: userReducer,
     auth: authReducer,
+    orders: orderReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().prepend(localStorageMiddleware.middleware),

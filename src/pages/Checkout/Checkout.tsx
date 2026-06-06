@@ -1,28 +1,80 @@
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import cls from './Checkout.module.scss'
 import { CheckoutItem } from './CheckoutItem/CheckoutItem'
+import { DeliveryForm } from './DeliveryForm/DeliveryForm'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import { RadioBtn } from '@/components/ui/RadioBtn/RadioBtn'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getCartItems } from '@/redux/selectors/cartSelectors'
+import { getUserSelector } from '@/redux/selectors/getUserSelector'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
-import type { DeliveryType } from '@/models/orderType'
+import { createOrder } from '@/redux/async/createOrder'
+import { checkoutSchema, type ICheckoutFormValues } from './schema'
+import type { DeliveryType, IOrderItem } from '@/models/orderType'
 
 const DELIVERY_OPTIONS: DeliveryType[] = ['ДО ДВЕРЕЙ', 'ПУНКТ ВИДАЧІ']
 
 const Checkout = () => {
+  const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
   const items = useAppSelector(getCartItems)
+  const user = useAppSelector(getUserSelector)
   const [delivery, setDelivery] = useState<DeliveryType>('ДО ДВЕРЕЙ')
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ICheckoutFormValues>({
+    resolver: yupResolver(checkoutSchema),
+    defaultValues: {
+      city: user?.address.city ?? '',
+      street: user?.address.street ?? '',
+      home: user?.address.home?.toString() ?? '',
+      apartment: user?.address.apartment ?? '',
+    },
+  })
 
   if (items.length === 0) return <Navigate to="/store" replace />
 
   const total = items.reduce((sum, item) => sum + item.price * item.amount, 0)
 
+  const onSubmit: SubmitHandler<ICheckoutFormValues> = async data => {
+    const orderNumber = crypto.randomUUID().slice(0, 8).toUpperCase()
+    const orderItems: IOrderItem[] = items.map(item => ({
+      id: item.id,
+      title: item.title,
+      amount: item.amount,
+      price: item.price,
+      img: item.img,
+      size: item.size,
+    }))
+    const result = await dispatch(
+      createOrder({
+        orderNumber,
+        date: new Date(),
+        status: 'pending',
+        deliveryType: delivery,
+        items: orderItems,
+        address: {
+          city: data.city,
+          street: data.street,
+          home: Number(data.home),
+          apartment: data.apartment,
+        },
+      })
+    )
+    if (createOrder.fulfilled.match(result)) {
+      navigateTo('/checkout/success', { state: { orderNumber } })
+    }
+  }
+
   return (
-    <div className={cls.root}>
+    <form className={cls.root} onSubmit={handleSubmit(onSubmit)} noValidate>
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
         ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
       </Typography>
@@ -62,16 +114,18 @@ const Checkout = () => {
         ))}
       </div>
 
+      <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
+        Адреса доставки
+      </Typography>
+      <DeliveryForm register={register} errors={errors} />
+
       <div className={cls.actions}>
-        <Button
-          title="Оформити замовлення"
-          onClick={() => navigateTo('/checkout/success')}
-        />
-        <button className={cls.backBtn} onClick={() => navigateTo('/store')}>
+        <Button title="Оформити замовлення" type="submit" disabled={isSubmitting} />
+        <button type="button" className={cls.backBtn} onClick={() => navigateTo('/store')}>
           Назад до магазину
         </button>
       </div>
-    </div>
+    </form>
   )
 }
 

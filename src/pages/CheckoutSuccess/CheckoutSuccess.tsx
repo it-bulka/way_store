@@ -6,14 +6,19 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getCartItems } from '@/redux/selectors/cartSelectors'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const CheckoutSuccess = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const items = useAppSelector(getCartItems)
 
-  const [orderNumber] = useState(() => crypto.randomUUID().slice(0, 8).toUpperCase())
+  const [orderNumber] = useState<string>(
+    () =>
+      (location.state as { orderNumber?: string } | null)?.orderNumber ??
+      crypto.randomUUID().slice(0, 8).toUpperCase()
+  )
   const [snapshot] = useState(() => items)
 
   useEffect(() => {
