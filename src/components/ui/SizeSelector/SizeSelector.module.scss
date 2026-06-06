@@ -1,0 +1,31 @@
+.sizeSelector {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.839rem;
+
+  .holder {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    min-width: 32px;
+    height: 24px;
+    padding: 0 0.4rem;
+    border: $border_width solid $grey_2;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: $grey;
+    }
+
+    &.active {
+      border-color: $grey;
+      background-color: $grey;
+      color: $white;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+
+  .image {
+    background-color: $grey_3;
+    padding-bottom: 100%;
+    width: 100%;
+  }
+
+  .content {
+    max-width: calc(182.66 / 209.91 * 100%);
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .title {
+    background-color: $grey_3;
+    height: 0.85rem;
+    width: 80%;
+  }
+
+  .price {
+    background-color: $grey_3;
+    height: 0.85rem;
+    width: 50%;
+  }
+}

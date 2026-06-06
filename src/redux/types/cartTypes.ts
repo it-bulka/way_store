@@ -4,6 +4,7 @@ interface ICartItem {
   amount: number
   price: number
   img: string
+  size?: number
 }
 
 interface ICart {

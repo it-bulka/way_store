@@ -38,4 +38,5 @@ export interface IRing {
 
 export interface IProduct extends IRing {
   id: string
+  sizes?: number[]
 }
