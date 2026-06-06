@@ -7,9 +7,10 @@ import { PAGES } from '@/data/pages'
 
 interface BreadCrumbsProps {
   className?: string
+  lastLabel?: string
 }
 
-export const BreadCrumbs: FC<BreadCrumbsProps> = ({ className }) => {
+export const BreadCrumbs: FC<BreadCrumbsProps> = ({ className, lastLabel }) => {
   const locations = useLocation()
 
   let current = ''
@@ -23,7 +24,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = ({ className }) => {
     <ul className={classnames(cls.breadcrumbs, [className])}>
       {crumbs.map((item, order) => {
         if (order === crumbs.length - 1) {
-          return <li key={item}>{PAGES[item] ?? item.split('/').pop()}</li>
+          return <li key={item}>{lastLabel ?? PAGES[item] ?? item.split('/').pop()}</li>
         }
 
         return (

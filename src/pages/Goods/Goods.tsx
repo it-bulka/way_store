@@ -31,7 +31,7 @@ const Goods = () => {
 
   return (
     <div className={cls.goods}>
-      <BreadCrumbs />
+      <BreadCrumbs lastLabel={prod.name} />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">
           Каблучки
