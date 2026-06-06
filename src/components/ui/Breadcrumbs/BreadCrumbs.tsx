@@ -23,7 +23,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = ({ className }) => {
     <ul className={classnames(cls.breadcrumbs, [className])}>
       {crumbs.map((item, order) => {
         if (order === crumbs.length - 1) {
-          return <li key={item}>{PAGES[item]}</li>
+          return <li key={item}>{PAGES[item] ?? item.split('/').pop()}</li>
         }
 
         return (

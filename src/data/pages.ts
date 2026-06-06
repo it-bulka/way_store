@@ -1,10 +1,10 @@
 export const PAGES: { [key: string]: string } = {
-  '/': 'Главная',
-  '/account': 'Аккаунт',
-  '/account/profile': 'Профиль',
-  '/account/purchase-history': 'История покупок',
-  '/account/chosen': 'Избранное',
+  '/': 'Головна',
+  '/account': 'Акаунт',
+  '/account/profile': 'Профіль',
+  '/account/purchase-history': 'Історія покупок',
+  '/account/chosen': 'Обране',
   '/store': 'Магазин',
-  '/store/rings': 'Кольца',
-  '/store/rings/1': 'Кольцo 1',
+  '/store/rings': 'Каблучки',
+  '/store/rings/1': 'Каблучка 1',
 }

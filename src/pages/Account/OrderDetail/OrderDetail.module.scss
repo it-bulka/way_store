@@ -1,0 +1,143 @@
+.root {
+  padding: pc($main_width, 40) 0 pc($main_width, 60);
+}
+
+// ─── OrderHeader ─────────────────────────────────────────────────────────────
+
+.header {
+  padding-bottom: 1.5rem;
+  border-bottom: $border_width solid $border_color;
+  margin-bottom: 1.5rem;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  font-size: 0.7rem;
+  color: $grey;
+  text-decoration: underline;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.orderNum {
+  font-family: $font_bold;
+  font-size: 0.85rem;
+}
+
+.date {
+  color: $grey;
+  font-size: 0.75rem;
+}
+
+// ─── OrderItems ───────────────────────────────────────────────────────────────
+
+.itemsSection {
+  padding: 1.5rem 0;
+  border-bottom: $border_width solid $border_color;
+}
+
+.sectionTitle {
+  margin-bottom: 1rem;
+}
+
+.itemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.8rem 0;
+  border-bottom: $border_width solid $border_color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.itemName {
+  flex: 1;
+}
+
+.itemSize {
+  font-size: 0.7rem;
+  color: $grey;
+  margin-top: 0.25rem;
+}
+
+.itemQty {
+  color: $grey;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.itemTotal {
+  font-family: $font_bold;
+  white-space: nowrap;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.totalLabel {
+  color: $grey;
+}
+
+.totalAmount {
+  font-family: $font_bold;
+}
+
+// ─── OrderInfo ────────────────────────────────────────────────────────────────
+
+.infoSection {
+  display: flex;
+  gap: 4rem;
+  padding: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.infoBlock {
+  min-width: 200px;
+}
+
+.infoTitle {
+  margin-bottom: 0.8rem;
+}
+
+.infoRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.infoLabel {
+  color: $grey;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.tracking {
+  font-family: $font_bold;
+  color: $blue;
+}
