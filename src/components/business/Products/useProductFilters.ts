@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { where } from 'firebase/firestore'
 import { type IOption as IDropdownOption } from '@/components/ui/Dropdown/Dropdown'
 import { type IGetRange } from '@/components/ui/RangeSlider/RangeSlider'
@@ -13,7 +13,6 @@ import {
   metalsOptions,
   stonesOptions,
   productOptions,
-  type FilterTypes,
   type GoodsDropdownType,
 } from './filterOptions'
 
@@ -29,16 +28,22 @@ function onCategoryChecked<T extends string>(
   return categories.map(item => (item.id === id ? { ...item, chosen: status } : item))
 }
 
-function checkFilters<T extends FilterTypes>(
-  arr: GoodsDropdownType<T>,
-  filtersArr: T[],
-  cb: Dispatch<SetStateAction<GoodsDropdownType<T>>>
-): void {
-  cb(arr.map(item => ({ ...item, chosen: filtersArr.includes(item.label) })))
-}
-
 function resetArr<T extends GoodsDropdownType>(arr: T): T {
   return arr.map(item => ({ ...item, chosen: false })) as T
+}
+
+function buildQueryConstraints(fc: IFilters): QueryFieldFilterConstraint[] | undefined {
+  const filters: QueryFieldFilterConstraint[] = []
+
+  if (fc.metal?.length) filters.push(where('metal', 'array-contains-any', fc.metal))
+  if (fc.stones?.length) filters.push(where('stones', 'array-contains-any', fc.stones))
+
+  if (fc.price) {
+    filters.push(where('price', '>=', fc.price.min))
+    filters.push(where('price', '<=', fc.price.max))
+  }
+
+  return filters.length ? filters : undefined
 }
 
 export const useProductFilters = () => {
@@ -51,78 +56,62 @@ export const useProductFilters = () => {
   const [productType, setProductType] = useState(productOptions)
   const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(null)
 
-  const getFilters = (fc: IFilters): QueryFieldFilterConstraint[] | undefined => {
-    const filters: QueryFieldFilterConstraint[] = []
+  const onMetalsChecked = useCallback(
+    (id: string, status: boolean) =>
+      setMetals(prev => onCategoryChecked<MetalsType>(id, status, prev)),
+    []
+  )
 
-    const push = (category: keyof Omit<IFilters, 'price'>) => {
-      const arr: FilterTypes[] = fc?.[category] ? [...(fc[category] as FilterTypes[])] : []
-      if (arr.length) filters.push(where(category, 'array-contains-any', arr))
-    }
+  const onStonesChecked = useCallback(
+    (id: string, status: boolean) =>
+      setStones(prev => onCategoryChecked<StoneType>(id, status, prev)),
+    []
+  )
 
-    push('metal')
-    push('stones')
-    push('product')
+  const onProductChecked = useCallback(
+    (id: string, status: boolean) =>
+      setProductType(prev => onCategoryChecked<ProductType>(id, status, prev)),
+    []
+  )
 
-    if (fc.price) {
-      filters.push(where('price', '>=', fc.price.min))
-      filters.push(where('price', '<=', fc.price.max))
-    }
+  const getRange: IGetRange = useCallback((min, max) => setPriceFilter({ min, max }), [])
 
-    return filters.length ? filters : undefined
-  }
-
-  const dispatchProducts = (fc: IFilters): void => {
-    const queries = getFilters(fc)
-    const chosen = getChosenCategory<ProductType>(productType)[0] ?? 'rings'
-    dispatch(fetchProducts({ collection: chosen, queries }))
-  }
-
-  const setFilters = (): IFilters => {
-    const filters: IFilters = {
-      metal: getChosenCategory<MetalsType>(metals),
-      stones: getChosenCategory<StoneType>(stones),
-      product: getChosenCategory<ProductType>(productType),
-    }
-    if (priceFilter) filters.price = priceFilter
-    dispatch(FilterActions.addCategory(filters))
-    return filters
-  }
-
-  const onMetalsChecked = (id: string, status: boolean) =>
-    setMetals(onCategoryChecked<MetalsType>(id, status, metals))
-
-  const onStonesChecked = (id: string, status: boolean) =>
-    setStones(onCategoryChecked<StoneType>(id, status, stones))
-
-  const onProductChecked = (id: string, status: boolean) =>
-    setProductType(onCategoryChecked<ProductType>(id, status, productType))
-
-  const getRange: IGetRange = (min, max) => setPriceFilter({ min, max })
-
-  const resetFilters = () => {
-    setMetals(resetArr(metals))
-    setStones(resetArr(stones))
-    setProductType(resetArr(productType))
+  const resetFilters = useCallback(() => {
+    setMetals(prev => resetArr(prev))
+    setStones(prev => resetArr(prev))
+    setProductType(prev => resetArr(prev))
     setPriceFilter(null)
-  }
+  }, [])
+
+  const chosenProductType = useMemo(
+    () => getChosenCategory<ProductType>(productType)[0] ?? 'rings',
+    [productType]
+  )
 
   useEffect(() => {
-    const { metal, stones: stonesFilter, product, price } = filterCategories
-    metal?.length && checkFilters(metals, metal, setMetals)
-    stonesFilter?.length && checkFilters(stones, stonesFilter, setStones)
-    product?.length && checkFilters(productType, product, setProductType)
-    price && setPriceFilter({ min: price.min, max: price.max })
+    const { metal, stones: sf, product, price } = filterCategories
+    if (metal?.length) setMetals(prev => prev.map(item => ({ ...item, chosen: metal.includes(item.label) })))
+    if (sf?.length) setStones(prev => prev.map(item => ({ ...item, chosen: sf.includes(item.label) })))
+    if (product?.length) setProductType(prev => prev.map(item => ({ ...item, chosen: product.includes(item.label) })))
+    if (price) setPriceFilter({ min: price.min, max: price.max })
     firstRenderRef.current = false
   }, [])
 
   useEffect(() => {
     if (!firstRenderRef.current) {
-      const filters = setFilters()
-      dispatchProducts(filters)
+      const filters: IFilters = {
+        metal: getChosenCategory<MetalsType>(metals),
+        stones: getChosenCategory<StoneType>(stones),
+        product: getChosenCategory<ProductType>(productType),
+      }
+      if (priceFilter) filters.price = priceFilter
+      dispatch(FilterActions.addCategory(filters))
+      dispatch(fetchProducts({
+        collection: filters.product?.[0] ?? 'rings',
+        queries: buildQueryConstraints(filters),
+      }))
     }
-  }, [metals, stones, productType, priceFilter])
-
-  const chosenProductType = getChosenCategory<ProductType>(productType)[0] ?? 'rings'
+  }, [dispatch, metals, stones, productType, priceFilter])
 
   return {
     metals,
