@@ -1,9 +1,37 @@
 import { Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/base/firebase'
+import { useAppDispatch } from '@/hooks/reduxHooks'
+import { setUser, clearUser } from '@/redux/reducers/authSlice'
+import { ToastProvider } from '@/context/ToastContext'
+import { ToastContainer } from '@/components/ui/ToastContainer/ToastContainer'
+
+function AuthListener() {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        dispatch(setUser({ uid: user.uid, email: user.email }))
+      } else {
+        dispatch(clearUser())
+      }
+    })
+    return unsubscribe
+  }, [dispatch])
+
+  return null
+}
 
 export function App() {
   return (
-    <div className="app">
-      <Outlet />
-    </div>
+    <ToastProvider>
+      <div className="app">
+        <AuthListener />
+        <Outlet />
+        <ToastContainer />
+      </div>
+    </ToastProvider>
   )
 }

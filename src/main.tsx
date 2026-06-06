@@ -7,14 +7,17 @@ import '@/styles/index.scss'
 import { Loader } from '@/components/ui/Loader/Loader'
 import { Provider } from 'react-redux'
 import { store } from '@/redux/store'
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary/ErrorBoundary'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <CookiesProvider>
-        <Suspense fallback={<Loader />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Loader />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ErrorBoundary>
       </CookiesProvider>
     </Provider>
   </React.StrictMode>

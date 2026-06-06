@@ -1,0 +1,19 @@
+.privacy {
+  padding: pc($main_width, 40) 0 pc($main_width, 60);
+
+  .title {
+    margin-bottom: 3rem;
+  }
+
+  .content {
+    max-width: pc($main_width, 700);
+  }
+
+  .heading {
+    margin: 2rem 0 0.8rem;
+  }
+
+  .section {
+    line-height: 1.6rem;
+  }
+}

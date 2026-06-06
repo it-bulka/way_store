@@ -1,6 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom'
 import { App } from '@/components/App.tsx'
 import { Layout } from '@/components/business/Layout/Layout'
+import { ProtectedRoute } from '@/components/business/ProtectedRoute/ProtectedRoute'
 import {
   Home,
   Store,
@@ -19,6 +20,8 @@ import {
   Collections,
   About,
   NotFound,
+  Privacy,
+  Offer,
 } from '@/pages'
 
 import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
@@ -43,12 +46,19 @@ export const router = createBrowserRouter(
           <Route path="contacts" element={<Contacts />} />
           <Route path="*" element={<Navigate to="questions" />} />
         </Route>
-        <Route path="account" element={<Account />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="purchase-history" element={<PurchaseHistory />} />
-          <Route path="chosen" element={<ChosenGoods />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="account" element={<Account />}>
+            <Route index element={<Navigate to="profile" replace />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="purchase-history" element={<PurchaseHistory />} />
+            <Route path="chosen" element={<ChosenGoods />} />
+          </Route>
         </Route>
+
         <Route path="about" element={<About />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="offer" element={<Offer />} />
       </Route>
 
       <Route path="collaborations" element={<Collaborations />}>
