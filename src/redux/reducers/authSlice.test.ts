@@ -12,7 +12,7 @@ const base = {
   error: null,
 }
 
-const credentials = { email: 'a@b.com', password: '123456' }
+const credentials = { email: 'a@b.com', password: '123456', name: 'Test User' }
 const authPayload = { uid: 'u1', email: 'a@b.com' }
 
 describe('authSlice — sync reducers', () => {

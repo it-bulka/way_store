@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use './global' as *;
 
 @mixin flex($justify: space-between, $align: center) {
   display: flex;
