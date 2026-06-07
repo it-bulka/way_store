@@ -7,6 +7,7 @@ import { OrderInfo } from './OrderInfo'
 import { useLoaderData, useNavigate, type LoaderFunctionArgs } from 'react-router-dom'
 import { mockOrders } from '@/data/orders'
 import type { IOrder } from '@/models/orderType'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const OrderDetail = () => {
   const order = useLoaderData() as IOrder | null
@@ -24,6 +25,7 @@ const OrderDetail = () => {
 
   return (
     <div className={cls.root}>
+      <PageMeta title="Деталі замовлення" noindex />
       <BreadCrumbs />
       <OrderHeader order={order} />
       <OrderItems items={order.items} />

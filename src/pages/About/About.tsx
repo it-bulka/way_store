@@ -7,6 +7,7 @@ import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import Img1 from '@/assets/home/img-1.jpg'
 import Img2 from '@/assets/home/img-2.jpg'
 import Img3 from '@/assets/home/img-3.jpg'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const VALUES = [
   {
@@ -34,6 +35,10 @@ const About = () => {
 
   return (
     <div className={cls.about}>
+      <PageMeta
+        title="Про нас"
+        description="Дізнайтеся більше про бренд Way — українські ювелірні прикраси ручної роботи."
+      />
       <BreadCrumbs />
 
       <section className={cls.hero}>

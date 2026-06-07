@@ -2,6 +2,7 @@ import { CollectionInfo } from '@/components/ui/CollectionInfo/CollectionInfo'
 import { collections } from '@/data/collections'
 import { Outlet, useParams } from 'react-router-dom'
 import { Layout } from '@/components/business/Layout/Layout'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 export const Collections = () => {
   const { slug } = useParams()
@@ -11,6 +12,7 @@ export const Collections = () => {
 
   return (
     <Layout>
+      <PageMeta title="Колекції" />
       {collections?.map(({ id, title, data, images }) => (
         <CollectionInfo title={title} data={data} images={images} key={id} id={id} />
       ))}

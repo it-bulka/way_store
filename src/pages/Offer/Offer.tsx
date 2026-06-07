@@ -1,8 +1,10 @@
 import cls from './Offer.module.scss'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const Offer = () => (
   <div className={cls.offer}>
+    <PageMeta title="Договір оферти" />
     <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.title}>
       ПУБЛІЧНА ОФЕРТА
     </Typography>

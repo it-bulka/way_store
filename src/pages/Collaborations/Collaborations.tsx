@@ -5,6 +5,7 @@ import { collabs } from '@/data/collabs'
 import { CollabCard } from '@/components/ui/CollabCard/CollabCard'
 import { Layout } from '@/components/business/Layout/Layout'
 import { Outlet, useParams } from 'react-router-dom'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const options = [
   { id: '1', title: 'Главная', path: '/' },
@@ -20,6 +21,7 @@ export const Collaborations = () => {
 
   return (
     <Layout>
+      <PageMeta title="Колаборації" />
       <div className={cls.collaborations}>
         <PageNav options={options} />
         <Typography className={cls.title}>КОЛЛАБОРАЦИИ</Typography>

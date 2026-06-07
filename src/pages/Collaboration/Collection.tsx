@@ -7,6 +7,7 @@ import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
 //import { products } from '@/data/products'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Footer } from '@/components/business/Footer/Footer'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 interface CollectionProps {
   className?: string
@@ -17,6 +18,11 @@ interface CollectionProps {
 const Collection = ({ className, title, info, gallery }: CollectionProps) => {
   return (
     <div className={classnames(cls.collection, {}, [className])}>
+      <PageMeta
+        title={title}
+        description={info.slice(0, 160)}
+        ogImage={gallery[0]?.img}
+      />
       <div className={cls.firstBlock}>
         <Header />
         <div className={'flex-container container'}>
@@ -36,7 +42,7 @@ const Collection = ({ className, title, info, gallery }: CollectionProps) => {
         <section className={cls.gallery}>
           {gallery.map(({ img, alt, id }) => (
             <div key={id}>
-              <img src={img} alt={alt} />
+              <img src={img} alt={alt} loading="lazy" />
             </div>
           ))}
         </section>

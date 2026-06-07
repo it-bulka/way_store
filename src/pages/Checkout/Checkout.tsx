@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import cls from './Checkout.module.scss'
@@ -91,6 +92,7 @@ const Checkout = () => {
 
   return (
     <form className={cls.root} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <PageMeta title="Оформлення замовлення" noindex />
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
         ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
       </Typography>

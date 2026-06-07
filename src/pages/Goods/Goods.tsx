@@ -8,6 +8,7 @@ import { RelatedProducts } from './RelatedProducts'
 import { useGoods } from './useGoods'
 import { useLoaderData } from 'react-router-dom'
 import type { IProduct } from '@/models/goodsType'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const Goods = () => {
   const prod = useLoaderData() as IProduct
@@ -32,6 +33,11 @@ const Goods = () => {
 
   return (
     <div className={cls.goods}>
+      <PageMeta
+        title={prod.name}
+        description={`${prod.name} — ${prod.material}, ${prod.price.amount} ${prod.price.currency}`}
+        ogImage={prod.images.white?.[0]}
+      />
       <BreadCrumbs lastLabel={prod.name} />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">

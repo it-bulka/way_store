@@ -1,9 +1,11 @@
 import cls from './FAQ.module.scss'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { ContactForm } from '@/components/ui/ContactForm/ContactForm'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 export const Contacts = () => (
   <>
+    <PageMeta title="Контакти" />
     <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
       КОНТАКТИ
     </Typography>

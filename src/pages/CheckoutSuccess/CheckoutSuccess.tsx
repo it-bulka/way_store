@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import cls from './CheckoutSuccess.module.scss'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -29,6 +30,7 @@ const CheckoutSuccess = () => {
 
   return (
     <div className={cls.root}>
+      <PageMeta title="Замовлення прийнято" noindex />
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
         ЗАМОВЛЕННЯ ОФОРМЛЕНО
       </Typography>
@@ -41,7 +43,7 @@ const CheckoutSuccess = () => {
         <ul className={cls.items}>
           {snapshot.map(item => (
             <li key={item.id} className={cls.item}>
-              <img src={item.img} alt={item.title} className={cls.img} />
+              <img src={item.img} alt={item.title} className={cls.img} loading="lazy" />
               <Typography className={cls.title}>{item.title}</Typography>
               <Typography className={cls.qty}>× {item.amount}</Typography>
               <Typography className={cls.price}>

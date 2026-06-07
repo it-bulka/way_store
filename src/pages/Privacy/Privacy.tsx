@@ -1,8 +1,10 @@
 import cls from './Privacy.module.scss'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const Privacy = () => (
   <div className={cls.privacy}>
+    <PageMeta title="Конфіденційність" />
     <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.title}>
       ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ
     </Typography>

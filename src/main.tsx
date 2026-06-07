@@ -8,17 +8,20 @@ import { Loader } from '@/components/ui/Loader/Loader'
 import { Provider } from 'react-redux'
 import { store } from '@/redux/store'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary/ErrorBoundary'
+import { HelmetProvider } from 'react-helmet-async'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <CookiesProvider>
-        <ErrorBoundary>
-          <Suspense fallback={<Loader />}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </ErrorBoundary>
-      </CookiesProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <CookiesProvider>
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <RouterProvider router={router} />
+            </Suspense>
+          </ErrorBoundary>
+        </CookiesProvider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 )
