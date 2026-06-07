@@ -4,9 +4,10 @@ import { useAppDispatch } from '@/hooks/reduxHooks'
 import { productsAction } from '@/redux/reducers/productsSlice'
 import { getSubcollectionDocsPaged, PAGE_SIZE } from '@/services/getSubcollectionDocsPaged'
 import { useToast } from '@/context/ToastContext'
+import { PAGES } from '@/models/pages'
 import type { IProduct } from '@/models/goodsType'
 
-const PRODUCT_PATH_PREFIX = ['products', 'translations', 'ukr', 'accessories']
+const PRODUCT_PATH_PREFIX = PAGES.getCollection().split('/').slice(0, -1)
 
 interface UsePaginationParams {
   collection: string

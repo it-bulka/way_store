@@ -13,7 +13,7 @@ import { PAGES } from '@/models'
 import type { IProduct } from '@/models/goodsType'
 
 const RELATED_COUNT = 4
-const RELATED_SLUGS = PAGES.getCollection('ukr').split('/')
+const RELATED_SLUGS = PAGES.getCollection().split('/')
 
 interface RelatedProductsProps {
   prod: IProduct

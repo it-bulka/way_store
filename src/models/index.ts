@@ -1,3 +1,4 @@
-export { PAGES } from './pages.ts'
+export { PAGES, DEFAULT_LANG } from './pages.ts'
+export type { Lang } from './pages.ts'
 export type { StoneType, ProductType, MetalsType, IProduct, IRing, ringsColors } from './goodsType.ts'
 export type { IRegister } from './form.ts'

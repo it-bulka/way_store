@@ -64,7 +64,7 @@ export const useGoods = (prod: IProduct) => {
 
   const onNextClick = useCallback(async () => {
     const nextProd = await getNextDoc({
-      collection: PAGES.getCollection('ukr'),
+      collection: PAGES.getCollection(),
       currentDocId: prod.id,
     })
     if (!nextProd?.id) {
