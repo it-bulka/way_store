@@ -5,3 +5,4 @@ export { getSubcollectionDocsPaged, PAGE_SIZE } from './getSubcollectionDocsPage
 export { getNextDoc } from './getNextDoc.ts'
 export { setUserData } from './setUserData'
 export { createOrderDoc } from './createOrderDoc'
+export { saveSubscriber } from './saveSubscriber'

@@ -11,6 +11,22 @@
     justify-content: space-between;
   }
 
+  .subscribeBtn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    text-transform: uppercase;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .copyrights {
     color: #979797;
     text-transform: lowercase;
