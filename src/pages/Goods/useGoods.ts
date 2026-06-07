@@ -36,9 +36,14 @@ export const useGoods = (prod: IProduct) => {
   const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [navigate])
 
   const onLikeClick = () => {
+    if (isChosen) {
+      dispatch(productsAction.deleteChosen(prod.id))
+      addToast('Видалено з обраного', 'info')
+    } else {
+      dispatch(productsAction.addChosen(prod))
+      addToast('Додано до обраного', 'success')
+    }
     setIsChosen(prev => !prev)
-    if (isChosen) dispatch(productsAction.deleteChosen(prod.id))
-    if (!isChosen) dispatch(productsAction.addChosen(prod))
   }
 
   const pickColor = (colorTag: ringsColors) => setColor(colorTag)

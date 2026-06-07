@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { fetchProducts } from '@/redux/async/fetchProducts'
 import { FilterActions } from '@/redux/reducers'
 import { getFilterCategories } from '@/redux/selectors'
+import { useToast } from '@/context/ToastContext'
 import { type FilterPrice, type IFilters } from '@/redux/reducers/filterCategorySlice.ts'
 import { QueryFieldFilterConstraint } from '@firebase/firestore'
 import type { StoneType, ProductType, MetalsType } from '@/models'
@@ -50,6 +51,7 @@ export const useProductFilters = () => {
   const dispatch = useAppDispatch()
   const filterCategories = useAppSelector(getFilterCategories)
   const firstRenderRef = useRef(true)
+  const { addToast } = useToast()
 
   const [metals, setMetals] = useState(metalsOptions)
   const [stones, setStones] = useState(stonesOptions)
@@ -110,6 +112,8 @@ export const useProductFilters = () => {
         collection: filters.product?.[0] ?? 'rings',
         queries: buildQueryConstraints(filters),
       }))
+        .unwrap()
+        .catch(() => addToast('Помилка завантаження товарів', 'error'))
     }
   }, [dispatch, metals, stones, productType, priceFilter])
 

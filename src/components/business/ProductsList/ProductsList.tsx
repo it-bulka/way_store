@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { productsAction } from '@/redux/reducers/productsSlice'
+import { useToast } from '@/context/ToastContext'
 
 interface ProductsListProps {
   className?: string
@@ -21,6 +22,7 @@ export const ProductsList: FC<ProductsListProps> = ({ className, products, title
   const loading = useAppSelector(state => state.products.loading)
   const navigateTo = useNavigate()
   const dispatch = useAppDispatch()
+  const { addToast } = useToast()
 
   const onCardClick = useCallback(
     (id: string) => () => navigateTo(`/store/${id}`),
@@ -36,15 +38,17 @@ export const ProductsList: FC<ProductsListProps> = ({ className, products, title
         price: product.price.amount,
         img: product.images['white'][0],
       }))
+      addToast('Додано до кошика', 'success')
     },
-    [dispatch]
+    [dispatch, addToast]
   )
 
   const onAddToFavorites = useCallback(
     (product: IProduct) => () => {
       dispatch(productsAction.addChosen(product))
+      addToast('Додано до обраного', 'success')
     },
-    [dispatch]
+    [dispatch, addToast]
   )
 
   return (
