@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '@/models/goodsType'
 import { fetchProducts } from '@/redux/async/fetchProducts'
+import { syncChosen } from '@/redux/async/syncChosen'
 import { storage } from '@/utils/storage'
 
 export interface IProductsSlice {
@@ -47,6 +48,9 @@ const cartSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload as string
+      })
+      .addCase(syncChosen.fulfilled, (state, action) => {
+        state.chosen = action.payload
       })
   },
 })

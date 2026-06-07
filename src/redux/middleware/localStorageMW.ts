@@ -1,6 +1,9 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { storage } from '@/utils/storage'
-import type { RootState } from '@/redux/store'
+import { signIn } from '@/redux/async/signIn'
+import { signUp } from '@/redux/async/signUp'
+import { syncChosen } from '@/redux/async/syncChosen'
+import type { RootState, AppDispatch } from '@/redux/store'
 
 export const localStorageMiddleware = createListenerMiddleware()
 
@@ -19,5 +22,23 @@ localStorageMiddleware.startListening({
   effect: (_, { getState }) => {
     const state = getState() as RootState
     storage.set('chosen', state.products.chosen)
+  },
+})
+
+localStorageMiddleware.startListening({
+  actionCreator: signIn.fulfilled,
+  effect: async (action, { dispatch }) => {
+    if (action.payload.uid) {
+      ;(dispatch as AppDispatch)(syncChosen(action.payload.uid))
+    }
+  },
+})
+
+localStorageMiddleware.startListening({
+  actionCreator: signUp.fulfilled,
+  effect: async (action, { dispatch }) => {
+    if (action.payload.uid) {
+      ;(dispatch as AppDispatch)(syncChosen(action.payload.uid))
+    }
   },
 })

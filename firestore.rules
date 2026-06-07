@@ -18,6 +18,11 @@ service cloud.firestore {
       match /orders/{orderId} {
         allow read, write: if isOwner(userId);
       }
+
+      // Saved favorites — synced from localStorage on sign-in
+      match /chosen/{chosenId} {
+        allow read, write: if isOwner(userId);
+      }
     }
 
     // Products catalogue: public read, no client writes
