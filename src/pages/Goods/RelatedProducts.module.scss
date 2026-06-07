@@ -1,0 +1,19 @@
+.related {
+  margin-top: 4rem;
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 8.78px;
+    row-gap: 12.16px;
+    margin-top: 1.4rem;
+
+    @include respond-to('tablet') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond-to('mobile') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { ImgTabs } from '@/components/ui/ImgTabs/ImgTabs'
 import { PrevNextBtns } from '@/components/ui/PrevNextBtns/PrevNextBtns'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { GoodsControls } from './GoodsControls/GoodsControls'
+import { RelatedProducts } from './RelatedProducts'
 import { useGoods } from './useGoods'
 import { useLoaderData } from 'react-router-dom'
 import type { IProduct } from '@/models/goodsType'
@@ -64,6 +65,7 @@ const Goods = () => {
           />
         </div>
       </div>
+      <RelatedProducts prod={prod} />
     </div>
   )
 }
