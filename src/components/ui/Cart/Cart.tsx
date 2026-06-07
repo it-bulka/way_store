@@ -8,6 +8,7 @@ import { Typography } from '@/components/ui/Typography/Typography'
 import CloseIcon from '@/assets/general/close.svg'
 import classnames from 'classnames'
 import { Button } from '@/components/ui/Button/Button'
+import { Absent } from '@/components/ui/Absent/Absent'
 import { useNavigate } from 'react-router-dom'
 import { CartItem } from '@/components/ui/Cart/CartItem/CartItem'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -83,31 +84,38 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
             </button>
           </div>
           <div className={cls.content}>
-            <ul>
-              {items.map(({ img, title, price, amount, id }) => (
-                <CartItem
-                  img={img}
-                  title={title}
-                  price={price}
-                  amount={amount}
-                  onDelete={() => deleteItem(id)}
-                  setAmount={(amount: number) => changeItemAmount(id, amount)}
-                  key={id}
-                />
-              ))}
-            </ul>
+            {items.length === 0 ? (
+              <Absent
+                info="КОШИК ПОРОЖНІЙ"
+                btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
+                className={cls.absent}
+                onBtnClick={() => { onClose(); navigateTo('/store') }}
+              />
+            ) : (
+              <ul>
+                {items.map(({ img, title, price, amount, id }) => (
+                  <CartItem
+                    img={img}
+                    title={title}
+                    price={price}
+                    amount={amount}
+                    onDelete={() => deleteItem(id)}
+                    setAmount={(amount: number) => changeItemAmount(id, amount)}
+                    key={id}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
 
-          <div className={cls.footer}>
-            <Typography className={cls.sum}>
-              {getInfo()} НА СУМУ <span>{totalSum} </span> грн.
-            </Typography>
-            <Button
-              title="Оформити замовлення"
-              onClick={toCheckout}
-              disabled={items.length === 0}
-            />
-          </div>
+          {items.length > 0 && (
+            <div className={cls.footer}>
+              <Typography className={cls.sum}>
+                {getInfo()} НА СУМУ <span>{totalSum} </span> грн.
+              </Typography>
+              <Button title="Оформити замовлення" onClick={toCheckout} />
+            </div>
+          )}
         </div>
       </div>
     </Portal>
