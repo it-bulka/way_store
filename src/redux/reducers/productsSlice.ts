@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '@/models/goodsType'
 import { fetchProducts } from '@/redux/async/fetchProducts'
 import { storage } from '@/utils/storage'
-import { mockProducts } from '@/data/mockProducts'
 
 export interface IProductsSlice {
   products: IProduct[]
@@ -12,7 +11,7 @@ export interface IProductsSlice {
 }
 
 const initialState: IProductsSlice = {
-  products: mockProducts,
+  products: [],
   chosen: storage.get<IProduct[]>('chosen') ?? [],
   loading: false,
   error: null,
@@ -22,6 +21,12 @@ const cartSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
+    setProducts: (state, action: PayloadAction<IProduct[]>) => {
+      state.products = action.payload
+    },
+    appendProducts: (state, action: PayloadAction<IProduct[]>) => {
+      state.products.push(...action.payload)
+    },
     addChosen: (state, action: PayloadAction<IProduct>) => {
       state.chosen.push(action.payload)
     },

@@ -10,6 +10,7 @@ import { getProducts } from '@/redux/selectors/getProducts'
 import { Absent } from '@/components/ui/Absent/Absent.tsx'
 import { categoryTitles } from './filterOptions'
 import { useProductFilters } from './useProductFilters'
+import { useProductPagination } from './useProductPagination'
 import { useSearchParams } from 'react-router-dom'
 
 interface ProductsProps {
@@ -27,12 +28,16 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     productType,
     priceFilter,
     chosenProductType,
+    collection,
+    queries,
     onMetalsChecked,
     onStonesChecked,
     onProductChecked,
     getRange,
     resetFilters,
   } = useProductFilters()
+
+  const { loading, loadingMore, hasMore, loadMore } = useProductPagination({ collection, queries })
 
   const visibleProducts = useMemo(
     () =>
@@ -76,7 +81,7 @@ export const Products: FC<ProductsProps> = ({ className }) => {
           />
         </div>
       </div>
-      {!visibleProducts.length ? (
+      {!visibleProducts.length && !loading ? (
         <Absent
           info={
             searchQuery
@@ -87,7 +92,14 @@ export const Products: FC<ProductsProps> = ({ className }) => {
           onBtnClick={searchQuery ? clearSearch : handleReset}
         />
       ) : (
-        <ProductsList products={visibleProducts} title={categoryTitles[chosenProductType]} />
+        <ProductsList
+          products={visibleProducts}
+          title={categoryTitles[chosenProductType]}
+          loading={loading}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loadingMore={loadingMore}
+        />
       )}
     </div>
   )

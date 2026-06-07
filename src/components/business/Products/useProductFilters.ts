@@ -3,10 +3,8 @@ import { where } from 'firebase/firestore'
 import { type IOption as IDropdownOption } from '@/components/ui/Dropdown/Dropdown'
 import { type IGetRange } from '@/components/ui/RangeSlider/RangeSlider'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
-import { fetchProducts } from '@/redux/async/fetchProducts'
 import { FilterActions } from '@/redux/reducers'
 import { getFilterCategories } from '@/redux/selectors'
-import { useToast } from '@/context/ToastContext'
 import { type FilterPrice, type IFilters } from '@/redux/reducers/filterCategorySlice.ts'
 import { QueryFieldFilterConstraint } from '@firebase/firestore'
 import type { StoneType, ProductType, MetalsType } from '@/models'
@@ -51,12 +49,19 @@ export const useProductFilters = () => {
   const dispatch = useAppDispatch()
   const filterCategories = useAppSelector(getFilterCategories)
   const firstRenderRef = useRef(true)
-  const { addToast } = useToast()
 
-  const [metals, setMetals] = useState(metalsOptions)
-  const [stones, setStones] = useState(stonesOptions)
-  const [productType, setProductType] = useState(productOptions)
-  const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(null)
+  const [metals, setMetals] = useState(() =>
+    metalsOptions.map(opt => ({ ...opt, chosen: (filterCategories.metal ?? []).includes(opt.label as MetalsType) }))
+  )
+  const [stones, setStones] = useState(() =>
+    stonesOptions.map(opt => ({ ...opt, chosen: (filterCategories.stones ?? []).includes(opt.label as StoneType) }))
+  )
+  const [productType, setProductType] = useState(() =>
+    productOptions.map(opt => ({ ...opt, chosen: (filterCategories.product ?? []).includes(opt.label as ProductType) }))
+  )
+  const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(
+    filterCategories.price ? { min: filterCategories.price.min, max: filterCategories.price.max } : null
+  )
 
   const onMetalsChecked = useCallback(
     (id: string, status: boolean) =>
@@ -90,12 +95,18 @@ export const useProductFilters = () => {
     [productType]
   )
 
+  const queries = useMemo(
+    () =>
+      buildQueryConstraints({
+        metal: getChosenCategory<MetalsType>(metals),
+        stones: getChosenCategory<StoneType>(stones),
+        product: getChosenCategory<ProductType>(productType),
+        price: priceFilter ?? undefined,
+      }),
+    [metals, stones, productType, priceFilter]
+  )
+
   useEffect(() => {
-    const { metal, stones: sf, product, price } = filterCategories
-    if (metal?.length) setMetals(prev => prev.map(item => ({ ...item, chosen: metal.includes(item.label) })))
-    if (sf?.length) setStones(prev => prev.map(item => ({ ...item, chosen: sf.includes(item.label) })))
-    if (product?.length) setProductType(prev => prev.map(item => ({ ...item, chosen: product.includes(item.label) })))
-    if (price) setPriceFilter({ min: price.min, max: price.max })
     firstRenderRef.current = false
   }, [])
 
@@ -108,12 +119,6 @@ export const useProductFilters = () => {
       }
       if (priceFilter) filters.price = priceFilter
       dispatch(FilterActions.addCategory(filters))
-      dispatch(fetchProducts({
-        collection: filters.product?.[0] ?? 'rings',
-        queries: buildQueryConstraints(filters),
-      }))
-        .unwrap()
-        .catch(() => addToast('Помилка завантаження товарів', 'error'))
     }
   }, [dispatch, metals, stones, productType, priceFilter])
 
@@ -123,6 +128,8 @@ export const useProductFilters = () => {
     productType,
     priceFilter,
     chosenProductType,
+    collection: chosenProductType,
+    queries,
     onMetalsChecked,
     onStonesChecked,
     onProductChecked,

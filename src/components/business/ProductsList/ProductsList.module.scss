@@ -25,4 +25,10 @@
       transition: opacity 0.15s ease;
     }
   }
+
+  .loadMore {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
 }

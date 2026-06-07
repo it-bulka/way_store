@@ -2,10 +2,12 @@ import { type FC, useCallback } from 'react'
 import cls from './ProductsList.module.scss'
 import { ProductCard } from '@/components/ui/ProductCard/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/ProductCardSkeleton/ProductCardSkeleton'
+import { Button } from '@/components/ui/Button/Button'
+import { Loader } from '@/components/ui/Loader/Loader'
 import type { IProduct } from '@/models/goodsType'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { productsAction } from '@/redux/reducers/productsSlice'
 import { useToast } from '@/context/ToastContext'
@@ -14,12 +16,23 @@ interface ProductsListProps {
   className?: string
   products: Array<IProduct>
   title?: string
+  loading?: boolean
+  loadMore?: () => void
+  hasMore?: boolean
+  loadingMore?: boolean
 }
 
 const SKELETON_COUNT = 8
 
-export const ProductsList: FC<ProductsListProps> = ({ className, products, title }) => {
-  const loading = useAppSelector(state => state.products.loading)
+export const ProductsList: FC<ProductsListProps> = ({
+  className,
+  products,
+  title,
+  loading = false,
+  loadMore,
+  hasMore = false,
+  loadingMore = false,
+}) => {
   const navigateTo = useNavigate()
   const dispatch = useAppDispatch()
   const { addToast } = useToast()
@@ -69,6 +82,15 @@ export const ProductsList: FC<ProductsListProps> = ({ className, products, title
               />
             ))}
       </div>
+      {!loading && hasMore && (
+        <div className={cls.loadMore}>
+          {loadingMore ? (
+            <Loader />
+          ) : (
+            <Button title="Показати ще" onClick={loadMore} />
+          )}
+        </div>
+      )}
     </div>
   )
 }
