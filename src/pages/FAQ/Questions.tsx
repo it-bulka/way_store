@@ -6,7 +6,7 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 export const Questions = () => (
   <>
     <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
-      ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ
+      ЧАСТІ ЗАПИТАННЯ
     </Typography>
     <Accordion items={FAQdata} type={AccordionType.ARROW} />
   </>

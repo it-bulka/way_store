@@ -5,20 +5,20 @@ import { ContactForm } from '@/components/ui/ContactForm/ContactForm'
 export const Contacts = () => (
   <>
     <Typography className={cls.title} type={TypographyTypes.HEADER} variant="h3">
-      СВЯЗАТЬСЯ С НАМИ
+      КОНТАКТИ
     </Typography>
     <div className={cls.info}>
       <Typography>
-        Если у вас возникнут вопросы по поводу вашего заказа, продукта или чего-либо еще, напишите
-        нам, заполнив форму запроса ниже.
+        Якщо у вас є питання щодо замовлення, продукту або чого-небудь іншого — заповніть форму
+        нижче і ми відповімо протягом одного робочого дня.
       </Typography>
       <Typography>
-        По вопросам оптовой торговли обращайтесь по адресу{' '}
-        <a href="mailto:sales@sweetlimejuice.com">sales@sweetlimejuice.com.</a>
+        З питань оптових замовлень:{' '}
+        <a href="mailto:wholesale@way.com.ua">wholesale@way.com.ua</a>
       </Typography>
       <Typography>
-        Для прессы обращайтесь по адресу{' '}
-        <a href="mailto:press@sweetlimejuice.com">press@sweetlimejuice.com</a>
+        Для медіа та преси:{' '}
+        <a href="mailto:press@way.com.ua">press@way.com.ua</a>
       </Typography>
     </div>
     <ContactForm />
