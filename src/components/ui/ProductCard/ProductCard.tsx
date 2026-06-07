@@ -42,7 +42,7 @@ export const ProductCard: FC<ProductCardProps> = ({
       tabIndex={-1}
     >
       <div className={cls.imgWrapper}>
-        <img src={img} alt="product" />
+        <img src={img} alt="product" loading="lazy" />
       </div>
 
       <div className={cls.actions}>

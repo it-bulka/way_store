@@ -17,7 +17,7 @@ export const CollabCard: FC<CollabCardProps> = ({ className, id, img, title, con
   return (
     <div className={classnames(cls.collabCard, [className])}>
       <div>
-        <img src={img} alt={title} />
+        <img src={img} alt={title} loading="lazy" />
       </div>
       <div className={cls.content}>
         <Typography variant="h3" type={TypographyTypes.HEADER}>

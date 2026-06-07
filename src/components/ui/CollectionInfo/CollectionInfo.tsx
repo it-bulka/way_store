@@ -34,7 +34,7 @@ export const CollectionInfo: FC<CollectionInfoProps> = ({ className, id, title, 
         <div className={classnames(cls.imgs, cls[`imgs_${imgAmount > 4 ? 4 : imgAmount}`])}>
           {images?.map((img, order) => (
             <div>
-              <img src={img} alt="collection" key={order} />
+              <img src={img} alt="collection" key={order} loading="lazy" />
             </div>
           ))}
         </div>

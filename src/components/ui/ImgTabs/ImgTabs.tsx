@@ -47,7 +47,7 @@ export const ImgTabs: FC<ImgTabsProps> = ({ options }) => {
             key={imgSrc}
             className={cls.tab}
           >
-            <img src={imgSrc} alt={'ring'} />
+            <img src={imgSrc} alt={'ring'} loading="lazy" />
           </div>
         ))}
       </div>

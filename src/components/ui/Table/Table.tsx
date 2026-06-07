@@ -56,7 +56,7 @@ export const Table: FC<TableProps> = ({ className, data, columns, onRowClick }) 
         <tr key={tr.id}>
           <td>
             <div className={cls.name}>
-              <img src={Ring} alt="ring" />
+              <img src={Ring} alt="ring" loading="lazy" />
               <Typography>{tr.title}</Typography>
             </div>
           </td>

@@ -19,7 +19,7 @@ export const OrderItems: FC<OrderItemsProps> = ({ items }) => {
       <ul className={cls.itemsList}>
         {items.map(item => (
           <li key={item.id} className={cls.item}>
-            <img src={item.img} alt={item.title} className={cls.itemImg} />
+            <img src={item.img} alt={item.title} className={cls.itemImg} loading="lazy" />
             <div className={cls.itemName}>
               <Typography>{item.title}</Typography>
               {item.size && <Typography className={cls.itemSize}>Розмір: {item.size} мм</Typography>}

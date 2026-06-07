@@ -22,7 +22,7 @@ export const CartItem: FC<CartItemProps> = ({ img, title, price, amount, onDelet
 
       <div className={cls.content}>
         <div className={cls.product}>
-          <img src={img} alt={title} />
+          <img src={img} alt={title} loading="lazy" />
         </div>
 
         <Typography className={cls.title}>{title}</Typography>
