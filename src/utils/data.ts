@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 export const daysInMonth = (year: number, month: number) => {
   const startDate = dayjs().year(year).month(month).date(1)
