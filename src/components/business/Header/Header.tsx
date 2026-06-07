@@ -73,9 +73,14 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         <button
           onClick={openCart}
           className={classnames(cls.cartBtn, { [cls.active]: !!items.length })}
+          aria-label={`Кошик${totalAmount ? `, ${totalAmount} товарів` : ''}`}
         >
           <CartIcon />
-          {!!items.length && <p className={cls.items}>{totalAmount}</p>}
+          {!!items.length && (
+            <p className={cls.items} aria-live="polite" aria-atomic="true">
+              {totalAmount}
+            </p>
+          )}
         </button>
         {isAuthenticated ? (
           <>

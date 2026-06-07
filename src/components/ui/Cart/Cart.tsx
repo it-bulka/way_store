@@ -1,7 +1,4 @@
-/* NO need for wrapper and stopPropagation */
-/* eslint jsx-a11y/click-events-have-key-events: 0,jsx-a11y/no-static-element-interactions: 0 */
-
-import { FC, memo, useCallback } from 'react'
+import { FC, memo, useCallback, useEffect, useRef } from 'react'
 import cls from './Cart.module.scss'
 import { Portal } from '@/components/ui/Portal/Portal'
 import { Typography } from '@/components/ui/Typography/Typography'
@@ -15,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getCartItems } from '@/redux/selectors/cartSelectors'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 
 interface CartProps {
   onClose: () => void
@@ -24,6 +22,17 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
   const navigateTo = useNavigate()
   const items = useAppSelector(getCartItems)
   const dispatch = useAppDispatch()
+  const cartInnerRef = useRef<HTMLDivElement>(null)
+
+  useFocusTrap(cartInnerRef, true)
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [onClose])
 
   const deleteItem = useCallback(
     (id: string) => {
@@ -76,7 +85,14 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
   return (
     <Portal>
       <div className={cls.cart} onClick={onClose}>
-        <div className={classnames(cls.cartInner, 'container')} onClick={e => e.stopPropagation()}>
+        <div
+          ref={cartInnerRef}
+          className={classnames(cls.cartInner, 'container')}
+          onClick={e => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Ваш кошик"
+        >
           <div className={cls.header}>
             <Typography>ВАШ КОШИК</Typography>
             <button className={cls.closeBtn} onClick={onClose}>

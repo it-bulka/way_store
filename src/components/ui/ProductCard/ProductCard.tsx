@@ -38,11 +38,12 @@ export const ProductCard: FC<ProductCardProps> = ({
       className={classnames(cls.productCard, [className])}
       onClick={() => onClick?.()}
       role="button"
+      aria-label={title}
       onKeyDown={onKeyDown}
-      tabIndex={-1}
+      tabIndex={0}
     >
       <div className={cls.imgWrapper}>
-        <img src={img} alt="product" loading="lazy" />
+        <img src={img} alt={title} loading="lazy" />
       </div>
 
       <div className={cls.actions}>

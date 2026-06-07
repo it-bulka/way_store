@@ -1,11 +1,11 @@
-/* There is window EventListener set for keyboard interaction */
-/* eslint jsx-a11y/click-events-have-key-events: 0,jsx-a11y/no-static-element-interactions: 0 */
-
-import { type FC, ReactNode, useRef, useState, useCallback, MouseEvent, useEffect } from 'react'
+import { type FC, ReactNode, useRef, useState, useCallback, MouseEvent, useEffect, useId, createContext } from 'react'
 import cls from './Modal.module.scss'
 import { Portal } from '@/components/ui/Portal/Portal'
 import CloseIcon from '@/assets/general/close.svg'
 import classnames from 'classnames'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
+
+export const ModalTitleContext = createContext<string>('')
 
 export interface ModalProps {
   className?: string
@@ -27,6 +27,8 @@ export const Modal: FC<ModalProps> = ({
 }) => {
   const [isClosing, setIsClosing] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const titleId = useId()
 
   const closeHandler = useCallback(() => {
     if (close) {
@@ -43,35 +45,42 @@ export const Modal: FC<ModalProps> = ({
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeHandler()
-      }
+      if (e.key === 'Escape') closeHandler()
     },
     [closeHandler]
   )
 
   useEffect(() => {
-    if (isOpened) {
-      window.addEventListener('keydown', onKeyDown)
-    }
-
+    if (isOpened) window.addEventListener('keydown', onKeyDown)
     return () => {
       timer.current && clearTimeout(timer.current as ReturnType<typeof setTimeout>)
       window.removeEventListener('keydown', onKeyDown)
     }
   }, [isOpened, onKeyDown])
+
+  useFocusTrap(contentRef, isOpened)
+
   return (
     <Portal>
-      <div className={classnames(cls.modal, { [cls.closing]: isClosing, [cls.opened]: isOpened })}>
-        <div className={cls.overlay + ' ' + cls[overlay]} onClick={closeHandler}>
-          <div className={cls.content + ' ' + contentClassName} onClick={onContentClick}>
-            <button className={cls.closeBtn} onClick={closeHandler}>
-              <CloseIcon />
-            </button>
-            {children}
+      <ModalTitleContext.Provider value={titleId}>
+        <div className={classnames(cls.modal, { [cls.closing]: isClosing, [cls.opened]: isOpened })}>
+          <div className={cls.overlay + ' ' + cls[overlay]} onClick={closeHandler}>
+            <div
+              ref={contentRef}
+              className={classnames(cls.content, contentClassName)}
+              onClick={onContentClick}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+            >
+              <button className={cls.closeBtn} onClick={closeHandler} aria-label="Закрити">
+                <CloseIcon />
+              </button>
+              {children}
+            </div>
           </div>
         </div>
-      </div>
+      </ModalTitleContext.Provider>
     </Portal>
   )
 }
