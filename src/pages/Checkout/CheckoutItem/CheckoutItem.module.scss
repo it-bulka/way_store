@@ -6,6 +6,20 @@
   border-bottom: $border_width solid $border_color;
 }
 
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover .title {
+    font-family: $font_bold;
+  }
+}
+
 .img {
   width: 60px;
   height: 60px;
@@ -17,13 +31,30 @@
   flex: 1;
 }
 
-.qty {
-  color: $grey;
-  font-size: 0.75rem;
-  white-space: nowrap;
+.stepper {
+  width: 74px;
+  flex-shrink: 0;
 }
 
 .price {
   font-family: $font_bold;
   white-space: nowrap;
+  min-width: 5.5rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.deleteBtn {
+  width: 10px;
+  height: 10px;
+  border: $border_width solid #C7C7C7;
+  padding: 1px;
+  line-height: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }
