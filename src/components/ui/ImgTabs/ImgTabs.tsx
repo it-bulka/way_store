@@ -34,7 +34,15 @@ export const ImgTabs: FC<ImgTabsProps> = ({ options }) => {
   return (
     <div className={cls.imgTabs}>
       <div className={cls.viewer}>
-        <img src={shownImg} alt={'ring'} />
+        <img
+          src={shownImg}
+          alt={'ring'}
+          onError={e => {
+              const el = e.currentTarget as HTMLImageElement
+              el.onerror = null
+              el.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
+            }}
+        />
       </div>
 
       <div className={cls.container}>
@@ -47,7 +55,16 @@ export const ImgTabs: FC<ImgTabsProps> = ({ options }) => {
             key={imgSrc}
             className={cls.tab}
           >
-            <img src={imgSrc} alt={'ring'} loading="lazy" />
+            <img
+              src={imgSrc}
+              alt={'ring'}
+              loading="lazy"
+              onError={e => {
+              const el = e.currentTarget as HTMLImageElement
+              el.onerror = null
+              el.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
+            }}
+            />
           </div>
         ))}
       </div>

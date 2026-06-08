@@ -10,9 +10,12 @@ import { useAppDispatch } from '@/hooks/reduxHooks'
 import { useToast } from '@/context/ToastContext'
 import { useNavigate } from 'react-router-dom'
 import { PAGES } from '@/models'
-import type { IProduct } from '@/models/goodsType'
+import type { IProduct, ringsColors } from '@/models/goodsType'
 
 const RELATED_COUNT = 4
+
+const firstImg = (images: IProduct['images']): string =>
+  (['white', 'rose', 'yellow'] as ringsColors[]).map(c => images[c][0]).find(Boolean) ?? ''
 const RELATED_SLUGS = PAGES.getCollection().split('/')
 
 interface RelatedProductsProps {
@@ -52,7 +55,7 @@ export const RelatedProducts: FC<RelatedProductsProps> = ({ prod }) => {
           title: product.name,
           amount: 1,
           price: product.price.amount,
-          img: product.images['white'][0],
+          img: firstImg(product.images),
         })
       )
       addToast('Додано до кошика', 'success')
@@ -79,7 +82,7 @@ export const RelatedProducts: FC<RelatedProductsProps> = ({ prod }) => {
           : products.map(p => (
               <ProductCard
                 key={p.id}
-                img={p.images['white'][0]}
+                img={firstImg(p.images)}
                 title={p.name}
                 price={p.price.amount}
                 onClick={onCardClick(p.id)}

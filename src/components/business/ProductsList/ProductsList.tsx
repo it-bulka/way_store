@@ -4,7 +4,7 @@ import { ProductCard } from '@/components/ui/ProductCard/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/ProductCardSkeleton/ProductCardSkeleton'
 import { Button } from '@/components/ui/Button/Button'
 import { Loader } from '@/components/ui/Loader/Loader'
-import type { IProduct } from '@/models/goodsType'
+import type { IProduct, ringsColors } from '@/models/goodsType'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/hooks/reduxHooks'
@@ -23,6 +23,9 @@ interface ProductsListProps {
 }
 
 const SKELETON_COUNT = 8
+
+const firstImg = (images: IProduct['images']): string =>
+  (['white', 'rose', 'yellow'] as ringsColors[]).map(c => images[c][0]).find(Boolean) ?? ''
 
 export const ProductsList: FC<ProductsListProps> = ({
   className,
@@ -49,7 +52,7 @@ export const ProductsList: FC<ProductsListProps> = ({
         title: product.name,
         amount: 1,
         price: product.price.amount,
-        img: product.images['white'][0],
+        img: firstImg(product.images),
       }))
       addToast('Додано до кошика', 'success')
     },
@@ -73,7 +76,7 @@ export const ProductsList: FC<ProductsListProps> = ({
           : products.map(product => (
               <ProductCard
                 key={product.id}
-                img={product.images['white'][0]}
+                img={firstImg(product.images)}
                 title={product.name}
                 price={product.price.amount}
                 onClick={onCardClick(product.id)}
