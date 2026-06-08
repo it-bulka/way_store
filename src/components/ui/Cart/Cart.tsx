@@ -111,12 +111,14 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
               <ul>
                 {items.map(({ img, title, price, amount, id }) => (
                   <CartItem
+                    id={id}
                     img={img}
                     title={title}
                     price={price}
                     amount={amount}
                     onDelete={() => deleteItem(id)}
                     setAmount={(amount: number) => changeItemAmount(id, amount)}
+                    onNavigate={onClose}
                     key={id}
                   />
                 ))}
