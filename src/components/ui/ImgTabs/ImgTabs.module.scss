@@ -5,8 +5,15 @@
   max-width: 428px;
 
   .viewer {
+    background-color: $grey_3;
+    height: 284px;
+
     img {
-      height: 284px;
+      height: 100%;
+
+      &[src=''] {
+        visibility: hidden;
+      }
     }
   }
 
@@ -19,6 +26,11 @@
       height: 121px;
       width: calc(33%);
       overflow: hidden;
+      background-color: $grey_3;
+
+      img[src=''] {
+        visibility: hidden;
+      }
     }
   }
 
