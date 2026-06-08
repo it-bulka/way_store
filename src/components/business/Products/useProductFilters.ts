@@ -91,7 +91,7 @@ export const useProductFilters = () => {
   }, [])
 
   const chosenProductType = useMemo(
-    () => getChosenCategory<ProductType>(productType)[0] ?? 'rings',
+    () => getChosenCategory<ProductType>(productType)[0] ?? null,
     [productType]
   )
 

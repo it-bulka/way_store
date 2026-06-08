@@ -94,7 +94,7 @@ export const Products: FC<ProductsProps> = ({ className }) => {
       ) : (
         <ProductsList
           products={visibleProducts}
-          title={categoryTitles[chosenProductType]}
+          title={chosenProductType ? categoryTitles[chosenProductType] : 'УСІ ВИРОБИ'}
           loading={loading}
           loadMore={loadMore}
           hasMore={hasMore}

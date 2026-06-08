@@ -5,12 +5,17 @@ import { productsAction } from '@/redux/reducers/productsSlice'
 import { getSubcollectionDocsPaged, PAGE_SIZE } from '@/services/getSubcollectionDocsPaged'
 import { useToast } from '@/context/ToastContext'
 import { PAGES } from '@/models/pages'
-import type { IProduct } from '@/models/goodsType'
+import type { IProduct, ProductType } from '@/models/goodsType'
 
 const PRODUCT_PATH_PREFIX = PAGES.getCollection().split('/').slice(0, -1)
 
+const ALL_CATEGORIES: ProductType[] = [
+  'rings', 'necklaces', 'bracelets', 'earrings',
+  'pendants', 'watches', 'cufflinks', 'chains',
+]
+
 interface UsePaginationParams {
-  collection: string
+  collection: ProductType | null
   queries?: QueryFieldFilterConstraint[]
 }
 
@@ -28,6 +33,8 @@ export const useProductPagination = ({
   const dispatch = useAppDispatch()
   const { addToast } = useToast()
   const cursorRef = useRef<QueryDocumentSnapshot | null>(null)
+  const bufferRef = useRef<IProduct[]>([])
+  const bufferOffsetRef = useRef<number>(0)
   const loadingMoreRef = useRef(false)
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -35,11 +42,29 @@ export const useProductPagination = ({
 
   useEffect(() => {
     cursorRef.current = null
+    bufferRef.current = []
+    bufferOffsetRef.current = 0
     setHasMore(true)
 
     const fetchFirstPage = async () => {
       setLoading(true)
       try {
+        if (!collection) {
+          const results = await Promise.all(
+            ALL_CATEGORIES.map(cat =>
+              getSubcollectionDocsPaged<IProduct>({
+                slugs: [...PRODUCT_PATH_PREFIX, cat],
+                queries,
+                pageSize: 1000,
+              })
+            )
+          )
+          bufferRef.current = results.flatMap(r => r.data)
+          bufferOffsetRef.current = PAGE_SIZE
+          dispatch(productsAction.setProducts(bufferRef.current.slice(0, PAGE_SIZE)))
+          setHasMore(bufferRef.current.length > PAGE_SIZE)
+          return
+        }
         const slugs = [...PRODUCT_PATH_PREFIX, collection]
         const { data, lastDoc } = await getSubcollectionDocsPaged<IProduct>({ slugs, queries })
         cursorRef.current = lastDoc
@@ -60,6 +85,14 @@ export const useProductPagination = ({
     loadingMoreRef.current = true
     setLoadingMore(true)
     try {
+      if (!collection) {
+        const offset = bufferOffsetRef.current
+        const next = bufferRef.current.slice(offset, offset + PAGE_SIZE)
+        bufferOffsetRef.current = offset + PAGE_SIZE
+        setHasMore(bufferRef.current.length > bufferOffsetRef.current)
+        dispatch(productsAction.appendProducts(next))
+        return
+      }
       const slugs = [...PRODUCT_PATH_PREFIX, collection]
       const { data, lastDoc } = await getSubcollectionDocsPaged<IProduct>({
         slugs,
