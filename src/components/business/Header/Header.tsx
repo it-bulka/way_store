@@ -1,4 +1,4 @@
-import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { type FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import cls from './Header.module.scss'
 import LogoIcon from '@/assets/logo/logo.svg'
 import HeartIcon from '@/assets/general/heart.svg'
@@ -53,53 +53,67 @@ export const Header: FC<HeaderProps> = ({ className }) => {
 
   const totalAmount = useMemo(() => items.reduce((acc, item) => acc + item.amount, 0), [items])
 
+  const headerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+    const observer = new ResizeObserver(([entry]) => {
+      document.documentElement.style.setProperty('--header-height', `${entry.contentRect.height}px`)
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   const handleSignOut = () => {
     dispatch(signOutUser())
     navigateTo('/')
   }
 
   return (
-    <div className={classnames(cls.header, 'container ', [className])}>
-      <div className={classnames(cls.logo, 'col-1')}>
-        <LogoIcon />
-      </div>
-      <div className={classnames(cls.searchHolder, 'col-2')}>
-        <SearchBar value={localQuery} onChange={setLocalQuery} onSearch={handleSearch} />
-      </div>
-      <div className={classnames(cls.actions, 'col-3')}>
-        <button onClick={() => navigateTo('/account/chosen')}>
-          <HeartIcon />
-        </button>
-        <button
-          onClick={openCart}
-          className={classnames(cls.cartBtn, { [cls.active]: !!items.length })}
-          aria-label={`Кошик${totalAmount ? `, ${totalAmount} товарів` : ''}`}
-        >
-          <CartIcon />
-          {!!items.length && (
-            <p className={cls.items} aria-live="polite" aria-atomic="true">
-              {totalAmount}
-            </p>
-          )}
-        </button>
-        {isAuthenticated ? (
-          <>
-            <button onClick={() => navigateTo('/account/profile')}>
-              <PersonIcon />
-            </button>
-            <button className={cls.signOutBtn} onClick={handleSignOut}>
-              Вийти
-            </button>
-          </>
-        ) : (
-          <button className={cls.signInBtn} onClick={openAuth}>
-            Увійти
+    <header className={cls.root} ref={headerRef}>
+      <div className={classnames(cls.header, 'container ', [className])}>
+        <div className={classnames(cls.logo, 'col-1')}>
+          <LogoIcon />
+        </div>
+        <div className={classnames(cls.searchHolder, 'col-2')}>
+          <SearchBar value={localQuery} onChange={setLocalQuery} onSearch={handleSearch} />
+        </div>
+        <div className={classnames(cls.actions, 'col-3')}>
+          <button onClick={() => navigateTo('/account/chosen')}>
+            <HeartIcon />
           </button>
-        )}
-      </div>
+          <button
+            onClick={openCart}
+            className={classnames(cls.cartBtn, { [cls.active]: !!items.length })}
+            aria-label={`Кошик${totalAmount ? `, ${totalAmount} товарів` : ''}`}
+          >
+            <CartIcon />
+            {!!items.length && (
+              <p className={cls.items} aria-live="polite" aria-atomic="true">
+                {totalAmount}
+              </p>
+            )}
+          </button>
+          {isAuthenticated ? (
+            <>
+              <button onClick={() => navigateTo('/account/profile')}>
+                <PersonIcon />
+              </button>
+              <button className={cls.signOutBtn} onClick={handleSignOut}>
+                Вийти
+              </button>
+            </>
+          ) : (
+            <button className={cls.signInBtn} onClick={openAuth}>
+              Увійти
+            </button>
+          )}
+        </div>
 
-      {isCartOpen && <Cart onClose={closeCart} />}
-      <AuthModal isOpened={isAuthOpen} close={closeAuth} overlay="on" />
-    </div>
+        {isCartOpen && <Cart onClose={closeCart} />}
+        <AuthModal isOpened={isAuthOpen} close={closeAuth} overlay="on" />
+      </div>
+    </header>
   )
 }
