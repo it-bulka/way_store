@@ -39,6 +39,7 @@ export const RangeSlider: FC<RangeProps> = ({
     onMinRangeChange,
     onMaxRangeChange,
     showTooltip,
+    hideTooltip,
     onStopSliding,
     refreshMinVal,
     refreshMaxVal,
@@ -48,21 +49,21 @@ export const RangeSlider: FC<RangeProps> = ({
     <div className={classnames(cls.rangeSlider, [className])}>
       <div className={cls.labels}>
         <label className={cls.label}>
-          <span>р.</span>
+          <span>грн.</span>
           <input
             type="number"
-            min="1000"
-            max="500000"
+            min={min}
+            max={max}
             onChange={onMinRangeChange}
             value={minValue}
           />
         </label>
         <label className={cls.label}>
-          <span>р.</span>
+          <span>грн.</span>
           <input
             type="number"
-            min="1000"
-            max="500000"
+            min={min}
+            max={max}
             onChange={onMaxRangeChange}
             value={maxValue}
           />
@@ -77,25 +78,25 @@ export const RangeSlider: FC<RangeProps> = ({
         <div className={cls.rangeInput}>
           <input
             type="range"
-            min="1000"
-            max="500000"
+            min={min}
+            max={max}
             onChange={onMinRangeChange}
             value={minRange}
             onMouseEnter={showTooltip('min')}
-            onMouseLeave={onStopSliding()}
-            onMouseUp={refreshMinVal}
+            onMouseLeave={hideTooltip}
+            onMouseUp={onStopSliding(refreshMinVal)}
             onTouchStart={showTooltip('min')}
             onTouchEnd={onStopSliding(refreshMinVal)}
           />
           <input
             type="range"
-            min="1000"
-            max="500000"
+            min={min}
+            max={max}
             onChange={onMaxRangeChange}
             value={maxRange}
             onMouseEnter={showTooltip('max')}
-            onMouseLeave={onStopSliding()}
-            onMouseUp={refreshMaxVal}
+            onMouseLeave={hideTooltip}
+            onMouseUp={onStopSliding(refreshMaxVal)}
             onTouchStart={showTooltip('max')}
             onTouchEnd={onStopSliding(refreshMaxVal)}
           />
