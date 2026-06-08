@@ -30,6 +30,7 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     chosenProductType,
     collection,
     queries,
+    clientSideFilters,
     onMetalsChecked,
     onStonesChecked,
     onProductChecked,
@@ -39,13 +40,16 @@ export const Products: FC<ProductsProps> = ({ className }) => {
 
   const { loading, loadingMore, hasMore, loadMore } = useProductPagination({ collection, queries })
 
-  const visibleProducts = useMemo(
-    () =>
-      searchQuery
-        ? products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        : products,
-    [products, searchQuery]
-  )
+  const visibleProducts = useMemo(() => {
+    let result = products
+    if (searchQuery) {
+      result = result.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    }
+    if (clientSideFilters.stones?.length) {
+      result = result.filter(p => p.stones.some(s => clientSideFilters.stones!.includes(s)))
+    }
+    return result
+  }, [products, searchQuery, clientSideFilters])
 
   const handleReset = useCallback(() => {
     resetFilters()
@@ -76,8 +80,9 @@ export const Products: FC<ProductsProps> = ({ className }) => {
             <RangeSlider
               getRange={getRange}
               min={1000}
-              max={500000}
-              maxPossible={500000}
+              max={46000}
+              maxPossible={46000}
+              rangeGap={3000}
               reset={!priceFilter}
             />
           </div>

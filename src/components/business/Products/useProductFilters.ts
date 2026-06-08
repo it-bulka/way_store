@@ -31,24 +31,37 @@ function resetArr<T extends GoodsDropdownType>(arr: T): T {
   return arr.map(item => ({ ...item, chosen: false })) as T
 }
 
+type ClientSideFilters = { stones?: StoneType[] }
+
+// Firestore allows only ONE array-contains-any per query.
+// Priority: metal > stones. When both are active, stones falls back to client-side.
 function buildQueryConstraints(fc: IFilters): QueryFieldFilterConstraint[] | undefined {
   const filters: QueryFieldFilterConstraint[] = []
 
-  if (fc.metal?.length) filters.push(where('metal', 'array-contains-any', fc.metal))
-  if (fc.stones?.length) filters.push(where('stones', 'array-contains-any', fc.stones))
+  if (fc.metal?.length) {
+    filters.push(where('metal', 'array-contains-any', fc.metal))
+  } else if (fc.stones?.length) {
+    filters.push(where('stones', 'array-contains-any', fc.stones))
+  }
 
   if (fc.price) {
-    filters.push(where('price', '>=', fc.price.min))
-    filters.push(where('price', '<=', fc.price.max))
+    filters.push(where('price.amount', '>=', fc.price.min))
+    filters.push(where('price.amount', '<=', fc.price.max))
   }
 
   return filters.length ? filters : undefined
+}
+
+function buildClientSideFilters(fc: IFilters): ClientSideFilters {
+  if (fc.metal?.length && fc.stones?.length) return { stones: fc.stones }
+  return {}
 }
 
 export const useProductFilters = () => {
   const dispatch = useAppDispatch()
   const filterCategories = useAppSelector(getFilterCategories)
   const firstRenderRef = useRef(true)
+  const priceDebounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const [metals, setMetals] = useState(() =>
     metalsOptions.map(opt => ({ ...opt, chosen: (filterCategories.metal ?? []).includes(opt.label as MetalsType) }))
@@ -81,7 +94,10 @@ export const useProductFilters = () => {
     []
   )
 
-  const getRange: IGetRange = useCallback((min, max) => setPriceFilter({ min, max }), [])
+  const getRange: IGetRange = useCallback((min, max) => {
+    clearTimeout(priceDebounceRef.current)
+    priceDebounceRef.current = setTimeout(() => setPriceFilter({ min, max }), 400)
+  }, [])
 
   const resetFilters = useCallback(() => {
     setMetals(prev => resetArr(prev))
@@ -95,32 +111,27 @@ export const useProductFilters = () => {
     [productType]
   )
 
-  const queries = useMemo(
-    () =>
-      buildQueryConstraints({
-        metal: getChosenCategory<MetalsType>(metals),
-        stones: getChosenCategory<StoneType>(stones),
-        product: getChosenCategory<ProductType>(productType),
-        price: priceFilter ?? undefined,
-      }),
+  const activeFilters = useMemo<IFilters>(
+    () => ({
+      metal: getChosenCategory<MetalsType>(metals),
+      stones: getChosenCategory<StoneType>(stones),
+      product: getChosenCategory<ProductType>(productType),
+      price: priceFilter ?? undefined,
+    }),
     [metals, stones, productType, priceFilter]
   )
+
+  const queries = useMemo(() => buildQueryConstraints(activeFilters), [activeFilters])
+
+  const clientSideFilters = useMemo(() => buildClientSideFilters(activeFilters), [activeFilters])
 
   useEffect(() => {
     firstRenderRef.current = false
   }, [])
 
   useEffect(() => {
-    if (!firstRenderRef.current) {
-      const filters: IFilters = {
-        metal: getChosenCategory<MetalsType>(metals),
-        stones: getChosenCategory<StoneType>(stones),
-        product: getChosenCategory<ProductType>(productType),
-      }
-      if (priceFilter) filters.price = priceFilter
-      dispatch(FilterActions.addCategory(filters))
-    }
-  }, [dispatch, metals, stones, productType, priceFilter])
+    if (!firstRenderRef.current) dispatch(FilterActions.addCategory(activeFilters))
+  }, [dispatch, activeFilters])
 
   return {
     metals,
@@ -130,6 +141,7 @@ export const useProductFilters = () => {
     chosenProductType,
     collection: chosenProductType,
     queries,
+    clientSideFilters,
     onMetalsChecked,
     onStonesChecked,
     onProductChecked,
