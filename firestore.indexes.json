@@ -1,0 +1,133 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "rings",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "rings",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "necklaces",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "necklaces",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "bracelets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "bracelets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "earrings",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "earrings",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "pendants",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "pendants",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "watches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "watches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cufflinks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cufflinks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "chains",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "metal", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "chains",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "stones", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "price.amount", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
