@@ -56,29 +56,31 @@ export const Products: FC<ProductsProps> = ({ className }) => {
 
   return (
     <div className={classnames(cls.products, [className])}>
-      <BreadCrumbs />
-      {searchQuery && (
-        <div className={cls.searchInfo}>
-          <span>Пошук: «{searchQuery}»</span>
-          <button type="button" className={cls.clearSearch} onClick={clearSearch}>
-            Скинути пошук
-          </button>
-        </div>
-      )}
-      <div className={cls.filters}>
-        <div className={cls.dropdowns}>
-          <Dropdown title="ВИРІБ" options={productType} onChangeChecked={onProductChecked} />
-          <Dropdown title="МЕТАЛ" options={metals} onChangeChecked={onMetalsChecked} />
-          <Dropdown title="КАМІННЯ" options={stones} onChangeChecked={onStonesChecked} />
-        </div>
-        <div className={cls.slider}>
-          <RangeSlider
-            getRange={getRange}
-            min={1000}
-            max={500000}
-            maxPossible={500000}
-            reset={!priceFilter}
-          />
+      <div className={cls.controls}>
+        <BreadCrumbs />
+        {searchQuery && (
+          <div className={cls.searchInfo}>
+            <span>Пошук: «{searchQuery}»</span>
+            <button type="button" className={cls.clearSearch} onClick={clearSearch}>
+              Скинути пошук
+            </button>
+          </div>
+        )}
+        <div className={cls.filters}>
+          <div className={cls.dropdowns}>
+            <Dropdown title="ВИРІБ" options={productType} onChangeChecked={onProductChecked} />
+            <Dropdown title="МЕТАЛ" options={metals} onChangeChecked={onMetalsChecked} />
+            <Dropdown title="КАМІННЯ" options={stones} onChangeChecked={onStonesChecked} />
+          </div>
+          <div className={cls.slider}>
+            <RangeSlider
+              getRange={getRange}
+              min={1000}
+              max={500000}
+              maxPossible={500000}
+              reset={!priceFilter}
+            />
+          </div>
         </div>
       </div>
       {!visibleProducts.length && !loading ? (

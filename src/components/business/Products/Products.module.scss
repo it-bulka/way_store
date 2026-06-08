@@ -1,6 +1,13 @@
 @use 'sass:math';
 
 .products {
+  .controls {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 99;
+    background-color: $grey_bg;
+  }
+
   .searchInfo {
     display: flex;
     align-items: center;
