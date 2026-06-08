@@ -1,6 +1,10 @@
 @import 'fonts';
 @import 'reset';
 
+:root {
+  --header-height: 98px;
+}
+
 html, body {
   font-family: $font_normal;
   font-style: normal;
