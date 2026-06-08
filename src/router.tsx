@@ -30,6 +30,7 @@ import {
 import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
 import { colGallery, colInfo, colTitle } from '@/data/collection'
 import { goodsLoader } from '@/pages/Goods/goodsLoader'
+import { GoodsError } from '@/pages/Goods/GoodsError'
 import { orderLoader } from '@/pages/Account/OrderDetail/OrderDetail'
 
 export const router = createBrowserRouter(
@@ -39,7 +40,7 @@ export const router = createBrowserRouter(
 
       <Route element={<Layout />}>
         <Route path="store" element={<Store />}>
-          <Route path=":slug" element={<Goods />} loader={goodsLoader} />
+          <Route path=":slug" element={<Goods />} loader={goodsLoader} errorElement={<GoodsError />} />
         </Route>
         <Route path="goods" element={<Goods />} />
 
