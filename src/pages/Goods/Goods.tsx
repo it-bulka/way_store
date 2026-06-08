@@ -8,6 +8,7 @@ import { RelatedProducts } from './RelatedProducts'
 import { useGoods } from './useGoods'
 import { useLoaderData } from 'react-router-dom'
 import type { IProduct } from '@/models/goodsType'
+import { PRODUCT_TYPE_LABELS } from '@/models/goodsType'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const Goods = () => {
@@ -36,12 +37,12 @@ const Goods = () => {
       <PageMeta
         title={prod.name}
         description={`${prod.name} — ${prod.material}, ${prod.price.amount} ${prod.price.currency}`}
-        ogImage={prod.images.white?.[0]}
+        ogImage={prod.images?.white?.[0]}
       />
       <BreadCrumbs lastLabel={prod.name} />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">
-          Каблучки
+          {PRODUCT_TYPE_LABELS[prod.category]}
         </Typography>
         <PrevNextBtns
           onNextClick={onNextClick}
@@ -52,7 +53,7 @@ const Goods = () => {
       </div>
       <div className={cls.content}>
         <div className={cls.col1}>
-          <ImgTabs options={prod.images[color] || []} />
+          <ImgTabs options={prod.images?.[color] || []} />
         </div>
         <div className={cls.col2}>
           <GoodsControls

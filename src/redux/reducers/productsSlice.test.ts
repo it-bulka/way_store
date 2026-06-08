@@ -9,9 +9,12 @@ const base: IProductsSlice = { products: [], chosen: [], loading: false, error: 
 
 const mockProduct: IProduct = {
   id: 'p1',
+  category: 'rings',
   name: 'Gold Ring',
   prev: null,
   price: { amount: 500, currency: 'UAH' },
+  metal: ['gold'],
+  stones: [],
   material: 'gold',
   weight: { num: 3.5, measurement: 'г' },
   color: 'yellow',

@@ -11,7 +11,8 @@ import type { IProduct, ringsColors } from '@/models/goodsType'
 import type { ICartItem } from '@/redux/types/cartTypes'
 
 export const useGoods = (prod: IProduct) => {
-  const [color, setColor] = useState<ringsColors>('white')
+  const firstColor = (Object.keys(prod.images) as ringsColors[]).find(key => prod.images[key].length > 0) ?? 'white'
+  const [color, setColor] = useState<ringsColors>(firstColor)
   const [isChosen, setIsChosen] = useState(false)
   const [amount, setAmount] = useState(0)
   const [selectedSize, setSelectedSize] = useState<number | undefined>(undefined)

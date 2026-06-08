@@ -2,19 +2,14 @@ import { FC, useMemo } from 'react'
 import cls from './GoodsControls.module.scss'
 import { Button } from '@/components/ui/Button/Button'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
-import { ColorPicker, type IOption as IColorOption } from '@/components/ui/ColorPicker/ColorPicker'
+import { ColorPicker } from '@/components/ui/ColorPicker/ColorPicker'
 import { SizeSelector } from '@/components/ui/SizeSelector/SizeSelector'
 import { Accordion } from '@/components/ui/Accordion/Accordion'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import LikeIcon from '@/assets/general/heart.svg'
 import classNames from 'classnames'
 import type { IProduct, ringsColors } from '@/models/goodsType'
-
-const colors: IColorOption[] = [
-  { id: '1', color: '#D3D3D3', tag: 'white' },
-  { id: '2', color: '#C0BA97', tag: 'yellow' },
-  { id: '3', color: '#DBC5C5', tag: 'rose' },
-]
+import { COLOR_PALETTE, COLOR_LABELS, METAL_LABELS, STONE_LABELS, CARE_INSTRUCTIONS, DELIVERY_INFO } from '@/models/goodsType'
 
 interface GoodsControlsProps {
   prod: IProduct
@@ -45,33 +40,53 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
   onAddToBucketClick,
   onBuyClick,
 }) => {
+  const availableColors = useMemo(
+    () => (Object.keys(prod.images ?? {}) as ringsColors[])
+      .filter(key => prod.images?.[key]?.length > 0)
+      .map((tag, idx) => ({ id: String(idx + 1), tag, color: COLOR_PALETTE[tag] })),
+    [prod]
+  )
+
   const accordionItems = useMemo(
     () => [
       {
         id: '1',
         title: 'Деталі',
         content: (
-          <p>
-            Колір - {prod.color}, Вага - {prod.weight.num} {prod.weight.measurement}
-          </p>
+          <div>
+            <p>Матеріал: {prod.material}</p>
+            <p>Метал: {(prod.metal ?? []).map(m => METAL_LABELS[m]).join(', ')}</p>
+            {(prod.stones ?? []).length > 0 && (
+              <p>Камені: {(prod.stones ?? []).map(s => STONE_LABELS[s]).join(', ')}</p>
+            )}
+            <p>Вага: {prod.weight.num} {prod.weight.measurement}</p>
+          </div>
         ),
       },
       {
         id: '2',
         title: 'Таблиця розмірів',
-        content: <p>Колір - {prod.color}</p>,
+        content: prod.sizes?.length
+          ? <p>Доступні розміри: {prod.sizes.join(', ')}</p>
+          : <p>Розмір універсальний</p>,
       },
       {
         id: '3',
         title: 'Догляд за виробом',
-        content:
-          'LOrem LOremLOremvvLOremLOrem LOremLOremLOremLOremLOremLOr emLOremL OremLOremLOrem LOremLOr emvvLOremLOremLOremLOremLOremLOremLOremLOremLOremLOremLOremLOrem LOremLOremvvLOremLOremLOremLOremLOremLOremLOemLOremLOremLOremLOremLOremLOremLOremLOrem',
+        content: (
+          <div>
+            {(prod.metal ?? []).map(m => <p key={m}>{CARE_INSTRUCTIONS[m]}</p>)}
+          </div>
+        ),
       },
       {
         id: '4',
         title: 'Доставка та повернення',
-        content:
-          'emLOremLOremLOrem LOremLOremLOremLOremLOremLOrem LOremLOr emvvLOrem LOremLOremLOremLOremLOremLO remLOremLOremLOremLOrem',
+        content: (
+          <div>
+            {DELIVERY_INFO.split('\n\n').map((line, i) => <p key={i}>{line}</p>)}
+          </div>
+        ),
       },
     ],
     [prod]
@@ -106,7 +121,7 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
         </div>
       </div>
 
-      <ColorPicker options={colors} title={`Колір - ${color}`} onClick={onColorPick} />
+      <ColorPicker options={availableColors} title={`Колір - ${COLOR_LABELS[color]}`} onClick={onColorPick} />
 
       {!!prod.sizes?.length && (
         <SizeSelector sizes={prod.sizes} selected={selectedSize} onSelect={onSizeSelect} />
