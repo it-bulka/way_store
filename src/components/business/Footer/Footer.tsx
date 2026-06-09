@@ -2,12 +2,13 @@ import { AppLink } from '@/components/ui/AppLink/AppLink'
 import { SubscriptionModal } from '@/components/ui/SubscriptionModal/SubscriptionModal'
 import { useControlModal } from '@/hooks/useControlModal'
 import cls from './Footer.module.scss'
+import { APP_ROUTES } from '@/models'
 
 const nav = [
-  { id: '1', title: 'FAQ', path: 'faq' },
-  { id: '2', title: 'Політика конфіденційності', path: 'faq' },
-  { id: '3', title: 'Публічна оферта', path: 'faq' },
-  { id: '4', title: 'Instagram', path: 'faq' },
+  { id: '1', title: 'FAQ',                       path: APP_ROUTES.FAQ },
+  { id: '2', title: 'Політика конфіденційності',  path: APP_ROUTES.PRIVACY },
+  { id: '3', title: 'Публічна оферта',            path: APP_ROUTES.OFFER },
+  { id: '4', title: 'Instagram',                  path: 'faq' },
 ]
 
 export const Footer = () => {
