@@ -37,10 +37,7 @@ export const SearchBar: FC<SearchBarProps> = ({ className, value, onChange, onSe
         <button
           type="button"
           className={cls.clearBtn}
-          onClick={() => {
-            onChange('')
-            onSearch('')
-          }}
+          onClick={() => onChange('')}
           aria-label="Скинути пошук"
         >
           ×
