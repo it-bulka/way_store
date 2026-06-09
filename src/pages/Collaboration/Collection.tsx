@@ -1,22 +1,30 @@
-//import { type FC } from 'react'
 import cls from './Collection.module.scss'
 import classnames from 'classnames'
 import { Header } from '@/components/business/Header/Header'
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
-//import { ProductsList } from '@/components/business/ProductsList/ProductsList'
-//import { products } from '@/data/products'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Footer } from '@/components/business/Footer/Footer'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
+import { useNavigate } from 'react-router-dom'
+import { APP_ROUTES } from '@/models'
+
+interface GalleryItem {
+  id: string
+  img: string
+  alt: string
+  productId?: string
+  productCategory?: string
+}
 
 interface CollectionProps {
   className?: string
   title: string
   info: string
-  gallery: { img: string; alt: string; id: string }[]
+  gallery: GalleryItem[]
   heroImage?: string
 }
 const Collection = ({ className, title, info, gallery, heroImage }: CollectionProps) => {
+  const navigate = useNavigate()
   return (
     <div className={classnames(cls.collection, {}, [className])}>
       <PageMeta
@@ -39,13 +47,15 @@ const Collection = ({ className, title, info, gallery, heroImage }: CollectionPr
             {title}
           </Typography>
           <Typography className={cls.text}>{info}</Typography>
-
-          {/*<ProductsList products={products} />*/}
         </section>
 
         <section className={cls.gallery}>
-          {gallery.map(({ img, alt, id }) => (
-            <div key={id}>
+          {gallery.map(({ img, alt, id, productId, productCategory }) => (
+            <div
+              key={id}
+              className={classnames({ [cls.clickable]: !!productId })}
+              onClick={() => productId && navigate(APP_ROUTES.GOODS_DETAIL(productId, productCategory))}
+            >
               <img src={img} alt={alt} loading="lazy" />
             </div>
           ))}
