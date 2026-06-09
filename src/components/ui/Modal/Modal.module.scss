@@ -13,11 +13,11 @@
   height: 100%;
   position: relative;
 
-  .on {
+  &.on {
     background-color: $overlay-color;
   }
 
-  .off {
+  &.off {
     background-color: transparent;
   }
 }
@@ -31,6 +31,7 @@
   transition: transform 400ms ease-in-out;
   transform-origin: left;
   max-height: 90vh;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 .closeBtn {
   position: absolute;
