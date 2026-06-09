@@ -15,7 +15,7 @@ export const Footer = () => {
 
   return (
     <footer className={cls.footer}>
-      <div className={cls.content}>
+      <div className={`${cls.content} container`}>
         <nav>
           <ul className={cls.links}>
             {nav.map(({ id, title, path }) => (
