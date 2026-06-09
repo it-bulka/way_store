@@ -7,10 +7,13 @@ import { Loader } from '@/components/ui/Loader/Loader'
 import type { IProduct, ringsColors } from '@/models/goodsType'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '@/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { productsAction } from '@/redux/reducers/productsSlice'
 import { useToast } from '@/context/ToastContext'
+import { useControlModal } from '@/hooks/useControlModal'
+import { getIsAuthenticated } from '@/redux/selectors/getAuthSelector'
+import { NotAuthModal } from '@/components/ui/NotAuthModal/NotAuthModal'
 
 interface ProductsListProps {
   className?: string
@@ -39,6 +42,8 @@ export const ProductsList: FC<ProductsListProps> = memo(({
   const navigateTo = useNavigate()
   const dispatch = useAppDispatch()
   const { addToast } = useToast()
+  const isAuthenticated = useAppSelector(getIsAuthenticated)
+  const { isModalOpen, openModal, closeModal } = useControlModal(false)
 
   const onCardClick = useCallback(
     (id: string) => () => navigateTo(`/store/${id}`),
@@ -61,10 +66,14 @@ export const ProductsList: FC<ProductsListProps> = memo(({
 
   const onAddToFavorites = useCallback(
     (product: IProduct) => () => {
+      if (!isAuthenticated) {
+        openModal()
+        return
+      }
       dispatch(productsAction.addChosen(product))
       addToast('Додано до обраного', 'success')
     },
-    [dispatch, addToast]
+    [dispatch, addToast, isAuthenticated, openModal]
   )
 
   return (
@@ -94,6 +103,7 @@ export const ProductsList: FC<ProductsListProps> = memo(({
           )}
         </div>
       )}
+      <NotAuthModal isOpened={isModalOpen} close={closeModal} overlay="on" />
     </div>
   )
 })
