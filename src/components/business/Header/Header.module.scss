@@ -25,6 +25,17 @@
     }
   }
 
+  .burgerHolder {
+    display: none;
+
+    @include respond-to('mobile') {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+      padding: 0 1.5rem;
+    }
+  }
+
   .searchHolder {
     text-align: right;
   }
@@ -65,10 +76,17 @@
   }
 
   @include respond-to('mobile') {
+    position: relative;
     flex-wrap: wrap;
-    padding: 1.5rem 0;
+    justify-content: space-between;
+    padding: 1rem 0;
 
-    :global(.col-1) { flex: 1 1 auto; padding: 0 1.5rem; }
+    :global(.col-1) {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0;
+    }
     :global(.col-2) { flex: 0 0 100%; order: 3; padding: 0 1.5rem 1rem; }
     :global(.col-3) { flex: 0 0 auto; padding: 0 1.5rem; }
   }

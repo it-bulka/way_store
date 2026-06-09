@@ -5,6 +5,7 @@ import HeartIcon from '@/assets/general/heart.svg'
 import CartIcon from '@/assets/general/cart.svg'
 import PersonIcon from '@/assets/general/person.svg'
 import { SearchContainer } from '@/components/business/SearchContainer/SearchContainer'
+import { BurgerMenu } from '@/components/ui/BurgerMenu/BurgerMenu'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { Cart } from '@/components/ui/Cart/Cart'
@@ -58,6 +59,9 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <header className={cls.root} ref={headerRef}>
       <div className={classnames(cls.header, 'container ', [className])}>
+        <div className={cls.burgerHolder}>
+          <BurgerMenu />
+        </div>
         <div className={classnames(cls.logo, 'col-1')}>
           <LogoIcon />
         </div>
