@@ -1,3 +1,5 @@
+import type { ringsColors } from '@/models/goodsType'
+
 export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
 export type DeliveryType = 'ДО ДВЕРЕЙ' | 'ПУНКТ ВИДАЧІ'
@@ -11,6 +13,7 @@ export interface IOrderItem {
   price: number
   img: string
   size?: number
+  color?: ringsColors
 }
 
 export interface IOrder {
