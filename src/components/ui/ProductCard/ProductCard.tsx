@@ -10,6 +10,7 @@ interface ProductCardProps {
   onClick?: () => void
   onAddToCart?: () => void
   onAddToFavorites?: () => void
+  isChosen?: boolean
 }
 
 export const ProductCard: FC<ProductCardProps> = ({
@@ -20,6 +21,7 @@ export const ProductCard: FC<ProductCardProps> = ({
   onClick,
   onAddToCart,
   onAddToFavorites,
+  isChosen,
 }) => {
   const onKeyDown = useCallback(
     (e: KeyboardEvent<HTMLElement>) => {
@@ -57,7 +59,12 @@ export const ProductCard: FC<ProductCardProps> = ({
 
       <div className={cls.actions}>
         <button onClick={stopAndCall(onAddToCart)}>В кошик</button>
-        <button onClick={stopAndCall(onAddToFavorites)}>В обране</button>
+        <button
+          onClick={stopAndCall(onAddToFavorites)}
+          className={classnames({ [cls.chosenBtn]: isChosen })}
+        >
+          {isChosen ? 'З обраного' : 'В обране'}
+        </button>
       </div>
 
       <div className={cls.content}>

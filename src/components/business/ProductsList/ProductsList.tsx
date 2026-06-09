@@ -13,6 +13,7 @@ import { productsAction } from '@/redux/reducers/productsSlice'
 import { useToast } from '@/context/ToastContext'
 import { useControlModal } from '@/hooks/useControlModal'
 import { getIsAuthenticated } from '@/redux/selectors/getAuthSelector'
+import { getChosenProducts } from '@/redux/selectors/getChosenProducts'
 import { NotAuthModal } from '@/components/ui/NotAuthModal/NotAuthModal'
 
 interface ProductsListProps {
@@ -43,6 +44,8 @@ export const ProductsList: FC<ProductsListProps> = memo(({
   const dispatch = useAppDispatch()
   const { addToast } = useToast()
   const isAuthenticated = useAppSelector(getIsAuthenticated)
+  const chosen = useAppSelector(getChosenProducts)
+  const chosenIds = new Set(chosen.map(p => p.id))
   const { isModalOpen, openModal, closeModal } = useControlModal(false)
 
   const onCardClick = useCallback(
@@ -70,10 +73,15 @@ export const ProductsList: FC<ProductsListProps> = memo(({
         openModal()
         return
       }
-      dispatch(productsAction.addChosen(product))
-      addToast('Додано до обраного', 'success')
+      if (chosenIds.has(product.id)) {
+        dispatch(productsAction.deleteChosen(product.id))
+        addToast('Видалено з обраного', 'info')
+      } else {
+        dispatch(productsAction.addChosen(product))
+        addToast('Додано до обраного', 'success')
+      }
     },
-    [dispatch, addToast, isAuthenticated, openModal]
+    [dispatch, addToast, isAuthenticated, openModal, chosenIds]
   )
 
   return (
@@ -91,6 +99,7 @@ export const ProductsList: FC<ProductsListProps> = memo(({
                 onClick={onCardClick(product.id)}
                 onAddToCart={onAddToCart(product)}
                 onAddToFavorites={onAddToFavorites(product)}
+                isChosen={chosenIds.has(product.id)}
               />
             ))}
       </div>
