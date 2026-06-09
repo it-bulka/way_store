@@ -4,6 +4,7 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 import { Button } from '@/components/ui/Button/Button'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
+import { APP_ROUTES } from '@/models'
 
 interface CollabCardProps {
   className?: string
@@ -32,7 +33,7 @@ export const CollabCard: FC<CollabCardProps> = ({ className, id, img, title, con
         ) : (
           <Typography>{content}</Typography>
         )}
-        <Button title="продолжить" className={cls.btn} onClick={() => navigateTo(id)} />
+        <Button title="продовжити" className={cls.btn} onClick={() => navigateTo(APP_ROUTES.COLLABORATION_DETAIL(id))} />
       </div>
     </div>
   )
