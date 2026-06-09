@@ -13,4 +13,10 @@ const safeSet = <T>(key: string, value: T): void => {
   } catch {}
 }
 
-export const storage = { get: safeGet, set: safeSet }
+const safeRemove = (key: string): void => {
+  try {
+    localStorage.removeItem(key)
+  } catch {}
+}
+
+export const storage = { get: safeGet, set: safeSet, remove: safeRemove }

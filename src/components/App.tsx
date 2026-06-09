@@ -4,6 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/base/firebase'
 import { useAppDispatch } from '@/hooks/reduxHooks'
 import { setUser, clearUser, setInitialized } from '@/redux/reducers/authSlice'
+import { syncCartOnLogin, restoreGuestCart } from '@/redux/async/syncCart'
 import { ToastProvider } from '@/context/ToastContext'
 import { ToastContainer } from '@/components/ui/ToastContainer/ToastContainer'
 
@@ -14,8 +15,10 @@ function AuthListener() {
     const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
         dispatch(setUser({ uid: user.uid, email: user.email }))
+        dispatch(syncCartOnLogin(user.uid))
       } else {
         dispatch(clearUser())
+        dispatch(restoreGuestCart())
       }
       dispatch(setInitialized())
     })

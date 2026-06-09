@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { cartItems } from '@/data/cartItems'
 import type { ICart, ICartItem } from '@/redux/types/cartTypes'
 import type { ringsColors } from '@/models/goodsType'
 import { storage } from '@/utils/storage'
+import { syncCartOnLogin, restoreGuestCart } from '@/redux/async/syncCart'
 
 const initialState: ICart = {
-  items: storage.get<ICartItem[]>('cart') ?? cartItems,
+  items: storage.get<ICartItem[]>('cart_guest') ?? [],
 }
 
 type VariantTarget = { id: string; color?: ringsColors; size?: number }
@@ -71,6 +71,19 @@ const cartSlice = createSlice({
     clearCart: (state: ICart) => {
       state.items = []
     },
+
+    replaceCart: (state, action: PayloadAction<ICartItem[]>) => {
+      state.items = action.payload
+    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(syncCartOnLogin.fulfilled, (state, action) => {
+        state.items = action.payload
+      })
+      .addCase(restoreGuestCart.fulfilled, (state, action) => {
+        state.items = action.payload
+      })
   },
 })
 

@@ -11,7 +11,9 @@ localStorageMiddleware.startListening({
   predicate: action => (action.type as string).startsWith('cart/'),
   effect: (_, { getState }) => {
     const state = getState() as RootState
-    storage.set('cart', state.cart.items)
+    const uid = state.auth.uid
+    const key = uid ? `cart_${uid}` : 'cart_guest'
+    storage.set(key, state.cart.items)
   },
 })
 
