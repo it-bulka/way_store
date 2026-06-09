@@ -3,7 +3,7 @@ $section_width: 872;
 .collection {
   .firstBlock {
     @include bg-img('@/assets/collaboration/collab-bg-1.jpg');
-    min-height: 100vh;
+    min-height: 50vh;
   }
 
   .container {
