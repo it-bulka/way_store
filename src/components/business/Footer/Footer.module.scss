@@ -8,7 +8,9 @@
 
   .links {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem 3rem;
   }
 
   .subscribeBtn {
