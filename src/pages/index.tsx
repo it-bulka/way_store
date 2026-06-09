@@ -16,6 +16,7 @@ const Collaborations = lazy(() => import('./Collaborations/Collaborations'))
 const Collection = lazy(() => import('./Collaboration/Collection'))
 const CollaborationDetail = lazy(() => import('./Collaboration/CollaborationDetail'))
 const Collections = lazy(() => import('./Collections/Collections'))
+const CollectionDetail = lazy(() => import('./Collections/CollectionDetail'))
 const About = lazy(() => import('./About/About'))
 const NotFound = lazy(() => import('./NotFound/NotFound'))
 const Privacy = lazy(() => import('./Privacy/Privacy'))
@@ -35,6 +36,7 @@ export {
   ChosenGoods,
   Collaborations,
   Collections,
+  CollectionDetail,
   Collection,
   CollaborationDetail,
   About,

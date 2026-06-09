@@ -13,8 +13,8 @@ export const Collections = () => {
   return (
     <Layout>
       <PageMeta title="Колекції" />
-      {collections?.map(({ id, title, data, images }) => (
-        <CollectionInfo title={title} data={data} images={images} key={id} id={id} />
+      {collections?.map(({ id, title, content, images }) => (
+        <CollectionInfo title={title} content={content} images={images} key={id} id={id} />
       ))}
     </Layout>
   )
