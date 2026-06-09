@@ -25,18 +25,18 @@ export const useGoods = (prod: IProduct) => {
 
   const hasRequiredSize = !prod?.sizes?.length || selectedSize !== undefined
 
-  const buildCartItem = (): ICartItem => ({
+  const buildCartItem = useCallback((): ICartItem => ({
     id: prod.id,
     title: prod.name,
     amount,
     price: prod.price.amount,
     img: prod.images[color][0],
     size: selectedSize,
-  })
+  }), [prod, amount, color, selectedSize])
 
   const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [navigate])
 
-  const onLikeClick = () => {
+  const onLikeClick = useCallback(() => {
     if (isChosen) {
       dispatch(productsAction.deleteChosen(prod.id))
       addToast('Видалено з обраного', 'info')
@@ -45,23 +45,23 @@ export const useGoods = (prod: IProduct) => {
       addToast('Додано до обраного', 'success')
     }
     setIsChosen(prev => !prev)
-  }
+  }, [isChosen, dispatch, prod, addToast])
 
-  const pickColor = (colorTag: ringsColors) => setColor(colorTag)
+  const pickColor = useCallback((colorTag: ringsColors) => setColor(colorTag), [])
 
-  const onAmountChange = (n: number) => setAmount(n)
+  const onAmountChange = useCallback((n: number) => setAmount(n), [])
 
-  const onSizeSelect = (size: number) => setSelectedSize(size)
+  const onSizeSelect = useCallback((size: number) => setSelectedSize(size), [])
 
-  const onAddToBucketClick = () => {
+  const onAddToBucketClick = useCallback(() => {
     dispatch(cartActions.addItem(buildCartItem()))
     addToast('Додано до кошика', 'success')
-  }
+  }, [buildCartItem, dispatch, addToast])
 
-  const onBuyClick = () => {
+  const onBuyClick = useCallback(() => {
     dispatch(cartActions.addItem(buildCartItem()))
     navigate('/checkout')
-  }
+  }, [buildCartItem, dispatch, navigate])
 
   const onNextClick = useCallback(async () => {
     const nextProd = await getNextDoc({
