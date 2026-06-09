@@ -52,4 +52,50 @@ $viewport_width: 1440;
     font-size: 0.65rem;
     margin-top: 0.5rem;
   }
+
+  .divider {
+    @include flex;
+    gap: 0.6rem;
+    margin: 1.2rem 0 0.8rem;
+    color: $grey_2;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $grey_4;
+    }
+  }
+
+  .googleBtn {
+    @include flex;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: $border_width solid $grey_4;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 1rem;
+
+    &:hover {
+      border-color: $grey_2;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }

@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { signIn } from '@/redux/async/signIn'
 import { signUp } from '@/redux/async/signUp'
 import { signOutUser } from '@/redux/async/signOutUser'
+import { signInWithGoogle } from '@/redux/async/signInWithGoogle'
 
 interface AuthState {
   uid: string | null
@@ -70,6 +71,20 @@ const authSlice = createSlice({
         state.uid = null
         state.email = null
         state.isAuthenticated = false
+      })
+      .addCase(signInWithGoogle.pending, state => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(signInWithGoogle.fulfilled, (state, action) => {
+        state.loading = false
+        state.uid = action.payload.uid
+        state.email = action.payload.email
+        state.isAuthenticated = true
+      })
+      .addCase(signInWithGoogle.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload as string
       })
   },
 })
