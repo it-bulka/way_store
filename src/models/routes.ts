@@ -1,7 +1,8 @@
 export const APP_ROUTES = {
   HOME: '/',
   STORE: '/store',
-  GOODS_DETAIL: (id: string) => `/store/${id}`,
+  GOODS_DETAIL: (id: string, category?: string) =>
+    category ? `/store/${id}?category=${category}` : `/store/${id}`,
   FAQ: '/faq',
   FAQ_QUESTIONS: '/faq/questions',
   FAQ_DELIVERY: '/faq/delivery',
@@ -17,6 +18,7 @@ export const APP_ROUTES = {
   CHECKOUT: '/checkout',
   CHECKOUT_SUCCESS: '/checkout/success',
   COLLECTIONS: '/collections',
+  COLLECTION_DETAIL: (id: string) => `/collections/${id}`,
   COLLABORATIONS: '/collaborations',
   COLLABORATION_DETAIL: (id: string) => `/collaborations/${id}`,
 } as const

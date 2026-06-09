@@ -95,4 +95,5 @@ export interface IProduct extends IRing {
   id: string
   category: ProductType
   sizes?: number[]
+  collectionId?: string
 }
