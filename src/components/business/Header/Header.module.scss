@@ -2,7 +2,12 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: $grey_bg;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+
+  &.scrolled {
+    background-color: $grey_bg;
+  }
 }
 
 .header {

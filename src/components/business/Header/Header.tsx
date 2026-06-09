@@ -1,4 +1,5 @@
 import { type FC, useRef, useEffect } from 'react'
+import { useIsScrolled } from '@/hooks/useIsScrolled'
 import cls from './Header.module.scss'
 import LogoIcon from '@/assets/logo/logo.svg'
 import HeartIcon from '@/assets/general/heart.svg'
@@ -16,6 +17,7 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = ({ className }) => {
   const navigateTo = useNavigate()
   const headerRef = useRef<HTMLElement>(null)
+  const isScrolled = useIsScrolled()
 
   useEffect(() => {
     const el = headerRef.current
@@ -28,7 +30,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   }, [])
 
   return (
-    <header className={cls.root} ref={headerRef}>
+    <header className={classnames(cls.root, { [cls.scrolled]: isScrolled })} ref={headerRef}>
       <div className={classnames(cls.header, 'container ', [className])}>
         <div className={cls.burgerHolder}>
           <BurgerMenu />
