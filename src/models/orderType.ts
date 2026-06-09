@@ -2,6 +2,8 @@ export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | '
 
 export type DeliveryType = 'ДО ДВЕРЕЙ' | 'ПУНКТ ВИДАЧІ'
 
+export type PaymentType = 'ОНЛАЙН' | 'ПРИ ОТРИМАННІ'
+
 export interface IOrderItem {
   id: string
   title: string
@@ -18,6 +20,8 @@ export interface IOrder {
   status: OrderStatus
   items: IOrderItem[]
   deliveryType: DeliveryType
+  paymentType: PaymentType
+  recipient: { name: string; phone: string }
   tracking?: string
   address: {
     city: string

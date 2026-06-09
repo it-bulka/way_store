@@ -8,6 +8,8 @@ export const mockOrders: IOrder[] = [
     date: new Date(2024, 2, 15),
     status: 'delivered',
     deliveryType: 'ДО ДВЕРЕЙ',
+    paymentType: 'ОНЛАЙН',
+    recipient: { name: 'Іванenko Іван Іванович', phone: '+380671234567' },
     tracking: '59000482850821',
     address: {
       city: 'Київ',
@@ -39,6 +41,8 @@ export const mockOrders: IOrder[] = [
     date: new Date(2024, 5, 20),
     status: 'cancelled',
     deliveryType: 'ПУНКТ ВИДАЧІ',
+    paymentType: 'ПРИ ОТРИМАННІ',
+    recipient: { name: 'Петренко Петро Петрович', phone: '+380501234567' },
     address: {
       city: 'Львів',
       street: 'Сагайдачного',

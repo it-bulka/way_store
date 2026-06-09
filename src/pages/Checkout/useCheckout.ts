@@ -9,7 +9,7 @@ import { createOrder } from '@/redux/async/createOrder'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { checkoutSchema, pickupSchema } from './schema'
 import type { ICheckoutFormValues, IPickupFormValues } from './schema'
-import type { DeliveryType, IOrder, IOrderItem } from '@/models/orderType'
+import type { DeliveryType, IOrder, IOrderItem, PaymentType } from '@/models/orderType'
 import { useWayforpay } from '@/hooks/useWayforpay'
 import { useToast } from '@/context/ToastContext'
 
@@ -19,13 +19,16 @@ export const useCheckout = () => {
   const items = useAppSelector(getCartItems)
   const user = useAppSelector(getUserSelector)
   const [delivery, setDelivery] = useState<DeliveryType>('ДО ДВЕРЕЙ')
+  const [payment, setPayment] = useState<PaymentType>('ОНЛАЙН')
   const [isPaying, setIsPaying] = useState(false)
-  const { pay } = useWayforpay()
+  const { pay, isReady } = useWayforpay()
   const { addToast } = useToast()
 
   const doorForm = useForm<ICheckoutFormValues>({
     resolver: yupResolver(checkoutSchema),
     defaultValues: {
+      name: user?.name ?? '',
+      phone: user?.phone ?? '',
       city: user?.address.city ?? '',
       street: user?.address.street ?? '',
       home: user?.address.home?.toString() ?? '',
@@ -35,7 +38,14 @@ export const useCheckout = () => {
 
   const pickupForm = useForm<IPickupFormValues>({
     resolver: yupResolver(pickupSchema),
-    defaultValues: { cityName: '', cityRef: '', warehouseRef: '', warehouseAddress: '' },
+    defaultValues: {
+      name: user?.name ?? '',
+      phone: user?.phone ?? '',
+      cityName: '',
+      cityRef: '',
+      warehouseRef: '',
+      warehouseAddress: '',
+    },
   })
 
   const onDeleteItem = useCallback(
@@ -54,7 +64,7 @@ export const useCheckout = () => {
   const onBack = useCallback(() => navigateTo('/store'), [navigateTo])
 
   const submitOrder = useCallback(
-    async (address: IOrder['address']) => {
+    async (address: IOrder['address'], name: string, phone: string) => {
       const orderNumber = crypto.randomUUID().slice(0, 8).toUpperCase()
       const orderItems: IOrderItem[] = items.map(item => ({
         id: item.id,
@@ -71,18 +81,33 @@ export const useCheckout = () => {
           date: new Date(),
           status: 'pending',
           deliveryType: delivery,
+          paymentType: payment,
+          recipient: { name, phone },
           items: orderItems,
           address,
         })
       )
-      if (!createOrder.fulfilled.match(result)) return
+      if (!createOrder.fulfilled.match(result)) {
+        addToast('Помилка при створенні замовлення', 'error')
+        return
+      }
+
+      if (payment === 'ПРИ ОТРИМАННІ') {
+        navigateTo('/checkout/success', { state: { orderNumber } })
+        return
+      }
+
+      if (!isReady) {
+        addToast('Платіжний сервіс недоступний. Спробуйте ще раз.', 'error')
+        return
+      }
 
       setIsPaying(true)
       pay({
         orderReference: orderNumber,
         items,
-        clientFirstName: user?.name,
-        clientPhone: user?.phone,
+        clientFirstName: name,
+        clientPhone: phone,
         onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
         onDeclined: () => {
           setIsPaying(false)
@@ -90,30 +115,33 @@ export const useCheckout = () => {
         },
       })
     },
-    [items, delivery, dispatch, user, navigateTo, pay, addToast]
+    [items, delivery, payment, isReady, dispatch, navigateTo, pay, addToast]
   )
 
   const onDoorSubmit = useCallback<SubmitHandler<ICheckoutFormValues>>(
     data =>
-      submitOrder({
-        city: data.city,
-        street: data.street,
-        home: Number(data.home),
-        apartment: data.apartment,
-      }),
+      submitOrder(
+        { city: data.city, street: data.street, home: Number(data.home), apartment: data.apartment },
+        data.name,
+        data.phone
+      ),
     [submitOrder]
   )
 
   const onPickupSubmit = useCallback<SubmitHandler<IPickupFormValues>>(
     data =>
-      submitOrder({
-        city: data.cityName,
-        street: data.warehouseAddress,
-        home: 0,
-        apartment: '',
-        warehouseRef: data.warehouseRef,
-        warehouseAddress: data.warehouseAddress,
-      }),
+      submitOrder(
+        {
+          city: data.cityName,
+          street: data.warehouseAddress,
+          home: 0,
+          apartment: '',
+          warehouseRef: data.warehouseRef,
+          warehouseAddress: data.warehouseAddress,
+        },
+        data.name,
+        data.phone
+      ),
     [submitOrder]
   )
 
@@ -121,6 +149,8 @@ export const useCheckout = () => {
     items,
     delivery,
     setDelivery,
+    payment,
+    setPayment,
     doorForm,
     pickupForm,
     onDoorSubmit,

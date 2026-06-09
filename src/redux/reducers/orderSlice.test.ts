@@ -12,6 +12,8 @@ const mockOrder: IOrder = {
   status: 'pending',
   items: [{ id: 'i1', title: 'Ring', amount: 1, price: 500, img: '' }],
   deliveryType: 'ДО ДВЕРЕЙ',
+  paymentType: 'ОНЛАЙН',
+  recipient: { name: 'Test User', phone: '+380671234567' },
   address: { city: 'Kyiv', street: 'Main', home: 1, apartment: '1' },
 }
 
@@ -21,6 +23,8 @@ const orderArg: Omit<IOrder, 'id'> = {
   status: 'pending',
   items: [{ id: 'i1', title: 'Ring', amount: 1, price: 500, img: '' }],
   deliveryType: 'ДО ДВЕРЕЙ',
+  paymentType: 'ОНЛАЙН',
+  recipient: { name: 'Test User', phone: '+380671234567' },
   address: { city: 'Kyiv', street: 'Main', home: 1, apartment: '1' },
 }
 
