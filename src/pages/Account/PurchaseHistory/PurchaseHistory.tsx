@@ -1,10 +1,12 @@
-import { type FC } from 'react'
+import { type FC, useEffect } from 'react'
 import cls from './PurchaseHistory.module.scss'
 import { Table, type IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import { mockOrders } from '@/data/orders'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { getOrders, getOrdersLoading } from '@/redux/selectors/getOrdersSelector'
+import { fetchOrders } from '@/redux/async/fetchOrders'
 import type { OrderStatus } from '@/models/orderType'
 
 const statusEnMap: Record<OrderStatus, string> = {
@@ -23,19 +25,6 @@ const statusLabelMap: Record<OrderStatus, string> = {
   shipped: 'В ДОРОЗІ',
 }
 
-const tableData: IGoods[] = mockOrders.map(order => ({
-  id: order.id,
-  title: order.items[0]?.title ?? '—',
-  price: order.items.reduce((sum, item) => sum + item.price * item.amount, 0),
-  data: order.date,
-  order: order.orderNumber,
-  delivery: {
-    type: order.deliveryType,
-    statusEn: statusEnMap[order.status],
-    status: statusLabelMap[order.status],
-  },
-}))
-
 const columns = [
   { header: "ІМ'Я", accessorKey: 'name' },
   { header: 'ЦІНА', accessorKey: 'price' },
@@ -51,10 +40,30 @@ interface PurchaseHistoryProps {
 
 const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const orders = useAppSelector(getOrders)
+  const loading = useAppSelector(getOrdersLoading)
+
+  useEffect(() => {
+    dispatch(fetchOrders())
+  }, [dispatch])
+
+  const tableData: IGoods[] = orders.map(order => ({
+    id: order.id,
+    title: order.items[0]?.title ?? '—',
+    price: order.items.reduce((sum, item) => sum + item.price * item.amount, 0),
+    data: order.date,
+    order: order.orderNumber,
+    delivery: {
+      type: order.deliveryType,
+      statusEn: statusEnMap[order.status],
+      status: statusLabelMap[order.status],
+    },
+  }))
 
   return (
     <div className={classnames(cls.purchaseHistory, [className])}>
-      {tableData.length ? (
+      {!loading && tableData.length ? (
         <Table
           columns={columns}
           data={tableData}
@@ -62,12 +71,14 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
           onRowClick={id => navigate(`/account/purchase-history/${id}`)}
         />
       ) : (
-        <Absent
-          info="У ВАС ЩЕ НЕ БУЛО ЗАМОВЛЕНЬ"
-          btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
-          className={cls.absent}
-          onBtnClick={() => navigate('/store')}
-        />
+        !loading && (
+          <Absent
+            info="У ВАС ЩЕ НЕ БУЛО ЗАМОВЛЕНЬ"
+            btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
+            className={cls.absent}
+            onBtnClick={() => navigate('/store')}
+          />
+        )
       )}
     </div>
   )
