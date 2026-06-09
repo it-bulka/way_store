@@ -4,16 +4,40 @@
   padding: 0.02rem 0;
   position: relative;
 
-  & > button {
+  .control {
+    @include flex($justify: space-between);
+    gap: 4px;
+  }
+
+  .toggleBtn {
+    flex: 1;
     min-width: 0;
-    width: 100%;
     gap: 2px;
     @include flex($justify: space-between);
   }
 
   &.opened {
-    & > button > svg {
+    .toggleBtn > svg {
       transform: scaleY(-1);
+    }
+  }
+
+  .clearBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    @include flex;
+    flex-shrink: 0;
+    color: $grey_2;
+
+    &:hover {
+      color: $grey;
+    }
+
+    svg {
+      width: 0.7rem;
+      height: 0.7rem;
     }
   }
 

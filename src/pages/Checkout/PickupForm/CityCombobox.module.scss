@@ -1,0 +1,78 @@
+.combobox {
+  position: relative;
+}
+
+.inputWrapper {
+  border-bottom: $border_width solid $grey_4;
+  padding: 0.8rem 0;
+  @include flex($justify: space-between);
+}
+
+.input {
+  flex: 1;
+  text-transform: uppercase;
+  font-family: $font_normal;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: $grey_2;
+    opacity: 0.8;
+    font-size: 0.85em;
+  }
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background-color: $grey_bg;
+  border: $border_width solid $grey_4;
+  padding: 0.4rem 0;
+  z-index: $modal_zindex;
+  max-height: 200px;
+  overflow: auto;
+
+  li {
+    cursor: pointer;
+    padding: 0.3rem 0.4rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+
+    &:hover {
+      background-color: $grey_4;
+    }
+  }
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  @include flex;
+  flex-shrink: 0;
+  color: $grey_2;
+
+  &:hover {
+    color: $grey;
+  }
+
+  svg {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  opacity: 0.8;
+  font-size: 0.8em;
+  color: red;
+  background-color: $grey_bg;
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import cls from './Select.module.scss'
 import ArrowIcon from '@/assets/general/arrow.svg'
+import CloseIcon from '@/assets/general/close.svg'
 import { useToggle } from '@/hooks/useToggle'
 import classnames from 'classnames'
 import type { FieldValues } from 'react-hook-form/dist/types/fields'
@@ -17,6 +18,7 @@ interface SelectProps<T extends FieldValues | undefined = undefined> extends Par
   className?: string
   initialValue?: string | number
   onChose?: (chosen: SelectOption) => void
+  onClear?: () => void
   options: Options
 }
 
@@ -24,6 +26,7 @@ export function Select<T extends FieldValues | undefined = undefined>({
   className = '',
   initialValue = 'День',
   onChose,
+  onClear,
   register,
   name,
   options,
@@ -33,11 +36,18 @@ export function Select<T extends FieldValues | undefined = undefined>({
 
   function onItemClick(item: SelectOption) {
     setChosen(item)
+    setOpen(false)
     onChose && onChose(item)
 
     if (register && name) {
       register(name as any, { value: item.value })
     }
+  }
+
+  function onClearClick() {
+    setChosen(null)
+    setOpen(false)
+    onClear && onClear()
   }
 
   const isSelected = (item: SelectOption) => {
@@ -49,10 +59,17 @@ export function Select<T extends FieldValues | undefined = undefined>({
 
   return (
     <div className={classnames(cls.select, { className, [cls.opened]: isOpen })}>
-      <button onClick={() => setOpen()} type={'button'}>
-        <p>{chosen?.label || initialValue}</p>
-        <ArrowIcon />
-      </button>
+      <div className={cls.control}>
+        <button type="button" onClick={() => setOpen()} className={cls.toggleBtn}>
+          <p>{chosen?.label || initialValue}</p>
+          <ArrowIcon />
+        </button>
+        {chosen && onClear && (
+          <button type="button" className={cls.clearBtn} onClick={onClearClick}>
+            <CloseIcon />
+          </button>
+        )}
+      </div>
       {isOpen && (
         <ul className={cls.options}>
           {options.map(item => (

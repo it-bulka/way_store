@@ -24,5 +24,7 @@ export interface IOrder {
     street: string
     home: number
     apartment: string
+    warehouseRef?: string
+    warehouseAddress?: string
   }
 }

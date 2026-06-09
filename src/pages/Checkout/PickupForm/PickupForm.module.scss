@@ -1,0 +1,28 @@
+.npLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $grey;
+  margin-bottom: 0.4rem;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 3rem;
+}
+
+.warehouseWrapper {
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  opacity: 0.8;
+  font-size: 0.8em;
+  color: red;
+  background-color: $grey_bg;
+}

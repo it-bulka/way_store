@@ -4,6 +4,7 @@ import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import { DeliveryForm } from './DeliveryForm/DeliveryForm'
+import { PickupForm } from './PickupForm/PickupForm'
 import { CheckoutOrderList } from './CheckoutOrderList/CheckoutOrderList'
 import { CheckoutDelivery } from './CheckoutDelivery/CheckoutDelivery'
 import { useCheckout } from './useCheckout'
@@ -13,12 +14,11 @@ const Checkout = () => {
     items,
     delivery,
     setDelivery,
-    register,
-    handleSubmit,
-    errors,
-    isSubmitting,
+    doorForm,
+    pickupForm,
+    onDoorSubmit,
+    onPickupSubmit,
     isPaying,
-    onSubmit,
     onDeleteItem,
     onSetItemAmount,
     onBack,
@@ -26,8 +26,21 @@ const Checkout = () => {
 
   if (!items.length) return <Navigate to="/store" replace />
 
+  const isDoor = delivery === 'ДО ДВЕРЕЙ'
+  const isSubmitting = isDoor
+    ? doorForm.formState.isSubmitting
+    : pickupForm.formState.isSubmitting
+
   return (
-    <form className={cls.root} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      className={cls.root}
+      onSubmit={
+        isDoor
+          ? doorForm.handleSubmit(onDoorSubmit)
+          : pickupForm.handleSubmit(onPickupSubmit)
+      }
+      noValidate
+    >
       <PageMeta title="Оформлення замовлення" noindex />
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
         ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
@@ -46,7 +59,17 @@ const Checkout = () => {
       <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
         Адреса доставки
       </Typography>
-      <DeliveryForm register={register} errors={errors} />
+
+      {isDoor ? (
+        <DeliveryForm register={doorForm.register} errors={doorForm.formState.errors} />
+      ) : (
+        <PickupForm
+          control={pickupForm.control}
+          register={pickupForm.register}
+          setValue={pickupForm.setValue}
+          errors={pickupForm.formState.errors}
+        />
+      )}
 
       <div className={cls.actions}>
         <Button title="Оформити замовлення" type="submit" disabled={isSubmitting || isPaying} />

@@ -7,8 +7,9 @@ import { getCartItems } from '@/redux/selectors/cartSelectors'
 import { getUserSelector } from '@/redux/selectors/getUserSelector'
 import { createOrder } from '@/redux/async/createOrder'
 import { cartActions } from '@/redux/reducers/cartSlice'
-import { checkoutSchema, type ICheckoutFormValues } from './schema'
-import type { DeliveryType, IOrderItem } from '@/models/orderType'
+import { checkoutSchema, pickupSchema } from './schema'
+import type { ICheckoutFormValues, IPickupFormValues } from './schema'
+import type { DeliveryType, IOrder, IOrderItem } from '@/models/orderType'
 import { useWayforpay } from '@/hooks/useWayforpay'
 import { useToast } from '@/context/ToastContext'
 
@@ -22,11 +23,7 @@ export const useCheckout = () => {
   const { pay } = useWayforpay()
   const { addToast } = useToast()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ICheckoutFormValues>({
+  const doorForm = useForm<ICheckoutFormValues>({
     resolver: yupResolver(checkoutSchema),
     defaultValues: {
       city: user?.address.city ?? '',
@@ -34,6 +31,11 @@ export const useCheckout = () => {
       home: user?.address.home?.toString() ?? '',
       apartment: user?.address.apartment ?? '',
     },
+  })
+
+  const pickupForm = useForm<IPickupFormValues>({
+    resolver: yupResolver(pickupSchema),
+    defaultValues: { cityName: '', cityRef: '', warehouseRef: '', warehouseAddress: '' },
   })
 
   const onDeleteItem = useCallback(
@@ -51,58 +53,79 @@ export const useCheckout = () => {
 
   const onBack = useCallback(() => navigateTo('/store'), [navigateTo])
 
-  const onSubmit: SubmitHandler<ICheckoutFormValues> = async data => {
-    const orderNumber = crypto.randomUUID().slice(0, 8).toUpperCase()
-    const orderItems: IOrderItem[] = items.map(item => ({
-      id: item.id,
-      title: item.title,
-      amount: item.amount,
-      price: item.price,
-      img: item.img,
-      size: item.size,
-    }))
+  const submitOrder = useCallback(
+    async (address: IOrder['address']) => {
+      const orderNumber = crypto.randomUUID().slice(0, 8).toUpperCase()
+      const orderItems: IOrderItem[] = items.map(item => ({
+        id: item.id,
+        title: item.title,
+        amount: item.amount,
+        price: item.price,
+        img: item.img,
+        size: item.size,
+      }))
 
-    const result = await dispatch(
-      createOrder({
-        orderNumber,
-        date: new Date(),
-        status: 'pending',
-        deliveryType: delivery,
-        items: orderItems,
-        address: {
-          city: data.city,
-          street: data.street,
-          home: Number(data.home),
-          apartment: data.apartment,
+      const result = await dispatch(
+        createOrder({
+          orderNumber,
+          date: new Date(),
+          status: 'pending',
+          deliveryType: delivery,
+          items: orderItems,
+          address,
+        })
+      )
+      if (!createOrder.fulfilled.match(result)) return
+
+      setIsPaying(true)
+      pay({
+        orderReference: orderNumber,
+        items,
+        clientFirstName: user?.name,
+        clientPhone: user?.phone,
+        onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
+        onDeclined: () => {
+          setIsPaying(false)
+          addToast('Платіж відхилено. Спробуйте ще раз.', 'error')
         },
       })
-    )
-    if (!createOrder.fulfilled.match(result)) return
+    },
+    [items, delivery, dispatch, user, navigateTo, pay, addToast]
+  )
 
-    setIsPaying(true)
-    pay({
-      orderReference: orderNumber,
-      items,
-      clientFirstName: user?.name,
-      clientPhone: user?.phone,
-      onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
-      onDeclined: () => {
-        setIsPaying(false)
-        addToast('Платіж відхилено. Спробуйте ще раз.', 'error')
-      },
-    })
-  }
+  const onDoorSubmit = useCallback<SubmitHandler<ICheckoutFormValues>>(
+    data =>
+      submitOrder({
+        city: data.city,
+        street: data.street,
+        home: Number(data.home),
+        apartment: data.apartment,
+      }),
+    [submitOrder]
+  )
+
+  const onPickupSubmit = useCallback<SubmitHandler<IPickupFormValues>>(
+    data =>
+      submitOrder({
+        city: data.cityName,
+        street: data.warehouseAddress,
+        home: 0,
+        apartment: '',
+        warehouseRef: data.warehouseRef,
+        warehouseAddress: data.warehouseAddress,
+      }),
+    [submitOrder]
+  )
 
   return {
     items,
     delivery,
     setDelivery,
-    register,
-    handleSubmit,
-    errors,
-    isSubmitting,
+    doorForm,
+    pickupForm,
+    onDoorSubmit,
+    onPickupSubmit,
     isPaying,
-    onSubmit,
     onDeleteItem,
     onSetItemAmount,
     onBack,

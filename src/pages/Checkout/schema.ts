@@ -15,3 +15,19 @@ export const checkoutSchema = yup
     apartment: yup.string().default(''),
   })
   .required()
+
+export interface IPickupFormValues {
+  cityName: string
+  cityRef: string
+  warehouseRef: string
+  warehouseAddress: string
+}
+
+export const pickupSchema = yup
+  .object({
+    cityName: yup.string().required("Місто обов'язкове"),
+    cityRef: yup.string().required('Оберіть місто зі списку'),
+    warehouseRef: yup.string().required("Відділення обов'язкове"),
+    warehouseAddress: yup.string().default(''),
+  })
+  .required()
