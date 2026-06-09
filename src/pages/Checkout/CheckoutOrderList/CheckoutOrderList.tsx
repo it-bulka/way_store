@@ -4,11 +4,12 @@ import { CheckoutItem } from '../CheckoutItem/CheckoutItem'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
 import type { ICartItem } from '@/redux/types/cartTypes'
+import type { ringsColors } from '@/models/goodsType'
 
 interface CheckoutOrderListProps {
   items: ICartItem[]
-  onDelete: (id: string) => void
-  setAmount: (id: string, amount: number) => void
+  onDelete: (id: string, color?: ringsColors, size?: number) => void
+  setAmount: (id: string, amount: number, color?: ringsColors, size?: number) => void
 }
 
 export const CheckoutOrderList: FC<CheckoutOrderListProps> = memo(({ items, onDelete, setAmount }) => {
@@ -22,14 +23,16 @@ export const CheckoutOrderList: FC<CheckoutOrderListProps> = memo(({ items, onDe
       <ul className={cls.items}>
         {items.map(item => (
           <CheckoutItem
-            key={item.id}
+            key={`${item.id}-${item.color ?? ''}-${item.size ?? ''}`}
             id={item.id}
             img={item.img}
             title={item.title}
             price={item.price}
             amount={item.amount}
-            onDelete={() => onDelete(item.id)}
-            setAmount={amount => setAmount(item.id, amount)}
+            color={item.color}
+            size={item.size}
+            onDelete={() => onDelete(item.id, item.color, item.size)}
+            setAmount={amount => setAmount(item.id, amount, item.color, item.size)}
           />
         ))}
       </ul>

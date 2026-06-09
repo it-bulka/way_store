@@ -10,6 +10,7 @@ import { cartActions } from '@/redux/reducers/cartSlice'
 import { checkoutSchema, pickupSchema } from './schema'
 import type { ICheckoutFormValues, IPickupFormValues } from './schema'
 import type { DeliveryType, IOrder, IOrderItem, PaymentType } from '@/models/orderType'
+import type { ringsColors } from '@/models/goodsType'
 import { useWayforpay } from '@/hooks/useWayforpay'
 import { useToast } from '@/context/ToastContext'
 
@@ -49,14 +50,15 @@ export const useCheckout = () => {
   })
 
   const onDeleteItem = useCallback(
-    (id: string) => dispatch(cartActions.deleteItem({ id })),
+    (id: string, color?: ringsColors, size?: number) =>
+      dispatch(cartActions.deleteItem({ id, color, size })),
     [dispatch]
   )
 
   const onSetItemAmount = useCallback(
-    (id: string, amount: number) => {
-      if (amount === 0) dispatch(cartActions.deleteItem({ id }))
-      else dispatch(cartActions.setItemAmount({ id, amount }))
+    (id: string, amount: number, color?: ringsColors, size?: number) => {
+      if (amount === 0) dispatch(cartActions.deleteItem({ id, color, size }))
+      else dispatch(cartActions.setItemAmount({ id, amount, color, size }))
     },
     [dispatch]
   )
@@ -73,6 +75,7 @@ export const useCheckout = () => {
         price: item.price,
         img: item.img,
         size: item.size,
+        color: item.color,
       }))
 
       const result = await dispatch(
