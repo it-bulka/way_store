@@ -18,4 +18,5 @@ export const APP_ROUTES = {
   CHECKOUT_SUCCESS: '/checkout/success',
   COLLECTIONS: '/collections',
   COLLABORATIONS: '/collaborations',
+  COLLABORATION_DETAIL: (id: string) => `/collaborations/${id}`,
 } as const

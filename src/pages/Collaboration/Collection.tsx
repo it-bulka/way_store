@@ -14,8 +14,9 @@ interface CollectionProps {
   title: string
   info: string
   gallery: { img: string; alt: string; id: string }[]
+  heroImage?: string
 }
-const Collection = ({ className, title, info, gallery }: CollectionProps) => {
+const Collection = ({ className, title, info, gallery, heroImage }: CollectionProps) => {
   return (
     <div className={classnames(cls.collection, {}, [className])}>
       <PageMeta
@@ -23,7 +24,10 @@ const Collection = ({ className, title, info, gallery }: CollectionProps) => {
         description={info.slice(0, 160)}
         ogImage={gallery[0]?.img}
       />
-      <div className={cls.firstBlock}>
+      <div
+        className={cls.firstBlock}
+        style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
+      >
         <Header />
         <div className={'flex-container container'}>
           <Sidebar />

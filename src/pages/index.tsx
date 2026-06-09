@@ -14,6 +14,7 @@ const PurchaseHistory = lazy(() => import('./Account/PurchaseHistory/PurchaseHis
 const ChosenGoods = lazy(() => import('./Account/ChosenGoods/ChosenGoods'))
 const Collaborations = lazy(() => import('./Collaborations/Collaborations'))
 const Collection = lazy(() => import('./Collaboration/Collection'))
+const CollaborationDetail = lazy(() => import('./Collaboration/CollaborationDetail'))
 const Collections = lazy(() => import('./Collections/Collections'))
 const About = lazy(() => import('./About/About'))
 const NotFound = lazy(() => import('./NotFound/NotFound'))
@@ -35,6 +36,7 @@ export {
   Collaborations,
   Collections,
   Collection,
+  CollaborationDetail,
   About,
   NotFound,
   Privacy,

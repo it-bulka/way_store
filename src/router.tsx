@@ -17,6 +17,7 @@ import {
   PurchaseHistory,
   Collaborations,
   Collection,
+  CollaborationDetail,
   Collections,
   About,
   NotFound,
@@ -27,11 +28,11 @@ import {
   OrderDetail,
 } from '@/pages'
 
-import { colabGallery, colabInfo, colabTitle } from '@/data/collaboration'
 import { colGallery, colInfo, colTitle } from '@/data/collection'
 import { goodsLoader } from '@/pages/Goods/goodsLoader'
 import { GoodsError } from '@/pages/Goods/GoodsError'
 import { orderLoader } from '@/pages/Account/OrderDetail/OrderDetail'
+import { collaborationLoader } from '@/pages/Collaboration/collaborationLoader'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -76,10 +77,7 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route path="collaborations" element={<Collaborations />}>
-        <Route
-          path=":slug"
-          element={<Collection gallery={colabGallery} title={colabTitle} info={colabInfo} />}
-        />
+        <Route path=":slug" element={<CollaborationDetail />} loader={collaborationLoader} />
       </Route>
 
       <Route path="collections" element={<Collections />}>

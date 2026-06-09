@@ -18,6 +18,7 @@ $section_width: 872;
 
     .text {
       padding: pc($section_width, 33) 0 pc($section_width, 77);
+      white-space: pre-line;
     }
   }
 
