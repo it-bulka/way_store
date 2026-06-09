@@ -11,6 +11,7 @@ import { CartItem } from '@/components/ui/Cart/CartItem/CartItem'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getCartItems } from '@/redux/selectors/cartSelectors'
 import { cartActions } from '@/redux/reducers/cartSlice'
+import type { ringsColors } from '@/models/goodsType'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 
@@ -35,19 +36,19 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
   }, [onClose])
 
   const deleteItem = useCallback(
-    (id: string) => {
-      dispatch(cartActions.deleteItem({ id }))
+    (id: string, color?: ringsColors, size?: number) => {
+      dispatch(cartActions.deleteItem({ id, color, size }))
     },
     [dispatch]
   )
 
   const changeItemAmount = useCallback(
-    (id: string, amount: number): void => {
+    (id: string, amount: number, color?: ringsColors, size?: number): void => {
       if (amount === 0) {
-        deleteItem(id)
+        deleteItem(id, color, size)
         return
       }
-      dispatch(cartActions.setItemAmount({ id, amount }))
+      dispatch(cartActions.setItemAmount({ id, amount, color, size }))
     },
     [dispatch, deleteItem]
   )
@@ -109,17 +110,31 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
               />
             ) : (
               <ul>
-                {items.map(({ img, title, price, amount, id }) => (
+                {items.map(item => (
                   <CartItem
-                    id={id}
-                    img={img}
-                    title={title}
-                    price={price}
-                    amount={amount}
-                    onDelete={() => deleteItem(id)}
-                    setAmount={(amount: number) => changeItemAmount(id, amount)}
+                    key={`${item.id}-${item.color ?? ''}-${item.size ?? ''}`}
+                    id={item.id}
+                    img={item.img}
+                    title={item.title}
+                    price={item.price}
+                    amount={item.amount}
+                    color={item.color}
+                    size={item.size}
+                    colorImages={item.colorImages}
+                    availableSizes={item.availableSizes}
+                    onDelete={() => deleteItem(item.id, item.color, item.size)}
+                    setAmount={amount => changeItemAmount(item.id, amount, item.color, item.size)}
+                    onColorChange={(newColor, newImg) =>
+                      dispatch(cartActions.updateItemVariant({
+                        id: item.id, oldColor: item.color, oldSize: item.size, newColor, newImg,
+                      }))
+                    }
+                    onSizeChange={newSize =>
+                      dispatch(cartActions.updateItemVariant({
+                        id: item.id, oldColor: item.color, oldSize: item.size, newSize,
+                      }))
+                    }
                     onNavigate={onClose}
-                    key={id}
                   />
                 ))}
               </ul>
