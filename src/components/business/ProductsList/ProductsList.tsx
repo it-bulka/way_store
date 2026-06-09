@@ -1,4 +1,4 @@
-import { type FC, useCallback } from 'react'
+import { type FC, memo, useCallback } from 'react'
 import cls from './ProductsList.module.scss'
 import { ProductCard } from '@/components/ui/ProductCard/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/ProductCardSkeleton/ProductCardSkeleton'
@@ -27,7 +27,7 @@ const SKELETON_COUNT = 8
 const firstImg = (images: IProduct['images']): string =>
   (['white', 'rose', 'yellow'] as ringsColors[]).map(c => images[c][0]).find(Boolean) ?? ''
 
-export const ProductsList: FC<ProductsListProps> = ({
+export const ProductsList: FC<ProductsListProps> = memo(({
   className,
   products,
   title,
@@ -96,4 +96,6 @@ export const ProductsList: FC<ProductsListProps> = ({
       )}
     </div>
   )
-}
+})
+
+ProductsList.displayName = 'ProductsList'

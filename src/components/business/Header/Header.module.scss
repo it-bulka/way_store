@@ -40,41 +40,6 @@
     text-align: right;
   }
 
-  .signInBtn,
-  .signOutBtn {
-    font-size: 0.65rem;
-    line-height: 1rem;
-    text-transform: uppercase;
-    text-decoration: underline;
-    color: $grey;
-  }
-
-  .cartBtn {
-    position: relative;
-
-    .items {
-      position: absolute;
-      content: '31';
-      top: 0;
-      right: 0;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background-color: $blue;
-      color: $white;
-      font-size: 4px;
-      line-height: 6px;
-      @include flex($justify: center);
-      display: none;
-    }
-
-    &.active {
-      .items {
-        display: flex;
-      }
-    }
-  }
-
   @include respond-to('mobile') {
     position: relative;
     flex-wrap: wrap;
