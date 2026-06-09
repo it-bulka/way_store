@@ -1,0 +1,72 @@
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 280px;
+  max-width: 480px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: $white;
+  border: $border_width solid $border_color;
+  border-radius: 4px;
+  z-index: 200;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s;
+
+  & + & {
+    border-top: $border_width solid $grey_3;
+  }
+
+  &:hover {
+    background-color: $grey_bg;
+  }
+}
+
+.thumbnail {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  font-size: 0.62rem;
+  color: $grey;
+  margin-top: 2px;
+}
+
+.price {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: $grey;
+}
+
+.status {
+  padding: 14px;
+  font-size: 0.75rem;
+  color: $grey;
+  text-align: center;
+}

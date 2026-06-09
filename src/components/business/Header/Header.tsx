@@ -1,12 +1,12 @@
-import { type FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { type FC, useMemo, useRef, useEffect } from 'react'
 import cls from './Header.module.scss'
 import LogoIcon from '@/assets/logo/logo.svg'
 import HeartIcon from '@/assets/general/heart.svg'
 import CartIcon from '@/assets/general/cart.svg'
 import PersonIcon from '@/assets/general/person.svg'
-import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
+import { SearchContainer } from '@/components/business/SearchContainer/SearchContainer'
 import classnames from 'classnames'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Cart } from '@/components/ui/Cart/Cart'
 import { AuthModal } from '@/components/ui/AuthModal/AuthModal'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -35,21 +35,6 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   const isAuthenticated = useAppSelector(getIsAuthenticated)
   const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
-  const [searchParams] = useSearchParams()
-
-  const urlQuery = searchParams.get('search') ?? ''
-  const [localQuery, setLocalQuery] = useState(urlQuery)
-
-  useEffect(() => {
-    setLocalQuery(urlQuery)
-  }, [urlQuery])
-
-  const handleSearch = useCallback(
-    (query: string) => {
-      navigateTo(query.trim() ? `/store?search=${encodeURIComponent(query.trim())}` : '/store')
-    },
-    [navigateTo]
-  )
 
   const totalAmount = useMemo(() => items.reduce((acc, item) => acc + item.amount, 0), [items])
 
@@ -76,9 +61,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         <div className={classnames(cls.logo, 'col-1')}>
           <LogoIcon />
         </div>
-        <div className={classnames(cls.searchHolder, 'col-2')}>
-          <SearchBar value={localQuery} onChange={setLocalQuery} onSearch={handleSearch} />
-        </div>
+        <SearchContainer className={classnames(cls.searchHolder, 'col-2')} />
         <div className={classnames(cls.actions, 'col-3')}>
           <button onClick={() => navigateTo('/account/chosen')}>
             <HeartIcon />
