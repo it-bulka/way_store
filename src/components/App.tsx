@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/base/firebase'
 import { useAppDispatch } from '@/hooks/reduxHooks'
-import { setUser, clearUser } from '@/redux/reducers/authSlice'
+import { setUser, clearUser, setInitialized } from '@/redux/reducers/authSlice'
 import { ToastProvider } from '@/context/ToastContext'
 import { ToastContainer } from '@/components/ui/ToastContainer/ToastContainer'
 
@@ -17,6 +17,7 @@ function AuthListener() {
       } else {
         dispatch(clearUser())
       }
+      dispatch(setInitialized())
     })
     return unsubscribe
   }, [dispatch])

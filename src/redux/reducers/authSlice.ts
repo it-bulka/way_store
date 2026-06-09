@@ -8,6 +8,7 @@ interface AuthState {
   uid: string | null
   email: string | null
   isAuthenticated: boolean
+  initializing: boolean
   loading: boolean
   error: string | null
 }
@@ -16,6 +17,7 @@ const initialState: AuthState = {
   uid: null,
   email: null,
   isAuthenticated: false,
+  initializing: true,
   loading: false,
   error: null,
 }
@@ -35,6 +37,9 @@ const authSlice = createSlice({
       state.email = null
       state.isAuthenticated = false
       state.error = null
+    },
+    setInitialized: state => {
+      state.initializing = false
     },
   },
   extraReducers: builder => {
@@ -89,5 +94,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { setUser, clearUser } = authSlice.actions
+export const { setUser, clearUser, setInitialized } = authSlice.actions
 export const { reducer: authReducer } = authSlice

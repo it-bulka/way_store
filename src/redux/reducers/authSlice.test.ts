@@ -8,6 +8,7 @@ const base = {
   uid: null,
   email: null,
   isAuthenticated: false,
+  initializing: false,
   loading: false,
   error: null,
 }
