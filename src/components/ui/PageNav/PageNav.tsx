@@ -1,4 +1,5 @@
 import { MouseEvent, useState, useRef, useEffect, useCallback, FC } from 'react'
+import { useLocation } from 'react-router-dom'
 import cls from './PageNav.module.scss'
 import { AppLink } from '@/components/ui/AppLink/AppLink'
 
@@ -10,7 +11,8 @@ export const PageNav: FC<PageNavProps> = ({ options }) => {
   const [underlineStyle, setUnderlineStyle] = useState({ width: 0, transform: 'translateX(0)' })
   const [positionShift, setPositionShift] = useState(0)
   const ref = useRef<HTMLElement | null>(null)
-  //TODO: make responsive to changing screens
+  const { pathname } = useLocation()
+
   const getStartPosition = useCallback((elem: HTMLElement): number => {
     return elem.getBoundingClientRect().left
   }, [])
@@ -30,13 +32,14 @@ export const PageNav: FC<PageNavProps> = ({ options }) => {
 
   useEffect(() => {
     const wrapper = ref.current
-    if (wrapper) {
-      const wrapperStartPosition = getStartPosition(wrapper as HTMLElement)
-      setPositionShift(wrapperStartPosition)
-      const activeLink = wrapper.querySelector('li.active') as HTMLElement | null
-      activeLink && setUnderLine(activeLink, wrapperStartPosition)
-    }
-  }, [getStartPosition, setUnderLine])
+    if (!wrapper) return
+    const wrapperStartPosition = getStartPosition(wrapper as HTMLElement)
+    setPositionShift(wrapperStartPosition)
+    const activeIndex = options.findIndex(opt => pathname.includes(opt.path))
+    const items = wrapper.querySelectorAll('li')
+    const activeItem = items[activeIndex] as HTMLElement | undefined
+    activeItem && setUnderLine(activeItem, wrapperStartPosition)
+  }, [getStartPosition, setUnderLine, pathname, options])
 
   return (
     <nav className={cls.pageNav} ref={ref}>
@@ -47,7 +50,7 @@ export const PageNav: FC<PageNavProps> = ({ options }) => {
             key={id}
             withDecoration={false}
             onClick={handleLinkClick}
-            className={'active'}
+            isActive={pathname.includes(path)}
             path={path}
           />
         ))}
