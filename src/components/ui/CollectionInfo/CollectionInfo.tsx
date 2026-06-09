@@ -4,15 +4,16 @@ import { Typography } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
+import { APP_ROUTES } from '@/models'
 
 interface CollectionInfoProps {
   className?: string
   id: string
   title: string
-  data: { id: string; content: string }[]
+  content: string[]
   images?: string[]
 }
-export const CollectionInfo: FC<CollectionInfoProps> = ({ className, id, title, data, images }) => {
+export const CollectionInfo: FC<CollectionInfoProps> = ({ className, id, title, content, images }) => {
   const navigateTo = useNavigate()
   const imgAmount = images?.length
   return (
@@ -21,20 +22,20 @@ export const CollectionInfo: FC<CollectionInfoProps> = ({ className, id, title, 
         <Typography variant="h3" className={cls.title}>
           {title}
         </Typography>
-        <Button title="продолжить" onClick={() => navigateTo(id)} />
+        <Button title="продовжити" onClick={() => navigateTo(APP_ROUTES.COLLECTION_DETAIL(id))} />
       </div>
       <div className={cls.content}>
-        {data?.map(p => (
-          <Typography key={p.id} className={cls.paragraph}>
-            {p.content}
+        {content?.map((p, i) => (
+          <Typography key={i} className={cls.paragraph}>
+            {p}
           </Typography>
         ))}
       </div>
       {imgAmount && (
         <div className={classnames(cls.imgs, cls[`imgs_${imgAmount > 4 ? 4 : imgAmount}`])}>
           {images?.map((img, order) => (
-            <div>
-              <img src={img} alt="collection" key={order} loading="lazy" />
+            <div key={order}>
+              <img src={img} alt="collection" loading="lazy" />
             </div>
           ))}
         </div>
