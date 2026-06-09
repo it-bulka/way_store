@@ -51,7 +51,10 @@ export const Modal: FC<ModalProps> = ({
   )
 
   useEffect(() => {
-    if (isOpened) window.addEventListener('keydown', onKeyDown)
+    if (isOpened) {
+      setIsClosing(false)
+      window.addEventListener('keydown', onKeyDown)
+    }
     return () => {
       timer.current && clearTimeout(timer.current as ReturnType<typeof setTimeout>)
       window.removeEventListener('keydown', onKeyDown)
