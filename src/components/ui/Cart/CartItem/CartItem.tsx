@@ -41,7 +41,7 @@ export const CartItem: FC<CartItemProps> = memo(({
   onNavigate,
 }) => {
   const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
-  const showColors = colorKeys.length > 1
+  const showColors = colorKeys.length > 0
 
   return (
     <li className={cls.cartItem}>
