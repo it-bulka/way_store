@@ -10,7 +10,7 @@ export const Footer = () => {
   const { isModalOpen, openModal, closeModal } = useControlModal(false)
 
   const nav = [
-    { id: '1', title: 'FAQ', path: APP_ROUTES.FAQ },
+    { id: '1', title: 'FAQ', path: APP_ROUTES.FAQ_QUESTIONS },
     { id: '2', title: t('footer.privacy'), path: APP_ROUTES.PRIVACY },
     { id: '3', title: t('footer.offer'), path: APP_ROUTES.OFFER },
   ]
