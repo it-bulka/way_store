@@ -3,7 +3,6 @@ import { Sex } from '@/redux/types/user.ts'
 
 export interface IInfoFormValues {
   sex: Sex
-  email: string
   name: string
   phone: string
   day: number
@@ -14,7 +13,6 @@ export interface IInfoFormValues {
 export const infoSchema = yup
   .object({
     sex: yup.string(),
-    email: yup.string().email('Невірний email').required("Email обов'язковий"),
     name: yup.string().required("Ім'я обов'язкове"),
     phone: yup
       .string()

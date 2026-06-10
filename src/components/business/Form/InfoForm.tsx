@@ -31,7 +31,6 @@ export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex 
   const submitHandler: SubmitHandler<IInfoFormValues> = async data => {
     await saveUser({
       name: data.name,
-      email: data.email,
       phone: data.phone,
       sex: data.sex as Sex,
       birthday: {
@@ -66,8 +65,7 @@ export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex 
         name="email"
         defaultValue={email}
         className={cls.col_1}
-        register={register}
-        error={errors?.email?.message}
+        readOnly
       />
       <Input
         name="name"
