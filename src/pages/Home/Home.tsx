@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import cls from './Home.module.scss'
 import classnames from 'classnames'
@@ -16,32 +17,26 @@ import Look3 from '@/assets/collections/look_3.jpg'
 import Look4 from '@/assets/collections/look_4.jpg'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
-const CATEGORIES = [
-  { name: 'КАБЛУЧКИ', slug: 'rings', img: Look1 },
-  { name: 'НАМИСТО', slug: 'necklaces', img: Look2 },
-  { name: 'БРАСЛЕТИ', slug: 'bracelets', img: Look3 },
-  { name: 'СЕРЕЖКИ', slug: 'earrings', img: Look4 },
-]
+const STAT_KEYS = ['gold', 'handmade', 'kyiv'] as const
 
-const STATS = [
-  { value: '585° та 750°', label: 'ЗОЛОТО ВИЩОЇ ПРОБИ' },
-  { value: 'РУЧНА РОБОТА', label: 'АВТОРСЬКИЙ ПІДХІД' },
-  { value: 'КИЇВ', label: 'ВИРОБЛЕНО В УКРАЇНІ' },
-]
+const CATEGORIES = [
+  { key: 'rings', img: Look1 },
+  { key: 'necklaces', img: Look2 },
+  { key: 'bracelets', img: Look3 },
+  { key: 'earrings', img: Look4 },
+] as const
 
 interface HomeProps {
   className?: string
 }
 
 const Home: FC<HomeProps> = ({ className }) => {
+  const { t } = useTranslation('home')
   const navigate = useNavigate()
 
   return (
     <>
-      <PageMeta
-        title="Ювелірні прикраси"
-        description="Авторські ювелірні прикраси з золота та срібла від українського бренду Way. Каблучки, намисто, браслети, сережки."
-      />
+      <PageMeta title={t('meta.title')} description={t('meta.description')} />
       <div className={classnames(cls.home, 'flex-grow', [className])}>
         <div className={cls.info}>
           <Header />
@@ -50,19 +45,19 @@ const Home: FC<HomeProps> = ({ className }) => {
           </main>
           <h1 className={cls.title}>Way</h1>
           <div className={cls.heroContent}>
-            <h2 className={cls.heroCtaTitle}>ВАША НАСТУПНА ПРИКРАСА</h2>
-            <p className={cls.heroCtaSubtitle}>ВІДКРИЙТЕ ПОВНУ КОЛЕКЦІЮ</p>
+            <h2 className={cls.heroCtaTitle}>{t('hero.cta')}</h2>
+            <p className={cls.heroCtaSubtitle}>{t('hero.subtitle')}</p>
             <button className={cls.heroButton} onClick={() => navigate(APP_ROUTES.STORE)}>
-              ПЕРЕГЛЯНУТИ КОЛЕКЦІЇ
+              {t('hero.button')}
             </button>
           </div>
           <div className={cls.heroStats}>
             <div className="container">
               <div className={cls.heroStatsGrid}>
-                {STATS.map(({ value, label }) => (
-                  <div key={label} className={cls.heroStat}>
-                    <span className={cls.heroStatValue}>{value}</span>
-                    <span className={cls.heroStatLabel}>{label}</span>
+                {STAT_KEYS.map(key => (
+                  <div key={key} className={cls.heroStat}>
+                    <span className={cls.heroStatValue}>{t(`stats.${key}.value`)}</span>
+                    <span className={cls.heroStatLabel}>{t(`stats.${key}.label`)}</span>
                   </div>
                 ))}
               </div>
@@ -71,36 +66,39 @@ const Home: FC<HomeProps> = ({ className }) => {
         </div>
         <div className={cls.gallery}>
           <div>
-            <img src={Img1} alt={'collection'} />
+            <img src={Img1} alt={t('gallery.altText')} />
           </div>
           <div>
-            <img src={Img2} alt={'collection'} loading="lazy" />
+            <img src={Img2} alt={t('gallery.altText')} loading="lazy" />
           </div>
           <div>
-            <img src={Img3} alt={'collection'} loading="lazy" />
+            <img src={Img3} alt={t('gallery.altText')} loading="lazy" />
           </div>
         </div>
 
         <section className={cls.categoriesSection}>
           <div className="container">
             <Typography variant="h2" type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-              КОЛЕКЦІЇ
+              {t('collections.title')}
             </Typography>
             <div className={cls.categoryGrid}>
-              {CATEGORIES.map(({ name, slug, img }) => (
-                <button
-                  key={slug}
-                  type="button"
-                  className={cls.categoryCard}
-                  onClick={() => navigate(APP_ROUTES.STORE_WITH_PRODUCT(slug))}
-                >
-                  <img src={img} alt={name} loading="lazy" />
-                  <div className={cls.overlay}>
-                    <span className={cls.categoryName}>{name}</span>
-                    <span className={cls.categoryArrow}>Дивитись →</span>
-                  </div>
-                </button>
-              ))}
+              {CATEGORIES.map(({ key, img }) => {
+                const name = t(`collections.categories.${key}`)
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    className={cls.categoryCard}
+                    onClick={() => navigate(APP_ROUTES.STORE_WITH_PRODUCT(key))}
+                  >
+                    <img src={img} alt={name} loading="lazy" />
+                    <div className={cls.overlay}>
+                      <span className={cls.categoryName}>{name}</span>
+                      <span className={cls.categoryArrow}>{t('collections.viewMore')}</span>
+                    </div>
+                  </button>
+                )
+              })}
             </div>
           </div>
         </section>
