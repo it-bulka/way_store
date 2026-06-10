@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Home",
+    "store": "Store",
+    "collections": "Collections",
+    "collaborations": "Collaborations",
+    "about": "About"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "account": "Account",
+    "profile": "Profile",
+    "purchaseHistory": "Purchase History",
+    "chosen": "Favorites",
+    "about": "About",
+    "checkout": "Checkout",
+    "checkoutSuccess": "Order Placed",
+    "store": "Store"
+  },
+  "footer": {
+    "faq": "FAQ",
+    "privacy": "Privacy Policy",
+    "offer": "Public Offer",
+    "subscribe": "Subscribe",
+    "copyright": "© 2021 WAYYOUCHOOSE. ALL RIGHTS RESERVED."
+  },
+  "cookie": {
+    "text": "We use cookies to ensure the proper functioning of our website, personalize advertising and analyze traffic. We also share information with our social media, advertising and analytics partners.",
+    "decline": "Decline",
+    "confirm": "Confirm"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "backHome": "Back to Home"
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "backToStore": "Back to Store",
+    "prev": "Prev.",
+    "next": "Next."
+  },
+  "subscription": {
+    "title": "Subscribe to receive news about collections, collaborations and special offers.",
+    "email": "E-MAIL",
+    "name": "NAME",
+    "submit": "SUBSCRIBE",
+    "success": "You have successfully subscribed to the newsletter",
+    "error": "Subscription error. Please try again"
+  },
+  "modal": {
+    "close": "Close"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "About us",
+    "description": "Learn more about WAY — Ukrainian handcrafted jewelry brand."
+  },
+  "hero": {
+    "tagline": "Chosen forever",
+    "imgAlt": "Way jewelry"
+  },
+  "story": {
+    "title": "ABOUT US",
+    "p1": "WAY is a Kyiv jewelry brand founded on the belief that true jewelry should not shout. It should speak. Quietly, confidently, forever.",
+    "p2": "We work with gold, silver and platinum of the highest grades. Every piece passes through the hands of craftsmen who understand metal not as a material, but as a language. The forms we choose — minimal. The meaning we put in — maximal.",
+    "imgAlt": "WAY Workshop"
+  },
+  "values": {
+    "craftsmanship": {
+      "title": "CRAFTSMANSHIP",
+      "content": "Handmade with an individual approach at every stage. No piece leaves the workshop without a final quality check — from the choice of metal to the clasp."
+    },
+    "materials": {
+      "title": "MATERIALS",
+      "content": "Gold 585° and 750°, silver 925°, platinum 950°. Precious stones exclusively of confirmed origin. Nothing extra — only the essence."
+    },
+    "eternity": {
+      "title": "ETERNITY",
+      "content": "We do not follow trends — we avoid them intentionally. WAY is a choice that will not age in a season or go out of fashion in a year."
+    }
+  },
+  "quote": "\"Jewelry is not about beauty. It's about who you choose to be.\"",
+  "atelier": {
+    "title": "OUR WORKSHOP",
+    "content": "A small team of designers and jewelers in the heart of Kyiv. We believe: fewer people — more attention to each piece. Every collection starts with a sketch on paper and ends with a piece you want to touch again and again.",
+    "imgAlt": "WAY Atelier"
+  },
+  "cta": "VIEW COLLECTIONS"
+}

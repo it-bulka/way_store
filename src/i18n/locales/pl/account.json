@@ -1,0 +1,84 @@
+{
+  "meta": { "title": "Konto" },
+  "title": "KONTO",
+  "currency": "UAH",
+  "nav": {
+    "profile": "PROFIL",
+    "purchaseHistory": "HISTORIA ZAKUPÓW",
+    "chosen": "ULUBIONE"
+  },
+  "profile": {
+    "title": "O MNIE",
+    "email": "EMAIL",
+    "name": "IMIĘ",
+    "phone": "TELEFON",
+    "birthday": "DATA URODZENIA",
+    "sex": {
+      "male": "M",
+      "female": "K",
+      "other": "Inne"
+    },
+    "day": "DZIEŃ",
+    "month": "MIESIĄC",
+    "year": "ROK",
+    "submit": "Potwierdź",
+    "loadError": "Błąd ładowania profilu"
+  },
+  "address": {
+    "title": "ADRES DOSTAWY",
+    "city": "MIASTO",
+    "street": "ULICA",
+    "home": "BUDYNEK",
+    "entrance": "KLATKA",
+    "floor": "PIĘTRO",
+    "apartment": "MIESZKANIE",
+    "index": "KOD POCZTOWY",
+    "comment": "KOMENTARZ DO ADRESU",
+    "submit": "Potwierdź"
+  },
+  "purchaseHistory": {
+    "empty": "NIE MASZ JESZCZE ŻADNYCH ZAMÓWIEŃ",
+    "goToStore": "PRZEJDŹ DO SKLEPU",
+    "columns": {
+      "name": "IMIĘ",
+      "price": "CENA",
+      "date": "DATA",
+      "order": "NUMER ZAMÓWIENIA",
+      "deliveryType": "TYP DOSTAWY",
+      "status": "STATUS"
+    },
+    "status": {
+      "pending": "OCZEKUJE",
+      "processing": "W REALIZACJI",
+      "shipped": "W DRODZE",
+      "delivered": "DOSTARCZONE",
+      "cancelled": "ANULOWANE"
+    }
+  },
+  "chosen": {
+    "title": "ULUBIONE",
+    "empty": "NIE DODAŁEŚ JESZCZE NIC DO ULUBIONYCH",
+    "goToStore": "PRZEJDŹ DO SKLEPU"
+  },
+  "orderDetail": {
+    "meta": { "title": "Szczegóły zamówienia" },
+    "notFound": "Nie znaleziono zamówienia",
+    "backToList": "Wróć do listy zamówień",
+    "backToListArrow": "← Wróć do listy zamówień",
+    "sections": {
+      "items": "PRODUKTY",
+      "address": "ADRES DOSTAWY",
+      "tracking": "ŚLEDZENIE NOVA POSHTA"
+    },
+    "labels": {
+      "deliveryType": "Typ dostawy:",
+      "city": "Miasto:",
+      "street": "Ulica:",
+      "apartment": "Mieszkanie:",
+      "trackingNumber": "Numer przesyłki:"
+    },
+    "itemSize": "Rozmiar: {{size}} mm",
+    "totalPrefix": "ŁĄCZNIE:",
+    "currency": "UAH"
+  }
+}

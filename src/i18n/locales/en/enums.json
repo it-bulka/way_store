@@ -1,0 +1,58 @@
+{
+  "metal": {
+    "gold": "Gold",
+    "silver": "Silver",
+    "platinum": "Platinum",
+    "stainless steel": "Stainless steel"
+  },
+  "stone": {
+    "diamonds": "Diamonds",
+    "sapphires": "Sapphires",
+    "rubies": "Rubies",
+    "amethysts": "Amethysts",
+    "topazes": "Topazes",
+    "aquamarines": "Aquamarines",
+    "pearls": "Pearls",
+    "opals": "Opals",
+    "garnets": "Garnets"
+  },
+  "product": {
+    "rings": "Rings",
+    "necklaces": "Necklaces & Colliers",
+    "bracelets": "Bracelets",
+    "earrings": "Earrings",
+    "pendants": "Pendants",
+    "watches": "Watches",
+    "cufflinks": "Cufflinks",
+    "chains": "Chains"
+  },
+  "productTitle": {
+    "rings": "RINGS",
+    "necklaces": "NECKLACES",
+    "bracelets": "BRACELETS",
+    "earrings": "EARRINGS",
+    "pendants": "PENDANTS",
+    "watches": "WATCHES",
+    "cufflinks": "CUFFLINKS",
+    "chains": "CHAINS"
+  },
+  "color": {
+    "white": "White",
+    "rose": "Rose",
+    "yellow": "Yellow"
+  },
+  "orderStatus": {
+    "pending": "PENDING",
+    "processing": "PROCESSING",
+    "shipped": "IN TRANSIT",
+    "delivered": "DELIVERED",
+    "cancelled": "CANCELLED"
+  },
+  "careInstructions": {
+    "gold": "Avoid contact with perfumes and household chemicals. Wipe with a soft lint-free cloth after wearing. Store separately in a jewellery box.",
+    "silver": "Wipe silver with a special anti-tarnish cloth. Avoid prolonged contact with moisture and chlorine. Store in an airtight package.",
+    "platinum": "Platinum is durable but can scratch. Wipe with a soft cloth. For scratches, consult a jeweller for polishing. Store separately.",
+    "stainless steel": "Requires no special care. Rinse with warm water and neutral soap, dry thoroughly. Resistant to rust and scratches."
+  },
+  "deliveryInfo": "Delivery: Nova Poshta (2–3 days), courier in Kyiv (1 day). Cost — according to carrier rates.\n\nReturns: within 14 days of receipt in unworn condition with original packaging and receipt. Exchange or full refund."
+}

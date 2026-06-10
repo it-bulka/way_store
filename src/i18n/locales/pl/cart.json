@@ -1,0 +1,21 @@
+{
+  "title": "TWÓJ KOSZYK",
+  "ariaLabel": "Koszyk",
+  "ariaLabelWithItems": "Koszyk, {{count}} produktów",
+  "empty": "KOSZYK JEST PUSTY",
+  "goToStore": "PRZEJDŹ DO SKLEPU",
+  "checkout": "Złóż zamówienie",
+  "total": "{{label}} ŁĄCZNIE {{sum}} UAH",
+  "totalSumLabel": "ŁĄCZNIE",
+  "currency": "UAH",
+  "itemCount_one": "{{count}} PRODUKT",
+  "itemCount_few": "{{count}} PRODUKTY",
+  "itemCount_many": "{{count}} PRODUKTÓW",
+  "itemCount_other": "{{count}} PRODUKTÓW",
+  "addedToCart": "Dodano do koszyka",
+  "addedToFavorites": "Dodano do ulubionych",
+  "removedFromFavorites": "Usunięto z ulubionych",
+  "toCart": "Do koszyka",
+  "toFavorites": "Do ulubionych",
+  "fromFavorites": "W ulubionych"
+}

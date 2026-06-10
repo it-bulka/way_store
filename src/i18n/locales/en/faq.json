@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "FAQ",
+    "description": "Answers to questions about delivery, payment and returns at Way Store."
+  },
+  "nav": {
+    "questions": "FAQ",
+    "delivery": "DELIVERY",
+    "payment": "PAYMENT",
+    "contacts": "CONTACTS"
+  },
+  "questions": {
+    "heading": "FREQUENTLY ASKED QUESTIONS",
+    "pageMeta": "Questions & Answers",
+    "items": {
+      "1": {
+        "title": "Can I return or exchange an item?",
+        "content": "Jewellery belongs to the category of goods that cannot be returned under Ukrainian law. The exception is a manufacturing defect confirmed after inspection at the workshop. In that case we will replace or repair the item free of charge."
+      },
+      "2": {
+        "title": "What warranty do WAY products carry?",
+        "content": "All WAY products carry a 12-month warranty from the date of purchase. It covers manufacturing defects: metal cracking, coating peeling, clasp failure. Mechanical damage and natural wear are not warranty cases."
+      },
+      "3": {
+        "title": "Do you ship abroad?",
+        "content": "Currently delivery is within Ukraine only. International shipping is temporarily suspended. If you are abroad — write to us at hello@way.com.ua and we will find an individual solution."
+      },
+      "4": {
+        "title": "Do you have a physical store?",
+        "content": "Yes. The WAY showroom is located in Kyiv — please check the address and opening hours in the Contacts section or call +380 44 000 00 00. Showroom visits are by appointment only."
+      },
+      "5": {
+        "title": "How should I care for jewellery?",
+        "content": "Store items separately in soft pouches or a case to avoid scratches. Remove jewellery before contact with water, perfume and household chemicals. Use a soft lint-free cloth for cleaning. We recommend professional cleaning at the workshop once a year."
+      }
+    }
+  },
+  "delivery": {
+    "heading": "DELIVERY",
+    "pageMeta": "Delivery",
+    "novaPoshta": {
+      "title": "Nova Poshta",
+      "content": "Delivery across Ukraine via Nova Poshta branches and parcel lockers. Delivery time — 1–3 business days. The cost is calculated automatically at checkout depending on weight and location."
+    },
+    "courier": {
+      "title": "Courier delivery",
+      "content": "Courier delivery is available in Kyiv and partner cities. Delivery time — the next business day after order confirmation. Before delivery the courier will call to arrange a convenient time."
+    }
+  },
+  "payment": {
+    "heading": "PAYMENT",
+    "pageMeta": "Payment",
+    "card": {
+      "title": "Online card payment",
+      "content": "Secure payment via the WayForPay payment service. VISA and Mastercard are supported. Card data is encrypted and not stored on our servers."
+    },
+    "cashOnDelivery": {
+      "title": "Cash on delivery",
+      "content": "Payment by cash or card upon receipt at a Nova Poshta branch. The cash-on-delivery service is charged according to the carrier's terms."
+    }
+  },
+  "contacts": {
+    "heading": "CONTACTS",
+    "pageMeta": "Contacts",
+    "description": "If you have questions about an order, a product or anything else — fill in the form below and we will respond within one business day.",
+    "wholesale": "For wholesale inquiries:",
+    "media": "For media and press:"
+  },
+  "form": {
+    "name": "FULL NAME",
+    "email": "EMAIL ADDRESS",
+    "phone": "PHONE NUMBER",
+    "subject": "SUBJECT",
+    "message": "LEAVE YOUR MESSAGE",
+    "subscribe": "I WANT TO SUBSCRIBE TO THE NEWSLETTER",
+    "submit": "SUBMIT"
+  }
+}

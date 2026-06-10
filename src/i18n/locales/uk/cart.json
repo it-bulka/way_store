@@ -1,0 +1,21 @@
+{
+  "title": "ВАШ КОШИК",
+  "ariaLabel": "Кошик",
+  "ariaLabelWithItems": "Кошик, {{count}} товарів",
+  "empty": "КОШИК ПОРОЖНІЙ",
+  "goToStore": "ПЕРЕЙТИ ДО МАГАЗИНУ",
+  "checkout": "Оформити замовлення",
+  "total": "{{label}} НА СУМУ {{sum}} грн.",
+  "totalSumLabel": "НА СУМУ",
+  "currency": "грн.",
+  "itemCount_one": "{{count}} ТОВАР",
+  "itemCount_few": "{{count}} ТОВАРИ",
+  "itemCount_many": "{{count}} ТОВАРІВ",
+  "itemCount_other": "{{count}} ТОВАРІВ",
+  "addedToCart": "Додано до кошика",
+  "addedToFavorites": "Додано до обраного",
+  "removedFromFavorites": "Видалено з обраного",
+  "toCart": "В кошик",
+  "toFavorites": "В обране",
+  "fromFavorites": "З обраного"
+}

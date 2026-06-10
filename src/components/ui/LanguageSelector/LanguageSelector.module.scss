@@ -1,0 +1,84 @@
+@import '@/styles/global';
+
+.root {
+  position: relative;
+  font-family: $font_normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $grey;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.chevron {
+  display: inline-block;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-right: 1.5px solid $grey;
+  border-bottom: 1.5px solid $grey;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+
+  .open & {
+    transform: rotate(-135deg) translateY(1px);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 3px);
+  right: 0;
+  list-style: none;
+  padding: 0.2rem 0;
+  margin: 0;
+  min-width: 100%;
+  background: $white;
+  border: 1px solid $border_color;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  .open & {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $grey;
+  font-family: $font_normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.12s;
+
+  &:hover {
+    background-color: $grey_bg;
+  }
+}

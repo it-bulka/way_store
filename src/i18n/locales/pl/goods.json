@@ -1,0 +1,22 @@
+{
+  "details": {
+    "title": "Szczegóły",
+    "material": "Materiał:",
+    "metal": "Metal:",
+    "stones": "Kamienie:",
+    "weight": "Waga: {{num}} {{measurement}}"
+  },
+  "sizes": {
+    "title": "Tabela rozmiarów",
+    "available": "Dostępne rozmiary: {{sizes}}",
+    "universal": "Rozmiar uniwersalny"
+  },
+  "care": { "title": "Pielęgnacja wyrobu" },
+  "delivery": { "title": "Dostawa i zwroty" },
+  "quantity": "Ilość",
+  "addToCart": "Dodaj do koszyka",
+  "buy": "Kup",
+  "color": "Kolor - {{color}}",
+  "error": "Nie udało się załadować produktu.",
+  "relatedTitle": "Podobne produkty"
+}

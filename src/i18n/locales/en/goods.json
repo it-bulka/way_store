@@ -1,0 +1,22 @@
+{
+  "details": {
+    "title": "Details",
+    "material": "Material:",
+    "metal": "Metal:",
+    "stones": "Stones:",
+    "weight": "Weight: {{num}} {{measurement}}"
+  },
+  "sizes": {
+    "title": "Size chart",
+    "available": "Available sizes: {{sizes}}",
+    "universal": "One size"
+  },
+  "care": { "title": "Care instructions" },
+  "delivery": { "title": "Delivery & returns" },
+  "quantity": "Quantity",
+  "addToCart": "Add to cart",
+  "buy": "Buy",
+  "color": "Color - {{color}}",
+  "error": "Failed to load product.",
+  "relatedTitle": "Related products"
+}

@@ -1,0 +1,84 @@
+{
+  "meta": { "title": "Account" },
+  "title": "ACCOUNT",
+  "currency": "UAH",
+  "nav": {
+    "profile": "PROFILE",
+    "purchaseHistory": "PURCHASE HISTORY",
+    "chosen": "FAVORITES"
+  },
+  "profile": {
+    "title": "ABOUT ME",
+    "email": "EMAIL",
+    "name": "NAME",
+    "phone": "PHONE",
+    "birthday": "BIRTHDAY",
+    "sex": {
+      "male": "M",
+      "female": "F",
+      "other": "Other"
+    },
+    "day": "DAY",
+    "month": "MONTH",
+    "year": "YEAR",
+    "submit": "Confirm",
+    "loadError": "Profile loading error"
+  },
+  "address": {
+    "title": "DELIVERY ADDRESS",
+    "city": "CITY",
+    "street": "STREET",
+    "home": "BUILDING",
+    "entrance": "ENTRANCE",
+    "floor": "FLOOR",
+    "apartment": "APARTMENT",
+    "index": "ZIP CODE",
+    "comment": "ADDRESS COMMENT",
+    "submit": "Confirm"
+  },
+  "purchaseHistory": {
+    "empty": "YOU HAVEN'T MADE ANY ORDERS YET",
+    "goToStore": "GO TO STORE",
+    "columns": {
+      "name": "NAME",
+      "price": "PRICE",
+      "date": "DATE",
+      "order": "ORDER NUMBER",
+      "deliveryType": "DELIVERY TYPE",
+      "status": "STATUS"
+    },
+    "status": {
+      "pending": "PENDING",
+      "processing": "PROCESSING",
+      "shipped": "SHIPPED",
+      "delivered": "DELIVERED",
+      "cancelled": "CANCELLED"
+    }
+  },
+  "chosen": {
+    "title": "FAVORITES",
+    "empty": "YOU HAVEN'T ADDED ANYTHING TO FAVORITES YET",
+    "goToStore": "GO TO STORE"
+  },
+  "orderDetail": {
+    "meta": { "title": "Order details" },
+    "notFound": "Order not found",
+    "backToList": "Back to orders",
+    "backToListArrow": "← Back to orders",
+    "sections": {
+      "items": "ITEMS",
+      "address": "DELIVERY ADDRESS",
+      "tracking": "NOVA POSHTA TRACKING"
+    },
+    "labels": {
+      "deliveryType": "Delivery type:",
+      "city": "City:",
+      "street": "Street:",
+      "apartment": "Apartment:",
+      "trackingNumber": "Tracking number:"
+    },
+    "itemSize": "Size: {{size}} mm",
+    "totalPrefix": "TOTAL:",
+    "currency": "UAH"
+  }
+}

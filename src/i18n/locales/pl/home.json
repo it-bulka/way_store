@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "cta": "TWOJA NASTĘPNA BIŻUTERIA",
+    "subtitle": "ODKRYJ PEŁNĄ KOLEKCJĘ",
+    "button": "PRZEGLĄDAJ KOLEKCJE"
+  },
+  "stats": {
+    "gold": { "value": "585° i 750°", "label": "ZŁOTO NAJWYŻSZEJ PRÓBY" },
+    "handmade": { "value": "RĘCZNA ROBOTA", "label": "AUTORSKIE PODEJŚCIE" },
+    "kyiv": { "value": "KIJÓW", "label": "WYPRODUKOWANO NA UKRAINIE" }
+  },
+  "collections": {
+    "title": "KOLEKCJE",
+    "viewMore": "Zobacz →",
+    "categories": {
+      "rings": "PIERŚCIONKI",
+      "necklaces": "NASZYJNIKI",
+      "bracelets": "BRANSOLETKI",
+      "earrings": "KOLCZYKI"
+    }
+  },
+  "gallery": { "altText": "Kolekcja WAY" },
+  "meta": {
+    "title": "Biżuteria",
+    "description": "Autorska biżuteria ze złota i srebra od ukraińskiej marki Way. Pierścionki, naszyjniki, bransoletki, kolczyki."
+  }
+}

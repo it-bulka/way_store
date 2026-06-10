@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Store",
+    "description": "Browse jewellery from the Way collection: rings, necklaces, bracelets, earrings."
+  },
+  "filters": {
+    "product": "PRODUCT",
+    "metal": "METAL",
+    "stone": "STONES",
+    "reset": "Reset filters",
+    "resetSearch": "Clear search",
+    "searchLabel": "Search: «{{query}}»",
+    "noResults": "No products found. Try changing the filters",
+    "noResultsSearch": "Nothing found for «{{query}}»"
+  },
+  "allProducts": "ALL PRODUCTS",
+  "showMore": "Show more",
+  "toasts": {
+    "addedToCart": "Added to cart",
+    "addedToFavorites": "Added to favorites",
+    "removedFromFavorites": "Removed from favorites"
+  }
+}

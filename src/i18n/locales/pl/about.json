@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "O nas",
+    "description": "Dowiedz się więcej o marce WAY — ukraińska biżuteria ręcznie robiona."
+  },
+  "hero": {
+    "tagline": "Wybieramy na zawsze",
+    "imgAlt": "Way jewelry"
+  },
+  "story": {
+    "title": "O NAS",
+    "p1": "WAY to kijowska marka jubilerska założona na przekonaniu, że prawdziwa biżuteria nie powinna krzyczeć. Powinna mówić. Cicho, pewnie, wiecznie.",
+    "p2": "Pracujemy ze złotem, srebrem i platyną najwyższych prób. Każdy wyrób przechodzi przez ręce mistrzów, którzy rozumieją metal nie jako materiał, lecz jako język. Formy, które wybieramy — minimalne. Sens, który wkładamy — maksymalny.",
+    "imgAlt": "Pracownia WAY"
+  },
+  "values": {
+    "craftsmanship": {
+      "title": "RZEMIOSŁO",
+      "content": "Ręczna robota i autorskie podejście na każdym etapie. Żaden wyrób nie opuszcza pracowni bez końcowej kontroli jakości — od wyboru metalu po zapięcie."
+    },
+    "materials": {
+      "title": "MATERIAŁY",
+      "content": "Złoto 585° i 750°, srebro 925°, platyna 950°. Kamienie szlachetne wyłącznie z potwierdzonym pochodzeniem. Nic zbędnego — tylko esencja."
+    },
+    "eternity": {
+      "title": "WIECZNOŚĆ",
+      "content": "Nie podążamy za trendami — unikamy ich celowo. WAY to wybór, który nie zestarze się w sezonie i nie wyjdzie z mody w ciągu roku."
+    }
+  },
+  "quote": "«Biżuteria to nie piękno. To kim wybierasz być.»",
+  "atelier": {
+    "title": "NASZA PRACOWNIA",
+    "content": "Niewielki zespół projektantów i jubilerów w sercu Kijowa. Jesteśmy przekonani: mniej ludzi — więcej uwagi dla każdego wyrobu. Każda kolekcja zaczyna się od szkicu na papierze i kończy wyrobem, który chce się dotykać wciąż od nowa.",
+    "imgAlt": "Atelier WAY"
+  },
+  "cta": "PRZEGLĄDAJ KOLEKCJE"
+}

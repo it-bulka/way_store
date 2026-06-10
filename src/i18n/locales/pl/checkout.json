@@ -1,0 +1,51 @@
+{
+  "meta": { "title": "Realizacja zamówienia" },
+  "title": "REALIZACJA ZAMÓWIENIA",
+  "totalPrefix": "ŁĄCZNIE:",
+  "currency": "UAH",
+  "sizeLabel": "Rozmiar",
+  "sections": {
+    "order": "Twoje zamówienie",
+    "recipient": "Dane odbiorcy",
+    "payment": "Metoda płatności",
+    "delivery": "Metoda dostawy",
+    "address": "Adres dostawy"
+  },
+  "recipient": {
+    "fullName": "IMIĘ I NAZWISKO ODBIORCY",
+    "phone": "NUMER TELEFONU"
+  },
+  "delivery": {
+    "door": "POD DRZWI",
+    "pickup": "PUNKT ODBIORU"
+  },
+  "payment": {
+    "online": "ONLINE",
+    "onDelivery": "PRZY ODBIORZE"
+  },
+  "address": {
+    "city": "MIASTO",
+    "street": "ULICA",
+    "home": "BUDYNEK",
+    "apartment": "MIESZKANIE"
+  },
+  "pickup": {
+    "novaPoshta": "Nova Poshta",
+    "city": "MIASTO",
+    "warehouse": "ODDZIAŁ"
+  },
+  "submit": "Złóż zamówienie",
+  "backToStore": "Wróć do sklepu",
+  "toast": {
+    "orderError": "Nie udało się złożyć zamówienia",
+    "paymentUnavailable": "Usługa płatności niedostępna. Spróbuj ponownie.",
+    "paymentDeclined": "Płatność odrzucona. Spróbuj ponownie."
+  },
+  "success": {
+    "meta": { "title": "Zamówienie przyjęte" },
+    "title": "ZAMÓWIENIE ZŁOŻONE",
+    "orderNumber": "Numer zamówienia: {{number}}",
+    "total": "ŁĄCZNIE: {{sum}} UAH",
+    "continueShopping": "Kontynuuj zakupy"
+  }
+}

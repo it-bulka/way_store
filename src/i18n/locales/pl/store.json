@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Sklep",
+    "description": "Przeglądaj biżuterię z kolekcji Way: pierścionki, naszyjniki, bransoletki, kolczyki."
+  },
+  "filters": {
+    "product": "WYRÓB",
+    "metal": "METAL",
+    "stone": "KAMIENIE",
+    "reset": "Resetuj filtry",
+    "resetSearch": "Wyczyść wyszukiwanie",
+    "searchLabel": "Wyszukiwanie: «{{query}}»",
+    "noResults": "Nie znaleziono produktów. Spróbuj zmienić filtry",
+    "noResultsSearch": "Brak wyników dla «{{query}}»"
+  },
+  "allProducts": "WSZYSTKIE WYROBY",
+  "showMore": "Pokaż więcej",
+  "toasts": {
+    "addedToCart": "Dodano do koszyka",
+    "addedToFavorites": "Dodano do ulubionych",
+    "removedFromFavorites": "Usunięto z ulubionych"
+  }
+}

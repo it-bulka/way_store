@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "cta": "YOUR NEXT JEWELLERY",
+    "subtitle": "DISCOVER THE FULL COLLECTION",
+    "button": "VIEW COLLECTIONS"
+  },
+  "stats": {
+    "gold": { "value": "585° & 750°", "label": "FINEST GOLD" },
+    "handmade": { "value": "HANDMADE", "label": "ARTISAN APPROACH" },
+    "kyiv": { "value": "KYIV", "label": "MADE IN UKRAINE" }
+  },
+  "collections": {
+    "title": "COLLECTIONS",
+    "viewMore": "View →",
+    "categories": {
+      "rings": "RINGS",
+      "necklaces": "NECKLACES",
+      "bracelets": "BRACELETS",
+      "earrings": "EARRINGS"
+    }
+  },
+  "gallery": { "altText": "WAY collection" },
+  "meta": {
+    "title": "Jewellery",
+    "description": "Artisan gold and silver jewellery from Ukrainian brand Way. Rings, necklaces, bracelets, earrings."
+  }
+}

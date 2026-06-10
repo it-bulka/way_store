@@ -1,0 +1,51 @@
+{
+  "meta": { "title": "Checkout" },
+  "title": "CHECKOUT",
+  "totalPrefix": "TOTAL:",
+  "currency": "UAH",
+  "sizeLabel": "Size",
+  "sections": {
+    "order": "Your order",
+    "recipient": "Recipient info",
+    "payment": "Payment method",
+    "delivery": "Delivery method",
+    "address": "Delivery address"
+  },
+  "recipient": {
+    "fullName": "RECIPIENT FULL NAME",
+    "phone": "PHONE NUMBER"
+  },
+  "delivery": {
+    "door": "TO DOOR",
+    "pickup": "PICKUP POINT"
+  },
+  "payment": {
+    "online": "ONLINE",
+    "onDelivery": "CASH ON DELIVERY"
+  },
+  "address": {
+    "city": "CITY",
+    "street": "STREET",
+    "home": "BUILDING",
+    "apartment": "APARTMENT"
+  },
+  "pickup": {
+    "novaPoshta": "Nova Poshta",
+    "city": "CITY",
+    "warehouse": "WAREHOUSE"
+  },
+  "submit": "Place order",
+  "backToStore": "Back to Store",
+  "toast": {
+    "orderError": "Failed to create order",
+    "paymentUnavailable": "Payment service unavailable. Try again.",
+    "paymentDeclined": "Payment declined. Try again."
+  },
+  "success": {
+    "meta": { "title": "Order accepted" },
+    "title": "ORDER PLACED",
+    "orderNumber": "Order number: {{number}}",
+    "total": "TOTAL: {{sum}} UAH",
+    "continueShopping": "Continue shopping"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Strona główna",
+    "store": "Sklep",
+    "collections": "Kolekcje",
+    "collaborations": "Współprace",
+    "about": "O nas"
+  },
+  "breadcrumbs": {
+    "home": "Strona główna",
+    "account": "Konto",
+    "profile": "Profil",
+    "purchaseHistory": "Historia zakupów",
+    "chosen": "Ulubione",
+    "about": "O nas",
+    "checkout": "Realizacja zamówienia",
+    "checkoutSuccess": "Zamówienie złożone",
+    "store": "Sklep"
+  },
+  "footer": {
+    "faq": "FAQ",
+    "privacy": "Polityka prywatności",
+    "offer": "Oferta publiczna",
+    "subscribe": "Subskrybuj",
+    "copyright": "© 2021 WAYYOUCHOOSE. ALL RIGHTS RESERVED."
+  },
+  "cookie": {
+    "text": "Używamy plików cookie, aby zapewnić prawidłowe działanie naszej strony, personalizować reklamy i analizować ruch. Udostępniamy również informacje naszym partnerom w mediach społecznościowych, reklamie i analityce.",
+    "decline": "Odrzuć",
+    "confirm": "Potwierdź"
+  },
+  "notFound": {
+    "title": "Strona nie znaleziona",
+    "backHome": "Wróć na stronę główną"
+  },
+  "actions": {
+    "confirm": "Potwierdź",
+    "backToStore": "Wróć do sklepu",
+    "prev": "Poprz.",
+    "next": "Nast."
+  },
+  "subscription": {
+    "title": "Subskrybuj, aby otrzymywać wiadomości o kolekcjach, współpracach i ofertach specjalnych.",
+    "email": "E-MAIL",
+    "name": "IMIĘ",
+    "submit": "SUBSKRYBUJ",
+    "success": "Pomyślnie zapisałeś się do newslettera",
+    "error": "Błąd subskrypcji. Spróbuj ponownie"
+  },
+  "modal": {
+    "close": "Zamknij"
+  }
+}

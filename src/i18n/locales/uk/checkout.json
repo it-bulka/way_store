@@ -1,0 +1,51 @@
+{
+  "meta": { "title": "Оформлення замовлення" },
+  "title": "ОФОРМЛЕННЯ ЗАМОВЛЕННЯ",
+  "totalPrefix": "РАЗОМ:",
+  "currency": "грн.",
+  "sizeLabel": "Розмір",
+  "sections": {
+    "order": "Ваше замовлення",
+    "recipient": "Дані отримувача",
+    "payment": "Спосіб оплати",
+    "delivery": "Спосіб доставки",
+    "address": "Адреса доставки"
+  },
+  "recipient": {
+    "fullName": "ПІБ ОТРИМУВАЧА",
+    "phone": "НОМЕР ТЕЛЕФОНУ"
+  },
+  "delivery": {
+    "door": "ДО ДВЕРЕЙ",
+    "pickup": "ПУНКТ ВИДАЧІ"
+  },
+  "payment": {
+    "online": "ОНЛАЙН",
+    "onDelivery": "ПРИ ОТРИМАННІ"
+  },
+  "address": {
+    "city": "МІСТО",
+    "street": "ВУЛИЦЯ",
+    "home": "БУДИНОК",
+    "apartment": "КВАРТИРА"
+  },
+  "pickup": {
+    "novaPoshta": "Нова Пошта",
+    "city": "МІСТО",
+    "warehouse": "ВІДДІЛЕННЯ"
+  },
+  "submit": "Оформити замовлення",
+  "backToStore": "Назад до магазину",
+  "toast": {
+    "orderError": "Помилка при створенні замовлення",
+    "paymentUnavailable": "Платіжний сервіс недоступний. Спробуйте ще раз.",
+    "paymentDeclined": "Платіж відхилено. Спробуйте ще раз."
+  },
+  "success": {
+    "meta": { "title": "Замовлення прийнято" },
+    "title": "ЗАМОВЛЕННЯ ОФОРМЛЕНО",
+    "orderNumber": "Номер замовлення: {{number}}",
+    "total": "РАЗОМ: {{sum}} грн.",
+    "continueShopping": "Продовжити покупки"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "meta": { "title": "Акаунт" },
+  "title": "АКАУНТ",
+  "currency": "грн.",
+  "nav": {
+    "profile": "ПРОФІЛЬ",
+    "purchaseHistory": "ІСТОРІЯ ПОКУПОК",
+    "chosen": "ОБРАНЕ"
+  },
+  "profile": {
+    "title": "ПРО МЕНЕ",
+    "email": "EMAIL",
+    "name": "ІМ'Я",
+    "phone": "ТЕЛЕФОН",
+    "birthday": "ДЕНЬ НАРОДЖЕННЯ",
+    "sex": {
+      "male": "Ч",
+      "female": "Ж",
+      "other": "Інше"
+    },
+    "day": "ДЕНЬ",
+    "month": "МІСЯЦЬ",
+    "year": "РІК",
+    "submit": "Підтвердити",
+    "loadError": "Помилка завантаження профілю"
+  },
+  "address": {
+    "title": "АДРЕСА ДОСТАВКИ",
+    "city": "МІСТО",
+    "street": "ВУЛИЦЯ",
+    "home": "БУДИНОК",
+    "entrance": "ПІД'ЇЗД",
+    "floor": "ПОВЕРХ",
+    "apartment": "КВАРТИРА",
+    "index": "ІНДЕКС",
+    "comment": "КОМЕНТАР ДО АДРЕСИ",
+    "submit": "Підтвердити"
+  },
+  "purchaseHistory": {
+    "empty": "У ВАС ЩЕ НЕ БУЛО ЗАМОВЛЕНЬ",
+    "goToStore": "ПЕРЕЙТИ ДО МАГАЗИНУ",
+    "columns": {
+      "name": "ІМ'Я",
+      "price": "ЦІНА",
+      "date": "ДАТА",
+      "order": "НОМЕР ЗАМОВЛЕННЯ",
+      "deliveryType": "ТИП ДОСТАВКИ",
+      "status": "СТАТУС"
+    },
+    "status": {
+      "pending": "ОЧІКУЄТЬСЯ",
+      "processing": "ОБРОБЛЯЄТЬСЯ",
+      "shipped": "В ДОРОЗІ",
+      "delivered": "ВИКОНАНО",
+      "cancelled": "СКАСОВАНО"
+    }
+  },
+  "chosen": {
+    "title": "ДО ОБРАНОГО",
+    "empty": "ВИ ЩЕ НІЧОГО НЕ ДОДАЛИ ДО ОБРАНОГО",
+    "goToStore": "ПЕРЕЙТИ ДО МАГАЗИНУ"
+  },
+  "orderDetail": {
+    "meta": { "title": "Деталі замовлення" },
+    "notFound": "Замовлення не знайдено",
+    "backToList": "До списку замовлень",
+    "backToListArrow": "← До списку замовлень",
+    "sections": {
+      "items": "ТОВАРИ",
+      "address": "АДРЕСА ДОСТАВКИ",
+      "tracking": "ТРЕКІНГ НОВА ПОШТА"
+    },
+    "labels": {
+      "deliveryType": "Тип доставки:",
+      "city": "Місто:",
+      "street": "Вулиця:",
+      "apartment": "Квартира:",
+      "trackingNumber": "Номер ТТН:"
+    },
+    "itemSize": "Розмір: {{size}} мм",
+    "totalPrefix": "РАЗОМ:",
+    "currency": "грн."
+  }
+}

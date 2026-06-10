@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "FAQ",
+    "description": "Odpowiedzi na pytania dotyczące dostawy, płatności i zwrotów w Way Store."
+  },
+  "nav": {
+    "questions": "FAQ",
+    "delivery": "DOSTAWA",
+    "payment": "PŁATNOŚĆ",
+    "contacts": "KONTAKT"
+  },
+  "questions": {
+    "heading": "CZĘSTO ZADAWANE PYTANIA",
+    "pageMeta": "Pytania i odpowiedzi",
+    "items": {
+      "1": {
+        "title": "Czy mogę zwrócić lub wymienić produkt?",
+        "content": "Biżuteria należy do kategorii towarów niepodlegających zwrotowi zgodnie z prawem ukraińskim. Wyjątkiem jest wada produkcyjna potwierdzona po oględzinach w pracowni. W takim przypadku bezpłatnie wymienimy lub naprawimy produkt."
+      },
+      "2": {
+        "title": "Jaka gwarancja obowiązuje na produkty WAY?",
+        "content": "Wszystkie produkty WAY objęte są 12-miesięczną gwarancją od daty zakupu. Obejmuje ona wady produkcyjne: pękanie metalu, odpryskiwanie powłoki, niesprawność zapięcia. Uszkodzenia mechaniczne i naturalne zużycie nie są przypadkami gwarancyjnymi."
+      },
+      "3": {
+        "title": "Czy wysyłacie za granicę?",
+        "content": "Obecnie dostawa odbywa się wyłącznie na terytorium Ukrainy. Wysyłka międzynarodowa jest tymczasowo zawieszona. Jeśli przebywasz za granicą — napisz do nas na hello@way.com.ua, a znajdziemy indywidualne rozwiązanie."
+      },
+      "4": {
+        "title": "Czy posiadacie sklep stacjonarny?",
+        "content": "Tak. Showroom WAY mieści się w Kijowie — adres i godziny otwarcia znajdziesz w sekcji Kontakt lub pod numerem +380 44 000 00 00. Wizyty w showroomie odbywają się wyłącznie po wcześniejszym umówieniu."
+      },
+      "5": {
+        "title": "Jak dbać o biżuterię?",
+        "content": "Przechowuj wyroby osobno, w miękkich woreczkach lub etui — aby uniknąć zarysowań. Zdejmuj biżuterię przed kontaktem z wodą, perfumami i chemią domową. Do czyszczenia używaj miękkiej szmatki bez włókien. Raz w roku zalecamy profesjonalne czyszczenie w pracowni."
+      }
+    }
+  },
+  "delivery": {
+    "heading": "DOSTAWA",
+    "pageMeta": "Dostawa",
+    "novaPoshta": {
+      "title": "Nova Poshta",
+      "content": "Dostawa na terenie całej Ukrainy oddziałami i paczkami Nova Poshta. Czas dostawy — 1–3 dni robocze. Koszt jest naliczany automatycznie podczas składania zamówienia w zależności od wagi i miejscowości."
+    },
+    "courier": {
+      "title": "Dostawa kurierska",
+      "content": "Dostawa kurierska dostępna jest w Kijowie i miastach partnerskich. Czas — następny dzień roboczy po potwierdzeniu zamówienia. Przed dostawą kurier zadzwoni, aby ustalić dogodny termin."
+    }
+  },
+  "payment": {
+    "heading": "PŁATNOŚĆ",
+    "pageMeta": "Płatność",
+    "card": {
+      "title": "Płatność kartą online",
+      "content": "Bezpieczna płatność za pośrednictwem serwisu WayForPay. Obsługiwane są karty VISA i Mastercard. Dane karty są szyfrowane i nie są przechowywane na naszych serwerach."
+    },
+    "cashOnDelivery": {
+      "title": "Płatność przy odbiorze",
+      "content": "Płatność gotówką lub kartą przy odbiorze przesyłki w oddziale Nova Poshta. Usługa pobrania jest taryfikowana zgodnie z warunkami przewoźnika."
+    }
+  },
+  "contacts": {
+    "heading": "KONTAKT",
+    "pageMeta": "Kontakt",
+    "description": "Jeśli masz pytania dotyczące zamówienia, produktu lub czegokolwiek innego — wypełnij poniższy formularz, a odpowiemy w ciągu jednego dnia roboczego.",
+    "wholesale": "W sprawie zamówień hurtowych:",
+    "media": "Dla mediów i prasy:"
+  },
+  "form": {
+    "name": "IMIĘ I NAZWISKO",
+    "email": "ADRES E-MAIL",
+    "phone": "NUMER TELEFONU",
+    "subject": "TEMAT",
+    "message": "ZOSTAW WIADOMOŚĆ",
+    "subscribe": "CHCĘ ZAPISAĆ SIĘ DO NEWSLETTERA",
+    "submit": "POTWIERDŹ"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "YOUR CART",
+  "ariaLabel": "Cart",
+  "ariaLabelWithItems": "Cart, {{count}} items",
+  "empty": "CART IS EMPTY",
+  "goToStore": "GO TO STORE",
+  "checkout": "Place order",
+  "total": "{{label}} TOTAL {{sum}} UAH",
+  "totalSumLabel": "TOTAL",
+  "currency": "UAH",
+  "itemCount_one": "{{count}} ITEM",
+  "itemCount_other": "{{count}} ITEMS",
+  "addedToCart": "Added to cart",
+  "addedToFavorites": "Added to favorites",
+  "removedFromFavorites": "Removed from favorites",
+  "toCart": "Add to cart",
+  "toFavorites": "Favourite",
+  "fromFavorites": "Favourited"
+}

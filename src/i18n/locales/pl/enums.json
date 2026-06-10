@@ -1,0 +1,58 @@
+{
+  "metal": {
+    "gold": "Złoto",
+    "silver": "Srebro",
+    "platinum": "Platyna",
+    "stainless steel": "Stal nierdzewna"
+  },
+  "stone": {
+    "diamonds": "Diamenty",
+    "sapphires": "Szafiry",
+    "rubies": "Rubiny",
+    "amethysts": "Ametysty",
+    "topazes": "Topazy",
+    "aquamarines": "Akwamaryni",
+    "pearls": "Perły",
+    "opals": "Opale",
+    "garnets": "Granaty"
+  },
+  "product": {
+    "rings": "Pierścionki",
+    "necklaces": "Naszyjniki i kolię",
+    "bracelets": "Bransoletki",
+    "earrings": "Kolczyki",
+    "pendants": "Zawieszki",
+    "watches": "Zegarki",
+    "cufflinks": "Spinki do mankietów",
+    "chains": "Łańcuszki"
+  },
+  "productTitle": {
+    "rings": "PIERŚCIONKI",
+    "necklaces": "NASZYJNIKI",
+    "bracelets": "BRANSOLETKI",
+    "earrings": "KOLCZYKI",
+    "pendants": "ZAWIESZKI",
+    "watches": "ZEGARKI",
+    "cufflinks": "SPINKI",
+    "chains": "ŁAŃCUSZKI"
+  },
+  "color": {
+    "white": "Białe",
+    "rose": "Różowe",
+    "yellow": "Żółte"
+  },
+  "orderStatus": {
+    "pending": "OCZEKUJE",
+    "processing": "W TRAKCIE",
+    "shipped": "W DRODZE",
+    "delivered": "DOSTARCZONE",
+    "cancelled": "ANULOWANE"
+  },
+  "careInstructions": {
+    "gold": "Unikaj kontaktu z perfumami i środkami chemicznymi. Wytrzyj miękką szmatką bez włókien po noszeniu. Przechowuj osobno w szkatułce.",
+    "silver": "Wytrzyj srebro specjalną szmatką antyutleniającą. Unikaj długotrwałego kontaktu z wilgocią i chlorem. Przechowuj w szczelnym opakowaniu.",
+    "platinum": "Platyna jest trwała, ale może się porysować. Wytrzyj miękką szmatką. W razie zarysowań skontaktuj się z jubilerem. Przechowuj osobno.",
+    "stainless steel": "Nie wymaga specjalnej pielęgnacji. Spłucz ciepłą wodą z neutralnym mydłem, dokładnie wysusz. Odporna na rdzę i zarysowania."
+  },
+  "deliveryInfo": "Dostawa: Nova Poshta (2–3 dni), kurier po Kijowie (1 dzień). Koszt — zgodnie z taryfami przewoźnika.\n\nZwroty: w ciągu 14 dni od otrzymania w nienoszonym stanie z oryginalnym opakowaniem i paragonem. Wymiana lub pełny zwrot."
+}

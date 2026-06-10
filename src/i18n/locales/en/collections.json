@@ -1,0 +1,111 @@
+{
+  "meta": { "title": "Collections" },
+  "readMore": "Read more",
+  "items": {
+    "1": {
+      "title": "ETERNAL SILHOUETTE",
+      "content": [
+        "Classic is not a style, it is a decision. The Eternal Silhouette collection — jewellery in white and rose gold that is not tied to a season, mood or trend.",
+        "Every piece is cast by hand. A matte surface and polished edges — a detail you don't notice right away, but always feel."
+      ],
+      "detailParagraphs": [
+        "The Eternal Silhouette collection is an exploration of form that exists beyond time. No unnecessary element. Every line is justified, every volume is intentional.",
+        "Gold 585° and silver 925°, hand-cast in the WAY Kyiv workshop. The matte surface contrasts with the polished edges — a detail you don't notice right away, but always feel.",
+        "At the heart of the collection are minimal-profile rings in white gold, a thin-chain necklace, and earrings without excess detail. Each piece can be worn alone or paired — they don't compete, only complement.",
+        "All pieces are made in Ukraine and available to order. Standard sizing, custom fit on request.",
+        "Eternal Silhouette is not about trends. It is about a decision that stays right ten years from now."
+      ],
+      "gallery": {
+        "1": "WAY — white gold ring",
+        "2": "WAY — white gold necklace",
+        "3": "WAY — white gold earrings",
+        "4": "WAY — classic ring",
+        "5": "WAY — white gold bracelet"
+      }
+    },
+    "2": {
+      "title": "ARCHIVE OF WARM DAYS",
+      "content": [
+        "Yellow and rose gold, citrine, topaz. This collection is about the feeling of a summer morning that stays with you all year.",
+        "Light forms, thin chains, rings for the phalanx. Jewellery worn not for occasions, but because it simply feels right."
+      ],
+      "detailParagraphs": [
+        "Archive of Warm Days — a collection we started writing in July. The light fell in a special way, and we wanted to capture not an image, but a feeling. That is how the idea was born: jewellery as a bookmark in a personal archive.",
+        "Yellow and rose gold 585°. Thin topaz pendants, delicate phalanx rings, thin Venetian chains. Nothing extra — only the weight of metal and the warmth of stone.",
+        "Rose gold rings — for those who wear every day. Yellow gold earrings — light, invisible to everyone except those close. Necklaces and bracelets — fine details that complete the look.",
+        "The collection is produced in a limited run. Some pieces are one of a kind.",
+        "All pieces are handmade in the WAY Kyiv workshop."
+      ],
+      "gallery": {
+        "1": "WAY — rose gold ring",
+        "2": "WAY — yellow gold earrings",
+        "3": "WAY — yellow gold necklace",
+        "4": "WAY — gold bracelet",
+        "5": "WAY — rose gold ring"
+      }
+    },
+    "3": {
+      "title": "COLD POETRY",
+      "content": [
+        "Silver 925°, platinum and white gold. This collection is about structure, depth and form that speaks without excess words.",
+        "Sapphires, aquamarines, geometry. Autumn and winter as a reason to wear what truly matters."
+      ],
+      "detailParagraphs": [
+        "Cold Poetry is about the colour of metal in November light. White gold and platinum take on a different depth when the day is short and the air is sharp.",
+        "The collection is built around geometric form: rings with negative volume, relief bracelets, teardrop earrings with aquamarine. Every piece weighs more than it appears.",
+        "Silver 925° and white gold 585° — materials that hold their shape for decades. All stones are natural. Settings are handcrafted in the WAY Kyiv workshop.",
+        "Detail and structure matter more than volume. That is why every piece in the collection carries an architectural logic — nothing is accidental.",
+        "Limited run. Orders accepted while stock lasts."
+      ],
+      "gallery": {
+        "1": "WAY — white gold ring",
+        "2": "WAY — silver bracelet",
+        "3": "WAY — white gold earrings",
+        "4": "WAY — silver necklace",
+        "5": "WAY — white gold bracelet"
+      }
+    },
+    "4": {
+      "title": "MORNING IN KYIV",
+      "content": [
+        "Pendants, chains, thin rings. A collection for those who wear jewellery every day — not for occasions, but because it feels right.",
+        "Minimal form, maximum presence. A capsule you put together once and never think about again."
+      ],
+      "detailParagraphs": [
+        "Morning in Kyiv is an everyday capsule. Not for special events. For eight o'clock coffee, the metro, meetings without reason.",
+        "Pendants in yellow and white gold — small and unnoticed by all but those who know what to look for. Venetian and anchor chains. Thin rings that don't get in the way.",
+        "Yellow gold 585° — a material that holds its warmth and colour for years. Chains and pendants designed to be worn together or separately — no conflict of proportion.",
+        "The capsule is assembled once and never revisited. Pendant + chain + thin ring — the basic set that works every day.",
+        "All pieces made in Ukraine. Built for daily wear. Proven over time."
+      ],
+      "gallery": {
+        "1": "WAY — yellow gold pendant",
+        "2": "WAY — yellow gold chain",
+        "3": "WAY — minimalist pendant",
+        "4": "WAY — gold chain",
+        "5": "WAY — gold pendant"
+      }
+    },
+    "5": {
+      "title": "UNHURRIED EVENING",
+      "content": [
+        "Watches, cufflinks, statement earrings. A collection for evenings worth dressing for.",
+        "Nothing speaks about a person as clearly as the choice of detail. This collection is about details that are remembered."
+      ],
+      "detailParagraphs": [
+        "Unhurried Evening — a collection that begins where the working day ends. Minimal-dial watches, cufflinks in white and yellow gold, bold earrings that speak for themselves.",
+        "Gold 585°, steel 316L. Swiss watch movements. Hand-polished cufflinks. Earrings with natural stones in a classic setting.",
+        "A WAY watch is not just an accessory but a statement about how a person values their own time. Minimal dial, sapphire glass, nubuck strap or metal bracelet.",
+        "Cufflinks in yellow and white gold — for men who know the value of detail. Statement earrings in rose gold — for evenings that are remembered.",
+        "The result: a look that needs no explanation."
+      ],
+      "gallery": {
+        "1": "WAY — white gold watch",
+        "2": "WAY — yellow gold cufflinks",
+        "3": "WAY — rose gold earrings",
+        "4": "WAY — classic watch",
+        "5": "WAY — white gold cufflinks"
+      }
+    }
+  }
+}
