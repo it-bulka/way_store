@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import { SearchBar } from '@/components/ui/SearchBar/SearchBar'
 import { SearchDropdown } from '@/components/ui/SearchDropdown/SearchDropdown'
 import { useSearchProducts } from '@/hooks/useSearchProducts'
+import { useFirestoreLang } from '@/hooks/useFirestoreLang'
 
 interface SearchContainerProps {
   className?: string
@@ -16,8 +17,9 @@ export const SearchContainer: FC<SearchContainerProps> = ({ className }) => {
   const [query, setQuery] = useState(searchParams.get('search') ?? '')
   const [isOpen, setIsOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const lang = useFirestoreLang()
 
-  const { results, loading } = useSearchProducts(query)
+  const { results, loading } = useSearchProducts(query, lang)
 
   useEffect(() => {
     setQuery(searchParams.get('search') ?? '')

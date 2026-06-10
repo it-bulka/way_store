@@ -1,4 +1,5 @@
 import { type FC, type KeyboardEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './SearchBar.module.scss'
 import Search from '@/assets/general/search.svg'
 import classnames from 'classnames'
@@ -11,6 +12,8 @@ interface SearchBarProps {
 }
 
 export const SearchBar: FC<SearchBarProps> = ({ className, value, onChange, onSearch }) => {
+  const { t } = useTranslation('common')
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') onSearch(value)
   }
@@ -21,14 +24,14 @@ export const SearchBar: FC<SearchBarProps> = ({ className, value, onChange, onSe
         type="button"
         className={cls.searchBtn}
         onClick={() => onSearch(value)}
-        aria-label="Пошук"
+        aria-label={t('search.ariaSearch')}
       >
         <Search />
       </button>
       <input
         type="text"
         aria-label="search"
-        placeholder="Пошук..."
+        placeholder={t('search.placeholder')}
         value={value}
         onChange={e => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -38,7 +41,7 @@ export const SearchBar: FC<SearchBarProps> = ({ className, value, onChange, onSe
           type="button"
           className={cls.clearBtn}
           onClick={() => onChange('')}
-          aria-label="Скинути пошук"
+          aria-label={t('search.ariaClear')}
         >
           ×
         </button>

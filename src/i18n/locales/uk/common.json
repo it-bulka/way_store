@@ -49,5 +49,12 @@
   },
   "modal": {
     "close": "Закрити"
+  },
+  "search": {
+    "placeholder": "Пошук...",
+    "loading": "Пошук...",
+    "empty": "Нічого не знайдено",
+    "ariaSearch": "Пошук",
+    "ariaClear": "Скинути пошук"
   }
 }

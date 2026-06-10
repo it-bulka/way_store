@@ -49,5 +49,12 @@
   },
   "modal": {
     "close": "Close"
+  },
+  "search": {
+    "placeholder": "Search...",
+    "loading": "Searching...",
+    "empty": "Nothing found",
+    "ariaSearch": "Search",
+    "ariaClear": "Clear search"
   }
 }

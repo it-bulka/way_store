@@ -1,8 +1,8 @@
 import { memo, type FC } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import cls from './SearchDropdown.module.scss'
 import type { IProduct } from '@/models/goodsType'
-import { PRODUCT_TYPE_LABELS } from '@/models/goodsType'
 
 interface SearchDropdownProps {
   results: IProduct[]
@@ -11,10 +11,14 @@ interface SearchDropdownProps {
 }
 
 export const SearchDropdown: FC<SearchDropdownProps> = memo(({ results, loading, onSelect }) => {
+  const { t } = useTranslation('common')
+  const { t: tEnums } = useTranslation('enums')
+  const tEnum = tEnums as unknown as (key: string) => string
+
   if (loading) {
     return (
       <div className={cls.dropdown}>
-        <p className={cls.status}>Пошук...</p>
+        <p className={cls.status}>{t('search.loading')}</p>
       </div>
     )
   }
@@ -22,7 +26,7 @@ export const SearchDropdown: FC<SearchDropdownProps> = memo(({ results, loading,
   if (!results.length) {
     return (
       <div className={cls.dropdown}>
-        <p className={cls.status}>Нічого не знайдено</p>
+        <p className={cls.status}>{t('search.empty')}</p>
       </div>
     )
   }
@@ -39,7 +43,7 @@ export const SearchDropdown: FC<SearchDropdownProps> = memo(({ results, loading,
           <img src={product.images.white[0]} alt={product.name} className={cls.thumbnail} />
           <div className={cls.info}>
             <p className={cls.name}>{product.name}</p>
-            <p className={cls.meta}>{PRODUCT_TYPE_LABELS[product.category]}</p>
+            <p className={cls.meta}>{tEnum(`product.${product.category}`)}</p>
           </div>
           <span className={cls.price}>
             {product.price.amount} {product.price.currency}

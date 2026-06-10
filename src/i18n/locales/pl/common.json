@@ -49,5 +49,12 @@
   },
   "modal": {
     "close": "Zamknij"
+  },
+  "search": {
+    "placeholder": "Szukaj...",
+    "loading": "Szukam...",
+    "empty": "Nic nie znaleziono",
+    "ariaSearch": "Szukaj",
+    "ariaClear": "Wyczyść wyszukiwanie"
   }
 }

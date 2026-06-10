@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { fetchAllProducts } from '@/services/searchProducts'
 import type { IProduct } from '@/models/goodsType'
+import type { FirestoreLang } from '@/models/pages'
 
 const SEARCH_LIMIT = 20
 const DEBOUNCE_MS = 300
 const MIN_QUERY_LENGTH = 2
 
-let cache: Promise<IProduct[]> | null = null
+const cache = new Map<FirestoreLang, Promise<IProduct[]>>()
 
-const getProducts = (): Promise<IProduct[]> => {
-  if (!cache) cache = fetchAllProducts()
-  return cache
+const getProducts = (lang: FirestoreLang): Promise<IProduct[]> => {
+  if (!cache.has(lang)) cache.set(lang, fetchAllProducts(lang))
+  return cache.get(lang)!
 }
 
-export const useSearchProducts = (query: string) => {
+export const useSearchProducts = (query: string, lang: FirestoreLang) => {
   const [results, setResults] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
 
@@ -30,7 +31,7 @@ export const useSearchProducts = (query: string) => {
     let cancelled = false
 
     const timer = setTimeout(async () => {
-      const products = await getProducts()
+      const products = await getProducts(lang)
       if (cancelled) return
       setResults(
         products.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, SEARCH_LIMIT)
@@ -42,7 +43,7 @@ export const useSearchProducts = (query: string) => {
       cancelled = true
       clearTimeout(timer)
     }
-  }, [query])
+  }, [query, lang])
 
   return { results, loading }
 }
