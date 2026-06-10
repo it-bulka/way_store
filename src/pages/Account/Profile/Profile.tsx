@@ -18,7 +18,7 @@ const Profile = () => {
     dispatch(fetchUser(uid))
       .unwrap()
       .catch(() => addToast('Помилка завантаження профілю', 'error'))
-  }, [uid])
+  }, [uid, dispatch, addToast])
 
   if (!user) return <Loader />
 

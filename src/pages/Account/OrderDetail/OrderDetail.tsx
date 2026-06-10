@@ -44,8 +44,9 @@ export const orderLoader = async ({ params }: LoaderFunctionArgs): Promise<IOrde
 
   const uid = store.getState().auth.uid
   if (!uid) return null
+  if (!params.orderId) return null
   try {
-    const snap = await getDoc(doc(db, 'users', uid, 'orders', params.orderId!))
+    const snap = await getDoc(doc(db, 'users', uid, 'orders', params.orderId))
     return snap.exists() ? ({ ...snap.data(), id: snap.id } as IOrder) : null
   } catch {
     return null

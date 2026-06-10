@@ -32,7 +32,7 @@ export const Stepper = memo(
 
     useEffect(() => {
       getValue?.(+value)
-    }, [value])
+    }, [value, getValue])
 
     return (
       <div className={classnames(cls.stepper, [className])}>

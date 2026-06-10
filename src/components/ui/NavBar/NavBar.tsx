@@ -9,23 +9,18 @@ interface NavBarProps {
   className?: string
 }
 const links = [
-  { id: '1', title: 'Головна',      path: APP_ROUTES.HOME },
-  { id: '2', title: 'Магазин',      path: APP_ROUTES.STORE },
-  { id: '3', title: 'КОЛЕКЦІЇ',     path: APP_ROUTES.COLLECTIONS },
-  { id: '4', title: 'КОЛАБОРАЦІЇ',  path: APP_ROUTES.COLLABORATIONS },
-  { id: '5', title: 'про нас',      path: APP_ROUTES.ABOUT },
+  { id: '1', title: 'Головна', path: APP_ROUTES.HOME },
+  { id: '2', title: 'Магазин', path: APP_ROUTES.STORE },
+  { id: '3', title: 'КОЛЕКЦІЇ', path: APP_ROUTES.COLLECTIONS },
+  { id: '4', title: 'КОЛАБОРАЦІЇ', path: APP_ROUTES.COLLABORATIONS },
+  { id: '5', title: 'про нас', path: APP_ROUTES.ABOUT },
 ]
 export const NavBar: FC<NavBarProps> = ({ className }) => {
   const [activePage, setActivePage] = useState('/')
   const { pathname } = useLocation()
-  const checkPage = () => {
-    const pathName = pathname.split('/')[1]
-    const path = '/' + pathName
-    setActivePage(path)
-  }
 
   useEffect(() => {
-    checkPage()
+    setActivePage('/' + pathname.split('/')[1])
   }, [pathname])
   return (
     <nav className={classnames(cls.navbar, [className])}>

@@ -45,26 +45,32 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     if (searchQuery) {
       result = result.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     }
-    if (clientSideFilters.stones?.length) {
-      result = result.filter(p => p.stones.some(s => clientSideFilters.stones!.includes(s)))
+    const { stones: filterStones } = clientSideFilters
+    if (filterStones && filterStones.length > 0) {
+      result = result.filter(p => p.stones.some(s => filterStones.includes(s)))
     }
     return result
   }, [products, searchQuery, clientSideFilters])
 
   const handleReset = useCallback(() => {
     resetFilters()
-    if (searchQuery) setSearchParams(prev => {
-      const next = new URLSearchParams(prev)
-      next.delete('search')
-      return next
-    })
+    if (searchQuery)
+      setSearchParams(prev => {
+        const next = new URLSearchParams(prev)
+        next.delete('search')
+        return next
+      })
   }, [resetFilters, searchQuery, setSearchParams])
 
-  const clearSearch = useCallback(() => setSearchParams(prev => {
-    const next = new URLSearchParams(prev)
-    next.delete('search')
-    return next
-  }), [setSearchParams])
+  const clearSearch = useCallback(
+    () =>
+      setSearchParams(prev => {
+        const next = new URLSearchParams(prev)
+        next.delete('search')
+        return next
+      }),
+    [setSearchParams]
+  )
 
   return (
     <div className={classnames(cls.products, [className])}>

@@ -37,16 +37,11 @@ export const Dropdown = <T extends string>({
     return () => document.removeEventListener('click', clickHandle)
   }, [setOpened])
 
-  const checkChosen = () => {
-    const amount = options.filter(item => item.chosen).length
-    setChosenAmount(amount)
-  }
-
   const onCheck = (optionId: string, status: boolean) => onChangeChecked?.(optionId, status)
 
   useEffect(() => {
-    checkChosen()
-  }, [options, checkChosen])
+    setChosenAmount(options.filter(item => item.chosen).length)
+  }, [options])
 
   return (
     <div className={classnames(cls.dropdown, [className, 'drop'], { [cls.opened]: opened })}>

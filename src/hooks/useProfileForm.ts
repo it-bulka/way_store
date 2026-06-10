@@ -8,6 +8,7 @@ import { getAuthUid } from '@/redux/selectors/getAuthSelector'
 import { useToast } from '@/context/ToastContext'
 import type { IUser } from '@/redux/types/user'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useProfileForm<T extends FieldValues>(schema: ObjectSchema<any>) {
   const dispatch = useAppDispatch()
   const uid = useAppSelector(getAuthUid)

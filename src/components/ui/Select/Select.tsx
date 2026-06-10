@@ -4,7 +4,7 @@ import ArrowIcon from '@/assets/general/arrow.svg'
 import CloseIcon from '@/assets/general/close.svg'
 import { useToggle } from '@/hooks/useToggle'
 import classnames from 'classnames'
-import type { FieldValues } from 'react-hook-form/dist/types/fields'
+import type { FieldValues, UseFormRegister } from 'react-hook-form'
 import { IRegister } from '@/models'
 
 export interface SelectOption {
@@ -40,7 +40,7 @@ export function Select<T extends FieldValues | undefined = undefined>({
     onChose && onChose(item)
 
     if (register && name) {
-      register(name as any, { value: item.value })
+      ;(register as UseFormRegister<FieldValues>)(name as string, { value: item.value })
     }
   }
 

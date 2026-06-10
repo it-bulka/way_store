@@ -62,27 +62,24 @@ export const useProductFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const firstRenderRef = useRef(true)
   const priceDebounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const initialParamsRef = useRef(searchParams)
 
-  const urlProduct = useMemo(() => searchParams.getAll('product') as ProductType[], [])
-  const urlMetal   = useMemo(() => searchParams.getAll('metal')   as MetalsType[],  [])
-  const urlStones  = useMemo(() => searchParams.getAll('stones')  as StoneType[],   [])
-  const urlPriceRaw = searchParams.get('price')
-  const urlPrice = useMemo<FilterPrice | null>(
-    () => urlPriceRaw
-      ? { min: Number(urlPriceRaw.split('-')[0]), max: Number(urlPriceRaw.split('-')[1]) }
-      : null,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+  const urlProduct = initialParamsRef.current.getAll('product') as ProductType[]
+  const urlMetal = initialParamsRef.current.getAll('metal') as MetalsType[]
+  const urlStones = initialParamsRef.current.getAll('stones') as StoneType[]
+  const urlPriceRaw = initialParamsRef.current.get('price')
+  const urlPrice: FilterPrice | null = urlPriceRaw
+    ? { min: Number(urlPriceRaw.split('-')[0]), max: Number(urlPriceRaw.split('-')[1]) }
+    : null
 
   const [metals, setMetals] = useState(() =>
-    metalsOptions.map(opt => ({ ...opt, chosen: urlMetal.includes(opt.label as MetalsType) }))
+    metalsOptions.map(opt => ({ ...opt, chosen: urlMetal.includes(opt.label) }))
   )
   const [stones, setStones] = useState(() =>
-    stonesOptions.map(opt => ({ ...opt, chosen: urlStones.includes(opt.label as StoneType) }))
+    stonesOptions.map(opt => ({ ...opt, chosen: urlStones.includes(opt.label) }))
   )
   const [productType, setProductType] = useState(() =>
-    productOptions.map(opt => ({ ...opt, chosen: urlProduct.includes(opt.label as ProductType) }))
+    productOptions.map(opt => ({ ...opt, chosen: urlProduct.includes(opt.label) }))
   )
   const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(urlPrice)
 
@@ -144,27 +141,28 @@ export const useProductFilters = () => {
   }, [dispatch, activeFilters])
 
   useEffect(() => {
-    setSearchParams(prev => {
-      const next = new URLSearchParams(prev)
+    setSearchParams(
+      prev => {
+        const next = new URLSearchParams(prev)
 
-      const chosenProduct = getChosenCategory<ProductType>(productType)
-      next.delete('product')
-      chosenProduct.forEach(v => next.append('product', v))
+        next.delete('product')
+        activeFilters.product?.forEach(v => next.append('product', v))
 
-      const chosenMetal = getChosenCategory<MetalsType>(metals)
-      next.delete('metal')
-      chosenMetal.forEach(v => next.append('metal', v))
+        next.delete('metal')
+        activeFilters.metal?.forEach(v => next.append('metal', v))
 
-      const chosenStones = getChosenCategory<StoneType>(stones)
-      next.delete('stones')
-      chosenStones.forEach(v => next.append('stones', v))
+        next.delete('stones')
+        activeFilters.stones?.forEach(v => next.append('stones', v))
 
-      if (priceFilter) next.set('price', `${priceFilter.min}-${priceFilter.max}`)
-      else next.delete('price')
+        if (activeFilters.price)
+          next.set('price', `${activeFilters.price.min}-${activeFilters.price.max}`)
+        else next.delete('price')
 
-      return next
-    }, { replace: true })
-  }, [activeFilters])
+        return next
+      },
+      { replace: true }
+    )
+  }, [activeFilters, setSearchParams])
 
   return {
     metals,

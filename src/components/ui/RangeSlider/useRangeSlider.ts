@@ -23,7 +23,14 @@ interface UseRangeSliderProps {
   reset: boolean
 }
 
-export const useRangeSlider = ({ min, max, maxPossible, rangeGap, getRange, reset }: UseRangeSliderProps) => {
+export const useRangeSlider = ({
+  min,
+  max,
+  maxPossible,
+  rangeGap,
+  getRange,
+  reset,
+}: UseRangeSliderProps) => {
   const [isTooltipShown, setTooltipShown] = useToggle(false)
   const [tooltipContent, setTooltipContent] = useState('')
   const [tooltipX, setTooltipX] = useState<number>(0)
@@ -80,7 +87,7 @@ export const useRangeSlider = ({ min, max, maxPossible, rangeGap, getRange, rese
       setMaxRange(max)
       setRangePositions({ left: 0, right: 0 })
     }
-  }, [reset])
+  }, [reset, min, max])
 
   return {
     minRange,

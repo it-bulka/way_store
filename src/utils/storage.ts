@@ -10,13 +10,17 @@ const safeGet = <T>(key: string): T | null => {
 const safeSet = <T>(key: string, value: T): void => {
   try {
     localStorage.setItem(key, JSON.stringify(value))
-  } catch {}
+  } catch {
+    /* ignore localStorage errors (private browsing, storage quota, etc.) */
+  }
 }
 
 const safeRemove = (key: string): void => {
   try {
     localStorage.removeItem(key)
-  } catch {}
+  } catch {
+    /* ignore localStorage errors */
+  }
 }
 
 export const storage = { get: safeGet, set: safeSet, remove: safeRemove }
