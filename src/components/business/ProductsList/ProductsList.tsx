@@ -50,7 +50,10 @@ export const ProductsList: FC<ProductsListProps> = memo(
     const chosenIds = useMemo(() => new Set(chosen.map(p => p.id)), [chosen])
     const { isModalOpen, openModal, closeModal } = useControlModal(false)
 
-    const onCardClick = useCallback((id: string) => () => navigateTo(`/store/${id}`), [navigateTo])
+    const onCardClick = useCallback(
+      (product: IProduct) => () => navigateTo(`/store/${product.id}?category=${product.category}`),
+      [navigateTo]
+    )
 
     const onAddToCart = useCallback(
       (product: IProduct) => () => {
@@ -89,7 +92,7 @@ export const ProductsList: FC<ProductsListProps> = memo(
                   img={firstImg(product.images)}
                   title={product.name}
                   price={product.price.amount}
-                  onClick={onCardClick(product.id)}
+                  onClick={onCardClick(product)}
                   onAddToCart={onAddToCart(product)}
                   onAddToFavorites={onAddToFavorites(product)}
                   isChosen={chosenIds.has(product.id)}

@@ -5,9 +5,8 @@ import { productsAction } from '@/redux/reducers/productsSlice'
 import { getSubcollectionDocsPaged, PAGE_SIZE } from '@/services/getSubcollectionDocsPaged'
 import { useToast } from '@/context/ToastContext'
 import { PAGES } from '@/models/pages'
+import type { FirestoreLang } from '@/models/pages'
 import type { IProduct, ProductType } from '@/models/goodsType'
-
-const PRODUCT_PATH_PREFIX = PAGES.getCollection().split('/').slice(0, -1)
 
 const ALL_CATEGORIES: ProductType[] = [
   'rings',
@@ -23,6 +22,7 @@ const ALL_CATEGORIES: ProductType[] = [
 interface UsePaginationParams {
   collection: ProductType | null
   queries?: QueryFieldFilterConstraint[]
+  firestoreLang: FirestoreLang
 }
 
 interface UsePaginationResult {
@@ -35,6 +35,7 @@ interface UsePaginationResult {
 export const useProductPagination = ({
   collection,
   queries,
+  firestoreLang,
 }: UsePaginationParams): UsePaginationResult => {
   const dispatch = useAppDispatch()
   const { addToast } = useToast()
@@ -52,6 +53,8 @@ export const useProductPagination = ({
     bufferOffsetRef.current = 0
     setHasMore(true)
 
+    const pathPrefix = PAGES.getCollection(firestoreLang).split('/').slice(0, -1)
+
     const fetchFirstPage = async () => {
       setLoading(true)
       try {
@@ -59,7 +62,7 @@ export const useProductPagination = ({
           const results = await Promise.all(
             ALL_CATEGORIES.map(cat =>
               getSubcollectionDocsPaged<IProduct>({
-                slugs: [...PRODUCT_PATH_PREFIX, cat],
+                slugs: [...pathPrefix, cat],
                 queries,
                 pageSize: 1000,
               })
@@ -71,7 +74,7 @@ export const useProductPagination = ({
           setHasMore(bufferRef.current.length > PAGE_SIZE)
           return
         }
-        const slugs = [...PRODUCT_PATH_PREFIX, collection]
+        const slugs = [...pathPrefix, collection]
         const { data, lastDoc } = await getSubcollectionDocsPaged<IProduct>({ slugs, queries })
         cursorRef.current = lastDoc
         setHasMore(data.length >= PAGE_SIZE)
@@ -84,7 +87,7 @@ export const useProductPagination = ({
     }
 
     fetchFirstPage()
-  }, [collection, queries, dispatch, addToast])
+  }, [collection, queries, firestoreLang, dispatch, addToast])
 
   const loadMore = useCallback(async () => {
     if (loadingMoreRef.current || !hasMore) return
@@ -99,7 +102,8 @@ export const useProductPagination = ({
         dispatch(productsAction.appendProducts(next))
         return
       }
-      const slugs = [...PRODUCT_PATH_PREFIX, collection]
+      const pathPrefix = PAGES.getCollection(firestoreLang).split('/').slice(0, -1)
+      const slugs = [...pathPrefix, collection]
       const { data, lastDoc } = await getSubcollectionDocsPaged<IProduct>({
         slugs,
         queries,
@@ -114,7 +118,7 @@ export const useProductPagination = ({
       loadingMoreRef.current = false
       setLoadingMore(false)
     }
-  }, [collection, queries, hasMore, dispatch, addToast])
+  }, [collection, queries, firestoreLang, hasMore, dispatch, addToast])
 
   return { loading, loadingMore, hasMore, loadMore }
 }

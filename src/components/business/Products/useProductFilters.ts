@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { where } from 'firebase/firestore'
+import { useTranslation } from 'react-i18next'
 import { type IOption as IDropdownOption } from '@/components/ui/Dropdown/Dropdown'
 import { type IGetRange } from '@/components/ui/RangeSlider/RangeSlider'
 import { useAppDispatch } from '@/hooks/reduxHooks'
@@ -59,6 +60,7 @@ function buildClientSideFilters(fc: IFilters): ClientSideFilters {
 
 export const useProductFilters = () => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation('enums')
   const [searchParams, setSearchParams] = useSearchParams()
   const firstRenderRef = useRef(true)
   const priceDebounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
@@ -113,6 +115,19 @@ export const useProductFilters = () => {
     setPriceFilter(null)
   }, [])
 
+  const translatedMetals = useMemo(
+    () => metals.map(opt => ({ ...opt, displayLabel: t(`metal.${opt.label}` as never) })),
+    [metals, t]
+  )
+  const translatedStones = useMemo(
+    () => stones.map(opt => ({ ...opt, displayLabel: t(`stone.${opt.label}` as never) })),
+    [stones, t]
+  )
+  const translatedProductType = useMemo(
+    () => productType.map(opt => ({ ...opt, displayLabel: t(`product.${opt.label}` as never) })),
+    [productType, t]
+  )
+
   const chosenProductType = useMemo(
     () => getChosenCategory<ProductType>(productType)[0] ?? null,
     [productType]
@@ -165,9 +180,9 @@ export const useProductFilters = () => {
   }, [activeFilters, setSearchParams])
 
   return {
-    metals,
-    stones,
-    productType,
+    metals: translatedMetals,
+    stones: translatedStones,
+    productType: translatedProductType,
     priceFilter,
     chosenProductType,
     collection: chosenProductType,

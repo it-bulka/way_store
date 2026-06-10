@@ -1,4 +1,5 @@
 import { type FC, useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './Products.module.scss'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
 import { RangeSlider } from '@/components/ui/RangeSlider/RangeSlider'
@@ -8,9 +9,9 @@ import classnames from 'classnames'
 import { useAppSelector } from '@/hooks/reduxHooks'
 import { getProducts } from '@/redux/selectors/getProducts'
 import { Absent } from '@/components/ui/Absent/Absent.tsx'
-import { categoryTitles } from './filterOptions'
 import { useProductFilters } from './useProductFilters'
 import { useProductPagination } from './useProductPagination'
+import { useFirestoreLang } from '@/hooks/useFirestoreLang'
 import { useSearchParams } from 'react-router-dom'
 
 interface ProductsProps {
@@ -20,7 +21,10 @@ interface ProductsProps {
 export const Products: FC<ProductsProps> = ({ className }) => {
   const products = useAppSelector(getProducts)
   const [searchParams, setSearchParams] = useSearchParams()
+  const { t } = useTranslation('store')
+  const { t: tEnums } = useTranslation('enums')
   const searchQuery = searchParams.get('search') ?? ''
+  const firestoreLang = useFirestoreLang()
 
   const {
     metals,
@@ -38,7 +42,11 @@ export const Products: FC<ProductsProps> = ({ className }) => {
     resetFilters,
   } = useProductFilters()
 
-  const { loading, loadingMore, hasMore, loadMore } = useProductPagination({ collection, queries })
+  const { loading, loadingMore, hasMore, loadMore } = useProductPagination({
+    collection,
+    queries,
+    firestoreLang,
+  })
 
   const visibleProducts = useMemo(() => {
     let result = products
@@ -78,17 +86,17 @@ export const Products: FC<ProductsProps> = ({ className }) => {
         <BreadCrumbs />
         {searchQuery && (
           <div className={cls.searchInfo}>
-            <span>Пошук: «{searchQuery}»</span>
+            <span>{t('filters.searchLabel', { query: searchQuery })}</span>
             <button type="button" className={cls.clearSearch} onClick={clearSearch}>
-              Скинути пошук
+              {t('filters.resetSearch')}
             </button>
           </div>
         )}
         <div className={cls.filters}>
           <div className={cls.dropdowns}>
-            <Dropdown title="ВИРІБ" options={productType} onChangeChecked={onProductChecked} />
-            <Dropdown title="МЕТАЛ" options={metals} onChangeChecked={onMetalsChecked} />
-            <Dropdown title="КАМІННЯ" options={stones} onChangeChecked={onStonesChecked} />
+            <Dropdown title={t('filters.product')} options={productType} onChangeChecked={onProductChecked} />
+            <Dropdown title={t('filters.metal')} options={metals} onChangeChecked={onMetalsChecked} />
+            <Dropdown title={t('filters.stone')} options={stones} onChangeChecked={onStonesChecked} />
           </div>
           <div className={cls.slider}>
             <RangeSlider
@@ -106,16 +114,16 @@ export const Products: FC<ProductsProps> = ({ className }) => {
         <Absent
           info={
             searchQuery
-              ? `За запитом «${searchQuery}» нічого не знайдено`
-              : 'Товарів не знайдено. Спробуйте змінити параметри фільтрації'
+              ? t('filters.noResultsSearch', { query: searchQuery })
+              : t('filters.noResults')
           }
-          btnTitle={searchQuery ? 'Скинути пошук' : 'Скинути параметри'}
+          btnTitle={searchQuery ? t('filters.resetSearch') : t('filters.reset')}
           onBtnClick={searchQuery ? clearSearch : handleReset}
         />
       ) : (
         <ProductsList
           products={visibleProducts}
-          title={chosenProductType ? categoryTitles[chosenProductType] : 'УСІ ВИРОБИ'}
+          title={chosenProductType ? tEnums(`productTitle.${chosenProductType}` as never) : t('allProducts')}
           loading={loading}
           loadMore={loadMore}
           hasMore={hasMore}

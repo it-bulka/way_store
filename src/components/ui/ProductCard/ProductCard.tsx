@@ -1,4 +1,5 @@
 import { type FC, type KeyboardEvent, type MouseEvent, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './ProductCard.module.scss'
 import classnames from 'classnames'
 
@@ -23,6 +24,8 @@ export const ProductCard: FC<ProductCardProps> = ({
   onAddToFavorites,
   isChosen,
 }) => {
+  const { t } = useTranslation('cart')
+
   const onKeyDown = useCallback(
     (e: KeyboardEvent<HTMLElement>) => {
       if (e.key === 'Enter') onClick?.()
@@ -59,12 +62,12 @@ export const ProductCard: FC<ProductCardProps> = ({
       </div>
 
       <div className={cls.actions}>
-        <button onClick={stopAndCall(onAddToCart)}>В кошик</button>
+        <button onClick={stopAndCall(onAddToCart)}>{t('toCart')}</button>
         <button
           onClick={stopAndCall(onAddToFavorites)}
           className={classnames({ [cls.chosenBtn]: isChosen })}
         >
-          {isChosen ? 'З обраного' : 'В обране'}
+          {isChosen ? t('fromFavorites') : t('toFavorites')}
         </button>
       </div>
 
