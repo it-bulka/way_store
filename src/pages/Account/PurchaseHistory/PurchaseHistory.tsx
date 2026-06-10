@@ -1,4 +1,5 @@
 import { type FC, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './PurchaseHistory.module.scss'
 import { Table, type IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
@@ -7,9 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getOrders, getOrdersLoading } from '@/redux/selectors/getOrdersSelector'
 import { fetchOrders } from '@/redux/async/fetchOrders'
-import type { OrderStatus } from '@/models/orderType'
+import type { DeliveryType, OrderStatus } from '@/models/orderType'
 
-const statusEnMap: Record<OrderStatus, string> = {
+const STATUS_EN_MAP: Record<OrderStatus, string> = {
   delivered: 'success',
   cancelled: 'cancel',
   pending: 'pending',
@@ -17,28 +18,18 @@ const statusEnMap: Record<OrderStatus, string> = {
   shipped: 'shipped',
 }
 
-const statusLabelMap: Record<OrderStatus, string> = {
-  delivered: 'ВИКОНАНО',
-  cancelled: 'СКАСОВАНО',
-  pending: 'ОЧІКУЄТЬСЯ',
-  processing: 'ОБРОБЛЯЄТЬСЯ',
-  shipped: 'В ДОРОЗІ',
+const DELIVERY_KEY_MAP: Record<DeliveryType, 'door' | 'pickup'> = {
+  'ДО ДВЕРЕЙ': 'door',
+  'ПУНКТ ВИДАЧІ': 'pickup',
 }
-
-const columns = [
-  { header: "ІМ'Я", accessorKey: 'name' },
-  { header: 'ЦІНА', accessorKey: 'price' },
-  { header: 'ДАТА', accessorKey: 'date' },
-  { header: 'НОМЕР ЗАМОВЛЕННЯ', accessorKey: 'order' },
-  { header: 'ТИП ДОСТАВКИ', accessorKey: 'deliveryType' },
-  { header: 'СТАТУС', accessorKey: 'status' },
-]
 
 interface PurchaseHistoryProps {
   className?: string
 }
 
 const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
+  const { t } = useTranslation('account')
+  const { t: tCheckout } = useTranslation('checkout')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const orders = useAppSelector(getOrders)
@@ -48,6 +39,15 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
     dispatch(fetchOrders())
   }, [dispatch])
 
+  const columns = [
+    { header: t('purchaseHistory.columns.name'), accessorKey: 'name' },
+    { header: t('purchaseHistory.columns.price'), accessorKey: 'price' },
+    { header: t('purchaseHistory.columns.date'), accessorKey: 'date' },
+    { header: t('purchaseHistory.columns.order'), accessorKey: 'order' },
+    { header: t('purchaseHistory.columns.deliveryType'), accessorKey: 'deliveryType' },
+    { header: t('purchaseHistory.columns.status'), accessorKey: 'status' },
+  ]
+
   const tableData: IGoods[] = orders.map(order => ({
     id: order.id,
     title: order.items[0]?.title ?? '—',
@@ -55,9 +55,9 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
     data: order.date,
     order: order.orderNumber,
     delivery: {
-      type: order.deliveryType,
-      statusEn: statusEnMap[order.status],
-      status: statusLabelMap[order.status],
+      typeLabel: tCheckout(`delivery.${DELIVERY_KEY_MAP[order.deliveryType]}`),
+      statusEn: STATUS_EN_MAP[order.status],
+      status: t(`purchaseHistory.status.${order.status}`),
     },
   }))
 
@@ -73,8 +73,8 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
       ) : (
         !loading && (
           <Absent
-            info="У ВАС ЩЕ НЕ БУЛО ЗАМОВЛЕНЬ"
-            btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
+            info={t('purchaseHistory.empty')}
+            btnTitle={t('purchaseHistory.goToStore')}
             className={cls.absent}
             onBtnClick={() => navigate('/store')}
           />

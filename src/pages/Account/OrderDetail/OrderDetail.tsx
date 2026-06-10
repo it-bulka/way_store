@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import cls from './OrderDetail.module.scss'
 import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import { Absent } from '@/components/ui/Absent/Absent'
@@ -12,14 +13,15 @@ import type { IOrder } from '@/models/orderType'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const OrderDetail = () => {
+  const { t } = useTranslation('account')
   const order = useLoaderData() as IOrder | null
   const navigate = useNavigate()
 
   if (!order) {
     return (
       <Absent
-        info="Замовлення не знайдено"
-        btnTitle="До списку замовлень"
+        info={t('orderDetail.notFound')}
+        btnTitle={t('orderDetail.backToList')}
         onBtnClick={() => navigate('/account/purchase-history')}
       />
     )
@@ -27,7 +29,7 @@ const OrderDetail = () => {
 
   return (
     <div className={cls.root}>
-      <PageMeta title="Деталі замовлення" noindex />
+      <PageMeta title={t('orderDetail.meta.title')} noindex />
       <BreadCrumbs />
       <OrderHeader order={order} />
       <OrderItems items={order.items} />

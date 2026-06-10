@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './ChosenGoods.module.scss'
 import { Absent } from '@/components/ui/Absent/Absent'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
@@ -12,17 +13,18 @@ interface ChosenGoodsProps {
 }
 
 const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
+  const { t } = useTranslation('account')
   const chosen = useAppSelector(getChosenProducts)
   const navigateTo = useNavigate()
 
   return (
     <div className={classnames(cls.chosenGoods, [className])}>
       {chosen?.length ? (
-        <ProductsList products={chosen} className={cls.products} title="ДО ОБРАНОГО" />
+        <ProductsList products={chosen} className={cls.products} title={t('chosen.title')} />
       ) : (
         <Absent
-          info="ВИ ЩЕ НІЧОГО НЕ ДОДАЛИ ДО ОБРАНОГО"
-          btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
+          info={t('chosen.empty')}
+          btnTitle={t('chosen.goToStore')}
           className={cls.absent}
           onBtnClick={() => navigateTo('/store')}
         />
