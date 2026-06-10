@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { type FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import cls from './CartItem.module.scss'
@@ -24,7 +24,7 @@ interface CartItemProps {
   onNavigate?: () => void
 }
 
-export const CartItem: FC<CartItemProps> = ({
+export const CartItem: FC<CartItemProps> = memo(({
   id,
   img,
   title,
@@ -99,4 +99,6 @@ export const CartItem: FC<CartItemProps> = ({
       </div>
     </li>
   )
-}
+})
+
+CartItem.displayName = 'CartItem'
