@@ -1,4 +1,5 @@
 import { type FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './AuthForm.module.scss'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getAuthLoading, getAuthError } from '@/redux/selectors/getAuthSelector'
@@ -19,6 +20,7 @@ export const AuthForm: FC<AuthFormProps> = ({ onSuccess, onForgotPassword }) => 
   const dispatch = useAppDispatch()
   const loading = useAppSelector(getAuthLoading)
   const error = useAppSelector(getAuthError)
+  const { t } = useTranslation('auth')
 
   const handleGoogleSignIn = async () => {
     const result = await dispatch(signInWithGoogle())
@@ -35,14 +37,14 @@ export const AuthForm: FC<AuthFormProps> = ({ onSuccess, onForgotPassword }) => 
           className={mode === 'login' ? cls.activeTab : cls.tab}
           onClick={() => setMode('login')}
         >
-          ВХІД
+          {t('tabs.login')}
         </button>
         <button
           type="button"
           className={mode === 'register' ? cls.activeTab : cls.tab}
           onClick={() => setMode('register')}
         >
-          РЕЄСТРАЦІЯ
+          {t('tabs.register')}
         </button>
       </div>
       {mode === 'login' ? (
@@ -56,7 +58,7 @@ export const AuthForm: FC<AuthFormProps> = ({ onSuccess, onForgotPassword }) => 
         <RegisterForm onSuccess={onSuccess} loading={loading} error={error} />
       )}
       <div className={cls.divider}>
-        <span>або</span>
+        <span>{t('or')}</span>
       </div>
       <GoogleSignInButton onClick={handleGoogleSignIn} disabled={loading} />
     </div>

@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslation } from 'react-i18next'
 import cls from './AuthForm.module.scss'
 import { Input } from '@/components/ui/Input/Input'
 import { Button } from '@/components/ui/Button/Button'
@@ -22,6 +23,7 @@ export interface LoginFormProps {
 
 export const LoginForm: FC<LoginFormProps> = ({ onSuccess, onForgotPassword, loading, error }) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation('auth')
   const {
     register,
     handleSubmit,
@@ -38,11 +40,11 @@ export const LoginForm: FC<LoginFormProps> = ({ onSuccess, onForgotPassword, loa
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <ModalTitle>ВХІД</ModalTitle>
-      <Input name="email" label="E-MAIL" register={register} error={errors.email?.message} />
+      <ModalTitle>{t('login.title')}</ModalTitle>
+      <Input name="email" label={t('login.email')} register={register} error={errors.email?.message} />
       <Input
         name="password"
-        label="ПАРОЛЬ"
+        label={t('login.password')}
         type="password"
         addendum={<EyeIcon />}
         register={register}
@@ -50,10 +52,10 @@ export const LoginForm: FC<LoginFormProps> = ({ onSuccess, onForgotPassword, loa
       />
       {error && <Typography className={cls.error}>{error}</Typography>}
       <button type="button" className={cls.link} onClick={onForgotPassword}>
-        Забули пароль?
+        {t('login.forgotPassword')}
       </button>
-      <Button title="УВІЙТИ" type="submit" disabled={loading} className={cls.btn} />
-      <Checkbox label="Залишатись у системі" checked={false} />
+      <Button title={t('login.submit')} type="submit" disabled={loading} className={cls.btn} />
+      <Checkbox label={t('login.stayLoggedIn')} checked={false} />
     </form>
   )
 }

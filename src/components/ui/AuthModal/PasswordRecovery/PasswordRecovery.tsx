@@ -1,6 +1,7 @@
 import { type FC, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslation } from 'react-i18next'
 import * as yup from 'yup'
 import cls from './PasswordRecovery.module.scss'
 import { ModalTitle } from '@/components/ui/ModalTitle/ModalTitle'
@@ -9,8 +10,15 @@ import { Input } from '@/components/ui/Input/Input'
 import { Button } from '@/components/ui/Button/Button'
 import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '@/base/firebase'
+import i18n from '@/i18n/config'
 
-const schema = yup.object({ email: yup.string().email('Невірний email').required() })
+const getSchema = () =>
+  yup.object({
+    email: yup
+      .string()
+      .email(() => i18n.t('validation.emailInvalid', { ns: 'auth' }))
+      .required(() => i18n.t('validation.emailRequired', { ns: 'auth' })),
+  })
 
 interface PasswordRecoveryProps {
   onBack: () => void
@@ -19,13 +27,14 @@ interface PasswordRecoveryProps {
 export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ onBack }) => {
   const [isSubmitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
+  const { t } = useTranslation('auth')
 
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm<{ email: string }>({ resolver: yupResolver(schema) })
+  } = useForm<{ email: string }>({ resolver: yupResolver(getSchema()) })
 
   const onSubmit: SubmitHandler<{ email: string }> = async ({ email }) => {
     try {
@@ -39,22 +48,24 @@ export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ onBack }) => {
 
   return (
     <div className={cls.recovery}>
-      <ModalTitle>ВІДНОВЛЕННЯ ПАРОЛЯ</ModalTitle>
+      <ModalTitle>{t('passwordRecovery.title')}</ModalTitle>
       {isSubmitted ? (
         <Typography className={cls.info}>
-          ЯКЩО АКАУНТ «{getValues('email')}» ІСНУЄ, ВАМ БУДЕ НАДІСЛАНО ЕЛЕКТРОННИЙ ЛИСТ З ПОДАЛЬШИМИ
-          ІНСТРУКЦІЯМИ
+          {t('passwordRecovery.infoSent', { email: getValues('email') })}
         </Typography>
       ) : (
         <>
-          <Typography className={cls.info}>
-            ВВЕДІТЬ E-MAIL, ВКАЗАНИЙ ПРИ РЕЄСТРАЦІЇ, І ДОТРИМУЙТЕСЬ ПОДАЛЬШИХ ІНСТРУКЦІЙ
-          </Typography>
+          <Typography className={cls.info}>{t('passwordRecovery.infoPrompt')}</Typography>
           <form className={cls.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Input name="email" label="E-MAIL" register={register} error={errors.email?.message} />
+            <Input
+              name="email"
+              label={t('login.email')}
+              register={register}
+              error={errors.email?.message}
+            />
             {serverError && <Typography className={cls.error}>{serverError}</Typography>}
             <Button
-              title="СКИНУТИ ПАРОЛЬ"
+              title={t('passwordRecovery.submit')}
               type="submit"
               disabled={isSubmitting}
               className={cls.btn}
@@ -63,7 +74,7 @@ export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ onBack }) => {
         </>
       )}
       <button type="button" className={cls.backBtn} onClick={onBack}>
-        ← Назад до входу
+        {t('passwordRecovery.backToLogin')}
       </button>
     </div>
   )

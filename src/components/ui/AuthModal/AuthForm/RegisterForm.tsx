@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslation } from 'react-i18next'
 import cls from './AuthForm.module.scss'
 import { Input } from '@/components/ui/Input/Input'
 import { Button } from '@/components/ui/Button/Button'
@@ -19,6 +20,7 @@ export interface RegisterFormProps {
 
 export const RegisterForm: FC<RegisterFormProps> = ({ onSuccess, loading, error }) => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation('auth')
   const {
     register,
     handleSubmit,
@@ -34,20 +36,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSuccess, loading, error 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <ModalTitle>РЕЄСТРАЦІЯ</ModalTitle>
-      <Input name="name" label="ПІБ" register={register} error={errors.name?.message} />
-      <Input name="email" label="E-MAIL" register={register} error={errors.email?.message} />
-      <Input name="phone" label="ТЕЛЕФОН" register={register} error={errors.phone?.message} />
+      <ModalTitle>{t('register.title')}</ModalTitle>
+      <Input name="name" label={t('register.fullName')} register={register} error={errors.name?.message} />
+      <Input name="email" label={t('register.email')} register={register} error={errors.email?.message} />
+      <Input name="phone" label={t('register.phone')} register={register} error={errors.phone?.message} />
       <Input
         name="password"
-        label="ПАРОЛЬ"
+        label={t('register.password')}
         type="password"
         addendum={<EyeIcon />}
         register={register}
         error={errors.password?.message}
       />
       {error && <Typography className={cls.error}>{error}</Typography>}
-      <Button title="ЗАРЕЄСТРУВАТИСЬ" type="submit" disabled={loading} className={cls.btn} />
+      <Button title={t('register.submit')} type="submit" disabled={loading} className={cls.btn} />
     </form>
   )
 }
