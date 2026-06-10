@@ -53,10 +53,18 @@ export const Products: FC<ProductsProps> = ({ className }) => {
 
   const handleReset = useCallback(() => {
     resetFilters()
-    if (searchQuery) setSearchParams({})
+    if (searchQuery) setSearchParams(prev => {
+      const next = new URLSearchParams(prev)
+      next.delete('search')
+      return next
+    })
   }, [resetFilters, searchQuery, setSearchParams])
 
-  const clearSearch = useCallback(() => setSearchParams({}), [setSearchParams])
+  const clearSearch = useCallback(() => setSearchParams(prev => {
+    const next = new URLSearchParams(prev)
+    next.delete('search')
+    return next
+  }), [setSearchParams])
 
   return (
     <div className={classnames(cls.products, [className])}>

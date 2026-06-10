@@ -1,6 +1,7 @@
 export const APP_ROUTES = {
   HOME: '/',
   STORE: '/store',
+  STORE_WITH_PRODUCT: (product: string) => `/store?product=${product}`,
   GOODS_DETAIL: (id: string, category?: string) =>
     category ? `/store/${id}?category=${category}` : `/store/${id}`,
   FAQ: '/faq',

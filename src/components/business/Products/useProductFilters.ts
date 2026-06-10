@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { where } from 'firebase/firestore'
 import { type IOption as IDropdownOption } from '@/components/ui/Dropdown/Dropdown'
 import { type IGetRange } from '@/components/ui/RangeSlider/RangeSlider'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 import { FilterActions } from '@/redux/reducers'
-import { getFilterCategories } from '@/redux/selectors'
 import { type FilterPrice, type IFilters } from '@/redux/reducers/filterCategorySlice.ts'
 import { QueryFieldFilterConstraint } from '@firebase/firestore'
 import type { StoneType, ProductType, MetalsType } from '@/models'
@@ -59,22 +59,32 @@ function buildClientSideFilters(fc: IFilters): ClientSideFilters {
 
 export const useProductFilters = () => {
   const dispatch = useAppDispatch()
-  const filterCategories = useAppSelector(getFilterCategories)
+  const [searchParams, setSearchParams] = useSearchParams()
   const firstRenderRef = useRef(true)
   const priceDebounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
+  const urlProduct = useMemo(() => searchParams.getAll('product') as ProductType[], [])
+  const urlMetal   = useMemo(() => searchParams.getAll('metal')   as MetalsType[],  [])
+  const urlStones  = useMemo(() => searchParams.getAll('stones')  as StoneType[],   [])
+  const urlPriceRaw = searchParams.get('price')
+  const urlPrice = useMemo<FilterPrice | null>(
+    () => urlPriceRaw
+      ? { min: Number(urlPriceRaw.split('-')[0]), max: Number(urlPriceRaw.split('-')[1]) }
+      : null,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
   const [metals, setMetals] = useState(() =>
-    metalsOptions.map(opt => ({ ...opt, chosen: (filterCategories.metal ?? []).includes(opt.label as MetalsType) }))
+    metalsOptions.map(opt => ({ ...opt, chosen: urlMetal.includes(opt.label as MetalsType) }))
   )
   const [stones, setStones] = useState(() =>
-    stonesOptions.map(opt => ({ ...opt, chosen: (filterCategories.stones ?? []).includes(opt.label as StoneType) }))
+    stonesOptions.map(opt => ({ ...opt, chosen: urlStones.includes(opt.label as StoneType) }))
   )
   const [productType, setProductType] = useState(() =>
-    productOptions.map(opt => ({ ...opt, chosen: (filterCategories.product ?? []).includes(opt.label as ProductType) }))
+    productOptions.map(opt => ({ ...opt, chosen: urlProduct.includes(opt.label as ProductType) }))
   )
-  const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(
-    filterCategories.price ? { min: filterCategories.price.min, max: filterCategories.price.max } : null
-  )
+  const [priceFilter, setPriceFilter] = useState<FilterPrice | null>(urlPrice)
 
   const onMetalsChecked = useCallback(
     (id: string, status: boolean) =>
@@ -132,6 +142,29 @@ export const useProductFilters = () => {
   useEffect(() => {
     if (!firstRenderRef.current) dispatch(FilterActions.addCategory(activeFilters))
   }, [dispatch, activeFilters])
+
+  useEffect(() => {
+    setSearchParams(prev => {
+      const next = new URLSearchParams(prev)
+
+      const chosenProduct = getChosenCategory<ProductType>(productType)
+      next.delete('product')
+      chosenProduct.forEach(v => next.append('product', v))
+
+      const chosenMetal = getChosenCategory<MetalsType>(metals)
+      next.delete('metal')
+      chosenMetal.forEach(v => next.append('metal', v))
+
+      const chosenStones = getChosenCategory<StoneType>(stones)
+      next.delete('stones')
+      chosenStones.forEach(v => next.append('stones', v))
+
+      if (priceFilter) next.set('price', `${priceFilter.min}-${priceFilter.max}`)
+      else next.delete('price')
+
+      return next
+    }, { replace: true })
+  }, [activeFilters])
 
   return {
     metals,
