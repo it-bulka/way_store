@@ -9,6 +9,7 @@ import { PAGES } from '@/models'
 import { useToast } from '@/context/ToastContext'
 import type { IProduct, ringsColors } from '@/models/goodsType'
 import type { ICartItem } from '@/redux/types/cartTypes'
+import { buildDefaultCartItem } from '@/utils/buildDefaultCartItem'
 
 export const useGoods = (prod: IProduct) => {
   const firstColor =
@@ -26,25 +27,15 @@ export const useGoods = (prod: IProduct) => {
 
   const hasRequiredSize = !prod?.sizes?.length || selectedSize !== undefined
 
-  const buildCartItem = useCallback((): ICartItem => {
-    const colorImages = (Object.keys(prod.images) as ringsColors[])
-      .filter(k => prod.images[k].length > 0)
-      .reduce<Partial<Record<ringsColors, string>>>(
-        (acc, k) => ({ ...acc, [k]: prod.images[k][0] }),
-        {}
-      )
-    return {
-      id: prod.id,
-      title: prod.name,
-      amount,
-      price: prod.price.amount,
+  const buildCartItem = useCallback(
+    (): ICartItem => ({
+      ...buildDefaultCartItem(prod, amount),
       img: prod.images[color][0],
       color,
       size: selectedSize,
-      colorImages,
-      availableSizes: prod.sizes,
-    }
-  }, [prod, amount, color, selectedSize])
+    }),
+    [prod, amount, color, selectedSize]
+  )
 
   const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [navigate])
 

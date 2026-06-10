@@ -15,6 +15,7 @@ import { useControlModal } from '@/hooks/useControlModal'
 import { getIsAuthenticated } from '@/redux/selectors/getAuthSelector'
 import { getChosenProducts } from '@/redux/selectors/getChosenProducts'
 import { NotAuthModal } from '@/components/ui/NotAuthModal/NotAuthModal'
+import { buildDefaultCartItem } from '@/utils/buildDefaultCartItem'
 
 interface ProductsListProps {
   className?: string
@@ -53,15 +54,7 @@ export const ProductsList: FC<ProductsListProps> = memo(
 
     const onAddToCart = useCallback(
       (product: IProduct) => () => {
-        dispatch(
-          cartActions.addItem({
-            id: product.id,
-            title: product.name,
-            amount: 1,
-            price: product.price.amount,
-            img: firstImg(product.images),
-          })
-        )
+        dispatch(cartActions.addItem(buildDefaultCartItem(product)))
         addToast('Додано до кошика', 'success')
       },
       [dispatch, addToast]
