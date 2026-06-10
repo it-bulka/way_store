@@ -7,7 +7,7 @@ import type { WriteBatch } from 'firebase-admin/firestore'
 import type { IProduct, ProductType, ringsColors } from '../src/models/goodsType'
 import { PAGES } from '../src/models/pages'
 import { db, bucket } from './firebase'
-import { seedData } from './mockData'
+import { seedData, seedDataEn } from './mockData'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -98,25 +98,27 @@ const flush = async (batch: WriteBatch, n: number): Promise<[WriteBatch, number]
 
 async function clearCollections() {
   console.log('Clearing existing Firestore documents...')
-  for (const category of Object.keys(seedData)) {
-    const colPath = PAGES.getCollection('ukr', category as ProductType)
-    const col = db.collection(colPath)
-    const docs = await col.listDocuments()
-    if (!docs.length) continue
+  for (const lang of ['ukr', 'eng'] as const) {
+    for (const category of Object.keys(seedData)) {
+      const colPath = PAGES.getCollection(lang, category as ProductType)
+      const col = db.collection(colPath)
+      const docs = await col.listDocuments()
+      if (!docs.length) continue
 
-    let delBatch = db.batch()
-    let n = 0
-    for (const ref of docs) {
-      delBatch.delete(ref)
-      n++
-      if (n >= BATCH_LIMIT) {
-        await delBatch.commit()
-        delBatch = db.batch()
-        n = 0
+      let delBatch = db.batch()
+      let n = 0
+      for (const ref of docs) {
+        delBatch.delete(ref)
+        n++
+        if (n >= BATCH_LIMIT) {
+          await delBatch.commit()
+          delBatch = db.batch()
+          n = 0
+        }
       }
+      if (n > 0) await delBatch.commit()
+      console.log(`  ✓ cleared ${lang}/${category} (${docs.length} docs)`)
     }
-    if (n > 0) await delBatch.commit()
-    console.log(`  ✓ cleared ${category} (${docs.length} docs)`)
   }
   console.log()
 }
@@ -182,11 +184,59 @@ async function seed() {
   }
 
   if (count > 0) await batch.commit()
-  console.log(`\nSeeded ${total} documents across ${Object.keys(seedData).length} categories.`)
+  console.log(`\nSeeded ${total} ukr documents across ${Object.keys(seedData).length} categories.`)
   if (uploadErrors > 0) {
     console.log(`\n${uploadErrors} products used placeholder images due to Storage upload errors.`)
     console.log('Run again after enabling Firebase Storage billing to upload real images.')
   }
+
+  console.log('\n--- Seeding eng (English) ---')
+  batch = db.batch()
+  count = 0
+  let totalEn = 0
+
+  for (const [category, products] of Object.entries(seedDataEn)) {
+    console.log(`\n${category} (eng):`)
+
+    for (const product of products as IProduct[]) {
+      const { id, ...data } = product
+      const colPath = PAGES.getCollection('eng', category as ProductType)
+
+      process.stdout.write(`  ${id} ... `)
+
+      const localPaths = await optimizeLocally(category, id)
+      const hasLocal = COLORS.some(c => localPaths[c].length > 0)
+
+      let finalImages: Record<ringsColors, string[]> | null = null
+
+      if (hasLocal && !SKIP_UPLOAD) {
+        try {
+          finalImages = await uploadToStorage(localPaths, category, id)
+        } catch {
+          // images already uploaded during ukr pass — reuse same URLs
+        }
+      }
+
+      const docData = finalImages ? { ...data, images: finalImages } : data
+
+      const ref = db.doc(`${colPath}/${id}`)
+      batch.set(ref, docData)
+      count++
+      totalEn++
+      ;[batch, count] = await flush(batch, count)
+
+      if (finalImages) {
+        console.log('✓ real images')
+      } else if (hasLocal) {
+        console.log('✓ optimized locally')
+      } else {
+        console.log('✓ placeholder')
+      }
+    }
+  }
+
+  if (count > 0) await batch.commit()
+  console.log(`\nSeeded ${totalEn} eng documents across ${Object.keys(seedDataEn).length} categories.`)
 }
 
 seed().catch(err => {
