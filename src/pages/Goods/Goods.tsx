@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import cls from './Goods.module.scss'
 import { BreadCrumbs } from '@/components/ui/Breadcrumbs/BreadCrumbs'
 import { ImgTabs } from '@/components/ui/ImgTabs/ImgTabs'
@@ -6,13 +7,21 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 import { GoodsControls } from './GoodsControls/GoodsControls'
 import { RelatedProducts } from './RelatedProducts'
 import { useGoods } from './useGoods'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useRevalidator } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import type { IProduct } from '@/models/goodsType'
-import { PRODUCT_TYPE_LABELS } from '@/models/goodsType'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 
 const Goods = () => {
   const prod = useLoaderData() as IProduct
+  const { revalidate } = useRevalidator()
+  const { i18n, t: tEnums } = useTranslation('enums')
+  const mountedRef = useRef(false)
+
+  useEffect(() => {
+    if (!mountedRef.current) { mountedRef.current = true; return }
+    revalidate()
+  }, [i18n.language, revalidate])
   const {
     color,
     amount,
@@ -42,7 +51,7 @@ const Goods = () => {
       <BreadCrumbs lastLabel={prod.name} />
       <div className={cls.title}>
         <Typography type={TypographyTypes.HEADER} variant="h3">
-          {PRODUCT_TYPE_LABELS[prod.category]}
+          {tEnums(`productTitle.${prod.category}` as never)}
         </Typography>
         <PrevNextBtns
           onNextClick={onNextClick}

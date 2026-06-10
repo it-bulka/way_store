@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './GoodsControls.module.scss'
 import { Button } from '@/components/ui/Button/Button'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
@@ -9,14 +10,7 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 import LikeIcon from '@/assets/general/heart.svg'
 import classNames from 'classnames'
 import type { IProduct, ringsColors } from '@/models/goodsType'
-import {
-  COLOR_PALETTE,
-  COLOR_LABELS,
-  METAL_LABELS,
-  STONE_LABELS,
-  CARE_INSTRUCTIONS,
-  DELIVERY_INFO,
-} from '@/models/goodsType'
+import { COLOR_PALETTE } from '@/models/goodsType'
 
 interface GoodsControlsProps {
   prod: IProduct
@@ -47,6 +41,9 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
   onAddToBucketClick,
   onBuyClick,
 }) => {
+  const { t } = useTranslation('goods')
+  const { t: tEnums } = useTranslation('enums')
+
   const availableColors = useMemo(
     () =>
       (Object.keys(prod.images ?? {}) as ringsColors[])
@@ -59,53 +56,51 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
     () => [
       {
         id: '1',
-        title: 'Деталі',
+        title: t('details.title'),
         content: (
           <div>
-            <p>Матеріал: {prod.material}</p>
-            <p>Метал: {(prod.metal ?? []).map(m => METAL_LABELS[m]).join(', ')}</p>
+            <p>{t('details.material')} {prod.material}</p>
+            <p>{t('details.metal')} {(prod.metal ?? []).map(m => tEnums(`metal.${m}` as never)).join(', ')}</p>
             {(prod.stones ?? []).length > 0 && (
-              <p>Камені: {(prod.stones ?? []).map(s => STONE_LABELS[s]).join(', ')}</p>
+              <p>{t('details.stones')} {(prod.stones ?? []).map(s => tEnums(`stone.${s}` as never)).join(', ')}</p>
             )}
-            <p>
-              Вага: {prod.weight.num} {prod.weight.measurement}
-            </p>
+            <p>{t('details.weight', { num: prod.weight.num, measurement: prod.weight.measurement })}</p>
           </div>
         ),
       },
       {
         id: '2',
-        title: 'Таблиця розмірів',
+        title: t('sizes.title'),
         content: prod.sizes?.length ? (
-          <p>Доступні розміри: {prod.sizes.join(', ')}</p>
+          <p>{t('sizes.available', { sizes: prod.sizes.join(', ') })}</p>
         ) : (
-          <p>Розмір універсальний</p>
+          <p>{t('sizes.universal')}</p>
         ),
       },
       {
         id: '3',
-        title: 'Догляд за виробом',
+        title: t('care.title'),
         content: (
           <div>
             {(prod.metal ?? []).map(m => (
-              <p key={m}>{CARE_INSTRUCTIONS[m]}</p>
+              <p key={m}>{tEnums(`careInstructions.${m}` as never)}</p>
             ))}
           </div>
         ),
       },
       {
         id: '4',
-        title: 'Доставка та повернення',
+        title: t('delivery.title'),
         content: (
           <div>
-            {DELIVERY_INFO.split('\n\n').map((line, i) => (
+            {tEnums('deliveryInfo').split('\n\n').map((line, i) => (
               <p key={i}>{line}</p>
             ))}
           </div>
         ),
       },
     ],
-    [prod]
+    [prod, t, tEnums]
   )
 
   const isDisabled = amount <= 0 || !hasRequiredSize
@@ -128,18 +123,18 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
 
       <div className={cls.controls}>
         <div className={cls.stepper}>
-          <Typography>Кількість</Typography>
+          <Typography>{t('quantity')}</Typography>
           <Stepper initial={amount} getValue={onAmountChange} />
         </div>
         <div className={cls.btns}>
-          <Button title="Додати до кошика" onClick={onAddToBucketClick} disabled={isDisabled} />
-          <Button title="Купити" onClick={onBuyClick} disabled={isDisabled} />
+          <Button title={t('addToCart')} onClick={onAddToBucketClick} disabled={isDisabled} />
+          <Button title={t('buy')} onClick={onBuyClick} disabled={isDisabled} />
         </div>
       </div>
 
       <ColorPicker
         options={availableColors}
-        title={`Колір - ${COLOR_LABELS[color]}`}
+        title={t('color', { color: tEnums(`color.${color}` as never) })}
         onClick={onColorPick}
       />
 

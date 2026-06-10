@@ -7,7 +7,7 @@ import { getChosenProducts } from '@/redux/selectors/getChosenProducts'
 import { getNextDoc } from '@/services'
 import { PAGES } from '@/models'
 import { useToast } from '@/context/ToastContext'
-import type { IProduct, ringsColors } from '@/models/goodsType'
+import type { IProduct, ProductType, ringsColors } from '@/models/goodsType'
 import type { ICartItem } from '@/redux/types/cartTypes'
 import { buildDefaultCartItem } from '@/utils/buildDefaultCartItem'
 
@@ -68,7 +68,7 @@ export const useGoods = (prod: IProduct) => {
 
   const onNextClick = useCallback(async () => {
     const nextProd = await getNextDoc({
-      collection: PAGES.getCollection(),
+      collection: PAGES.getCollection(undefined, prod.category as ProductType),
       currentDocId: prod.id,
     })
     if (!nextProd?.id) {
