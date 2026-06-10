@@ -1,4 +1,4 @@
-import { FormEvent, HTMLAttributes, ReactNode, useId, useState } from 'react'
+import { FormEvent, InputHTMLAttributes, ReactNode, useId, useState } from 'react'
 import cls from './Input.module.scss'
 import classnames from 'classnames'
 import { FieldValues } from 'react-hook-form/dist/types/fields'
@@ -8,7 +8,7 @@ type InputVal = string | undefined
 type InputSetter = <T>(a: T) => void
 
 interface InputProps<T extends FieldValues | undefined = undefined>
-  extends HTMLAttributes<HTMLInputElement>,
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'name'>,
     IRegister<T> {
   className?: string
   type?: string
