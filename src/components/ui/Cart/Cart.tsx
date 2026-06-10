@@ -1,4 +1,5 @@
 import { type FC, memo, useCallback, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './Cart.module.scss'
 import { Portal } from '@/components/ui/Portal/Portal'
 import { Absent } from '@/components/ui/Absent/Absent'
@@ -17,6 +18,7 @@ interface CartProps {
 }
 
 export const Cart: FC<CartProps> = memo(({ onClose }) => {
+  const { t } = useTranslation('cart')
   const navigateTo = useNavigate()
   const items = useAppSelector(getCartItems)
   const dispatch = useAppDispatch()
@@ -57,14 +59,14 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
           className={classnames(cls.cartInner, 'container')}
           role="dialog"
           aria-modal="true"
-          aria-label="Ваш кошик"
+          aria-label={t('ariaLabel')}
         >
           <CartHeader onClose={onClose} />
           <div className={cls.content}>
             {items.length === 0 ? (
               <Absent
-                info="КОШИК ПОРОЖНІЙ"
-                btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
+                info={t('empty')}
+                btnTitle={t('goToStore')}
                 className={cls.absent}
                 onBtnClick={toStore}
               />

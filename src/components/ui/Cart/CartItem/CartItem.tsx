@@ -1,4 +1,5 @@
 import { type FC, memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import cls from './CartItem.module.scss'
@@ -40,6 +41,7 @@ export const CartItem: FC<CartItemProps> = memo(({
   onSizeChange,
   onNavigate,
 }) => {
+  const { t } = useTranslation('cart')
   const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
   const showColors = colorKeys.length > 0
 
@@ -94,7 +96,7 @@ export const CartItem: FC<CartItemProps> = memo(({
 
         <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />
         <Typography className={cls.price}>
-          <span>{price}</span> грн.
+          <span>{price}</span> {t('currency')}
         </Typography>
       </div>
     </li>
