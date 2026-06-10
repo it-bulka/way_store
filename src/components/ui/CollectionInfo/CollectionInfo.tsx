@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './CollectionInfo.module.scss'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
@@ -20,6 +21,7 @@ export const CollectionInfo: FC<CollectionInfoProps> = ({
   content,
   images,
 }) => {
+  const { t } = useTranslation('collections')
   const navigateTo = useNavigate()
   const imgAmount = images?.length
   return (
@@ -28,7 +30,7 @@ export const CollectionInfo: FC<CollectionInfoProps> = ({
         <Typography variant="h3" className={cls.title}>
           {title}
         </Typography>
-        <Button title="продовжити" onClick={() => navigateTo(APP_ROUTES.COLLECTION_DETAIL(id))} />
+        <Button title={t('readMore')} onClick={() => navigateTo(APP_ROUTES.COLLECTION_DETAIL(id))} />
       </div>
       <div className={cls.content}>
         {content?.map((p, i) => (

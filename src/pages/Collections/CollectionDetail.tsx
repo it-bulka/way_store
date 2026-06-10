@@ -1,12 +1,12 @@
 import { useLoaderData } from 'react-router-dom'
 import Collection from '@/pages/Collaboration/Collection'
-import { collections } from '@/data/collections'
+import { useCollection } from '@/hooks/useCollections'
+import type { CollectionBase } from '@/data/collectionsBase'
 import NotFound from '@/pages/NotFound/NotFound'
 
-type CollectionItem = (typeof collections)[number]
-
 const CollectionDetail = () => {
-  const collection = useLoaderData() as CollectionItem | null
+  const base = useLoaderData() as CollectionBase | null
+  const collection = useCollection(base?.id ?? '')
 
   if (!collection) return <NotFound />
 

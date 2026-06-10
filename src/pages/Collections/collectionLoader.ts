@@ -1,5 +1,5 @@
 import { type LoaderFunctionArgs } from 'react-router-dom'
-import { collections } from '@/data/collections'
+import { collectionsBase } from '@/data/collectionsBase'
 
 export const collectionLoader = ({ params }: LoaderFunctionArgs) =>
-  collections.find(c => c.id === params.slug) ?? null
+  collectionsBase.find(c => c.id === params.slug) ?? null
