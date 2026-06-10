@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './ContactForm.module.scss'
 import { Input } from '@/components/ui/Input/Input'
 import { TextField } from '@/components/ui/Textfield/TextField'
@@ -9,21 +10,23 @@ import classnames from 'classnames'
 interface ContactFormProps {
   className?: string
 }
+
 export const ContactForm: FC<ContactFormProps> = ({ className }) => {
+  const { t } = useTranslation('faq')
+
   return (
     <form className={classnames(cls.contactForm, [className])}>
       <div className={cls.inputs}>
-        <Input label="ПОЛНОЕ ИМЯ" name="name" />
-        <Input label="АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ" name="email" />
-        <Input label="НОМЕР ТЕЛЕФОНА" name="tel" />
-        <Input label="ТЕМА" name="theme" />
+        <Input label={t('form.name')} name="name" />
+        <Input label={t('form.email')} name="email" />
+        <Input label={t('form.phone')} name="tel" />
+        <Input label={t('form.subject')} name="theme" />
       </div>
-
-      <TextField name="comment" label="ОСТАВЬТЕ ВАШЕ СООБЩЕНИЕ" />
+      <TextField name="comment" label={t('form.message')} />
       <div>
-        <Checkbox label="Я ХОЧУ ПОДПИСАТЬСЯ НА РАССЫЛКУ" checked={true} className={cls.checkbox} />
+        <Checkbox label={t('form.subscribe')} checked={true} className={cls.checkbox} />
       </div>
-      <Button title="ПОДТВЕРДИТЬ" />
+      <Button title={t('form.submit')} />
     </form>
   )
 }

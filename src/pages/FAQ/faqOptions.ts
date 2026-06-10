@@ -1,19 +1,8 @@
-export const options = [
-  { id: '1', title: 'ЧАСТІ ЗАПИТАННЯ', path: 'questions' },
-  { id: '2', title: 'ДОСТАВКА', path: 'delivery' },
-  { id: '3', title: 'ОПЛАТА', path: 'payment' },
-  { id: '4', title: 'КОНТАКТИ', path: 'contacts' },
-]
+export const FAQ_NAV_PATHS = [
+  { id: '1', path: 'questions' },
+  { id: '2', path: 'delivery' },
+  { id: '3', path: 'payment' },
+  { id: '4', path: 'contacts' },
+] as const
 
-export const deliveryInfo = [
-  {
-    id: '1',
-    title: 'Нова Пошта',
-    content: `Доставка по всій Україні відділеннями та поштоматами Нової Пошти. Термін доставки — 1–3 робочі дні. Вартість розраховується автоматично при оформленні замовлення залежно від ваги та населеного пункту.`,
-  },
-  {
-    id: '2',
-    title: "Кур'єрська доставка",
-    content: `Кур'єрська доставка доступна у Києві та містах-партнерах. Термін — наступний робочий день після підтвердження замовлення. Перед доставкою кур'єр зателефонує для узгодження зручного часу.`,
-  },
-]
+export type FaqNavPath = (typeof FAQ_NAV_PATHS)[number]['path']
