@@ -58,11 +58,7 @@ const CheckoutSuccess = () => {
         РАЗОМ: <span>{formatNumberIntoGroups(total)} грн.</span>
       </Typography>
 
-      <Button
-        title="Продовжити покупки"
-        onClick={() => navigate('/store')}
-        className={cls.btn}
-      />
+      <Button title="Продовжити покупки" onClick={() => navigate('/store')} className={cls.btn} />
     </div>
   )
 }

@@ -33,9 +33,7 @@ export const useSearchProducts = (query: string) => {
       const products = await getProducts()
       if (cancelled) return
       setResults(
-        products
-          .filter(p => p.name.toLowerCase().includes(q.toLowerCase()))
-          .slice(0, SEARCH_LIMIT)
+        products.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, SEARCH_LIMIT)
       )
       setLoading(false)
     }, DEBOUNCE_MS)

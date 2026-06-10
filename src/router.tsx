@@ -41,7 +41,12 @@ export const router = createBrowserRouter(
 
       <Route element={<Layout />}>
         <Route path="store" element={<Store />}>
-          <Route path=":slug" element={<Goods />} loader={goodsLoader} errorElement={<GoodsError />} />
+          <Route
+            path=":slug"
+            element={<Goods />}
+            loader={goodsLoader}
+            errorElement={<GoodsError />}
+          />
         </Route>
         <Route path="goods" element={<Goods />} />
 

@@ -22,6 +22,9 @@ export const loginSchema = yup.object({
 export const registerSchema = yup.object({
   name: yup.string().required("ПІБ обов'язкове"),
   email: yup.string().email('Невірний email').required("Email обов'язковий"),
-  phone: yup.string().matches(phoneRegex, 'Невірний номер телефону').required("Телефон обов'язковий"),
+  phone: yup
+    .string()
+    .matches(phoneRegex, 'Невірний номер телефону')
+    .required("Телефон обов'язковий"),
   password: yup.string().min(6, 'Мінімум 6 символів').required("Пароль обов'язковий"),
 })

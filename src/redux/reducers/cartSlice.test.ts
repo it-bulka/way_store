@@ -21,10 +21,7 @@ describe('cartSlice', () => {
     })
 
     it('increments amount when item already exists', () => {
-      const state = cartReducer(
-        { items: [item1] },
-        cartActions.addItem({ ...item1, amount: 2 })
-      )
+      const state = cartReducer({ items: [item1] }, cartActions.addItem({ ...item1, amount: 2 }))
       expect(state.items).toHaveLength(1)
       expect(state.items[0].amount).toBe(3)
     })

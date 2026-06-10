@@ -4,7 +4,7 @@ import type { IProduct } from '@/models/goodsType'
 
 export const getChosenFromFirestore = async (uid: string): Promise<IProduct[]> => {
   const snap = await getDocs(collection(db, 'users', uid, 'chosen'))
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }) as IProduct)
+  return snap.docs.map(d => ({ id: d.id, ...d.data() } as IProduct))
 }
 
 export const addChosenToFirestore = async (uid: string, items: IProduct[]): Promise<void> => {

@@ -75,7 +75,9 @@ export const RelatedProducts: FC<RelatedProductsProps> = ({ prod }) => {
 
   return (
     <section className={cls.related}>
-      <Typography type={TypographyTypes.HEADER} variant="h3">Схожі товари</Typography>
+      <Typography type={TypographyTypes.HEADER} variant="h3">
+        Схожі товари
+      </Typography>
       <div className={cls.grid}>
         {loading
           ? Array.from({ length: RELATED_COUNT }, (_, i) => <ProductCardSkeleton key={i} />)

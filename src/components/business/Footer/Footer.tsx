@@ -5,9 +5,9 @@ import cls from './Footer.module.scss'
 import { APP_ROUTES } from '@/models'
 
 const nav = [
-  { id: '1', title: 'FAQ',                       path: APP_ROUTES.FAQ },
-  { id: '2', title: 'Політика конфіденційності',  path: APP_ROUTES.PRIVACY },
-  { id: '3', title: 'Публічна оферта',            path: APP_ROUTES.OFFER },
+  { id: '1', title: 'FAQ', path: APP_ROUTES.FAQ },
+  { id: '2', title: 'Політика конфіденційності', path: APP_ROUTES.PRIVACY },
+  { id: '3', title: 'Публічна оферта', path: APP_ROUTES.OFFER },
 ]
 
 export const Footer = () => {

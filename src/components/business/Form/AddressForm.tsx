@@ -13,7 +13,12 @@ import { useProfileForm } from '@/hooks/useProfileForm'
 type AddressFormProps = Pick<IUser, 'comment' | 'address'>
 
 export const AddressForm: FC<AddressFormProps> = ({ address, comment }) => {
-  const { register, handleSubmit, formState: { errors }, saveUser } = useProfileForm<IAddressFormValues>(addressSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    saveUser,
+  } = useProfileForm<IAddressFormValues>(addressSchema)
 
   const submitHandler: SubmitHandler<IAddressFormValues> = async data => {
     await saveUser({

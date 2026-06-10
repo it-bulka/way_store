@@ -12,11 +12,19 @@ interface SearchDropdownProps {
 
 export const SearchDropdown: FC<SearchDropdownProps> = memo(({ results, loading, onSelect }) => {
   if (loading) {
-    return <div className={cls.dropdown}><p className={cls.status}>Пошук...</p></div>
+    return (
+      <div className={cls.dropdown}>
+        <p className={cls.status}>Пошук...</p>
+      </div>
+    )
   }
 
   if (!results.length) {
-    return <div className={cls.dropdown}><p className={cls.status}>Нічого не знайдено</p></div>
+    return (
+      <div className={cls.dropdown}>
+        <p className={cls.status}>Нічого не знайдено</p>
+      </div>
+    )
   }
 
   return (
@@ -28,11 +36,7 @@ export const SearchDropdown: FC<SearchDropdownProps> = memo(({ results, loading,
           className={cls.item}
           onClick={onSelect}
         >
-          <img
-            src={product.images.white[0]}
-            alt={product.name}
-            className={cls.thumbnail}
-          />
+          <img src={product.images.white[0]} alt={product.name} className={cls.thumbnail} />
           <div className={cls.info}>
             <p className={cls.name}>{product.name}</p>
             <p className={cls.meta}>{PRODUCT_TYPE_LABELS[product.category]}</p>

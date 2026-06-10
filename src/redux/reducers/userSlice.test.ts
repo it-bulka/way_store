@@ -67,7 +67,10 @@ describe('userSlice — updateUser thunk states', () => {
   })
 
   it('fulfilled: clears loading', () => {
-    const state = userReducer({ ...base, loading: true }, updateUser.fulfilled(undefined, 'id', updateArg))
+    const state = userReducer(
+      { ...base, loading: true },
+      updateUser.fulfilled(undefined, 'id', updateArg)
+    )
     expect(state.loading).toBe(false)
   })
 

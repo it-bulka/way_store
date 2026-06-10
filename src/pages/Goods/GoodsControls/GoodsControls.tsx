@@ -9,7 +9,14 @@ import { Typography, TypographyTypes } from '@/components/ui/Typography/Typograp
 import LikeIcon from '@/assets/general/heart.svg'
 import classNames from 'classnames'
 import type { IProduct, ringsColors } from '@/models/goodsType'
-import { COLOR_PALETTE, COLOR_LABELS, METAL_LABELS, STONE_LABELS, CARE_INSTRUCTIONS, DELIVERY_INFO } from '@/models/goodsType'
+import {
+  COLOR_PALETTE,
+  COLOR_LABELS,
+  METAL_LABELS,
+  STONE_LABELS,
+  CARE_INSTRUCTIONS,
+  DELIVERY_INFO,
+} from '@/models/goodsType'
 
 interface GoodsControlsProps {
   prod: IProduct
@@ -41,9 +48,10 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
   onBuyClick,
 }) => {
   const availableColors = useMemo(
-    () => (Object.keys(prod.images ?? {}) as ringsColors[])
-      .filter(key => prod.images?.[key]?.length > 0)
-      .map((tag, idx) => ({ id: String(idx + 1), tag, color: COLOR_PALETTE[tag] })),
+    () =>
+      (Object.keys(prod.images ?? {}) as ringsColors[])
+        .filter(key => prod.images?.[key]?.length > 0)
+        .map((tag, idx) => ({ id: String(idx + 1), tag, color: COLOR_PALETTE[tag] })),
     [prod]
   )
 
@@ -59,23 +67,29 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
             {(prod.stones ?? []).length > 0 && (
               <p>Камені: {(prod.stones ?? []).map(s => STONE_LABELS[s]).join(', ')}</p>
             )}
-            <p>Вага: {prod.weight.num} {prod.weight.measurement}</p>
+            <p>
+              Вага: {prod.weight.num} {prod.weight.measurement}
+            </p>
           </div>
         ),
       },
       {
         id: '2',
         title: 'Таблиця розмірів',
-        content: prod.sizes?.length
-          ? <p>Доступні розміри: {prod.sizes.join(', ')}</p>
-          : <p>Розмір універсальний</p>,
+        content: prod.sizes?.length ? (
+          <p>Доступні розміри: {prod.sizes.join(', ')}</p>
+        ) : (
+          <p>Розмір універсальний</p>
+        ),
       },
       {
         id: '3',
         title: 'Догляд за виробом',
         content: (
           <div>
-            {(prod.metal ?? []).map(m => <p key={m}>{CARE_INSTRUCTIONS[m]}</p>)}
+            {(prod.metal ?? []).map(m => (
+              <p key={m}>{CARE_INSTRUCTIONS[m]}</p>
+            ))}
           </div>
         ),
       },
@@ -84,7 +98,9 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
         title: 'Доставка та повернення',
         content: (
           <div>
-            {DELIVERY_INFO.split('\n\n').map((line, i) => <p key={i}>{line}</p>)}
+            {DELIVERY_INFO.split('\n\n').map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
           </div>
         ),
       },
@@ -121,7 +137,11 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
         </div>
       </div>
 
-      <ColorPicker options={availableColors} title={`Колір - ${COLOR_LABELS[color]}`} onClick={onColorPick} />
+      <ColorPicker
+        options={availableColors}
+        title={`Колір - ${COLOR_LABELS[color]}`}
+        onClick={onColorPick}
+      />
 
       {!!prod.sizes?.length && (
         <SizeSelector sizes={prod.sizes} selected={selectedSize} onSelect={onSizeSelect} />

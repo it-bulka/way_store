@@ -21,7 +21,12 @@ const sexTypes: { id: Sex; label: string }[] = [
 type InfoFormProps = Pick<IUser, 'name' | 'sex' | 'email' | 'birthday' | 'phone'>
 
 export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex }) => {
-  const { register, handleSubmit, formState: { errors }, saveUser } = useProfileForm<IInfoFormValues>(infoSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    saveUser,
+  } = useProfileForm<IInfoFormValues>(infoSchema)
 
   const [chosenSexType, setChosenSexType] = useState(sex || 'other')
   const [chosenMonth, setChosenMonth] = useState<number>(0)
@@ -61,13 +66,7 @@ export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex 
         ))}
       </fieldset>
 
-      <Input
-        name="email"
-        label="EMAIL"
-        defaultValue={email}
-        className={cls.col_1}
-        readOnly
-      />
+      <Input name="email" label="EMAIL" defaultValue={email} className={cls.col_1} readOnly />
       <Input
         name="name"
         label="ІМ'Я"

@@ -9,7 +9,13 @@ export const ModalTitle: FC<ModalTitleProps> = ({ children, ...props }) => {
   const titleId = useContext(ModalTitleContext)
 
   return (
-    <Typography id={titleId} className={cls.modalTitle} type={TypographyTypes.HEADER} variant="h3" {...props}>
+    <Typography
+      id={titleId}
+      className={cls.modalTitle}
+      type={TypographyTypes.HEADER}
+      variant="h3"
+      {...props}
+    >
       {children}
     </Typography>
   )

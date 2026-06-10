@@ -50,23 +50,11 @@ export const RangeSlider: FC<RangeProps> = ({
       <div className={cls.labels}>
         <label className={cls.label}>
           <span>грн.</span>
-          <input
-            type="number"
-            min={min}
-            max={max}
-            onChange={onMinRangeChange}
-            value={minValue}
-          />
+          <input type="number" min={min} max={max} onChange={onMinRangeChange} value={minValue} />
         </label>
         <label className={cls.label}>
           <span>грн.</span>
-          <input
-            type="number"
-            min={min}
-            max={max}
-            onChange={onMaxRangeChange}
-            value={maxValue}
-          />
+          <input type="number" min={min} max={max} onChange={onMaxRangeChange} value={maxValue} />
         </label>
       </div>
       <div className={cls.slider}>

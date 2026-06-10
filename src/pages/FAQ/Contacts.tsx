@@ -15,12 +15,10 @@ export const Contacts = () => (
         нижче і ми відповімо протягом одного робочого дня.
       </Typography>
       <Typography>
-        З питань оптових замовлень:{' '}
-        <a href="mailto:wholesale@way.com.ua">wholesale@way.com.ua</a>
+        З питань оптових замовлень: <a href="mailto:wholesale@way.com.ua">wholesale@way.com.ua</a>
       </Typography>
       <Typography>
-        Для медіа та преси:{' '}
-        <a href="mailto:press@way.com.ua">press@way.com.ua</a>
+        Для медіа та преси: <a href="mailto:press@way.com.ua">press@way.com.ua</a>
       </Typography>
     </div>
     <ContactForm />

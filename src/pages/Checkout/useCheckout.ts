@@ -124,7 +124,12 @@ export const useCheckout = () => {
   const onDoorSubmit = useCallback<SubmitHandler<ICheckoutFormValues>>(
     data =>
       submitOrder(
-        { city: data.city, street: data.street, home: Number(data.home), apartment: data.apartment },
+        {
+          city: data.city,
+          street: data.street,
+          home: Number(data.home),
+          apartment: data.apartment,
+        },
         data.name,
         data.phone
       ),

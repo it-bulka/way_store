@@ -44,7 +44,10 @@ describe('authSlice — signIn thunk states', () => {
   })
 
   it('fulfilled: sets auth state', () => {
-    const state = authReducer({ ...base, loading: true }, signIn.fulfilled(authPayload, 'id', credentials))
+    const state = authReducer(
+      { ...base, loading: true },
+      signIn.fulfilled(authPayload, 'id', credentials)
+    )
     expect(state.loading).toBe(false)
     expect(state.isAuthenticated).toBe(true)
     expect(state.uid).toBe('u1')

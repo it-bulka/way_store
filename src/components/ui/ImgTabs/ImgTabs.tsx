@@ -38,10 +38,11 @@ export const ImgTabs: FC<ImgTabsProps> = ({ options }) => {
           src={shownImg}
           alt={'ring'}
           onError={e => {
-              const el = e.currentTarget as HTMLImageElement
-              el.onerror = null
-              el.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
-            }}
+            const el = e.currentTarget as HTMLImageElement
+            el.onerror = null
+            el.src =
+              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
+          }}
         />
       </div>
 
@@ -60,10 +61,11 @@ export const ImgTabs: FC<ImgTabsProps> = ({ options }) => {
               alt={'ring'}
               loading="lazy"
               onError={e => {
-              const el = e.currentTarget as HTMLImageElement
-              el.onerror = null
-              el.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
-            }}
+                const el = e.currentTarget as HTMLImageElement
+                el.onerror = null
+                el.src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
+              }}
             />
           </div>
         ))}

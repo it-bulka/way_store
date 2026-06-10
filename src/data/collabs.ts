@@ -72,7 +72,11 @@ WAY зустрів його в точці, де форма перестає де
       { id: '1', img: '/products/bracelets/001/yellow/1.webp', alt: 'way x kachorovska bracelet' },
       { id: '2', img: '/products/watches/001/white/1.webp', alt: 'way x kachorovska watch' },
       { id: '3', img: '/products/chains/001/yellow/1.webp', alt: 'way x kachorovska chain' },
-      { id: '4', img: '/products/bracelets/002/yellow/1.webp', alt: 'way x kachorovska bracelet gold' },
+      {
+        id: '4',
+        img: '/products/bracelets/002/yellow/1.webp',
+        alt: 'way x kachorovska bracelet gold',
+      },
       { id: '5', img: '/products/watches/002/white/1.webp', alt: 'way x kachorovska watch white' },
     ],
   },
@@ -94,8 +98,16 @@ WAY зустрів його в точці, де форма перестає де
       { id: '1', img: '/products/pendants/001/yellow/1.webp', alt: 'way x serhii makhno pendant' },
       { id: '2', img: '/products/necklaces/005/white/1.webp', alt: 'way x serhii makhno necklace' },
       { id: '3', img: '/products/rings/016/white/1.webp', alt: 'way x serhii makhno ring' },
-      { id: '4', img: '/products/pendants/002/white/1.webp', alt: 'way x serhii makhno pendant white' },
-      { id: '5', img: '/products/necklaces/003/white/1.webp', alt: 'way x serhii makhno necklace white' },
+      {
+        id: '4',
+        img: '/products/pendants/002/white/1.webp',
+        alt: 'way x serhii makhno pendant white',
+      },
+      {
+        id: '5',
+        img: '/products/necklaces/003/white/1.webp',
+        alt: 'way x serhii makhno necklace white',
+      },
     ],
   },
 ]

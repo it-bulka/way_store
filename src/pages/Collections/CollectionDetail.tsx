@@ -3,7 +3,7 @@ import Collection from '@/pages/Collaboration/Collection'
 import { collections } from '@/data/collections'
 import NotFound from '@/pages/NotFound/NotFound'
 
-type CollectionItem = typeof collections[number]
+type CollectionItem = (typeof collections)[number]
 
 const CollectionDetail = () => {
   const collection = useLoaderData() as CollectionItem | null

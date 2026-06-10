@@ -10,8 +10,14 @@ import type { IProduct, ProductType } from '@/models/goodsType'
 const PRODUCT_PATH_PREFIX = PAGES.getCollection().split('/').slice(0, -1)
 
 const ALL_CATEGORIES: ProductType[] = [
-  'rings', 'necklaces', 'bracelets', 'earrings',
-  'pendants', 'watches', 'cufflinks', 'chains',
+  'rings',
+  'necklaces',
+  'bracelets',
+  'earrings',
+  'pendants',
+  'watches',
+  'cufflinks',
+  'chains',
 ]
 
 interface UsePaginationParams {

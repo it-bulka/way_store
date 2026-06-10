@@ -24,7 +24,15 @@ export const signInWithGoogle = createAsyncThunk(
           email: user.email ?? '',
           phone: '',
           birthday: { day: 0, month: 0, year: 0 },
-          address: { city: '', street: '', home: 0, apartment: '', entrance: '', index: 0, floor: 0 },
+          address: {
+            city: '',
+            street: '',
+            home: 0,
+            apartment: '',
+            entrance: '',
+            index: 0,
+            floor: 0,
+          },
           comment: '',
         }
         await setDoc(userRef, newUser)

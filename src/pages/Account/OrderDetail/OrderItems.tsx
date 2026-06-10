@@ -22,7 +22,9 @@ export const OrderItems: FC<OrderItemsProps> = ({ items }) => {
             <img src={item.img} alt={item.title} className={cls.itemImg} loading="lazy" />
             <div className={cls.itemName}>
               <Typography>{item.title}</Typography>
-              {item.size && <Typography className={cls.itemSize}>Розмір: {item.size} мм</Typography>}
+              {item.size && (
+                <Typography className={cls.itemSize}>Розмір: {item.size} мм</Typography>
+              )}
             </div>
             <Typography className={cls.itemQty}>× {item.amount}</Typography>
             <Typography className={cls.itemTotal}>

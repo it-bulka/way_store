@@ -33,7 +33,11 @@ export const CollabCard: FC<CollabCardProps> = ({ className, id, img, title, con
         ) : (
           <Typography>{content}</Typography>
         )}
-        <Button title="продовжити" className={cls.btn} onClick={() => navigateTo(APP_ROUTES.COLLABORATION_DETAIL(id))} />
+        <Button
+          title="продовжити"
+          className={cls.btn}
+          onClick={() => navigateTo(APP_ROUTES.COLLABORATION_DETAIL(id))}
+        />
       </div>
     </div>
   )

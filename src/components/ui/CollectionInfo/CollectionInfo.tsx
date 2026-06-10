@@ -13,7 +13,13 @@ interface CollectionInfoProps {
   content: string[]
   images?: string[]
 }
-export const CollectionInfo: FC<CollectionInfoProps> = ({ className, id, title, content, images }) => {
+export const CollectionInfo: FC<CollectionInfoProps> = ({
+  className,
+  id,
+  title,
+  content,
+  images,
+}) => {
   const navigateTo = useNavigate()
   const imgAmount = images?.length
   return (

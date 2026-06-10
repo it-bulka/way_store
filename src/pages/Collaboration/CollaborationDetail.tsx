@@ -3,7 +3,7 @@ import Collection from './Collection'
 import { collabs } from '@/data/collabs'
 import NotFound from '@/pages/NotFound/NotFound'
 
-type CollabItem = typeof collabs[number]
+type CollabItem = (typeof collabs)[number]
 
 const CollaborationDetail = () => {
   const collab = useLoaderData() as CollabItem | null

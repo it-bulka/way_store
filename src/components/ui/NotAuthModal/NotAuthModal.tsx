@@ -6,7 +6,7 @@ import cls from './NotAuthModal.module.scss'
 
 type NotAuthModalProps = Omit<ModalProps, 'children'>
 
-export const NotAuthModal: FC<NotAuthModalProps> = (props) => (
+export const NotAuthModal: FC<NotAuthModalProps> = props => (
   <Modal {...props}>
     <div className={cls.content}>
       <ModalTitle>Функція недоступна</ModalTitle>

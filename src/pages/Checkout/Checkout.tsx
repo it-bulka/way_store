@@ -32,17 +32,13 @@ const Checkout = () => {
   if (!items.length) return <Navigate to="/store" replace />
 
   const isDoor = delivery === 'ДО ДВЕРЕЙ'
-  const isSubmitting = isDoor
-    ? doorForm.formState.isSubmitting
-    : pickupForm.formState.isSubmitting
+  const isSubmitting = isDoor ? doorForm.formState.isSubmitting : pickupForm.formState.isSubmitting
 
   return (
     <form
       className={cls.root}
       onSubmit={
-        isDoor
-          ? doorForm.handleSubmit(onDoorSubmit)
-          : pickupForm.handleSubmit(onPickupSubmit)
+        isDoor ? doorForm.handleSubmit(onDoorSubmit) : pickupForm.handleSubmit(onPickupSubmit)
       }
       noValidate
     >
@@ -64,7 +60,9 @@ const Checkout = () => {
         </Typography>
         <RecipientFields
           register={
-            (isDoor ? doorForm.register : pickupForm.register) as unknown as UseFormRegister<FieldValues>
+            (isDoor
+              ? doorForm.register
+              : pickupForm.register) as unknown as UseFormRegister<FieldValues>
           }
           errors={isDoor ? doorForm.formState.errors : pickupForm.formState.errors}
         />

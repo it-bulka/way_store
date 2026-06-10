@@ -50,9 +50,7 @@ export const SearchContainer: FC<SearchContainerProps> = ({ className }) => {
   return (
     <div ref={wrapperRef} className={classnames(cls.wrapper, [className])}>
       <SearchBar value={query} onChange={setQuery} onSearch={handleSearch} />
-      {isOpen && (
-        <SearchDropdown results={results} loading={loading} onSelect={handleSelect} />
-      )}
+      {isOpen && <SearchDropdown results={results} loading={loading} onSelect={handleSelect} />}
     </div>
   )
 }

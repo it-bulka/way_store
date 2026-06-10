@@ -42,8 +42,8 @@ export const PasswordRecovery: FC<PasswordRecoveryProps> = ({ onBack }) => {
       <ModalTitle>ВІДНОВЛЕННЯ ПАРОЛЯ</ModalTitle>
       {isSubmitted ? (
         <Typography className={cls.info}>
-          ЯКЩО АКАУНТ «{getValues('email')}» ІСНУЄ, ВАМ БУДЕ НАДІСЛАНО ЕЛЕКТРОННИЙ ЛИСТ З
-          ПОДАЛЬШИМИ ІНСТРУКЦІЯМИ
+          ЯКЩО АКАУНТ «{getValues('email')}» ІСНУЄ, ВАМ БУДЕ НАДІСЛАНО ЕЛЕКТРОННИЙ ЛИСТ З ПОДАЛЬШИМИ
+          ІНСТРУКЦІЯМИ
         </Typography>
       ) : (
         <>

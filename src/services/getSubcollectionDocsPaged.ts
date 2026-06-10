@@ -1,5 +1,9 @@
 import { collection, query, getDocs, startAfter, limit } from 'firebase/firestore'
-import type { QueryConstraint, QueryDocumentSnapshot, QueryFieldFilterConstraint } from '@firebase/firestore'
+import type {
+  QueryConstraint,
+  QueryDocumentSnapshot,
+  QueryFieldFilterConstraint,
+} from '@firebase/firestore'
 import { db } from '@/base/firebase'
 
 export const PAGE_SIZE = 12
@@ -27,6 +31,6 @@ export const getSubcollectionDocsPaged = async <T extends { id: string }>({
     limit(pageSize),
   ]
   const snap = await getDocs(query(colRef, ...constraints))
-  const data = snap.docs.map(d => ({ id: d.id, ...d.data() }) as T)
+  const data = snap.docs.map(d => ({ id: d.id, ...d.data() } as T))
   return { data, lastDoc: snap.docs.at(-1) ?? null }
 }

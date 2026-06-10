@@ -57,10 +57,7 @@ describe('productsSlice — sync reducers', () => {
 
 describe('productsSlice — fetchProducts thunk states', () => {
   it('pending: sets loading true, clears error', () => {
-    const state = productsReducer(
-      { ...base, error: 'old' },
-      fetchProducts.pending('id', arg)
-    )
+    const state = productsReducer({ ...base, error: 'old' }, fetchProducts.pending('id', arg))
     expect(state.loading).toBe(true)
     expect(state.error).toBeNull()
   })

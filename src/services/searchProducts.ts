@@ -4,8 +4,14 @@ import type { IProduct, ProductType } from '@/models/goodsType'
 import type { Lang } from '@/models'
 
 const ALL_CATEGORIES: ProductType[] = [
-  'rings', 'necklaces', 'bracelets', 'earrings',
-  'pendants', 'watches', 'cufflinks', 'chains',
+  'rings',
+  'necklaces',
+  'bracelets',
+  'earrings',
+  'pendants',
+  'watches',
+  'cufflinks',
+  'chains',
 ]
 
 export const fetchAllProducts = async (lang: Lang = 'ukr'): Promise<IProduct[]> => {

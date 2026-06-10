@@ -25,9 +25,20 @@ interface CartItemProps {
 }
 
 export const CartItem: FC<CartItemProps> = ({
-  id, img, title, price, amount,
-  color, size, colorImages, availableSizes,
-  onDelete, setAmount, onColorChange, onSizeChange, onNavigate,
+  id,
+  img,
+  title,
+  price,
+  amount,
+  color,
+  size,
+  colorImages,
+  availableSizes,
+  onDelete,
+  setAmount,
+  onColorChange,
+  onSizeChange,
+  onNavigate,
 }) => {
   const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
   const showColors = colorKeys.length > 1
@@ -71,7 +82,9 @@ export const CartItem: FC<CartItemProps> = ({
                   onChange={e => onSizeChange?.(Number(e.target.value))}
                 >
                   {availableSizes.map(s => (
-                    <option key={s} value={s}>{s}</option>
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
                   ))}
                 </select>
               )}

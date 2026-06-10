@@ -4,10 +4,7 @@ import type { IUser } from '@/redux/types/user'
 
 export const updateUser = createAsyncThunk(
   'user/update',
-  async (
-    { userId, data }: { userId: string; data: Partial<IUser> },
-    { rejectWithValue }
-  ) => {
+  async ({ userId, data }: { userId: string; data: Partial<IUser> }, { rejectWithValue }) => {
     try {
       await setUserData(userId, data)
     } catch (e) {

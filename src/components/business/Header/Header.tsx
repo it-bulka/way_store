@@ -46,7 +46,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         </div>
         <SearchContainer className={classnames(cls.searchHolder, 'col-2')} />
         <div className={classnames(cls.actions, 'col-3')}>
-          <button onClick={() => isAuthenticated ? navigateTo('/account/chosen') : openModal()}>
+          <button onClick={() => (isAuthenticated ? navigateTo('/account/chosen') : openModal())}>
             <HeartIcon />
           </button>
           <CartButton />

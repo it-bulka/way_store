@@ -20,7 +20,12 @@ interface OrderHeaderProps {
 
 export const OrderHeader: FC<OrderHeaderProps> = ({ order }) => (
   <div className={cls.header}>
-    <AppLink path="/account/purchase-history" title="← До списку замовлень" withDecoration={false} className={cls.back} />
+    <AppLink
+      path="/account/purchase-history"
+      title="← До списку замовлень"
+      withDecoration={false}
+      className={cls.back}
+    />
     <div className={cls.meta}>
       <Typography className={cls.orderNum}>№ {order.orderNumber}</Typography>
       <Typography className={cls.date}>{formatDate(order.date)}</Typography>

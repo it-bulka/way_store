@@ -16,10 +16,7 @@ describe('filterCategorySlice', () => {
         base,
         FilterActions.addCategory({ metal: ['gold'], stones: ['diamonds'] })
       )
-      const second = FilterCategoryReducer(
-        first,
-        FilterActions.addCategory({ product: ['rings'] })
-      )
+      const second = FilterCategoryReducer(first, FilterActions.addCategory({ product: ['rings'] }))
       expect(second.filters.metal).toBeUndefined()
       expect(second.filters.product).toEqual(['rings'])
     })

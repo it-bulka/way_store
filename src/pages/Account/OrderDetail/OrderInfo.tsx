@@ -26,7 +26,9 @@ export const OrderInfo: FC<OrderInfoProps> = ({ order }) => {
         </div>
         <div className={cls.infoRow}>
           <span className={cls.infoLabel}>Вулиця:</span>
-          <span>{address.street}, {address.home}</span>
+          <span>
+            {address.street}, {address.home}
+          </span>
         </div>
         {address.apartment && (
           <div className={cls.infoRow}>

@@ -20,12 +20,19 @@ interface CheckoutItemProps {
 }
 
 export const CheckoutItem: FC<CheckoutItemProps> = ({
-  id, img, title, price, amount, color, size, onDelete, setAmount,
+  id,
+  img,
+  title,
+  price,
+  amount,
+  color,
+  size,
+  onDelete,
+  setAmount,
 }) => {
-  const variantLabel = [
-    color && COLOR_LABELS[color],
-    size && `Розмір: ${size}`,
-  ].filter(Boolean).join(' / ')
+  const variantLabel = [color && COLOR_LABELS[color], size && `Розмір: ${size}`]
+    .filter(Boolean)
+    .join(' / ')
 
   return (
     <li className={cls.item}>
@@ -33,9 +40,7 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({
         <img src={img} alt={title} className={cls.img} loading="lazy" />
         <div className={cls.info}>
           <Typography className={cls.title}>{title}</Typography>
-          {variantLabel && (
-            <Typography className={cls.variant}>{variantLabel}</Typography>
-          )}
+          {variantLabel && <Typography className={cls.variant}>{variantLabel}</Typography>}
         </div>
       </Link>
       <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />

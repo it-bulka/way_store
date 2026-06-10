@@ -16,9 +16,15 @@ interface PickupFormProps {
 
 export const PickupForm: FC<PickupFormProps> = ({ control, register, setValue, errors }) => {
   const {
-    cities, showSuggestions, warehouseOptions,
-    handleCityChange, handleCityBlur, handleCitySelect, handleCityClear,
-    handleWarehouseSelect, handleWarehouseClear,
+    cities,
+    showSuggestions,
+    warehouseOptions,
+    handleCityChange,
+    handleCityBlur,
+    handleCitySelect,
+    handleCityClear,
+    handleWarehouseSelect,
+    handleWarehouseClear,
   } = usePickupForm(setValue)
 
   const cityRef = useWatch({ control, name: 'cityRef' })
