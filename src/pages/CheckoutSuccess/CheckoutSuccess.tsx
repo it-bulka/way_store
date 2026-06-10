@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './CheckoutSuccess.module.scss'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
@@ -10,6 +11,7 @@ import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const CheckoutSuccess = () => {
+  const { t } = useTranslation('checkout')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -30,13 +32,13 @@ const CheckoutSuccess = () => {
 
   return (
     <div className={cls.root}>
-      <PageMeta title="Замовлення прийнято" noindex />
+      <PageMeta title={t('success.meta.title')} noindex />
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
-        ЗАМОВЛЕННЯ ОФОРМЛЕНО
+        {t('success.title')}
       </Typography>
 
       <Typography className={cls.orderNum}>
-        Номер замовлення: <span>{orderNumber}</span>
+        {t('success.orderNumber', { number: orderNumber })}
       </Typography>
 
       {snapshot.length > 0 && (
@@ -47,7 +49,7 @@ const CheckoutSuccess = () => {
               <Typography className={cls.title}>{item.title}</Typography>
               <Typography className={cls.qty}>× {item.amount}</Typography>
               <Typography className={cls.price}>
-                {formatNumberIntoGroups(item.price * item.amount)} грн.
+                {formatNumberIntoGroups(item.price * item.amount)} {t('currency')}
               </Typography>
             </li>
           ))}
@@ -55,10 +57,10 @@ const CheckoutSuccess = () => {
       )}
 
       <Typography type={TypographyTypes.HEADER} className={cls.total}>
-        РАЗОМ: <span>{formatNumberIntoGroups(total)} грн.</span>
+        {t('totalPrefix')} <span>{formatNumberIntoGroups(total)} {t('currency')}</span>
       </Typography>
 
-      <Button title="Продовжити покупки" onClick={() => navigate('/store')} className={cls.btn} />
+      <Button title={t('success.continueShopping')} onClick={() => navigate('/store')} className={cls.btn} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -15,6 +16,7 @@ import { useWayforpay } from '@/hooks/useWayforpay'
 import { useToast } from '@/context/ToastContext'
 
 export const useCheckout = () => {
+  const { t } = useTranslation('checkout')
   const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
   const items = useAppSelector(getCartItems)
@@ -91,7 +93,7 @@ export const useCheckout = () => {
         })
       )
       if (!createOrder.fulfilled.match(result)) {
-        addToast('Помилка при створенні замовлення', 'error')
+        addToast(t('toast.orderError'), 'error')
         return
       }
 
@@ -101,7 +103,7 @@ export const useCheckout = () => {
       }
 
       if (!isReady) {
-        addToast('Платіжний сервіс недоступний. Спробуйте ще раз.', 'error')
+        addToast(t('toast.paymentUnavailable'), 'error')
         return
       }
 
@@ -114,7 +116,7 @@ export const useCheckout = () => {
         onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
         onDeclined: () => {
           setIsPaying(false)
-          addToast('Платіж відхилено. Спробуйте ще раз.', 'error')
+          addToast(t('toast.paymentDeclined'), 'error')
         },
       })
     },

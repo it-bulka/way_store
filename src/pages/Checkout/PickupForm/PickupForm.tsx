@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useWatch } from 'react-hook-form'
 import type { Control, UseFormSetValue, UseFormRegister, FieldErrors } from 'react-hook-form'
 import cls from './PickupForm.module.scss'
@@ -15,6 +16,7 @@ interface PickupFormProps {
 }
 
 export const PickupForm: FC<PickupFormProps> = ({ control, register, setValue, errors }) => {
+  const { t } = useTranslation('checkout')
   const {
     cities,
     showSuggestions,
@@ -31,9 +33,10 @@ export const PickupForm: FC<PickupFormProps> = ({ control, register, setValue, e
 
   return (
     <div className={cls.root}>
-      <p className={cls.npLabel}>Нова Пошта</p>
+      <p className={cls.npLabel}>{t('pickup.novaPoshta')}</p>
       <CityCombobox
         control={control}
+        placeholder={t('pickup.city')}
         error={errors.cityName?.message ?? errors.cityRef?.message}
         cities={cities}
         showSuggestions={showSuggestions}
@@ -48,7 +51,7 @@ export const PickupForm: FC<PickupFormProps> = ({ control, register, setValue, e
         <Select
           key={cityRef}
           options={warehouseOptions}
-          initialValue="ВІДДІЛЕННЯ"
+          initialValue={t('pickup.warehouse')}
           onChose={handleWarehouseSelect}
           onClear={handleWarehouseClear}
         />

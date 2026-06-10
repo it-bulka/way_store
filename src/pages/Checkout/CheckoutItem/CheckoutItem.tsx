@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import cls from './CheckoutItem.module.scss'
 import CloseIcon from '@/assets/general/close.svg'
@@ -30,7 +31,8 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({
   onDelete,
   setAmount,
 }) => {
-  const variantLabel = [color && COLOR_LABELS[color], size && `Розмір: ${size}`]
+  const { t } = useTranslation('checkout')
+  const variantLabel = [color && COLOR_LABELS[color], size && `${t('sizeLabel')}: ${size}`]
     .filter(Boolean)
     .join(' / ')
 
@@ -44,7 +46,9 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({
         </div>
       </Link>
       <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />
-      <Typography className={cls.price}>{formatNumberIntoGroups(price * amount)} грн.</Typography>
+      <Typography className={cls.price}>
+        {formatNumberIntoGroups(price * amount)} {t('currency')}
+      </Typography>
       <button className={cls.deleteBtn} onClick={onDelete}>
         <CloseIcon />
       </button>

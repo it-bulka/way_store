@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Navigate } from 'react-router-dom'
 import cls from './Checkout.module.scss'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
@@ -13,6 +14,7 @@ import { useCheckout } from './useCheckout'
 import type { FieldValues, UseFormRegister } from 'react-hook-form'
 
 const Checkout = () => {
+  const { t } = useTranslation('checkout')
   const {
     items,
     delivery,
@@ -42,21 +44,21 @@ const Checkout = () => {
       }
       noValidate
     >
-      <PageMeta title="Оформлення замовлення" noindex />
+      <PageMeta title={t('meta.title')} noindex />
       <Typography variant="h3" type={TypographyTypes.HEADER} className={cls.heading}>
-        ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
+        {t('title')}
       </Typography>
 
       <div className={cls.section}>
         <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-          Ваше замовлення
+          {t('sections.order')}
         </Typography>
         <CheckoutOrderList items={items} onDelete={onDeleteItem} setAmount={onSetItemAmount} />
       </div>
 
       <div className={cls.section}>
         <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-          Дані отримувача
+          {t('sections.recipient')}
         </Typography>
         <RecipientFields
           register={
@@ -70,21 +72,21 @@ const Checkout = () => {
 
       <div className={cls.section}>
         <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-          Спосіб оплати
+          {t('sections.payment')}
         </Typography>
         <CheckoutPayment payment={payment} onChange={setPayment} />
       </div>
 
       <div className={cls.section}>
         <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-          Спосіб доставки
+          {t('sections.delivery')}
         </Typography>
         <CheckoutDelivery delivery={delivery} onChange={setDelivery} />
       </div>
 
       <div className={cls.section}>
         <Typography type={TypographyTypes.HEADER} className={cls.sectionTitle}>
-          Адреса доставки
+          {t('sections.address')}
         </Typography>
         {isDoor ? (
           <DeliveryForm register={doorForm.register} errors={doorForm.formState.errors} />
@@ -99,9 +101,9 @@ const Checkout = () => {
       </div>
 
       <div className={cls.actions}>
-        <Button title="Оформити замовлення" type="submit" disabled={isSubmitting || isPaying} />
+        <Button title={t('submit')} type="submit" disabled={isSubmitting || isPaying} />
         <button type="button" className={cls.backBtn} onClick={onBack}>
-          Назад до магазину
+          {t('backToStore')}
         </button>
       </div>
     </form>

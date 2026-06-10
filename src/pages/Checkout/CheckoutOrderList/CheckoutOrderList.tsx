@@ -1,4 +1,5 @@
 import { FC, memo, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './CheckoutOrderList.module.scss'
 import { CheckoutItem } from '../CheckoutItem/CheckoutItem'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
@@ -14,6 +15,7 @@ interface CheckoutOrderListProps {
 
 export const CheckoutOrderList: FC<CheckoutOrderListProps> = memo(
   ({ items, onDelete, setAmount }) => {
+    const { t } = useTranslation('checkout')
     const total = useMemo(
       () => items.reduce((sum, item) => sum + item.price * item.amount, 0),
       [items]
@@ -38,7 +40,7 @@ export const CheckoutOrderList: FC<CheckoutOrderListProps> = memo(
           ))}
         </ul>
         <Typography type={TypographyTypes.HEADER} className={cls.total}>
-          РАЗОМ: <span>{formatNumberIntoGroups(total)} грн.</span>
+          {t('totalPrefix')} <span>{formatNumberIntoGroups(total)} {t('currency')}</span>
         </Typography>
       </>
     )

@@ -8,6 +8,7 @@ import type { IPickupFormValues } from '../schema'
 
 interface CityComboboxProps {
   control: Control<IPickupFormValues>
+  placeholder: string
   error?: string
   cities: INPCity[]
   showSuggestions: boolean
@@ -19,6 +20,7 @@ interface CityComboboxProps {
 
 export const CityCombobox: FC<CityComboboxProps> = ({
   control,
+  placeholder,
   error,
   cities,
   showSuggestions,
@@ -35,7 +37,7 @@ export const CityCombobox: FC<CityComboboxProps> = ({
         <div className={cls.inputWrapper}>
           <input
             {...field}
-            placeholder="МІСТО"
+            placeholder={placeholder}
             autoComplete="off"
             className={cls.input}
             onChange={e => {
