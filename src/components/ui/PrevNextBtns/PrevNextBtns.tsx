@@ -1,4 +1,5 @@
 import { type FC, useCallback, memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './PrevNextBtns.module.scss'
 import Arrow from '@/assets/general/arrow.svg'
 import classnames from 'classnames'
@@ -12,6 +13,8 @@ interface PageSwitcherProps {
 
 export const PrevNextBtns: FC<PageSwitcherProps> = memo(
   ({ onPrevClick, onNextClick, disablePrev = false, disableNext = false }) => {
+    const { t } = useTranslation('common')
+
     const prevClickHandler = useCallback(() => {
       onPrevClick && onPrevClick()
     }, [onPrevClick])
@@ -19,8 +22,6 @@ export const PrevNextBtns: FC<PageSwitcherProps> = memo(
     const nextClickHandler = useCallback(() => {
       onNextClick && onNextClick()
     }, [onNextClick])
-
-    console.log({ disablePrev, disableNext })
 
     return (
       <div className={cls.btns}>
@@ -32,7 +33,7 @@ export const PrevNextBtns: FC<PageSwitcherProps> = memo(
           <span className={cls.arrow}>
             <Arrow />
           </span>
-          <span>Пред.</span>
+          <span>{t('actions.prev')}</span>
         </button>
         <div className={cls.divider} />
         <button
@@ -40,7 +41,7 @@ export const PrevNextBtns: FC<PageSwitcherProps> = memo(
           onClick={nextClickHandler}
           disabled={disableNext}
         >
-          <span>След.</span>
+          <span>{t('actions.next')}</span>
           <span className={cls.arrow}>
             <Arrow />
           </span>

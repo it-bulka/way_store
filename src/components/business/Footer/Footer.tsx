@@ -1,17 +1,19 @@
+import { useTranslation } from 'react-i18next'
 import { AppLink } from '@/components/ui/AppLink/AppLink'
 import { SubscriptionModal } from '@/components/ui/SubscriptionModal/SubscriptionModal'
 import { useControlModal } from '@/hooks/useControlModal'
 import cls from './Footer.module.scss'
 import { APP_ROUTES } from '@/models'
 
-const nav = [
-  { id: '1', title: 'FAQ', path: APP_ROUTES.FAQ },
-  { id: '2', title: 'Політика конфіденційності', path: APP_ROUTES.PRIVACY },
-  { id: '3', title: 'Публічна оферта', path: APP_ROUTES.OFFER },
-]
-
 export const Footer = () => {
+  const { t } = useTranslation('common')
   const { isModalOpen, openModal, closeModal } = useControlModal(false)
+
+  const nav = [
+    { id: '1', title: 'FAQ', path: APP_ROUTES.FAQ },
+    { id: '2', title: t('footer.privacy'), path: APP_ROUTES.PRIVACY },
+    { id: '3', title: t('footer.offer'), path: APP_ROUTES.OFFER },
+  ]
 
   return (
     <footer className={cls.footer}>
@@ -23,13 +25,13 @@ export const Footer = () => {
             ))}
             <li>
               <button className={cls.subscribeBtn} onClick={openModal}>
-                ПІДПИСАТИСЯ
+                {t('footer.subscribe').toUpperCase()}
               </button>
             </li>
           </ul>
         </nav>
 
-        <p className={cls.copyrights}>&copy; 2021 WAYYOUCHOOSE. ALL RIGHTS RESERVED.</p>
+        <p className={cls.copyrights}>{t('footer.copyright')}</p>
       </div>
 
       <SubscriptionModal isOpened={isModalOpen} close={closeModal} />

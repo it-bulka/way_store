@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import PersonIcon from '@/assets/general/person.svg'
 import cls from './HeaderAuthControls.module.scss'
 import { AuthModal } from '@/components/ui/AuthModal/AuthModal'
@@ -13,6 +14,7 @@ export const HeaderAuthControls = memo(() => {
   const { isModalOpen, openModal, closeModal } = useControlModal(false)
   const dispatch = useAppDispatch()
   const navigateTo = useNavigate()
+  const { t } = useTranslation('auth')
 
   const handleSignOut = useCallback(() => {
     dispatch(signOutUser())
@@ -27,12 +29,12 @@ export const HeaderAuthControls = memo(() => {
             <PersonIcon />
           </button>
           <button className={cls.signOutBtn} onClick={handleSignOut}>
-            Вийти
+            {t('signOut')}
           </button>
         </>
       ) : (
         <button className={cls.signInBtn} onClick={openModal}>
-          Увійти
+          {t('signIn')}
         </button>
       )}
       <AuthModal isOpened={isModalOpen} close={closeModal} overlay="on" />

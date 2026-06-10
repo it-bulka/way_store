@@ -7,6 +7,7 @@ import { SearchContainer } from '@/components/business/SearchContainer/SearchCon
 import { BurgerMenu } from '@/components/ui/BurgerMenu/BurgerMenu'
 import { CartButton } from './CartButton'
 import { HeaderAuthControls } from './HeaderAuthControls'
+import { LanguageSelector } from '@/components/ui/LanguageSelector/LanguageSelector'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '@/hooks/reduxHooks'
@@ -50,6 +51,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
             <HeartIcon />
           </button>
           <CartButton />
+          <LanguageSelector className={cls.langSelector} />
           <HeaderAuthControls />
         </div>
       </div>

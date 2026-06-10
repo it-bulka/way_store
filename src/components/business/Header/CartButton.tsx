@@ -1,4 +1,5 @@
 import { memo, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import CartIcon from '@/assets/general/cart.svg'
 import cls from './CartButton.module.scss'
@@ -8,6 +9,7 @@ import { getCartItems } from '@/redux/selectors/cartSelectors'
 import { useControlModal } from '@/hooks/useControlModal'
 
 export const CartButton = memo(() => {
+  const { t } = useTranslation('cart')
   const items = useAppSelector(getCartItems)
   const { isModalOpen, openModal, closeModal } = useControlModal(false)
   const totalAmount = useMemo(() => items.reduce((acc, item) => acc + item.amount, 0), [items])
@@ -17,7 +19,7 @@ export const CartButton = memo(() => {
       <button
         onClick={openModal}
         className={classnames(cls.cartBtn, { [cls.active]: !!items.length })}
-        aria-label={`Кошик${totalAmount ? `, ${totalAmount} товарів` : ''}`}
+        aria-label={totalAmount ? t('ariaLabelWithItems', { count: totalAmount }) : t('ariaLabel')}
       >
         <CartIcon />
         {!!items.length && (
