@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/base/firebase'
@@ -33,6 +33,7 @@ export function App() {
     <ToastProvider>
       <div className="app">
         <AuthListener />
+        <ScrollRestoration />
         <Outlet />
         <ToastContainer />
       </div>
