@@ -7,6 +7,7 @@ import classnames from 'classnames'
 
 export interface IOption<T extends string> {
   label: T
+  displayLabel?: string
   id: string
   chosen: boolean
 }
@@ -59,7 +60,7 @@ export const Dropdown = <T extends string>({
           {options?.map(item => (
             <li key={item.id} className={cls.container}>
               <Checkbox
-                label={item.label}
+                label={item.displayLabel ?? item.label}
                 checked={item.chosen}
                 onChecked={status => onCheck(item.id, status)}
               />
