@@ -4,5 +4,6 @@ import { LOCALE_TO_FIRESTORE_LANG } from '@/models/pages'
 
 export function useFirestoreLang(): FirestoreLang {
   const { i18n } = useTranslation()
-  return LOCALE_TO_FIRESTORE_LANG[i18n.language as AppLocale] ?? 'ukr'
+  const locale = i18n.language.split('-')[0] as AppLocale
+  return LOCALE_TO_FIRESTORE_LANG[locale] ?? 'ukr'
 }

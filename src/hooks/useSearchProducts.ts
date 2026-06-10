@@ -28,10 +28,17 @@ export const useSearchProducts = (query: string, lang: FirestoreLang) => {
     }
 
     setLoading(true)
+    setResults([])
     let cancelled = false
 
     const timer = setTimeout(async () => {
-      const products = await getProducts(lang)
+      let products = await getProducts(lang)
+
+      // fallback to Ukrainian if language-specific data isn't seeded yet
+      if (products.length === 0 && lang !== 'ukr') {
+        products = await getProducts('ukr')
+      }
+
       if (cancelled) return
       setResults(
         products.filter(p => p.name.toLowerCase().includes(q.toLowerCase())).slice(0, SEARCH_LIMIT)
