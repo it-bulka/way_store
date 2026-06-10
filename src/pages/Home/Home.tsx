@@ -88,8 +88,9 @@ const Home: FC<HomeProps> = ({ className }) => {
             </Typography>
             <div className={cls.categoryGrid}>
               {CATEGORIES.map(({ name, slug, img }) => (
-                <div
+                <button
                   key={slug}
+                  type="button"
                   className={cls.categoryCard}
                   onClick={() => navigate(APP_ROUTES.STORE_WITH_PRODUCT(slug))}
                 >
@@ -98,12 +99,11 @@ const Home: FC<HomeProps> = ({ className }) => {
                     <span className={cls.categoryName}>{name}</span>
                     <span className={cls.categoryArrow}>Дивитись →</span>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
         </section>
-
       </div>
       <Footer />
     </>

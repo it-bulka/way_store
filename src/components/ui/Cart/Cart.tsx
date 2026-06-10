@@ -85,11 +85,15 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
 
   return (
     <Portal>
-      <div className={cls.cart} onClick={onClose}>
+      <div
+        className={cls.cart}
+        role="presentation"
+        onClick={e => e.target === e.currentTarget && onClose()}
+        onKeyDown={e => e.key === 'Escape' && onClose()}
+      >
         <div
           ref={cartInnerRef}
           className={classnames(cls.cartInner, 'container')}
-          onClick={e => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
           aria-label="Ваш кошик"
@@ -106,7 +110,10 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
                 info="КОШИК ПОРОЖНІЙ"
                 btnTitle="ПЕРЕЙТИ ДО МАГАЗИНУ"
                 className={cls.absent}
-                onBtnClick={() => { onClose(); navigateTo('/store') }}
+                onBtnClick={() => {
+                  onClose()
+                  navigateTo('/store')
+                }}
               />
             ) : (
               <ul>
@@ -125,14 +132,25 @@ export const Cart: FC<CartProps> = memo(({ onClose }) => {
                     onDelete={() => deleteItem(item.id, item.color, item.size)}
                     setAmount={amount => changeItemAmount(item.id, amount, item.color, item.size)}
                     onColorChange={(newColor, newImg) =>
-                      dispatch(cartActions.updateItemVariant({
-                        id: item.id, oldColor: item.color, oldSize: item.size, newColor, newImg,
-                      }))
+                      dispatch(
+                        cartActions.updateItemVariant({
+                          id: item.id,
+                          oldColor: item.color,
+                          oldSize: item.size,
+                          newColor,
+                          newImg,
+                        })
+                      )
                     }
                     onSizeChange={newSize =>
-                      dispatch(cartActions.updateItemVariant({
-                        id: item.id, oldColor: item.color, oldSize: item.size, newSize,
-                      }))
+                      dispatch(
+                        cartActions.updateItemVariant({
+                          id: item.id,
+                          oldColor: item.color,
+                          oldSize: item.size,
+                          newSize,
+                        })
+                      )
                     }
                     onNavigate={onClose}
                   />

@@ -1,4 +1,13 @@
-import { type FC, ReactNode, useRef, useState, useCallback, MouseEvent, useEffect, useId, createContext } from 'react'
+import {
+  type FC,
+  ReactNode,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  useId,
+  createContext,
+} from 'react'
 import cls from './Modal.module.scss'
 import { Portal } from '@/components/ui/Portal/Portal'
 import CloseIcon from '@/assets/general/close.svg'
@@ -39,10 +48,6 @@ export const Modal: FC<ModalProps> = ({
     }
   }, [close])
 
-  const onContentClick = useCallback((e: MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-  }, [])
-
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeHandler()
@@ -66,12 +71,18 @@ export const Modal: FC<ModalProps> = ({
   return (
     <Portal>
       <ModalTitleContext.Provider value={titleId}>
-        <div className={classnames(cls.modal, { [cls.closing]: isClosing, [cls.opened]: isOpened })}>
-          <div className={cls.overlay + ' ' + cls[overlay]} onClick={closeHandler}>
+        <div
+          className={classnames(cls.modal, { [cls.closing]: isClosing, [cls.opened]: isOpened })}
+        >
+          <div
+            className={cls.overlay + ' ' + cls[overlay]}
+            role="presentation"
+            onClick={e => e.target === e.currentTarget && closeHandler()}
+            onKeyDown={e => e.key === 'Escape' && closeHandler()}
+          >
             <div
               ref={contentRef}
               className={classnames(cls.content, contentClassName)}
-              onClick={onContentClick}
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}

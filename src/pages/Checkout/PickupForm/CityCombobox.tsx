@@ -62,9 +62,15 @@ export const CityCombobox: FC<CityComboboxProps> = ({
         </div>
         {error && <p className={cls.error}>{error}</p>}
         {showSuggestions && cities.length > 0 && (
-          <ul className={cls.suggestions}>
+          <ul className={cls.suggestions} role="listbox">
             {cities.map(city => (
-              <li key={city.Ref} onMouseDown={() => onSelect(city.Ref, city.Present)}>
+              <li
+                key={city.Ref}
+                role="option"
+                aria-selected={false}
+                onMouseDown={() => onSelect(city.Ref, city.Present)}
+                onKeyDown={e => e.key === 'Enter' && onSelect(city.Ref, city.Present)}
+              >
                 {city.Present}
               </li>
             ))}

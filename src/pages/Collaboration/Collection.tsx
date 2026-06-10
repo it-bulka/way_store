@@ -27,11 +27,7 @@ const Collection = ({ className, title, info, gallery, heroImage }: CollectionPr
   const navigate = useNavigate()
   return (
     <div className={classnames(cls.collection, {}, [className])}>
-      <PageMeta
-        title={title}
-        description={info.slice(0, 160)}
-        ogImage={gallery[0]?.img}
-      />
+      <PageMeta title={title} description={info.slice(0, 160)} ogImage={gallery[0]?.img} />
       <div
         className={cls.firstBlock}
         style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
@@ -50,15 +46,22 @@ const Collection = ({ className, title, info, gallery, heroImage }: CollectionPr
         </section>
 
         <section className={cls.gallery}>
-          {gallery.map(({ img, alt, id, productId, productCategory }) => (
-            <div
-              key={id}
-              className={classnames({ [cls.clickable]: !!productId })}
-              onClick={() => productId && navigate(APP_ROUTES.GOODS_DETAIL(productId, productCategory))}
-            >
-              <img src={img} alt={alt} loading="lazy" />
-            </div>
-          ))}
+          {gallery.map(({ img, alt, id, productId, productCategory }) =>
+            productId ? (
+              <button
+                key={id}
+                type="button"
+                className={cls.clickable}
+                onClick={() => navigate(APP_ROUTES.GOODS_DETAIL(productId, productCategory))}
+              >
+                <img src={img} alt={alt} loading="lazy" />
+              </button>
+            ) : (
+              <div key={id}>
+                <img src={img} alt={alt} loading="lazy" />
+              </div>
+            )
+          )}
         </section>
       </main>
       <Footer />
