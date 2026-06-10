@@ -63,12 +63,14 @@ export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex 
 
       <Input
         name="email"
+        label="EMAIL"
         defaultValue={email}
         className={cls.col_1}
         readOnly
       />
       <Input
         name="name"
+        label="ІМ'Я"
         defaultValue={name}
         className={cls.col_1}
         register={register}
@@ -76,6 +78,7 @@ export const InfoForm: FC<InfoFormProps> = ({ name, email, phone, birthday, sex 
       />
       <Input
         name="phone"
+        label="ТЕЛЕФОН"
         defaultValue={phone}
         className={cls.col_1}
         register={register}
