@@ -8,7 +8,6 @@ const nav = [
   { id: '1', title: 'FAQ',                       path: APP_ROUTES.FAQ },
   { id: '2', title: 'Політика конфіденційності',  path: APP_ROUTES.PRIVACY },
   { id: '3', title: 'Публічна оферта',            path: APP_ROUTES.OFFER },
-  { id: '4', title: 'Instagram',                  path: 'faq' },
 ]
 
 export const Footer = () => {
