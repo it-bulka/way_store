@@ -58,30 +58,32 @@ export function Input<T extends FieldValues | undefined = undefined>({
   }
 
   return (
-    <div className={classnames(cls.input, [className])}>
-      {label && (
-        <label
-          htmlFor={id + name}
-          className={classnames({ [cls.label]: !!value || isFieldFocused })}
-        >
-          {label}
-        </label>
-      )}
-      <input
-        type={type}
-        {...props}
-        id={id + name}
-        {...(register ? register(name) : {})}
-        name={name}
-        value={value}
-        onChange={changeHandler}
-        onBlur={() => setFieldFocused(false)}
-        onFocus={() => setFieldFocused(true)}
-        placeholder={placeholder}
-        autoComplete="new-password"
-        aria-invalid={!!error}
-      />
-      {addendum && <button onClick={addendumClickHandler}>{addendum}</button>}
+    <div className={classnames(cls.wrapper, [className])}>
+      <div className={cls.input}>
+        {label && (
+          <label
+            htmlFor={id + name}
+            className={classnames({ [cls.label]: !!value || isFieldFocused })}
+          >
+            {label}
+          </label>
+        )}
+        <input
+          type={type}
+          {...props}
+          id={id + name}
+          {...(register ? register(name) : {})}
+          name={name}
+          value={value}
+          onChange={changeHandler}
+          onBlur={() => setFieldFocused(false)}
+          onFocus={() => setFieldFocused(true)}
+          placeholder={placeholder}
+          autoComplete="new-password"
+          aria-invalid={!!error}
+        />
+        {addendum && <button onClick={addendumClickHandler}>{addendum}</button>}
+      </div>
       {error && !isFieldFocused && (
         <p role="alert" className={cls.error}>
           {error}
