@@ -1,4 +1,5 @@
 import { type FC, memo, useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './ProductsList.module.scss'
 import { ProductCard } from '@/components/ui/ProductCard/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/ProductCardSkeleton/ProductCardSkeleton'
@@ -49,6 +50,7 @@ export const ProductsList: FC<ProductsListProps> = memo(
     const chosen = useAppSelector(getChosenProducts)
     const chosenIds = useMemo(() => new Set(chosen.map(p => p.id)), [chosen])
     const { isModalOpen, openModal, closeModal } = useControlModal(false)
+    const { t } = useTranslation('store')
 
     const onCardClick = useCallback(
       (product: IProduct) => () => navigateTo(`/store/${product.id}?category=${product.category}`),
@@ -101,7 +103,7 @@ export const ProductsList: FC<ProductsListProps> = memo(
         </div>
         {!loading && hasMore && (
           <div className={cls.loadMore}>
-            {loadingMore ? <Loader /> : <Button title="Показати ще" onClick={loadMore} />}
+            {loadingMore ? <Loader /> : <Button title={t('showMore')} onClick={loadMore} />}
           </div>
         )}
         <NotAuthModal isOpened={isModalOpen} close={closeModal} overlay="on" />
