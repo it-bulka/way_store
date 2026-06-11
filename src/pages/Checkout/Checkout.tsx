@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { Navigate } from 'react-router-dom'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { getAuthInitializing } from '@/redux/selectors/getAuthSelector'
+import { Absent } from '@/components/ui/Absent/Absent'
 import cls from './Checkout.module.scss'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
@@ -31,7 +33,12 @@ const Checkout = () => {
     onBack,
   } = useCheckout()
 
-  if (!items.length) return <Navigate to="/store" replace />
+  const initializing = useAppSelector(getAuthInitializing)
+
+  if (initializing) return null
+  if (!items.length) return (
+    <Absent info={t('empty.info')} btnTitle={t('empty.btn')} onBtnClick={onBack} />
+  )
 
   const isDoor = delivery === 'ДО ДВЕРЕЙ'
   const isSubmitting = isDoor ? doorForm.formState.isSubmitting : pickupForm.formState.isSubmitting

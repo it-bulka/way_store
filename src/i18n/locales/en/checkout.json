@@ -34,6 +34,7 @@
     "city": "CITY",
     "warehouse": "WAREHOUSE"
   },
+  "empty": { "info": "Your cart is empty", "btn": "Go to store" },
   "submit": "Place order",
   "backToStore": "Back to Store",
   "toast": {

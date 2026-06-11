@@ -34,6 +34,7 @@
     "city": "MIASTO",
     "warehouse": "ODDZIAŁ"
   },
+  "empty": { "info": "Koszyk jest pusty", "btn": "Do sklepu" },
   "submit": "Złóż zamówienie",
   "backToStore": "Wróć do sklepu",
   "toast": {
