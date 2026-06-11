@@ -1,4 +1,14 @@
-import { FormEvent, InputHTMLAttributes, ReactNode, useId, useMemo, useState } from 'react'
+import {
+  FormEvent,
+  InputHTMLAttributes,
+  ReactNode,
+  useCallback,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import cls from './Input.module.scss'
 import classnames from 'classnames'
 import { FieldValues } from 'react-hook-form/dist/types/fields'
@@ -47,11 +57,28 @@ export function Input<T extends FieldValues | undefined = undefined>({
 
   const [isFieldFocused, setFieldFocused] = useState(false)
   const id = useId()
+  const inputElementRef = useRef<HTMLInputElement | null>(null)
 
   const registration = useMemo(
     () => (register && name ? register(name) : null),
     [register, name]
   )
+
+  // Merged ref: stores DOM element + forwards to RHF's ref (which sets input.value from defaultValues)
+  const mergedRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      inputElementRef.current = el
+      registration?.ref?.(el)
+    },
+    [registration]
+  )
+
+  // After mount, detect if RHF pre-filled the field (fires after all ref callbacks)
+  useLayoutEffect(() => {
+    if (inputElementRef.current?.value) {
+      setHasValue(true)
+    }
+  }, [])
 
   const changeHandler = (e: FormEvent<HTMLInputElement>) => {
     const currentValue = (e.target as HTMLInputElement).value
@@ -97,7 +124,7 @@ export function Input<T extends FieldValues | undefined = undefined>({
           type={type}
           {...props}
           id={id + name}
-          {...(registration ?? {})}
+          ref={mergedRef}
           name={name}
           {...valueProps}
           onChange={changeHandler}
