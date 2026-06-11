@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Oferta publiczna",
+    "description": "Warunki umowy sprzedaży biżuterii WAYYOUCHOOSE"
+  },
+  "pageTitle": "OFERTA PUBLICZNA",
+  "intro": "Niniejszy dokument stanowi ofertę publiczną sklepu internetowego WAYYOUCHOOSE (zwanego dalej Sprzedawcą) — propozycję zawarcia umowy kupna-sprzedaży biżuterii na warunkach określonych poniżej. Złożenie zamówienia na stronie oznacza bezwarunkową akceptację niniejszej oferty.",
+  "sections": {
+    "1": {
+      "heading": "1. PRZEDMIOT UMOWY",
+      "body": "Sprzedawca zobowiązuje się przenieść na własność Kupującego wyroby jubilerskie wykonane ze złota 585°/750°, srebra 925°, platyny 950° oraz kamieni szlachetnych zgodnie ze złożonym zamówieniem, a Kupujący — odebrać i opłacić towar na warunkach niniejszej umowy. Specyfikacja produktu (metal, kamienie, waga, rozmiar) podana jest na odpowiedniej stronie produktu."
+    },
+    "2": {
+      "heading": "2. PROCES ZAMÓWIENIA",
+      "body": "Zamówienia składane są przez stronę internetową poprzez dodanie produktów do koszyka i wypełnienie formularza z danymi kontaktowymi oraz adresem dostawy. Po złożeniu zamówienia Kupujący otrzymuje potwierdzenie na wskazany adres e-mail. Sprzedawca zastrzega sobie prawo do kontaktu z Kupującym w celu doprecyzowania szczegółów zamówienia przed wysyłką."
+    },
+    "3": {
+      "heading": "3. CENA I PŁATNOŚĆ",
+      "body": "Ceny produktów podane są na stronie w hrywniach ukraińskich (UAH) z VAT. Sprzedawca zastrzega sobie prawo do zmiany cen bez uprzedniego powiadomienia; cena w chwili składania zamówienia jest ostateczna. Metody płatności: online — przez LiqPay lub WayForPay (Visa/Mastercard); za pobraniem — przy odbiorze w oddziale Nova Poshta (opłatę za dostawę ponosi Kupujący)."
+    },
+    "4": {
+      "heading": "4. DOSTAWA",
+      "body": "Dostawa realizowana jest na terenie całej Ukrainy. Metody dostawy: Nova Poshta (1–3 dni robocze); Ukrposhta (3–7 dni roboczych); dostawa kurierska w Kijowie i miastach partnerskich (uzgadniana indywidualnie). Czas wysyłki — 1–2 dni robocze po potwierdzeniu płatności. Koszt dostawy obliczany jest przy składaniu zamówienia. Ryzyko przypadkowego zniszczenia lub uszkodzenia towaru przechodzi na Kupującego z chwilą odbioru."
+    },
+    "5": {
+      "heading": "5. ZWROTY I WYMIANA",
+      "body": "Zwroty i wymiana realizowane są zgodnie z ukraińską ustawą «O ochronie praw konsumentów» w ciągu 14 dni od daty odbioru. Warunki: produkt nie był używany, oryginalne opakowanie i etykiety są nienaruszone, dostępny jest dowód zakupu. Biżuteria wykonana lub dopasowana na indywidualne zamówienie (spersonalizowany rozmiar, grawerowanie) nie podlega zwrotowi ani wymianie. Koszty zwrotu ponosi Kupujący, chyba że zwrot wynika z wady produkcyjnej."
+    },
+    "6": {
+      "heading": "6. GWARANCJA",
+      "body": "Na wszystkie wyroby udzielana jest gwarancja 12 miesięcy od daty odbioru. Gwarancja obejmuje wady produkcyjne: uszkodzenia zapięć, odpadnięcie elementów, wady kamieni z obróbki fabrycznej. Gwarancja nie obejmuje uszkodzeń mechanicznych, deformacji w wyniku nieprawidłowego użytkowania ani naturalnego zużycia powierzchni. Obsługa gwarancyjna realizowana jest w naszym atelier w Kijowie lub pocztą."
+    },
+    "7": {
+      "heading": "7. ODPOWIEDZIALNOŚĆ STRON",
+      "body": "Sprzedawca nie ponosi odpowiedzialności za opóźnienia w dostawie spowodowane przez firmę kurierską lub okoliczności siły wyższej (działania wojenne, klęski żywiołowe, decyzje władz). W przypadku niemożności realizacji zamówienia z przyczyn niezależnych od Sprzedawcy Kupujący otrzyma pełny zwrot zapłaconej kwoty w ciągu 5 dni roboczych."
+    },
+    "8": {
+      "heading": "8. DANE SPRZEDAWCY",
+      "body": "WAYYOUCHOOSE · Kijów, Ukraina · info@way-store.ua · +380 (44) 000-00-00"
+    }
+  }
+}
