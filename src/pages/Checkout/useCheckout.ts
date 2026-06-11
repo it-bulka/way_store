@@ -21,7 +21,7 @@ export const useCheckout = () => {
   const navigateTo = useNavigate()
   const items = useAppSelector(getCartItems)
   const user = useAppSelector(getUserSelector)
-  const [delivery, setDelivery] = useState<DeliveryType>('ДО ДВЕРЕЙ')
+  const [delivery, setDeliveryRaw] = useState<DeliveryType>('ДО ДВЕРЕЙ')
   const [payment, setPayment] = useState<PaymentType>('ОНЛАЙН')
   const [isPaying, setIsPaying] = useState(false)
   const { pay, isReady } = useWayforpay()
@@ -50,6 +50,19 @@ export const useCheckout = () => {
       warehouseAddress: '',
     },
   })
+
+  const setDelivery = useCallback(
+    (newDelivery: DeliveryType) => {
+      const currentForm = delivery === 'ДО ДВЕРЕЙ' ? doorForm : pickupForm
+      const targetForm = newDelivery === 'ДО ДВЕРЕЙ' ? doorForm : pickupForm
+      const { name, phone } = currentForm.getValues()
+      const setVal = targetForm.setValue as (k: 'name' | 'phone', v: string) => void
+      setVal('name', name)
+      setVal('phone', phone)
+      setDeliveryRaw(newDelivery)
+    },
+    [delivery, doorForm, pickupForm]
+  )
 
   const onDeleteItem = useCallback(
     (id: string, color?: ringsColors, size?: number) =>
