@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import cls from './RangeSlider.module.scss'
 import { Tooltip, TooltipLeftPosition, TooltipTopPosition } from '@/components/ui/Tooltip/Tooltip'
 import classnames from 'classnames'
@@ -27,6 +28,8 @@ export const RangeSlider: FC<RangeProps> = ({
   getRange,
   reset = false,
 }) => {
+  const { t } = useTranslation('cart')
+
   const {
     minRange,
     maxRange,
@@ -49,11 +52,11 @@ export const RangeSlider: FC<RangeProps> = ({
     <div className={classnames(cls.rangeSlider, [className])}>
       <div className={cls.labels}>
         <label className={cls.label}>
-          <span>грн.</span>
+          <span>{t('currency')}</span>
           <input type="number" min={min} max={max} onChange={onMinRangeChange} value={minValue} />
         </label>
         <label className={cls.label}>
-          <span>грн.</span>
+          <span>{t('currency')}</span>
           <input type="number" min={min} max={max} onChange={onMaxRangeChange} value={maxValue} />
         </label>
       </div>

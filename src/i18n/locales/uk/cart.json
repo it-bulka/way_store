@@ -8,6 +8,7 @@
   "total": "{{label}} НА СУМУ {{sum}} грн.",
   "totalSumLabel": "НА СУМУ",
   "currency": "грн.",
+  "price": "Ціна",
   "itemCount_one": "{{count}} ТОВАР",
   "itemCount_few": "{{count}} ТОВАРИ",
   "itemCount_many": "{{count}} ТОВАРІВ",

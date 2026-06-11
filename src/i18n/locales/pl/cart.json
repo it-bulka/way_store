@@ -8,6 +8,7 @@
   "total": "{{label}} ŁĄCZNIE {{sum}} UAH",
   "totalSumLabel": "ŁĄCZNIE",
   "currency": "UAH",
+  "price": "Cena",
   "itemCount_one": "{{count}} PRODUKT",
   "itemCount_few": "{{count}} PRODUKTY",
   "itemCount_many": "{{count}} PRODUKTÓW",

@@ -8,6 +8,7 @@
   "total": "{{label}} TOTAL {{sum}} UAH",
   "totalSumLabel": "TOTAL",
   "currency": "UAH",
+  "price": "Price",
   "itemCount_one": "{{count}} ITEM",
   "itemCount_other": "{{count}} ITEMS",
   "addedToCart": "Added to cart",

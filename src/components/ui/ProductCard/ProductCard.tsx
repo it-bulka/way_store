@@ -73,7 +73,7 @@ export const ProductCard: FC<ProductCardProps> = ({
 
       <div className={cls.content}>
         <p>{title}</p>
-        <p>Price ${price}</p>
+        <p>{t('price')} {price} {t('currency')}</p>
       </div>
     </div>
   )
