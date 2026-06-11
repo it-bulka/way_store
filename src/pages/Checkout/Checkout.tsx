@@ -42,6 +42,7 @@ const Checkout = () => {
 
   const isDoor = delivery === 'ДО ДВЕРЕЙ'
   const isSubmitting = isDoor ? doorForm.formState.isSubmitting : pickupForm.formState.isSubmitting
+  const hasErrors = Object.keys(isDoor ? doorForm.formState.errors : pickupForm.formState.errors).length > 0
 
   return (
     <form
@@ -108,7 +109,7 @@ const Checkout = () => {
       </div>
 
       <div className={cls.actions}>
-        <Button title={t('submit')} type="submit" disabled={isSubmitting || isPaying} />
+        <Button title={t('submit')} type="submit" disabled={isSubmitting || isPaying || hasErrors} />
         <button type="button" className={cls.backBtn} onClick={onBack}>
           {t('backToStore')}
         </button>
