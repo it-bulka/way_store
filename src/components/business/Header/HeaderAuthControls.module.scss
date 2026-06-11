@@ -1,8 +1,18 @@
+@import '@/styles/global';
+
 .signInBtn,
 .signOutBtn {
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   line-height: 1rem;
   text-transform: uppercase;
   text-decoration: underline;
   color: $grey;
+
+  @media (max-width: $bp-tablet) {
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.68rem;
+  }
 }

@@ -3,8 +3,16 @@
 .root {
   position: relative;
   font-family: $font_normal;
-  font-size: 0.7rem;
+  font-size: 0.95rem;
   letter-spacing: 0.06em;
+
+  @media (max-width: $bp-tablet) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.75rem;
+  }
 }
 
 .trigger {
@@ -26,8 +34,18 @@
 
 .chevron {
   display: inline-block;
-  width: 0.32rem;
-  height: 0.32rem;
+  width: 0.37rem;
+  height: 0.37rem;
+
+  @media (max-width: $bp-tablet) {
+    width: 0.34rem;
+    height: 0.34rem;
+  }
+
+  @media (max-width: $bp-mobile) {
+    width: 0.32rem;
+    height: 0.32rem;
+  }
   border-right: 1.5px solid $grey;
   border-bottom: 1.5px solid $grey;
   transform: rotate(45deg) translateY(-1px);
@@ -72,9 +90,17 @@
   cursor: pointer;
   color: $grey;
   font-family: $font_normal;
-  font-size: 0.7rem;
+  font-size: 0.95rem;
   letter-spacing: 0.06em;
   text-align: center;
+
+  @media (max-width: $bp-tablet) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.75rem;
+  }
   white-space: nowrap;
   transition: background-color 0.12s;
 
