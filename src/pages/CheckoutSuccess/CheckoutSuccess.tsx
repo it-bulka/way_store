@@ -1,32 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import cls from './CheckoutSuccess.module.scss'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Button } from '@/components/ui/Button/Button'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
-import { getCartItems } from '@/redux/selectors/cartSelectors'
-import { cartActions } from '@/redux/reducers/cartSlice'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
 import { useNavigate, useLocation } from 'react-router-dom'
+import type { ICartItem } from '@/redux/types/cartTypes'
 
 const CheckoutSuccess = () => {
   const { t } = useTranslation('checkout')
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const items = useAppSelector(getCartItems)
 
   const [orderNumber] = useState<string>(
     () =>
       (location.state as { orderNumber?: string } | null)?.orderNumber ??
       crypto.randomUUID().slice(0, 8).toUpperCase()
   )
-  const [snapshot] = useState(() => items)
-
-  useEffect(() => {
-    dispatch(cartActions.clearCart())
-  }, [dispatch])
+  const [snapshot] = useState<ICartItem[]>(
+    () => (location.state as { items?: ICartItem[] } | null)?.items ?? []
+  )
 
   const total = snapshot.reduce((sum, item) => sum + item.price * item.amount, 0)
 

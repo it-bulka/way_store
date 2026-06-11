@@ -110,8 +110,10 @@ export const useCheckout = () => {
         return
       }
 
+      dispatch(cartActions.clearCart())
+
       if (payment === 'ПРИ ОТРИМАННІ') {
-        navigateTo('/checkout/success', { state: { orderNumber } })
+        navigateTo('/checkout/success', { state: { orderNumber, items } })
         return
       }
 
@@ -126,7 +128,7 @@ export const useCheckout = () => {
         items,
         clientFirstName: name,
         clientPhone: phone,
-        onApproved: () => navigateTo('/checkout/success', { state: { orderNumber } }),
+        onApproved: () => navigateTo('/checkout/success', { state: { orderNumber, items } }),
         onDeclined: () => {
           setIsPaying(false)
           addToast(t('toast.paymentDeclined'), 'error')
