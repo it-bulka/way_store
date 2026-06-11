@@ -8,7 +8,10 @@ import type { RootState, AppDispatch } from '@/redux/store'
 export const localStorageMiddleware = createListenerMiddleware()
 
 localStorageMiddleware.startListening({
-  predicate: action => (action.type as string).startsWith('cart/'),
+  predicate: action => {
+    const type = action.type as string
+    return type.startsWith('cart/') && !type.endsWith('/pending') && !type.endsWith('/rejected')
+  },
   effect: (_, { getState }) => {
     const state = getState() as RootState
     const uid = state.auth.uid
