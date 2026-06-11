@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/i18n/config'
 import cls from './SubscriptionForm.module.scss'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
 import { Input } from '@/components/ui/Input/Input'
@@ -14,12 +16,16 @@ interface ISubscriptionForm {
   name: string
 }
 
+const tAuth = i18n.t.bind(i18n) as (key: string, opts: object) => string
+const tv = (key: string) => () => tAuth(`validation.${key}`, { ns: 'auth' })
+
 const schema = yup.object({
-  email: yup.string().email('Невірний email').required("Email обов'язковий"),
-  name: yup.string().required("Ім'я обов'язкове"),
+  email: yup.string().email(tv('emailInvalid')).required(tv('emailRequired')),
+  name: yup.string().required(tv('nameRequired')),
 })
 
 export const SubscriptionForm = () => {
+  const { t } = useTranslation('common')
   const { addToast } = useToast()
   const [loading, setLoading] = useState(false)
   const {
@@ -33,10 +39,10 @@ export const SubscriptionForm = () => {
     setLoading(true)
     try {
       await saveSubscriber(email, name)
-      addToast('Ви успішно підписались на розсилку', 'success')
+      addToast(t('subscription.success'), 'success')
       reset()
     } catch {
-      addToast('Помилка підписки. Спробуйте ще раз', 'error')
+      addToast(t('subscription.error'), 'error')
     } finally {
       setLoading(false)
     }
@@ -45,13 +51,13 @@ export const SubscriptionForm = () => {
   return (
     <form className={cls.subscribtionForm} onSubmit={handleSubmit(onSubmit)} noValidate>
       <Typography type={TypographyTypes.HEADER} variant="h3" className={cls.title}>
-        Підписуйтесь, щоб отримувати новини про колекції, колаборації та спеціальні пропозиції.
+        {t('subscription.title')}
       </Typography>
       <div className={cls.fields}>
-        <Input name="email" label="E-MAIL" register={register} error={errors.email?.message} />
-        <Input name="name" label="ІМ'Я" register={register} error={errors.name?.message} />
+        <Input name="email" label={t('subscription.email')} register={register} error={errors.email?.message} />
+        <Input name="name" label={t('subscription.name')} register={register} error={errors.name?.message} />
       </div>
-      <Button title="ПІДПИСАТИСЯ" type="submit" disabled={loading} />
+      <Button title={t('subscription.submit')} type="submit" disabled={loading} />
     </form>
   )
 }
