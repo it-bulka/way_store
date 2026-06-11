@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Polityka prywatności",
+    "description": "Jak WAYYOUCHOOSE zbiera, przechowuje i chroni Twoje dane osobowe"
+  },
+  "pageTitle": "POLITYKA PRYWATNOŚCI",
+  "intro": "WAYYOUCHOOSE szanuje Twoją prywatność. Niniejsza polityka wyjaśnia, jakie dane osobowe zbieramy, jak je wykorzystujemy i chronimy podczas korzystania z naszej strony internetowej i usług. Korzystając ze strony, zgadzasz się z warunkami niniejszej polityki.",
+  "sections": {
+    "1": {
+      "heading": "JAKIE DANE ZBIERAMY",
+      "body": "Podczas rejestracji i składania zamówienia zbieramy: imię i nazwisko, adres e-mail, numer telefonu, adres dostawy (miasto, ulica, numer budynku, numer mieszkania). Automatycznie mogą być rejestrowane: adres IP, typ przeglądarki, odwiedzone strony oraz czas wizyty — wyłącznie w formie zagregowanej do celów analitycznych."
+    },
+    "2": {
+      "heading": "JAK UŻYWAMY TWOICH DANYCH",
+      "body": "Zebrane dane są wykorzystywane do: przetwarzania i potwierdzania zamówień; organizacji dostawy przez Nova Poshta, Ukrposhta lub kuriera; wysyłania powiadomień o statusie zamówienia (SMS, e-mail); odpowiadania na Twoje zapytania i zgłoszenia; poprawy jakości usług i wygody strony. Nie wykorzystujemy Twoich danych do sprzedaży ani przekazywania stronom trzecim w celach marketingowych."
+    },
+    "3": {
+      "heading": "PLIKI COOKIE I ANALITYKA",
+      "body": "Strona korzysta z technicznych plików cookie niezbędnych do prawidłowego działania (uwierzytelnianie, zapisywanie koszyka). Dane analityczne są zbierane anonimowo i nie pozwalają na identyfikację konkretnej osoby. Możesz wyłączyć pliki cookie w ustawieniach przeglądarki, jednak może to ograniczyć funkcjonalność strony."
+    },
+    "4": {
+      "heading": "PRZEKAZYWANIE DANYCH STRONOM TRZECIM",
+      "body": "W celu realizacji zamówień przekazujemy niezbędne dane: firmom kurierskim (Nova Poshta, Ukrposhta) — imię i adres odbiorcy; systemom płatności (LiqPay, WayForPay) — wyłącznie techniczne dane transakcji; Google Firebase — do przechowywania danych konta na bezpiecznych serwerach. Partnerzy ci są zobowiązani do przestrzegania przepisów o ochronie danych i nie mają prawa wykorzystywać ich do własnych celów."
+    },
+    "5": {
+      "heading": "OCHRONA I PRZECHOWYWANIE DANYCH",
+      "body": "Twoje dane są przechowywane na bezpiecznych serwerach Google Cloud (Firebase) z szyfrowaniem podczas przesyłania (HTTPS/TLS) i w spoczynku. Dostęp do danych osobowych mają wyłącznie upoważnieni pracownicy, którym jest on niezbędny do wykonywania obowiązków służbowych. Przechowujemy dane przez czas niezbędny do wywiązania się ze zobowiązań, nie dłużej jednak niż wymaga tego prawo ukraińskie."
+    },
+    "6": {
+      "heading": "TWOJE PRAWA",
+      "body": "Zgodnie z art. 8 ukraińskiej ustawy «O ochronie danych osobowych» masz prawo do: wiedzy o tym, jakie dane są o Tobie przechowywane; żądania ich poprawienia lub aktualizacji; wycofania zgody na przetwarzanie i żądania usunięcia; zakwestionowania działań podejmowanych wobec Twoich danych. Aby skorzystać z tych praw, skontaktuj się z nami korzystając z danych podanych poniżej."
+    },
+    "7": {
+      "heading": "KONTAKT W SPRAWIE PRYWATNOŚCI",
+      "body": "Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych, napisz do nas: info@way-store.ua. Odpowiemy w ciągu 5 dni roboczych."
+    }
+  }
+}

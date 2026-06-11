@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Privacy Policy",
+    "description": "How WAYYOUCHOOSE collects, stores and protects your personal data"
+  },
+  "pageTitle": "PRIVACY POLICY",
+  "intro": "WAYYOUCHOOSE respects your privacy. This policy explains what personal data we collect, how we use and protect it when you interact with our website and services. By using the site, you agree to the terms of this policy.",
+  "sections": {
+    "1": {
+      "heading": "WHAT DATA WE COLLECT",
+      "body": "When registering and placing an order we collect: first and last name, email address, phone number, delivery address (city, street, building, apartment). The following may be recorded automatically: IP address, browser type, pages you viewed and time of visit — exclusively in aggregated form for analytics purposes."
+    },
+    "2": {
+      "heading": "HOW WE USE YOUR DATA",
+      "body": "The collected data is used to: process and confirm orders; arrange delivery via Nova Poshta, Ukrposhta or courier; send order status notifications (SMS, email); respond to your inquiries and requests; improve service quality and website usability. We do not use your data to sell or transfer to third parties for marketing purposes."
+    },
+    "3": {
+      "heading": "COOKIES AND ANALYTICS",
+      "body": "The website uses technical cookies required for correct operation (authentication, cart storage). Analytics data is collected anonymously and does not allow identification of a specific person. You can disable cookies in your browser settings, however this may limit the functionality of the website."
+    },
+    "4": {
+      "heading": "SHARING DATA WITH THIRD PARTIES",
+      "body": "To fulfill orders we share the necessary data with: delivery services (Nova Poshta, Ukrposhta) — recipient name and address; payment systems (LiqPay, WayForPay) — technical transaction data only; Google Firebase — for storing account data on secure servers. These partners are required to comply with data protection legislation and may not use your data for their own purposes."
+    },
+    "5": {
+      "heading": "DATA PROTECTION AND STORAGE",
+      "body": "Your data is stored on secure Google Cloud (Firebase) servers with encryption in transit (HTTPS/TLS) and at rest. Access to personal data is limited to authorized employees who need it to perform their job duties. We retain data for as long as necessary to fulfill our obligations, but no longer than required by Ukrainian law."
+    },
+    "6": {
+      "heading": "YOUR RIGHTS",
+      "body": "Under Article 8 of the Law of Ukraine «On Personal Data Protection» you have the right to: know what data is stored about you; request its correction or update; withdraw consent to processing and request deletion; challenge actions taken with your data. To exercise these rights, contact us using the details below."
+    },
+    "7": {
+      "heading": "PRIVACY CONTACT",
+      "body": "If you have any questions about the processing of your personal data, please write to us: info@way-store.ua. We will respond within 5 business days."
+    }
+  }
+}
