@@ -6,7 +6,7 @@ import cls from './CartItem.module.scss'
 import CloseIcon from '@/assets/general/close.svg'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
-import { COLOR_PALETTE, COLOR_LABELS, type ringsColors } from '@/models/goodsType'
+import { COLOR_PALETTE, type ringsColors } from '@/models/goodsType'
 
 interface CartItemProps {
   id: string
@@ -42,6 +42,7 @@ export const CartItem: FC<CartItemProps> = memo(({
   onNavigate,
 }) => {
   const { t } = useTranslation('cart')
+  const { t: tEnums } = useTranslation('enums')
   const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
   const showColors = colorKeys.length > 0
 
@@ -71,7 +72,7 @@ export const CartItem: FC<CartItemProps> = memo(({
                       className={classnames(cls.colorDot, { [cls.active]: tag === color })}
                       style={{ backgroundColor: COLOR_PALETTE[tag] }}
                       onClick={() => onColorChange?.(tag, colorImages?.[tag])}
-                      title={COLOR_LABELS[tag]}
+                      title={tEnums(`color.${tag}`)}
                     />
                   ))}
                 </div>

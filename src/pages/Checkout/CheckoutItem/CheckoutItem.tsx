@@ -6,7 +6,7 @@ import CloseIcon from '@/assets/general/close.svg'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
 import { formatNumberIntoGroups } from '@/utils/formatNumberIntoGroups'
-import { COLOR_LABELS, type ringsColors } from '@/models/goodsType'
+import { type ringsColors } from '@/models/goodsType'
 
 interface CheckoutItemProps {
   id: string
@@ -32,7 +32,8 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({
   setAmount,
 }) => {
   const { t } = useTranslation('checkout')
-  const variantLabel = [color && COLOR_LABELS[color], size && `${t('sizeLabel')}: ${size}`]
+  const { t: tEnums } = useTranslation('enums')
+  const variantLabel = [color && tEnums(`color.${color}`), size && `${t('sizeLabel')}: ${size}`]
     .filter(Boolean)
     .join(' / ')
 
