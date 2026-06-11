@@ -1,11 +1,14 @@
 import * as yup from 'yup'
 
 const recipientSchemaFields = {
-  name: yup.string().min(2, 'Мінімум 2 символи').required("ПІБ обов'язкове"),
+  name: yup.string().required("ПІБ обов'язкове").min(2, 'Мінімум 2 символи'),
   phone: yup
     .string()
-    .matches(/^(\+380|0)\d{9}$/, 'Невірний формат телефону')
-    .required("Телефон обов'язковий"),
+    .required("Телефон обов'язковий")
+    .test('ua-phone', 'Вкажіть номер у форматі +380XXXXXXXXX', value => {
+      if (!value) return true
+      return /^\+380\d{9}$/.test(value.replace(/[\s\-\(\)]/g, ''))
+    }),
 }
 
 export interface ICheckoutFormValues {
