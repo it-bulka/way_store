@@ -16,6 +16,7 @@ interface IPayOptions {
   clientPhone?: string
   onApproved: () => void
   onDeclined: () => void
+  onClose?: () => void
 }
 
 interface UseWayforpayReturn {
@@ -86,6 +87,7 @@ export const useWayforpay = (): UseWayforpayReturn => {
         const status = event.data as WayforpayEvent | string
         if (status === 'WfpWidgetEventApproved') opts.onApproved()
         else if (status === 'WfpWidgetEventDeclined') opts.onDeclined()
+        else if (status === 'WfpWidgetEventClose') opts.onClose?.()
       })
     },
     [isReady]

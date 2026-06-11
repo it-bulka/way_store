@@ -93,26 +93,24 @@ export const useCheckout = () => {
         color: item.color,
       }))
 
-      const result = await dispatch(
-        createOrder({
-          orderNumber,
-          date: new Date(),
-          status: 'pending',
-          deliveryType: delivery,
-          paymentType: payment,
-          recipient: { name, phone },
-          items: orderItems,
-          address,
-        })
-      )
-      if (!createOrder.fulfilled.match(result)) {
-        addToast(t('toast.orderError'), 'error')
-        return
-      }
-
-      dispatch(cartActions.clearCart())
+      const buildOrder = () => ({
+        orderNumber,
+        date: new Date(),
+        status: 'pending' as const,
+        deliveryType: delivery,
+        paymentType: payment,
+        recipient: { name, phone },
+        items: orderItems,
+        address,
+      })
 
       if (payment === 'ПРИ ОТРИМАННІ') {
+        const result = await dispatch(createOrder(buildOrder()))
+        if (!createOrder.fulfilled.match(result)) {
+          addToast(t('toast.orderError'), 'error')
+          return
+        }
+        dispatch(cartActions.clearCart())
         navigateTo('/checkout/success', { state: { orderNumber, items } })
         return
       }
@@ -128,14 +126,24 @@ export const useCheckout = () => {
         items,
         clientFirstName: name,
         clientPhone: phone,
-        onApproved: () => navigateTo('/checkout/success', { state: { orderNumber, items } }),
+        onApproved: async () => {
+          const result = await dispatch(createOrder(buildOrder()))
+          if (!createOrder.fulfilled.match(result)) {
+            setIsPaying(false)
+            addToast(t('toast.orderError'), 'error')
+            return
+          }
+          dispatch(cartActions.clearCart())
+          navigateTo('/checkout/success', { state: { orderNumber, items } })
+        },
         onDeclined: () => {
           setIsPaying(false)
           addToast(t('toast.paymentDeclined'), 'error')
         },
+        onClose: () => setIsPaying(false),
       })
     },
-    [items, delivery, payment, isReady, dispatch, navigateTo, pay, addToast]
+    [items, delivery, payment, isReady, dispatch, navigateTo, pay, addToast, t]
   )
 
   const onDoorSubmit = useCallback<SubmitHandler<ICheckoutFormValues>>(

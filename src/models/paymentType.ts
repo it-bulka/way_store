@@ -18,6 +18,7 @@ export type WayforpayEvent =
   | 'WfpWidgetEventApproved'
   | 'WfpWidgetEventDeclined'
   | 'WfpWidgetEventPending'
+  | 'WfpWidgetEventClose'
 
 export interface IWayforpaySignatureFields {
   merchantAccount: string
