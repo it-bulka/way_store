@@ -14,6 +14,8 @@ import ukEnums from './locales/uk/enums.json'
 import ukAbout from './locales/uk/about.json'
 import ukCollections from './locales/uk/collections.json'
 import ukFaq from './locales/uk/faq.json'
+import ukOffer from './locales/uk/offer.json'
+import ukPrivacy from './locales/uk/privacy.json'
 
 import enCommon from './locales/en/common.json'
 import enHome from './locales/en/home.json'
@@ -27,6 +29,8 @@ import enEnums from './locales/en/enums.json'
 import enAbout from './locales/en/about.json'
 import enCollections from './locales/en/collections.json'
 import enFaq from './locales/en/faq.json'
+import enOffer from './locales/en/offer.json'
+import enPrivacy from './locales/en/privacy.json'
 
 import plCommon from './locales/pl/common.json'
 import plHome from './locales/pl/home.json'
@@ -40,6 +44,8 @@ import plEnums from './locales/pl/enums.json'
 import plAbout from './locales/pl/about.json'
 import plCollections from './locales/pl/collections.json'
 import plFaq from './locales/pl/faq.json'
+import plOffer from './locales/pl/offer.json'
+import plPrivacy from './locales/pl/privacy.json'
 
 i18n
   .use(LanguageDetector)
@@ -59,6 +65,8 @@ i18n
         about: ukAbout,
         collections: ukCollections,
         faq: ukFaq,
+        offer: ukOffer,
+        privacy: ukPrivacy,
       },
       en: {
         common: enCommon,
@@ -73,6 +81,8 @@ i18n
         about: enAbout,
         collections: enCollections,
         faq: enFaq,
+        offer: enOffer,
+        privacy: enPrivacy,
       },
       pl: {
         common: plCommon,
@@ -87,12 +97,14 @@ i18n
         about: plAbout,
         collections: plCollections,
         faq: plFaq,
+        offer: plOffer,
+        privacy: plPrivacy,
       },
     },
     lng: undefined,
     fallbackLng: 'uk',
     defaultNS: 'common',
-    ns: ['common', 'home', 'store', 'goods', 'cart', 'auth', 'account', 'checkout', 'enums', 'about', 'collections', 'faq'],
+    ns: ['common', 'home', 'store', 'goods', 'cart', 'auth', 'account', 'checkout', 'enums', 'about', 'collections', 'faq', 'offer', 'privacy'],
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],

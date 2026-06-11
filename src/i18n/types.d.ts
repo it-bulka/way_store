@@ -11,6 +11,8 @@ import type ukEnums from './locales/uk/enums.json'
 import type ukAbout from './locales/uk/about.json'
 import type ukCollections from './locales/uk/collections.json'
 import type ukFaq from './locales/uk/faq.json'
+import type ukOffer from './locales/uk/offer.json'
+import type ukPrivacy from './locales/uk/privacy.json'
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -28,6 +30,8 @@ declare module 'i18next' {
       about: typeof ukAbout
       collections: typeof ukCollections
       faq: typeof ukFaq
+      offer: typeof ukOffer
+      privacy: typeof ukPrivacy
     }
   }
 }
