@@ -5,6 +5,7 @@
   url('@/fonts/PTSans-Bold.woff') format('woff'),
   url('@/fonts/PTSans-Bold.ttf') format('truetype');
   font-weight: 700;
+  font-display: swap;
 }
 
 @font-face {
@@ -14,6 +15,7 @@
   url('@/fonts/PTSans-Regular.woff') format('woff'),
   url('@/fonts/PTSans-Regular.ttf') format('truetype');
   font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
@@ -23,4 +25,5 @@
     url('@/fonts/druktextwidecyr-medium.woff') format('woff'),
     url('@/fonts/druktextwidecyr-medium.ttf') format('truetype');
   font-weight: bold;
+  font-display: swap;
 }
