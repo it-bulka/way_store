@@ -26,4 +26,17 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react':    ['react', 'react-dom', 'react-router-dom'],
+          'vendor-firebase': ['firebase/app', 'firebase/firestore', 'firebase/storage', 'firebase/auth'],
+          'vendor-redux':    ['@reduxjs/toolkit', 'react-redux'],
+          'vendor-i18n':     ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
+          'vendor-forms':    ['react-hook-form', '@hookform/resolvers', 'yup'],
+        },
+      },
+    },
+  },
 })

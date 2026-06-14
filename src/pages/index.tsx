@@ -4,10 +4,10 @@ const Home = lazy(() => import('./Home/Home'))
 const Store = lazy(() => import('./Store/Store'))
 const Goods = lazy(() => import('./Goods/Goods'))
 const Faq = lazy(() => import('./FAQ/FAQ'))
-export { Questions } from './FAQ/Questions'
-export { Delivery } from './FAQ/Delivery'
-export { Payment } from './FAQ/Payment'
-export { Contacts } from './FAQ/Contacts'
+const Questions = lazy(() => import('./FAQ/Questions').then(m => ({ default: m.Questions })))
+const Delivery = lazy(() => import('./FAQ/Delivery').then(m => ({ default: m.Delivery })))
+const Payment = lazy(() => import('./FAQ/Payment').then(m => ({ default: m.Payment })))
+const Contacts = lazy(() => import('./FAQ/Contacts').then(m => ({ default: m.Contacts })))
 const Account = lazy(() => import('./Account/Account'))
 const Profile = lazy(() => import('./Account/Profile/Profile'))
 const PurchaseHistory = lazy(() => import('./Account/PurchaseHistory/PurchaseHistory'))
@@ -30,6 +30,10 @@ export {
   Store,
   Goods,
   Faq,
+  Questions,
+  Delivery,
+  Payment,
+  Contacts,
   Account,
   Profile,
   PurchaseHistory,
