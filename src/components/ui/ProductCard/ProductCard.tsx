@@ -2,6 +2,7 @@ import { type FC, type KeyboardEvent, type MouseEvent, useCallback } from 'react
 import { useTranslation } from 'react-i18next'
 import cls from './ProductCard.module.scss'
 import classnames from 'classnames'
+import HeartIcon from '@/assets/general/heart.svg'
 
 interface ProductCardProps {
   img: string
@@ -20,7 +21,7 @@ export const ProductCard: FC<ProductCardProps> = ({
   title,
   price,
   onClick,
-  onAddToCart,
+  //onAddToCart,
   onAddToFavorites,
   isChosen,
 }) => {
@@ -39,6 +40,44 @@ export const ProductCard: FC<ProductCardProps> = ({
   }
 
   return (
+    <div
+      className={classnames(cls.productCard, [className])}
+      onClick={() => onClick?.()}
+      role="button"
+      aria-label={title}
+      onKeyDown={onKeyDown}
+      tabIndex={0}
+    >
+      <button
+        onClick={stopAndCall(onAddToFavorites)}
+        className={classnames(cls.favoriteBtn, { [cls.chosenBtn]: isChosen })}
+      >
+        <HeartIcon />
+      </button>
+
+      <div className={cls.imageWrapper}>
+        <img
+          src={img}
+          alt={title}
+          loading="lazy"
+          onError={e => {
+            const el = e.currentTarget as HTMLImageElement
+            el.onerror = null
+            el.src =
+              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f0f0f0'/%3E%3C/svg%3E"
+          }}
+        />
+      </div>
+
+      <div className={cls.content}>
+        <h3>{title}</h3>
+        <p className={cls.price}>
+          {price} {t('currency')}
+        </p>
+      </div>
+    </div>
+  )
+  /*return (
     <div
       className={classnames(cls.productCard, [className])}
       onClick={() => onClick?.()}
@@ -76,5 +115,5 @@ export const ProductCard: FC<ProductCardProps> = ({
         <p>{t('price')} {price} {t('currency')}</p>
       </div>
     </div>
-  )
+  )*/
 }
