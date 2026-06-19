@@ -26,18 +26,22 @@ export const CollectionInfo: FC<CollectionInfoProps> = ({
   const imgAmount = images?.length
   return (
     <div className={classnames(cls.collectionInfo, [className])}>
-      <div className={cls.header}>
+      <div>
         <Typography variant="h3" className={cls.title}>
           {title}
         </Typography>
-        <Button title={t('readMore')} onClick={() => navigateTo(APP_ROUTES.COLLECTION_DETAIL(id))} />
-      </div>
-      <div className={cls.content}>
-        {content?.map((p, i) => (
-          <Typography key={i} className={cls.paragraph}>
-            {p}
-          </Typography>
-        ))}
+        <div className={cls.content}>
+          {content?.map((p, i) => (
+            <Typography key={i} className={cls.paragraph}>
+              {p}
+            </Typography>
+          ))}
+        </div>
+        <Button
+          title={t('readMore')}
+          onClick={() => navigateTo(APP_ROUTES.COLLECTION_DETAIL(id))}
+          className={cls.btn}
+        />
       </div>
       {imgAmount && (
         <div className={classnames(cls.imgs, cls[`imgs_${imgAmount > 4 ? 4 : imgAmount}`])}>

@@ -1,10 +1,19 @@
 .collectionInfo {
+  display: flex;
+  gap: 10px;
+
+  &:nth-child(2n) {
+    flex-direction: row-reverse;
+  }
+
+  & > * {
+    flex: 1;
+  }
+
   &:not(:last-of-type) {
     margin-bottom: pc($main_width, 35);
   }
-  .header {
-    @include flex;
-  }
+
   .title {
     font-family: "Druk Medium", sans-serif;
     font-weight: 500;
@@ -14,7 +23,6 @@
 
   .content {
     margin: pc($main_width, 27) 0 pc($main_width, 24);
-    max-width: pc($main_width, 678);
   }
 
   .paragraph:not(:last-of-type) {
@@ -45,7 +53,7 @@
 
       & > * {
         @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 2, $itemSize: 429, $gap: 7);
-        height: 260px;
+        height: 200px;
       }
     }
 
@@ -55,12 +63,12 @@
 
       & > * {
         @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 2, $itemSize: 429, $gap: 5);
-        height: 180px;
+        height: 150px;
       }
 
       & > *:first-of-type {
         flex: 0 0 100%;
-        height: 260px;
+        height: 180px;
       }
     }
 
@@ -72,5 +80,14 @@
         height: 150px;
       }
     }
+  }
+
+  &:nth-child(2n) {
+    flex-wrap: nowrap;
+  }
+
+  .btn {
+    margin-left: auto;
+    display: block;
   }
 }
