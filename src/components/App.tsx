@@ -7,6 +7,8 @@ import { setUser, clearUser, setInitialized } from '@/redux/reducers/authSlice'
 import { syncCartOnLogin, restoreGuestCart } from '@/redux/async/syncCart'
 import { ToastProvider } from '@/context/ToastContext'
 import { ToastContainer } from '@/components/ui/ToastContainer/ToastContainer'
+import bgImg from '@/assets/bg-store2.png'
+import cls from './App.module.scss'
 
 function AuthListener() {
   const dispatch = useAppDispatch()
@@ -29,8 +31,12 @@ function AuthListener() {
 }
 
 export function App() {
+  //const match = useMatch('/collections')
+
   return (
     <ToastProvider>
+      <div style={{ backgroundImage: `url(${bgImg})` }} className={cls.appBg} />
+
       <div className="app">
         <AuthListener />
         <ScrollRestoration />

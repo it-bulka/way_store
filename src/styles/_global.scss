@@ -13,6 +13,29 @@ $success: #81E491;
 $error: #E48181;
 $overlay-color: rgba(0, 0, 0, 0.77);
 
+/* COLORS */
+$accent: #B89A5E;         // основне золото
+$accent_light: #D7C08A;   // світле золото
+$accent_dark: #8F7442;    // темне золото
+
+$text_primary: #2B2927;   // основний текст
+$text_secondary: #6F6A64; // другорядний текст
+$text_muted: #A39B92;     // неактивний текст
+
+$background: #F7F4EF;     // основний фон
+$background_alt: #EEE9E1; // другий фон
+$card_bg: #F2EFEB;        // картки
+
+$border_color: #D9D2C7;
+$border_color2: #E5DED3;
+
+$success: #7AAE7F;
+$error: #C98787;
+
+$white: #FFFFFF;
+
+$overlay-color: rgba(32, 29, 25, 0.55);
+
 /* FONTS */
 $font_bold: 'PTSans-Bold', sans-serif;
 $font_normal: 'PTSans-Regular', sans-serif;
