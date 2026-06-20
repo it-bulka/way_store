@@ -40,10 +40,7 @@ export const LanguageSelector: FC<LanguageSelectorProps> = ({ className }) => {
   }
 
   return (
-    <div
-      className={classnames(cls.root, { [cls.open]: isOpen }, [className])}
-      ref={rootRef}
-    >
+    <div className={classnames(cls.root, { [cls.open]: isOpen }, [className])} ref={rootRef}>
       <button
         type="button"
         className={cls.trigger}
@@ -58,11 +55,7 @@ export const LanguageSelector: FC<LanguageSelectorProps> = ({ className }) => {
       <ul className={cls.dropdown} role="listbox" aria-label="language">
         {others.map(({ code, label }) => (
           <li key={code} role="option" aria-selected={false}>
-            <button
-              type="button"
-              className={cls.option}
-              onClick={() => handleSelect(code)}
-            >
+            <button type="button" className={cls.option} onClick={() => handleSelect(code)}>
               {label}
             </button>
           </li>

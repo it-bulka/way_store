@@ -1,3 +1,8 @@
 .navbar {
-  color: $grey;
+  color: $text_muted;
+
+  .active {
+    color: $accent_dark;
+    font-weight: bold;
+  }
 }

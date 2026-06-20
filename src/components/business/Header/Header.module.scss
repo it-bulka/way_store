@@ -8,13 +8,12 @@
   transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 
   &.scrolled {
-    background-color: $grey_bg;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
 .header {
-  padding: 2.6rem 0;
+  padding: 2rem 0;
   display: flex;
   align-items: center;
 
@@ -27,6 +26,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    font-size: 2em;
 
     button {
       padding: 5px;
@@ -62,5 +62,12 @@
     }
     :global(.col-2) { flex: 0 0 100%; order: 3; padding: 0 1.5rem 1rem; }
     :global(.col-3) { flex: 0 0 auto; padding: 0 1.5rem; }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .logo svg {
+    width: 30px;
+    height: 30px;
   }
 }

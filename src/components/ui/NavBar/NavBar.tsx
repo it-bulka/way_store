@@ -31,7 +31,12 @@ export const NavBar: FC<NavBarProps> = ({ className }) => {
     <nav className={classnames(cls.navbar, [className])}>
       <ul>
         {links.map(({ id, title, path }) => (
-          <AppLink title={title} key={id} path={path} isActive={activePage === path} />
+          <AppLink
+            title={title}
+            key={id}
+            path={path}
+            className={classnames({ [cls.active]: activePage === path })}
+          />
         ))}
       </ul>
     </nav>

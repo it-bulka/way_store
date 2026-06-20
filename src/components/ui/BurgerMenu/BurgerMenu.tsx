@@ -31,9 +31,11 @@ export const BurgerMenu: FC = () => {
         <span className={cls.line} />
         <span className={cls.line} />
       </button>
-      <nav className={classnames(cls.overlay, { [cls.open]: isOpen })} aria-hidden={!isOpen}>
-        <NavBar />
-      </nav>
+      <div className={classnames(cls.overlay, { [cls.open]: isOpen })} aria-hidden="true">
+        <nav className={classnames(cls.burgerNav, { [cls.open]: isOpen })} aria-hidden={!isOpen}>
+          <NavBar />
+        </nav>
+      </div>
     </>
   )
 }

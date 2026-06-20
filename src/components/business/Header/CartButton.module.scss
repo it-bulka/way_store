@@ -1,18 +1,25 @@
 .cartBtn {
   position: relative;
+  width: 36px;
+  height: 36px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 
   .items {
     position: absolute;
-    content: '31';
+    content: '';
     top: 0;
     right: 0;
-    width: 7px;
-    height: 7px;
+    padding: 5px 3px;
+    aspect-ratio: 1;
+    min-width: 20px;
+    transform: translate(0, -30%);
     border-radius: 50%;
-    background-color: $blue;
+    background-color: $accent;
     color: $white;
-    font-size: 4px;
-    line-height: 6px;
     @include flex($justify: center);
     display: none;
   }
@@ -20,6 +27,7 @@
   &.active {
     .items {
       display: flex;
+      font-size: 0.4em;
     }
   }
 }
