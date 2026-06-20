@@ -6,7 +6,7 @@
   max-width: 480px;
   max-height: 400px;
   overflow-y: auto;
-  background: $white;
+  background: $card_bg;
   border: $border_width solid $border_color;
   border-radius: 4px;
   z-index: 200;
@@ -23,11 +23,11 @@
   transition: background-color 0.15s;
 
   & + & {
-    border-top: $border_width solid $grey_3;
+    border-top: $border_width solid $border_color;
   }
 
   &:hover {
-    background-color: $grey_bg;
+    background-color: $background;
   }
 }
 
@@ -61,12 +61,12 @@
   font-size: 0.75rem;
   white-space: nowrap;
   flex-shrink: 0;
-  color: $grey;
+  color: $card_bg;
 }
 
 .status {
   padding: 14px;
   font-size: 0.75rem;
-  color: $grey;
+  color: $card_bg;
   text-align: center;
 }
