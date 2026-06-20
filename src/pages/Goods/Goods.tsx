@@ -11,6 +11,8 @@ import { useLoaderData, useRevalidator } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { IProduct } from '@/models/goodsType'
 import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
+import { useMediaQuery } from '@/hooks/useMediaQuery.tsx'
+import { GoodsAccordion } from '@/pages/Goods/GoodsControls/GoodsAccordion.tsx'
 
 const Goods = () => {
   const prod = useLoaderData() as IProduct
@@ -19,17 +21,18 @@ const Goods = () => {
   const mountedRef = useRef(false)
 
   useEffect(() => {
-    if (!mountedRef.current) { mountedRef.current = true; return }
+    if (!mountedRef.current) {
+      mountedRef.current = true
+      return
+    }
     revalidate()
   }, [i18n.language, revalidate])
   const {
     color,
     amount,
     selectedSize,
-    isChosen,
     isNextProd,
     hasRequiredSize,
-    onLikeClick,
     pickColor,
     onAmountChange,
     onSizeSelect,
@@ -38,6 +41,7 @@ const Goods = () => {
     onNextClick,
     onPrevClick,
   } = useGoods(prod)
+  const isMobile = useMediaQuery('screen and (max-width: 768px)')
 
   if (!prod) return null
 
@@ -70,17 +74,17 @@ const Goods = () => {
             color={color}
             amount={amount}
             selectedSize={selectedSize}
-            isChosen={isChosen}
             hasRequiredSize={hasRequiredSize}
-            onLikeClick={onLikeClick}
             onColorPick={pickColor}
             onAmountChange={onAmountChange}
             onSizeSelect={onSizeSelect}
             onAddToBucketClick={onAddToBucketClick}
             onBuyClick={onBuyClick}
+            withTabs={!isMobile}
           />
         </div>
       </div>
+      {isMobile && <GoodsAccordion prod={prod} />}
       <RelatedProducts prod={prod} />
     </div>
   )

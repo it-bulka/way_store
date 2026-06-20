@@ -94,9 +94,21 @@ export const Products: FC<ProductsProps> = ({ className }) => {
         )}
         <div className={cls.filters}>
           <div className={cls.dropdowns}>
-            <Dropdown title={t('filters.product')} options={productType} onChangeChecked={onProductChecked} />
-            <Dropdown title={t('filters.metal')} options={metals} onChangeChecked={onMetalsChecked} />
-            <Dropdown title={t('filters.stone')} options={stones} onChangeChecked={onStonesChecked} />
+            <Dropdown
+              title={t('filters.product')}
+              options={productType}
+              onChangeChecked={onProductChecked}
+            />
+            <Dropdown
+              title={t('filters.metal')}
+              options={metals}
+              onChangeChecked={onMetalsChecked}
+            />
+            <Dropdown
+              title={t('filters.stone')}
+              options={stones}
+              onChangeChecked={onStonesChecked}
+            />
           </div>
           <div className={cls.slider}>
             <RangeSlider
@@ -123,7 +135,11 @@ export const Products: FC<ProductsProps> = ({ className }) => {
       ) : (
         <ProductsList
           products={visibleProducts}
-          title={chosenProductType ? tEnums(`productTitle.${chosenProductType}` as never) : t('allProducts')}
+          title={
+            chosenProductType
+              ? tEnums(`productTitle.${chosenProductType}` as never)
+              : t('allProducts')
+          }
           loading={loading}
           loadMore={loadMore}
           hasMore={hasMore}

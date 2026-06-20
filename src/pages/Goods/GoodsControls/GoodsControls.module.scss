@@ -1,12 +1,8 @@
 .descript {
   @include flex;
-}
 
-.likeBtn {
-  color: $grey;
-
-  &.isLiked {
-    color: red;
+  & > p {
+   font-size: 1.5em;
   }
 }
 

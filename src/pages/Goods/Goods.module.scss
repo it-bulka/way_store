@@ -12,6 +12,7 @@
 
   .content {
     @include flex($align: flex-start);
+    gap: 1rem;
 
     .col1 {
       @include flexColSize(428)
@@ -22,9 +23,7 @@
     }
 
     @include respond-to('tablet') {
-      flex-direction: column;
-
-      .col1, .col2 { flex: 0 0 100%; }
+      .col2 { flex: 1; }
     }
   }
 }

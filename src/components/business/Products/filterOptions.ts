@@ -33,4 +33,3 @@ export const productOptions: GoodsDropdownType<ProductType> = [
   { id: '7', label: 'cufflinks', chosen: false },
   { id: '8', label: 'chains', chosen: false },
 ]
-

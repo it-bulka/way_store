@@ -35,7 +35,6 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem 0 3.5rem;
-    margin-left: -1.1rem; //padding for dropdown
   }
 
   .dropdowns {
@@ -52,4 +51,19 @@
   .slider {
     flex: 0 0 math.div(248, $main_width) * 100%;
   }
+}
+
+@media screen and (max-width: 650px) {
+  .products {
+    .filters {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    .slider {
+      max-width: 300px;
+    }
+  }
+
 }

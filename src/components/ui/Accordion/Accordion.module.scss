@@ -91,3 +91,9 @@
 
   word-break: break-all;
 }
+
+@media screen and (max-width: 678px){
+  .accordion .item {
+    padding: 1rem 0 1.3rem;
+  }
+}

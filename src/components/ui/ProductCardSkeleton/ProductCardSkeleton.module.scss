@@ -12,7 +12,7 @@
   animation: pulse 1.5s ease-in-out infinite;
 
   .image {
-    background-color: $grey_3;
+    background-color: $card_bg;
     padding-bottom: 100%;
     width: 100%;
   }
@@ -27,13 +27,13 @@
   }
 
   .title {
-    background-color: $grey_3;
+    background-color: $card_bg;
     height: 0.85rem;
     width: 80%;
   }
 
   .price {
-    background-color: $grey_3;
+    background-color: $card_bg;
     height: 0.85rem;
     width: 50%;
   }

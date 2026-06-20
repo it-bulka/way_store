@@ -5,26 +5,26 @@ import { Button } from '@/components/ui/Button/Button'
 import { Stepper } from '@/components/ui/Stepper/Stepper'
 import { ColorPicker } from '@/components/ui/ColorPicker/ColorPicker'
 import { SizeSelector } from '@/components/ui/SizeSelector/SizeSelector'
-import { Accordion } from '@/components/ui/Accordion/Accordion'
 import { Typography, TypographyTypes } from '@/components/ui/Typography/Typography'
-import LikeIcon from '@/assets/general/heart.svg'
-import classNames from 'classnames'
 import type { IProduct, ringsColors } from '@/models/goodsType'
 import { COLOR_PALETTE } from '@/models/goodsType'
+import { GoodsAccordion } from './GoodsAccordion.tsx'
+import { LikeButton } from '@/components/ui/LikeButton/LikeButton.tsx'
+import { useLikeProduct } from '@/components/business/LikeProductButton/model/hooks/useLikeProduct.tsx'
+import { NotAuthModal } from '@/components/ui/NotAuthModal/NotAuthModal.tsx'
 
 interface GoodsControlsProps {
   prod: IProduct
   color: ringsColors
   amount: number
   selectedSize: number | undefined
-  isChosen: boolean
   hasRequiredSize: boolean
-  onLikeClick: () => void
   onColorPick: (tag: ringsColors) => void
   onAmountChange: (n: number) => void
   onSizeSelect: (size: number) => void
   onAddToBucketClick: () => void
   onBuyClick: () => void
+  withTabs?: boolean
 }
 
 export const GoodsControls: FC<GoodsControlsProps> = ({
@@ -32,17 +32,17 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
   color,
   amount,
   selectedSize,
-  isChosen,
   hasRequiredSize,
-  onLikeClick,
   onColorPick,
   onAmountChange,
   onSizeSelect,
   onAddToBucketClick,
   onBuyClick,
+  withTabs = true,
 }) => {
   const { t } = useTranslation('goods')
   const { t: tEnums } = useTranslation('enums')
+  const { onAddToFavorites, chosenIds, isRestrictModalOpen, closeRestrictModal } = useLikeProduct()
 
   const availableColors = useMemo(
     () =>
@@ -52,69 +52,13 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
     [prod]
   )
 
-  const accordionItems = useMemo(
-    () => [
-      {
-        id: '1',
-        title: t('details.title'),
-        content: (
-          <div>
-            <p>{t('details.material')} {prod.material}</p>
-            <p>{t('details.metal')} {(prod.metal ?? []).map(m => tEnums(`metal.${m}` as never)).join(', ')}</p>
-            {(prod.stones ?? []).length > 0 && (
-              <p>{t('details.stones')} {(prod.stones ?? []).map(s => tEnums(`stone.${s}` as never)).join(', ')}</p>
-            )}
-            <p>{t('details.weight', { num: prod.weight.num, measurement: prod.weight.measurement })}</p>
-          </div>
-        ),
-      },
-      {
-        id: '2',
-        title: t('sizes.title'),
-        content: prod.sizes?.length ? (
-          <p>{t('sizes.available', { sizes: prod.sizes.join(', ') })}</p>
-        ) : (
-          <p>{t('sizes.universal')}</p>
-        ),
-      },
-      {
-        id: '3',
-        title: t('care.title'),
-        content: (
-          <div>
-            {(prod.metal ?? []).map(m => (
-              <p key={m}>{tEnums(`careInstructions.${m}` as never)}</p>
-            ))}
-          </div>
-        ),
-      },
-      {
-        id: '4',
-        title: t('delivery.title'),
-        content: (
-          <div>
-            {tEnums('deliveryInfo').split('\n\n').map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
-          </div>
-        ),
-      },
-    ],
-    [prod, t, tEnums]
-  )
-
   const isDisabled = amount <= 0 || !hasRequiredSize
 
   return (
     <>
       <div className={cls.descript}>
         <Typography>{prod.name}</Typography>
-        <button
-          onClick={onLikeClick}
-          className={classNames(cls.likeBtn, { [cls.isLiked]: isChosen })}
-        >
-          <LikeIcon />
-        </button>
+        <LikeButton onClick={onAddToFavorites(prod)} isLiked={chosenIds.has(prod.id)} />
       </div>
 
       <Typography type={TypographyTypes.HEADER} variant="h4">
@@ -142,7 +86,8 @@ export const GoodsControls: FC<GoodsControlsProps> = ({
         <SizeSelector sizes={prod.sizes} selected={selectedSize} onSelect={onSizeSelect} />
       )}
 
-      <Accordion items={accordionItems} />
+      {withTabs && <GoodsAccordion prod={prod} />}
+      <NotAuthModal isOpened={isRestrictModalOpen} close={closeRestrictModal} overlay="on" />
     </>
   )
 }

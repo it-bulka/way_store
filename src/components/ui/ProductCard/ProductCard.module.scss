@@ -46,39 +46,6 @@
   right: 14px;
   width: 24px;
   height: 24px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255,255,255,.4);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $text_primary;
-  z-index: 10;
-  cursor: pointer;
-  transition: all .25s ease;
-}
-
-.favoriteBtn svg {
-  width: 18px;
-  height: 18px;
-
-  stroke: currentColor;
-  stroke-width: 1.5;
-}
-
-.favoriteBtn:hover {
-  color: $accent;
-
-  background: white;
-}
-
-.favoriteBtn.active {
-  color: $accent;
-}
-
-.favoriteBtn.active svg {
-  fill: currentColor;
 }
 
 .content {

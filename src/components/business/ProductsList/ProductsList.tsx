@@ -1,4 +1,4 @@
-import { type FC, memo, useCallback, useMemo } from 'react'
+import { type FC, memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import cls from './ProductsList.module.scss'
 import { ProductCard } from '@/components/ui/ProductCard/ProductCard'
@@ -8,15 +8,12 @@ import { Loader } from '@/components/ui/Loader/Loader'
 import type { IProduct, ringsColors } from '@/models/goodsType'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 import { cartActions } from '@/redux/reducers/cartSlice'
-import { productsAction } from '@/redux/reducers/productsSlice'
 import { useToast } from '@/context/ToastContext'
-import { useControlModal } from '@/hooks/useControlModal'
-import { getIsAuthenticated } from '@/redux/selectors/getAuthSelector'
-import { getChosenProducts } from '@/redux/selectors/getChosenProducts'
 import { NotAuthModal } from '@/components/ui/NotAuthModal/NotAuthModal'
 import { buildDefaultCartItem } from '@/utils/buildDefaultCartItem'
+import { useLikeProduct } from '@/components/business/LikeProductButton/model/hooks/useLikeProduct.tsx'
 
 interface ProductsListProps {
   className?: string
@@ -46,11 +43,9 @@ export const ProductsList: FC<ProductsListProps> = memo(
     const navigateTo = useNavigate()
     const dispatch = useAppDispatch()
     const { addToast } = useToast()
-    const isAuthenticated = useAppSelector(getIsAuthenticated)
-    const chosen = useAppSelector(getChosenProducts)
-    const chosenIds = useMemo(() => new Set(chosen.map(p => p.id)), [chosen])
-    const { isModalOpen, openModal, closeModal } = useControlModal(false)
     const { t } = useTranslation('store')
+    const { onAddToFavorites, chosenIds, isRestrictModalOpen, closeRestrictModal } =
+      useLikeProduct()
 
     const onCardClick = useCallback(
       (product: IProduct) => () => navigateTo(`/store/${product.id}?category=${product.category}`),
@@ -63,23 +58,6 @@ export const ProductsList: FC<ProductsListProps> = memo(
         addToast('Додано до кошика', 'success')
       },
       [dispatch, addToast]
-    )
-
-    const onAddToFavorites = useCallback(
-      (product: IProduct) => () => {
-        if (!isAuthenticated) {
-          openModal()
-          return
-        }
-        if (chosenIds.has(product.id)) {
-          dispatch(productsAction.deleteChosen(product.id))
-          addToast('Видалено з обраного', 'info')
-        } else {
-          dispatch(productsAction.addChosen(product))
-          addToast('Додано до обраного', 'success')
-        }
-      },
-      [dispatch, addToast, isAuthenticated, openModal, chosenIds]
     )
 
     return (
@@ -106,7 +84,7 @@ export const ProductsList: FC<ProductsListProps> = memo(
             {loadingMore ? <Loader /> : <Button title={t('showMore')} onClick={loadMore} />}
           </div>
         )}
-        <NotAuthModal isOpened={isModalOpen} close={closeModal} overlay="on" />
+        <NotAuthModal isOpened={isRestrictModalOpen} close={closeRestrictModal} overlay="on" />
       </div>
     )
   }

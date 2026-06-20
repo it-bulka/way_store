@@ -10,6 +10,7 @@
   width: 17px;
   pointer-events: auto;
   background-image: url("@/assets/general/star.svg");
+  stroke: $accent;
 }
 
 .rangeSlider {
@@ -30,15 +31,15 @@
 
 
   .slider {
-    height: 1px;
+    height: 1.5px;
     width: calc(100%);
-    background-color: $grey_light;
+    background-color: $border_color;
     position: relative;
 
     .progress {
       position: absolute;
       @include absoluteSizeCover(25%, 25%);
-      background-color: $grey;
+      background-color: $accent;
     }
   }
 
