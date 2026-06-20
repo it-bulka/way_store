@@ -5,44 +5,44 @@
     @include flex(space-between, center);
     gap: 4rem;
     padding: 4rem 0 6rem;
+  }
 
-    .heroText {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+  .heroText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
-    .heroTitle {
-      font-family: 'Druk Medium', sans-serif;
-      font-size: 9rem;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: $grey;
-    }
+  .heroTitle {
+    font-family: 'Druk Medium', sans-serif;
+    font-size: 9rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: $text_secondary;
+  }
 
-    .heroTagline {
-      font-size: 1.1rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: $grey_2;
-    }
+  .heroTagline {
+    font-size: 1.1rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: $text_secondary;
+  }
 
-    .heroImage {
-      flex: 0 0 45%;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
+  .heroImage {
+    flex: 0 0 45%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s ease;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
 
-        &:hover {
-          transform: scale(1.04);
-        }
+      &:hover {
+        transform: scale(1.04);
       }
     }
   }
@@ -66,7 +66,7 @@
     }
 
     .storyImage {
-      flex: 0 0 40%;
+      width: 40%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
     }
@@ -95,7 +95,7 @@
       font-size: 1.8rem;
       font-style: italic;
       line-height: 1.6;
-      color: $grey;
+      color: $text_secondary;
     }
   }
 
@@ -105,7 +105,7 @@
     padding: 5rem 0;
 
     .atelierImage {
-      flex: 0 0 40%;
+      width: 40%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
     }
@@ -123,5 +123,32 @@
     padding: 4rem 0;
     text-align: center;
     border-top: $border_width solid $border_color;
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  .about {
+    .values {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .hero {
+      gap: 2rem;
+    }
+
+    .heroTitle {
+      font-size: 7rem;
+    }
+
+    .heroImage {
+      flex-basis: 30%;
+    }
+
+    .storyImage,
+    .atelierImage {
+      width: 25%;
+    }
   }
 }
