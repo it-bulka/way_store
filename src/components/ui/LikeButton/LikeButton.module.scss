@@ -1,0 +1,37 @@
+.likeButton {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text_primary;
+  z-index: 10;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.likeButton svg {
+  width: 18px;
+  height: 18px;
+
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.likeButton:hover {
+  color: $accent;
+
+  background: white;
+}
+
+.likeButton.active {
+  color: $accent;
+}
+
+.favoriteBtn.active svg {
+  fill: currentColor;
+}
