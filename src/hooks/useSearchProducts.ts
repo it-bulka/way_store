@@ -11,6 +11,7 @@ const cache = new Map<FirestoreLang, Promise<IProduct[]>>()
 
 const getProducts = (lang: FirestoreLang): Promise<IProduct[]> => {
   if (!cache.has(lang)) cache.set(lang, fetchAllProducts(lang))
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return cache.get(lang)!
 }
 
