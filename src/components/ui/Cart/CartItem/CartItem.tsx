@@ -25,83 +25,85 @@ interface CartItemProps {
   onNavigate?: () => void
 }
 
-export const CartItem: FC<CartItemProps> = memo(({
-  id,
-  img,
-  title,
-  price,
-  amount,
-  color,
-  size,
-  colorImages,
-  availableSizes,
-  onDelete,
-  setAmount,
-  onColorChange,
-  onSizeChange,
-  onNavigate,
-}) => {
-  const { t } = useTranslation('cart')
-  const { t: tEnums } = useTranslation('enums')
-  const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
-  const showColors = colorKeys.length > 0
+export const CartItem: FC<CartItemProps> = memo(
+  ({
+    id,
+    img,
+    title,
+    price,
+    amount,
+    color,
+    size,
+    colorImages,
+    availableSizes,
+    onDelete,
+    setAmount,
+    onColorChange,
+    onSizeChange,
+    onNavigate,
+  }) => {
+    const { t } = useTranslation('cart')
+    const { t: tEnums } = useTranslation('enums')
+    const colorKeys = colorImages ? (Object.keys(colorImages) as ringsColors[]) : []
+    const showColors = colorKeys.length > 0
 
-  return (
-    <li className={cls.cartItem}>
-      <button className={cls.deleteBtn} onClick={onDelete}>
-        <CloseIcon />
-      </button>
+    return (
+      <li className={cls.cartItem}>
+        <button className={cls.deleteBtn} onClick={onDelete}>
+          <CloseIcon />
+        </button>
 
-      <div className={cls.content}>
-        <Link to={`/store/${id}`} className={cls.link} onClick={onNavigate}>
-          <div className={cls.product}>
-            <img src={img} alt={title} loading="lazy" />
-          </div>
-        </Link>
-
-        <div className={cls.details}>
-          <Typography className={cls.title}>{title}</Typography>
-
-          {(showColors || (availableSizes && availableSizes.length > 0)) && (
-            <div className={cls.variants}>
-              {showColors && (
-                <div className={cls.colorDots}>
-                  {colorKeys.map(tag => (
-                    <button
-                      key={tag}
-                      className={classnames(cls.colorDot, { [cls.active]: tag === color })}
-                      style={{ backgroundColor: COLOR_PALETTE[tag] }}
-                      onClick={() => onColorChange?.(tag, colorImages?.[tag])}
-                      title={tEnums(`color.${tag}`)}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {availableSizes && availableSizes.length > 0 && (
-                <select
-                  className={cls.sizeSelect}
-                  value={size ?? ''}
-                  onChange={e => onSizeChange?.(Number(e.target.value))}
-                >
-                  {availableSizes.map(s => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              )}
+        <div className={cls.content}>
+          <Link to={`/store/${id}`} className={cls.link} onClick={onNavigate}>
+            <div className={cls.product}>
+              <img src={img} alt={title} loading="lazy" />
             </div>
-          )}
-        </div>
+          </Link>
 
-        <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />
-        <Typography className={cls.price}>
-          <span>{price}</span> {t('currency')}
-        </Typography>
-      </div>
-    </li>
-  )
-})
+          <div className={cls.details}>
+            <Typography className={cls.title}>{title}</Typography>
+
+            {(showColors || (availableSizes && availableSizes.length > 0)) && (
+              <div className={cls.variants}>
+                {showColors && (
+                  <div className={cls.colorDots}>
+                    {colorKeys.map(tag => (
+                      <button
+                        key={tag}
+                        className={classnames(cls.colorDot, { [cls.active]: tag === color })}
+                        style={{ backgroundColor: COLOR_PALETTE[tag] }}
+                        onClick={() => onColorChange?.(tag, colorImages?.[tag])}
+                        title={tEnums(`color.${tag}`)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {availableSizes && availableSizes.length > 0 && (
+                  <select
+                    className={cls.sizeSelect}
+                    value={size ?? ''}
+                    onChange={e => onSizeChange?.(Number(e.target.value))}
+                  >
+                    {availableSizes.map(s => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            )}
+          </div>
+
+          <Stepper className={cls.stepper} initial={amount} getValue={setAmount} />
+          <Typography className={cls.price}>
+            <span>{price}</span> {t('currency')}
+          </Typography>
+        </div>
+      </li>
+    )
+  }
+)
 
 CartItem.displayName = 'CartItem'

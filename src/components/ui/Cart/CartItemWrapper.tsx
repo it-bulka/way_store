@@ -31,7 +31,9 @@ export const CartItemWrapper: FC<CartItemWrapperProps> = memo(({ item, dispatch,
 
   const onColorChange = useCallback(
     (newColor: ringsColors, newImg: string | undefined) => {
-      dispatch(cartActions.updateItemVariant({ id, oldColor: color, oldSize: size, newColor, newImg }))
+      dispatch(
+        cartActions.updateItemVariant({ id, oldColor: color, oldSize: size, newColor, newImg })
+      )
     },
     [dispatch, id, color, size]
   )
