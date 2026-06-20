@@ -54,8 +54,18 @@ export const SubscriptionForm = () => {
         {t('subscription.title')}
       </Typography>
       <div className={cls.fields}>
-        <Input name="email" label={t('subscription.email')} register={register} error={errors.email?.message} />
-        <Input name="name" label={t('subscription.name')} register={register} error={errors.name?.message} />
+        <Input
+          name="email"
+          label={t('subscription.email')}
+          register={register}
+          error={errors.email?.message}
+        />
+        <Input
+          name="name"
+          label={t('subscription.name')}
+          register={register}
+          error={errors.name?.message}
+        />
       </div>
       <Button title={t('subscription.submit')} type="submit" disabled={loading} />
     </form>

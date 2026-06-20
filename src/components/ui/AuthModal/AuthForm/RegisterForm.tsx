@@ -37,9 +37,24 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSuccess, loading, error 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <ModalTitle>{t('register.title')}</ModalTitle>
-      <Input name="name" label={t('register.fullName')} register={register} error={errors.name?.message} />
-      <Input name="email" label={t('register.email')} register={register} error={errors.email?.message} />
-      <Input name="phone" label={t('register.phone')} register={register} error={errors.phone?.message} />
+      <Input
+        name="name"
+        label={t('register.fullName')}
+        register={register}
+        error={errors.name?.message}
+      />
+      <Input
+        name="email"
+        label={t('register.email')}
+        register={register}
+        error={errors.email?.message}
+      />
+      <Input
+        name="phone"
+        label={t('register.phone')}
+        register={register}
+        error={errors.phone?.message}
+      />
       <Input
         name="password"
         label={t('register.password')}

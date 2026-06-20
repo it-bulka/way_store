@@ -14,7 +14,7 @@ interface CheckoutPaymentProps {
 export const CheckoutPayment: FC<CheckoutPaymentProps> = memo(({ payment, onChange }) => {
   const { t } = useTranslation('checkout')
   const labels: Record<PaymentType, string> = {
-    'ОНЛАЙН': t('payment.online'),
+    ОНЛАЙН: t('payment.online'),
     'ПРИ ОТРИМАННІ': t('payment.onDelivery'),
   }
   return (

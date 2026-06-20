@@ -40,7 +40,10 @@ export const CheckoutOrderList: FC<CheckoutOrderListProps> = memo(
           ))}
         </ul>
         <Typography type={TypographyTypes.HEADER} className={cls.total}>
-          {t('totalPrefix')} <span>{formatNumberIntoGroups(total)} {t('currency')}</span>
+          {t('totalPrefix')}{' '}
+          <span>
+            {formatNumberIntoGroups(total)} {t('currency')}
+          </span>
         </Typography>
       </>
     )

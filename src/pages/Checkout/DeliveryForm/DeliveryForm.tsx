@@ -28,7 +28,11 @@ export const DeliveryForm: FC<DeliveryFormProps> = ({ register, errors }) => {
           register={register}
           error={errors.home?.message}
         />
-        <Input<ICheckoutFormValues> name="apartment" label={t('address.apartment')} register={register} />
+        <Input<ICheckoutFormValues>
+          name="apartment"
+          label={t('address.apartment')}
+          register={register}
+        />
       </div>
     </div>
   )

@@ -51,10 +51,17 @@ const CheckoutSuccess = () => {
       )}
 
       <Typography type={TypographyTypes.HEADER} className={cls.total}>
-        {t('totalPrefix')} <span>{formatNumberIntoGroups(total)} {t('currency')}</span>
+        {t('totalPrefix')}{' '}
+        <span>
+          {formatNumberIntoGroups(total)} {t('currency')}
+        </span>
       </Typography>
 
-      <Button title={t('success.continueShopping')} onClick={() => navigate('/store')} className={cls.btn} />
+      <Button
+        title={t('success.continueShopping')}
+        onClick={() => navigate('/store')}
+        className={cls.btn}
+      />
     </div>
   )
 }

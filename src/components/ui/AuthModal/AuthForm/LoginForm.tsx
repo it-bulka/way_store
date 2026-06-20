@@ -41,7 +41,12 @@ export const LoginForm: FC<LoginFormProps> = ({ onSuccess, onForgotPassword, loa
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <ModalTitle>{t('login.title')}</ModalTitle>
-      <Input name="email" label={t('login.email')} register={register} error={errors.email?.message} />
+      <Input
+        name="email"
+        label={t('login.email')}
+        register={register}
+        error={errors.email?.message}
+      />
       <Input
         name="password"
         label={t('login.password')}

@@ -14,7 +14,10 @@ export const Payment = () => {
         {t('payment.heading')}
       </Typography>
       <Info title={t('payment.card.title')} content={t('payment.card.content')} />
-      <Info title={t('payment.cashOnDelivery.title')} content={t('payment.cashOnDelivery.content')} />
+      <Info
+        title={t('payment.cashOnDelivery.title')}
+        content={t('payment.cashOnDelivery.content')}
+      />
     </>
   )
 }

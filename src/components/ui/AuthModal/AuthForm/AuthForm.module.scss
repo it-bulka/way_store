@@ -99,3 +99,10 @@ $viewport_width: 1440;
     }
   }
 }
+
+@media screen and (max-width: $bp-mobile) {
+  .authForm {
+    max-width: 90vw;
+    padding: 8% 10%;
+  }
+}
