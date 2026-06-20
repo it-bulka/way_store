@@ -17,7 +17,7 @@ export const CollabCard: FC<CollabCardProps> = ({ className, id, img, title, con
   const navigateTo = useNavigate()
   return (
     <div className={classnames(cls.collabCard, [className])}>
-      <div>
+      <div className={cls.colabImg}>
         <img src={img} alt={title} loading="lazy" />
       </div>
       <div className={cls.content}>

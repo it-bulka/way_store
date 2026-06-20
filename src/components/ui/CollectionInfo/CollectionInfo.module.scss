@@ -23,6 +23,7 @@
 
   .content {
     margin: pc($main_width, 27) 0 pc($main_width, 24);
+    font-size: 1.3em;
   }
 
   .paragraph:not(:last-of-type) {
@@ -62,13 +63,13 @@
       row-gap: 4px;
 
       & > * {
-        @include getItemFlexSize($generalSize: $main_width, $itemsAmmount: 2, $itemSize: 429, $gap: 5);
-        height: 150px;
+        flex: 1 1 48%;
+        height: 100px;
       }
 
       & > *:first-of-type {
         flex: 0 0 100%;
-        height: 180px;
+        height: 150px;
       }
     }
 
@@ -82,12 +83,29 @@
     }
   }
 
-  &:nth-child(2n) {
+  &:nth-child(2n) .imgs {
     flex-wrap: nowrap;
   }
-
   .btn {
     margin-left: auto;
     display: block;
+  }
+}
+
+@media screen  and (max-width: 800px) {
+  .collectionInfo {
+    flex-direction: column;
+  }
+
+  .img {
+    &_3 {
+      & > * {
+        height: 150px;
+      }
+
+      & > *:first-of-type {
+        height: 180px;
+      }
+    }
   }
 }

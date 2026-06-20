@@ -10,6 +10,10 @@
     flex: 1 1 50%;
   }
 
+  .colabImg {
+    flex: 1 1 50%;
+  }
+
   img {
     width: 100%;
     height: 100%;
@@ -21,6 +25,7 @@
     flex-direction: column;
     padding-bottom: pc($main_width, 23);
     max-height: 100%;
+    flex: 1 1 50%;
 
     & > *:nth-child(2) {
       flex: 1;
@@ -33,6 +38,16 @@
     }
 
   }
+}
 
+@media screen and (max-width: 600px) {
+  .collabCard {
+    .colabImg {
+      flex: 1 1 29%;
+    }
 
+    .content {
+      flex: 1 1 69%;
+    }
+  }
 }

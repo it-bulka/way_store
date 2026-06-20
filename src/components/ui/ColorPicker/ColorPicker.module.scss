@@ -2,6 +2,7 @@
   display: inline-flex;
   flex-direction: column;
   gap: 0.839rem;
+  margin-right: 2rem;
 
   .holder {
     display: flex;
@@ -13,7 +14,7 @@
     border-radius: 50%;
 
     &.active {
-      border: 0.06rem solid $grey;
+      border: 0.06rem solid $text_primary;
     }
   }
 }
