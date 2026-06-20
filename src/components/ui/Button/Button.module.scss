@@ -1,7 +1,7 @@
 .button {
   display: inline-block;
   padding: 0.5rem 1.7rem;
-  border: 0.06rem solid $border_color;
+  border: 0.06rem solid $accent_dark;
   text-transform: uppercase;
   transition: color .5s ease-in-out, background-color .5s ease-in-out, border-color .5s ease-in-out;
 
@@ -10,8 +10,8 @@
   }
   &:not(.disabled):hover,
   &:not(.disabled):active {
-    color: $white;
-    background-color: $blue;
-    border-color: $blue;
+    color: $background_alt;
+    background-color: $text_secondary;
+    border-color: $accent_light;
   }
 }

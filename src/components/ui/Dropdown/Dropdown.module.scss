@@ -1,7 +1,7 @@
-$borderColor: $grey_3;
+$borderColor: $border_color;
 @mixin dropdownBorder($withCol) {
   @if $withCol{
-    border: 0.6px solid $borderColor;
+    border: 0.6px solid $border_color;
   } @else {
     border: 0.6px solid transparent;
   }
@@ -9,8 +9,9 @@ $borderColor: $grey_3;
 
 
 .dropdown {
-  background-color: $grey_bg;
+  background-color: $background;
   position: relative;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 6px 20px 0 rgba(0, 0, 0, 0.06);
 
   .title {
     padding: 0.6rem 1.1rem ;
@@ -19,7 +20,7 @@ $borderColor: $grey_3;
     width: 100%;
     @include dropdownBorder(false);
     border-bottom: none;
-
+    border-radius: 4px;
 
     .arrow {
       padding: 3px 6px 5.5px;
@@ -42,7 +43,7 @@ $borderColor: $grey_3;
 
   &.opened {
     .title  {
-      border-color: $borderColor;
+      border-color: $border_color;
     }
 
     .arrow > svg {

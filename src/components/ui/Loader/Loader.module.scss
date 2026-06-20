@@ -4,7 +4,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: $blue;
+  background-color: $background_alt;
   z-index: $loader_zindex;
 
   .logo {
@@ -20,7 +20,7 @@
       width: 100%;
       height: 100%;
 
-      stroke: $white;
+      stroke: $text_secondary;
       stroke-width: 1;
       stroke-dasharray: 200;
       stroke-dashoffset: 200;
@@ -38,7 +38,7 @@
   }
   100% {
     stroke-dashoffset: 0;
-    color: $white;
+    color: $text_secondary;
     stroke-width: 0;
   }
 }

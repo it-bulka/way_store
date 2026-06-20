@@ -34,7 +34,8 @@
 }
 
 @mixin disable {
-  opacity: 0.3;
+  opacity: 0.8;
+  color: $text_muted;
 }
 
 @mixin respond-to($bp) {

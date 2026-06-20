@@ -1,9 +1,15 @@
 .appLink {
   cursor: pointer;
   text-transform: uppercase;
-  display: flex;
-  gap:1rem;
   color: inherit;
+  margin-bottom: 0.8em;
+  font-size: 1.2em;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+  }
 
   &.active,
   &:hover {

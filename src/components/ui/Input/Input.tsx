@@ -59,10 +59,7 @@ export function Input<T extends FieldValues | undefined = undefined>({
   const id = useId()
   const inputElementRef = useRef<HTMLInputElement | null>(null)
 
-  const registration = useMemo(
-    () => (register && name ? register(name) : null),
-    [register, name]
-  )
+  const registration = useMemo(() => (register && name ? register(name) : null), [register, name])
 
   // Merged ref: stores DOM element + forwards to RHF's ref (which sets input.value from defaultValues)
   const mergedRef = useCallback(
@@ -128,7 +125,7 @@ export function Input<T extends FieldValues | undefined = undefined>({
           name={name}
           {...valueProps}
           onChange={changeHandler}
-          onBlur={(e) => {
+          onBlur={e => {
             setFieldFocused(false)
             registration?.onBlur(e)
           }}

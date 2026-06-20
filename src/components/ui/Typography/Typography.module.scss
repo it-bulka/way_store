@@ -1,6 +1,18 @@
 .typography {
+  font-size: 1.2em;
   &.header {
     font-family: $font_bold;
     text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .typography {
+    &.header {
+      font-size: 1.5em;
+    }
   }
 }

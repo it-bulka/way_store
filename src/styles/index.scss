@@ -17,6 +17,10 @@ body {
   background-color: $background;
 }
 
+main {
+  padding-top: 1rem;
+}
+
 .app {
   min-height: 100vh;
   display: flex;
