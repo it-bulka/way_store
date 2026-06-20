@@ -65,7 +65,9 @@ export const Table: FC<TableProps> = ({ className, data, columns, onRowClick }) 
                 <Typography>{tr.title}</Typography>
               </div>
             </td>
-            <td>{formatNumberIntoGroups(tr.price)} {t('currency')}</td>
+            <td>
+              {formatNumberIntoGroups(tr.price)} {t('currency')}
+            </td>
             <td>{formatDate(tr.data)}</td>
             <td>{tr.order}</td>
             <td>{tr.delivery.typeLabel}</td>
