@@ -43,7 +43,7 @@ const Home: FC<HomeProps> = ({ className }) => {
           <main className={'flex-container container'}>
             <Sidebar className=" col-1" />
           </main>
-          <h1 className={cls.title}>Way</h1>
+          <h1 className={`${cls.title} notranslate`} translate="no">Way</h1>
           <div className={cls.heroContent}>
             <h2 className={cls.heroCtaTitle}>{t('hero.cta')}</h2>
             <p className={cls.heroCtaSubtitle}>{t('hero.subtitle')}</p>
