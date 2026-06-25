@@ -13,6 +13,7 @@ export const LikeButton = memo(({ onClick, className, isLiked = false }: LikeBut
     <button
       onClick={onClick}
       className={classnames(cls.likeButton, { [cls.active]: isLiked }, [className])}
+      aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
     >
       <HeartIcon />
     </button>

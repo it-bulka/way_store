@@ -55,7 +55,7 @@ const AccordionItem: FC<IAccordionItems> = ({
 
       <div
         className={cls.content}
-        aria-hidden={isOpened}
+        aria-hidden={!isOpened}
         ref={ref}
         style={{ maxHeight: isOpened ? ref.current?.scrollHeight : 0 }}
       >

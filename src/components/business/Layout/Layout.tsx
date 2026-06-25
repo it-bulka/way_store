@@ -11,8 +11,11 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Header />
-      <main className={'flex-container container flex-grow'}>
+      <main id="main-content" className={'flex-container container flex-grow'}>
         <Sidebar className=" col-1" />
         <div className="col-2">{children || <Outlet />}</div>
       </main>

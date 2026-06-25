@@ -36,7 +36,7 @@ export const Stepper = memo(
 
     return (
       <div className={classnames(cls.stepper, [className])}>
-        <input type="number" min="0" step="1" value={value} onChange={onChange} name="stepper" />
+        <input type="number" min="0" step="1" value={value} onChange={onChange} name="stepper" aria-label="Quantity" />
         <div className={cls.arrows}>
           <button className={cls.arrow} onClick={onUpClick}>
             <Arrow />

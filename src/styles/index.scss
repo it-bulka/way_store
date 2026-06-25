@@ -68,3 +68,17 @@ main {
 
   main > .col-2 { flex: 1 1 100%; }
 }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: $text_primary;
+  color: $white;
+
+  &:focus {
+    left: 0;
+  }
+}

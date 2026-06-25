@@ -25,7 +25,7 @@ export const HeaderAuthControls = memo(() => {
     <>
       {isAuthenticated ? (
         <>
-          <button onClick={() => navigateTo('/account/profile')}>
+          <button onClick={() => navigateTo('/account/profile')} aria-label="Profile">
             <PersonIcon />
           </button>
           <button className={cls.signOutBtn} onClick={handleSignOut}>

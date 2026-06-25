@@ -61,7 +61,7 @@ export const Table: FC<TableProps> = ({ className, data, columns, onRowClick }) 
           <tr key={tr.id}>
             <td data-label={columns[0].header}>
               <div className={cls.name}>
-                <img src={Ring} alt="ring" loading="lazy" />
+                <img src={Ring} alt={tr.title} loading="lazy" />
                 <Typography>{tr.title}</Typography>
               </div>
             </td>
@@ -74,7 +74,7 @@ export const Table: FC<TableProps> = ({ className, data, columns, onRowClick }) 
             <td data-label={columns[5].header}>
               <div className={cls.status}>
                 <OrderStatusBadge status={tr.delivery.statusEn} label={tr.delivery.status} />
-                <button className={cls.btn} onClick={() => onRowClick?.(tr.id)}>
+                <button className={cls.btn} onClick={() => onRowClick?.(tr.id)} aria-label={t('purchaseHistory.viewOrder')}>
                   <ArrowIcon />
                 </button>
               </div>

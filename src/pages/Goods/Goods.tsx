@@ -73,7 +73,7 @@ const Goods = () => {
         <>
           <div className={cls.content}>
             <div className={cls.col1}>
-              <ImgTabs options={prod.images?.[color] || []} />
+              <ImgTabs options={prod.images?.[color] || []} alt={prod.name} />
             </div>
             <div className={cls.col2}>
               <GoodsControls
