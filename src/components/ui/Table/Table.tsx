@@ -59,19 +59,19 @@ export const Table: FC<TableProps> = ({ className, data, columns, onRowClick }) 
       <tbody>
         {data.map(tr => (
           <tr key={tr.id}>
-            <td>
+            <td data-label={columns[0].header}>
               <div className={cls.name}>
                 <img src={Ring} alt="ring" loading="lazy" />
                 <Typography>{tr.title}</Typography>
               </div>
             </td>
-            <td>
+            <td data-label={columns[1].header}>
               {formatNumberIntoGroups(tr.price)} {t('currency')}
             </td>
-            <td>{formatDate(tr.data)}</td>
-            <td>{tr.order}</td>
-            <td>{tr.delivery.typeLabel}</td>
-            <td>
+            <td data-label={columns[2].header}>{formatDate(tr.data)}</td>
+            <td data-label={columns[3].header}>{tr.order}</td>
+            <td data-label={columns[4].header}>{tr.delivery.typeLabel}</td>
+            <td data-label={columns[5].header}>
               <div className={cls.status}>
                 <OrderStatusBadge status={tr.delivery.statusEn} label={tr.delivery.status} />
                 <button className={cls.btn} onClick={() => onRowClick?.(tr.id)}>

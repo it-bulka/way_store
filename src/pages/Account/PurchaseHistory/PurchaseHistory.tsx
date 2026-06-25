@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import cls from './PurchaseHistory.module.scss'
 import { Table, type IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
+import { PurchaseHistorySkeleton } from './PurchaseHistorySkeleton'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -63,7 +64,9 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
 
   return (
     <div className={classnames(cls.purchaseHistory, [className])}>
-      {!loading && tableData.length ? (
+      {loading ? (
+        <PurchaseHistorySkeleton />
+      ) : tableData.length ? (
         <Table
           columns={columns}
           data={tableData}
@@ -71,14 +74,12 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
           onRowClick={id => navigate(`/account/purchase-history/${id}`)}
         />
       ) : (
-        !loading && (
-          <Absent
-            info={t('purchaseHistory.empty')}
-            btnTitle={t('purchaseHistory.goToStore')}
-            className={cls.absent}
-            onBtnClick={() => navigate('/store')}
-          />
-        )
+        <Absent
+          info={t('purchaseHistory.empty')}
+          btnTitle={t('purchaseHistory.goToStore')}
+          className={cls.absent}
+          onBtnClick={() => navigate('/store')}
+        />
       )}
     </div>
   )
