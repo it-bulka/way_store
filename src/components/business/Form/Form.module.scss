@@ -100,3 +100,35 @@ $gap: 24;
     flex-grow: 1;
   }
 }
+
+@include respond-to('mobile') {
+  .form {
+    flex-direction: column;
+    gap: 2.5rem;
+
+    &::before {
+      top: auto;
+      left: 0;
+      width: 100%;
+      height: 0.06rem;
+      transform: none;
+      position: relative;
+    }
+
+    .col, .block {
+      flex: 0 0 100%;
+    }
+
+    .col_2 {
+      flex: 1 1 calc(50% - 12px);
+    }
+
+    .col_7 {
+      flex: 0 0 100%;
+    }
+
+    .col_6 {
+      flex: 0 0 100%;
+    }
+  }
+}
