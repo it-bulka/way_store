@@ -1,0 +1,166 @@
+@use 'sass:math';
+
+@keyframes pulse {
+  0%, 100% { background-color: $background_alt; }
+  50% { background-color: $border_color2; }
+}
+
+@mixin block {
+  background-color: $background_alt;
+  border-radius: 2px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+$gap: 24;
+
+.skeleton {
+  @include flex;
+  position: relative;
+  margin: pc($main_width, 67) 0 pc($main_width, 40);
+}
+
+.col {
+  flex: 0 0 pc($main_width, 369);
+  display: flex;
+  flex-direction: column;
+  row-gap: 3.2rem;
+}
+
+.section {
+  flex: 0 0 pc($main_width, 369);
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: $gap + px;
+  row-gap: 0.8rem;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 0.06rem;
+  background-color: $grey_light;
+  transform: translateX(-50%);
+}
+
+.sectionTitle {
+  @include block;
+  flex: 0 0 100%;
+  height: 1.8rem;
+  width: 60%;
+}
+
+.radioRow {
+  flex: 0 0 100%;
+  display: flex;
+  gap: 1.4rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.radio {
+  @include block;
+  width: 40px;
+  height: 1rem;
+}
+
+.input {
+  @include block;
+  flex: 0 0 100%;
+  height: 2.4rem;
+  border-bottom: 0.06rem solid $border_color2;
+}
+
+.birthdayBlock {
+  flex: 0 0 60%;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.8rem;
+}
+
+.selectRow {
+  display: flex;
+  gap: $gap + px;
+  width: 100%;
+}
+
+.select {
+  @include block;
+  flex: 1;
+  height: 1.6rem;
+  border-bottom: 0.06rem solid $border_color2;
+}
+
+.btn {
+  @include block;
+  width: 120px;
+  height: calc(1rem + 1rem + 0.06rem);
+  margin: math.div($gap, 2) + px;
+}
+
+.textLine {
+  @include block;
+  flex: 0 0 100%;
+  height: 1rem;
+  width: 80%;
+}
+
+.addressRow {
+  flex: 0 0 100%;
+  display: flex;
+  gap: $gap + px;
+}
+
+.addressWide {
+  @include block;
+  flex: 0 0 pc(369, 247);
+  height: 2.4rem;
+  border-bottom: 0.06rem solid $border_color2;
+}
+
+.addressNarrow {
+  @include block;
+  flex: 0 0 pc(369, 98);
+  height: 2.4rem;
+  border-bottom: 0.06rem solid $border_color2;
+}
+
+.textarea {
+  @include block;
+  flex: 0 0 100%;
+  height: 4rem;
+  flex-grow: 1;
+}
+
+@include respond-to('mobile') {
+  .skeleton {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .col, .section {
+    flex: 0 0 100%;
+  }
+
+  .divider {
+    position: relative;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: 0.06rem;
+    transform: none;
+  }
+
+  .birthdayBlock {
+    flex: 0 0 100%;
+  }
+
+  .addressWide {
+    flex: 0 0 100%;
+  }
+
+  .addressNarrow {
+    flex: 1 1 calc(50% - 12px);
+  }
+}

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Form } from '@/components/business/Form/Form'
-import { Loader } from '@/components/ui/Loader/Loader'
+import { FormSkeleton } from '@/components/business/Form/FormSkeleton'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks.ts'
 import { getUserSelector } from '@/redux/selectors/getUserSelector.ts'
 import { getAuthUid } from '@/redux/selectors/getAuthSelector'
@@ -22,7 +22,7 @@ const Profile = () => {
       .catch(() => addToast(t('profile.loadError'), 'error'))
   }, [uid, dispatch, addToast, t])
 
-  if (!user) return <Loader />
+  if (!user) return <FormSkeleton />
 
   return <Form user={user} />
 }
