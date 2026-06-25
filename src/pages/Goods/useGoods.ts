@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/hooks/reduxHooks'
 import { cartActions } from '@/redux/reducers/cartSlice'
 import { getNextDoc } from '@/services'
 import { PAGES } from '@/models'
+import { APP_ROUTES } from '@/models/routes'
 import { useToast } from '@/context/ToastContext'
 import type { IProduct, ProductType, ringsColors } from '@/models/goodsType'
 import type { ICartItem } from '@/redux/types/cartTypes'
@@ -33,7 +34,10 @@ export const useGoods = (prod: IProduct) => {
     [prod, amount, color, selectedSize]
   )
 
-  const moveToProdPage = useCallback((id: string) => navigate(`/store/${id}`), [navigate])
+  const moveToProdPage = useCallback(
+    (id: string) => navigate(APP_ROUTES.GOODS_DETAIL(id, prod.category)),
+    [navigate, prod.category]
+  )
   const pickColor = useCallback((colorTag: ringsColors) => setColor(colorTag), [])
 
   const onAmountChange = useCallback((n: number) => setAmount(n), [])
