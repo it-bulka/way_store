@@ -4,6 +4,7 @@ import cls from './PurchaseHistory.module.scss'
 import { Table, type IGoods } from '@/components/ui/Table/Table'
 import { Absent } from '@/components/ui/Absent/Absent'
 import { PurchaseHistorySkeleton } from './PurchaseHistorySkeleton'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
@@ -64,6 +65,7 @@ const PurchaseHistory: FC<PurchaseHistoryProps> = ({ className = '' }) => {
 
   return (
     <div className={classnames(cls.purchaseHistory, [className])}>
+      <PageMeta title={t('nav.purchaseHistory')} noindex />
       {loading ? (
         <PurchaseHistorySkeleton />
       ) : tableData.length ? (

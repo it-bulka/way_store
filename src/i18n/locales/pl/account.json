@@ -53,7 +53,8 @@
       "shipped": "W DRODZE",
       "delivered": "DOSTARCZONE",
       "cancelled": "ANULOWANE"
-    }
+    },
+    "viewOrder": "Zobacz zamówienie"
   },
   "chosen": {
     "title": "ULUBIONE",

@@ -53,7 +53,8 @@
       "shipped": "SHIPPED",
       "delivered": "DELIVERED",
       "cancelled": "CANCELLED"
-    }
+    },
+    "viewOrder": "View order"
   },
   "chosen": {
     "title": "FAVORITES",

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import cls from './ChosenGoods.module.scss'
 import { Absent } from '@/components/ui/Absent/Absent'
 import { ProductsList } from '@/components/business/ProductsList/ProductsList'
+import { PageMeta } from '@/components/ui/PageMeta/PageMeta'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '@/hooks/reduxHooks'
@@ -19,6 +20,7 @@ const ChosenGoods: FC<ChosenGoodsProps> = ({ className }) => {
 
   return (
     <div className={classnames(cls.chosenGoods, [className])}>
+      <PageMeta title={t('nav.chosen')} noindex />
       {chosen?.length ? (
         <ProductsList products={chosen} className={cls.products} title={t('chosen.title')} />
       ) : (
