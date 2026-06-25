@@ -1,15 +1,15 @@
 import { useRouteError } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import cls from './GoodsError.module.scss'
 
 export const GoodsError = () => {
   const error = useRouteError() as Error
+  const { t } = useTranslation('goods')
+
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <p>Не вдалося завантажити товар.</p>
-      {import.meta.env.DEV && (
-        <pre style={{ textAlign: 'left', fontSize: '0.8rem', marginTop: '1rem' }}>
-          {error?.message}
-        </pre>
-      )}
+    <div className={cls.fallback}>
+      <p>{t('error')}</p>
+      {import.meta.env.DEV && <pre className={cls.detail}>{error?.message}</pre>}
     </div>
   )
 }
