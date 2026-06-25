@@ -3,15 +3,17 @@
 @keyframes pulse {
   0%,
   100% {
-    opacity: 1;
+    background-color: $background_alt;
   }
   50% {
-    opacity: 0.4;
+    background-color: $border_color2;
   }
 }
 
 @mixin skeletonBlock {
-  background-color: $grey_3;
+  background-color: $background_alt;
+  border-radius: 2px;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @mixin colSize($size) {
@@ -19,7 +21,29 @@
 }
 
 .skeleton {
-  animation: pulse 1.5s ease-in-out infinite;
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .crumb {
+    @include skeletonBlock;
+    width: 50px;
+    height: 0.85rem;
+  }
+
+  .crumbSep {
+    width: 4px;
+    height: 0.85rem;
+  }
+
+  .crumbLast {
+    @include skeletonBlock;
+    width: 90px;
+    height: 0.85rem;
+  }
 
   .title {
     margin: 2.6rem 0 6.9rem;
@@ -28,84 +52,239 @@
 
   .titleText {
     @include skeletonBlock;
-    width: 200px;
-    height: 1rem;
+    width: 220px;
+    height: 2.3rem;
   }
 
   .titleNav {
     @include skeletonBlock;
-    width: 80px;
-    height: 1rem;
+    width: 140px;
+    height: 1.3rem;
   }
 
   .content {
     @include flex($align: flex-start);
+    gap: 1rem;
   }
 
   .col1 {
     @include colSize(428);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 428px;
   }
 
-  .mainImg {
+  .viewer {
     @include skeletonBlock;
     width: 100%;
-    padding-bottom: 85%;
+    height: 284px;
   }
 
   .thumbs {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 0.8rem;
+    justify-content: center;
+    gap: 0.9rem;
   }
 
   .thumb {
     @include skeletonBlock;
-    width: 50px;
-    height: 50px;
+    width: calc(33%);
+    aspect-ratio: 1 / 1;
+    max-height: 80px;
   }
 
   .col2 {
     @include colSize(369.83);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+  }
+
+  .descriptRow {
+    @include flex;
+    margin-bottom: 0.5rem;
   }
 
   .name {
     @include skeletonBlock;
     width: 65%;
-    height: 1rem;
+    height: 1.5em;
+  }
+
+  .likeBtn {
+    @include skeletonBlock;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
   }
 
   .price {
     @include skeletonBlock;
-    width: 30%;
-    height: 1.2rem;
+    width: 35%;
+    height: 1.8rem;
   }
 
   .controls {
+    padding: 3.439rem 0 1.939rem;
+    @include flex($align: flex-end);
+    flex-wrap: wrap;
+  }
+
+  .stepperBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.766rem;
+  }
+
+  .stepperLabel {
     @include skeletonBlock;
-    width: 100%;
-    height: 2.5rem;
+    width: 60px;
+    height: 1rem;
+  }
+
+  .stepperInput {
+    @include skeletonBlock;
+    width: 80px;
+    height: 1.8rem;
+  }
+
+  .btnsBlock {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    @include skeletonBlock;
+    width: 110px;
+    height: calc(1rem + 1rem + 0.06rem);
+  }
+
+  .colorSection {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.839rem;
+    margin-right: 2rem;
+  }
+
+  .colorLabel {
+    @include skeletonBlock;
+    width: 100px;
+    height: 1rem;
   }
 
   .colorRow {
     display: flex;
-    gap: 0.6rem;
+    gap: 0.8rem;
   }
 
   .colorDot {
     @include skeletonBlock;
-    width: 16px;
-    height: 16px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
   }
 
-  .accordionItem {
+  .sizeSection {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.839rem;
+    margin-top: 0.5rem;
+  }
+
+  .sizeLabel {
     @include skeletonBlock;
-    width: 100%;
-    height: 0.8rem;
-    border-bottom: $border_width solid $grey_bg;
-    padding-bottom: 0.8rem;
+    width: 90px;
+    height: 1rem;
+  }
+
+  .sizeRow {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .sizeBtn {
+    @include skeletonBlock;
+    min-width: 32px;
+    height: 24px;
+  }
+
+  .accordion {
+    margin-top: 0.5rem;
+  }
+
+  .accordionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.861rem 0 2.19rem;
+    border-bottom: $border_width solid $border_color;
+
+    &:last-child {
+      padding-bottom: 0;
+      border: none;
+    }
+  }
+
+  .accordionTitle {
+    @include skeletonBlock;
+    width: 40%;
+    height: 1rem;
+  }
+
+  .accordionIcon {
+    @include skeletonBlock;
+    width: 1.526rem;
+    height: 1.526rem;
+  }
+
+  .desktopAccordion {
+    display: block;
+  }
+
+  .mobileAccordion {
+    display: none;
+  }
+}
+
+@include respond-to('tablet') {
+  .skeleton {
+    .col2 {
+      flex: 1;
+    }
+  }
+}
+
+@include respond-to('mobile') {
+  .skeleton {
+    .col1 {
+      max-width: 400px;
+    }
+
+    .viewer {
+      max-height: 180px;
+    }
+
+    .thumb {
+      height: 50px;
+    }
+
+    .titleText {
+      width: 160px;
+      height: 1.5em;
+    }
+
+    .btn {
+      width: 90px;
+    }
+
+    .desktopAccordion {
+      display: none;
+    }
+
+    .mobileAccordion {
+      display: block;
+    }
   }
 }

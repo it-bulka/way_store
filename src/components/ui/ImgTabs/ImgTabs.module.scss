@@ -5,7 +5,7 @@
   max-width: 428px;
 
   .viewer {
-    background-color: $grey_3;
+    background-color: $background_alt;
     height: 284px;
 
     img {
@@ -26,7 +26,7 @@
       max-height: 80px;
       width: calc(33%);
       overflow: hidden;
-      background-color: $grey_3;
+      background-color: $background_alt;
       aspect-ratio: 1 / 1;
 
       img[src=''] {

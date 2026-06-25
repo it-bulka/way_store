@@ -1,18 +1,22 @@
 @keyframes pulse {
   0%,
   100% {
-    opacity: 1;
+    background-color: $background_alt;
   }
   50% {
-    opacity: 0.4;
+    background-color: $border_color2;
   }
 }
 
-.skeleton {
+@mixin skeletonBlock {
+  background-color: $background_alt;
+  border-radius: 2px;
   animation: pulse 1.5s ease-in-out infinite;
+}
 
+.skeleton {
   .image {
-    background-color: $card_bg;
+    @include skeletonBlock;
     padding-bottom: 100%;
     width: 100%;
   }
@@ -27,13 +31,13 @@
   }
 
   .title {
-    background-color: $card_bg;
+    @include skeletonBlock;
     height: 0.85rem;
     width: 80%;
   }
 
   .price {
-    background-color: $card_bg;
+    @include skeletonBlock;
     height: 0.85rem;
     width: 50%;
   }
