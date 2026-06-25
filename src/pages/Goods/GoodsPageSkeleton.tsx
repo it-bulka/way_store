@@ -12,21 +12,8 @@ const AccordionSkeleton = () => (
   </div>
 )
 
-export const GoodsPageSkeleton: FC = () => (
-  <div className={cls.skeleton}>
-    <div className={cls.breadcrumbs}>
-      <div className={cls.crumb} />
-      <div className={cls.crumbSep} />
-      <div className={cls.crumb} />
-      <div className={cls.crumbSep} />
-      <div className={cls.crumbLast} />
-    </div>
-
-    <div className={cls.title}>
-      <div className={cls.titleText} />
-      <div className={cls.titleNav} />
-    </div>
-
+const ContentSkeleton = () => (
+  <>
     <div className={cls.content}>
       <div className={cls.col1}>
         <div className={cls.viewer} />
@@ -82,5 +69,30 @@ export const GoodsPageSkeleton: FC = () => (
     <div className={cls.mobileAccordion}>
       <AccordionSkeleton />
     </div>
+  </>
+)
+
+export const GoodsContentSkeleton: FC = () => (
+  <div className={cls.skeleton}>
+    <ContentSkeleton />
+  </div>
+)
+
+export const GoodsPageSkeleton: FC = () => (
+  <div className={cls.skeleton}>
+    <div className={cls.breadcrumbs}>
+      <div className={cls.crumb} />
+      <div className={cls.crumbSep} />
+      <div className={cls.crumb} />
+      <div className={cls.crumbSep} />
+      <div className={cls.crumbLast} />
+    </div>
+
+    <div className={cls.title}>
+      <div className={cls.titleText} />
+      <div className={cls.titleNav} />
+    </div>
+
+    <ContentSkeleton />
   </div>
 )

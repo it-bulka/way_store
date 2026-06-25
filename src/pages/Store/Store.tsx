@@ -9,10 +9,12 @@ const Store = () => {
   const { state, location: pendingLocation } = useNavigation()
   const { t } = useTranslation('store')
 
-  const isLoadingProduct =
-    state === 'loading' && /^\/store\/[^/]+$/.test(pendingLocation?.pathname ?? '')
+  const isFirstProductLoad =
+    state === 'loading' &&
+    !slug &&
+    /^\/store\/[^/]+$/.test(pendingLocation?.pathname ?? '')
 
-  if (isLoadingProduct) return <GoodsPageSkeleton />
+  if (isFirstProductLoad) return <GoodsPageSkeleton />
   if (slug) return <Outlet />
   return (
     <>
