@@ -12,7 +12,7 @@ export const LikeButton = memo(({ onClick, className, isLiked = false }: LikeBut
   return (
     <button
       onClick={onClick}
-      className={classnames(cls.likeButton, { [cls.chosenBtn]: isLiked }, [className])}
+      className={classnames(cls.likeButton, { [cls.active]: isLiked }, [className])}
     >
       <HeartIcon />
     </button>
